@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Left click
+if [[ "${BLOCK_BUTTON}" -eq 1 ]]; then
+  pamixer -i 10
+# Middle click
+elif [[ "${BLOCK_BUTTON}" -eq 2 ]]; then
+  pamixer -t
+# Right click
+elif [[ "${BLOCK_BUTTON}" -eq 3 ]]; then
+  pamixer -d 10
+fi
+
+muted=$(pamixer --get-mute)
+volume=$(pamixer --get-volume)
+
+if [[ "${muted}" == "false" ]]; then
+  echo "${volume}%"
+  echo "${volume}%"
+  echo ""
+else
+  echo "off"
+  echo "off"
+  echo ""
+fi

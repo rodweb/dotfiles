@@ -1,0 +1,5 @@
+#!/bin/bash
+perc=$(transmission-remote -n transmission:transmission -l | awk '/Up & Down|Downloading/ {split($2,arr,"%"); tot += arr[1]; n += 1 } END { if(n>0) { print int(tot/n); } else { print "no"; }  }')
+if [[ "${perc}" -ne "no" ]]; then
+  echo "$perc%"
+fi
