@@ -1,13 +1,16 @@
+# vim: filetype=sh
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
+TOUCHPAD=$(xinput | grep -i "touchpad" | pcregrep -o1 '=([0-9]+)')
+NATURAL=$(xinput list-props $TOUCHPAD | grep -i -m1 "natural" | pcregrep -01 '\(([0-9]+)\)')
+TAP=$(xinput list-props $TOUCHPAD | grep -i -m1 "tap" | pcregrep -01 '\(([0-9]+)\)')
+TAPDRAG=$(xinput list-props $TOUCHPAD | grep -i -m1 "tap.*drag" | pcregrep -01 '\(([0-9]+)\)')
 setxkbmap br
 # natural scrolling
-#xinput set-prop 11 287 1
-xinput set-prop 11 289 1
+xinput set-prop $TOUCHPAD $NATURAL 1
 # tap to clik
-#xinput set-prop 11 279 1
-xinput set-prop 11 281 1
+xinput set-prop $TOUCHPAD $TAP 1
 # stop tap and drag
-xinput set-prop 11 283 0
+xinput set-prop $TOUCHPAD $TAPDRAG 0
 # swap capslock escape
 # setxkbmap -option "caps:swapescape"
 xmodmap ~/.Xmodmap
