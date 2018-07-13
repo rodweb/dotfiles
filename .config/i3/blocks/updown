@@ -3,7 +3,8 @@
 status=$(ping -c 1 google.com | grep "1 received" | wc -l)
 
 if [[ status -eq 1 ]]; then
-  echo "online"
+	echo "online"
 else
 	echo "offline"
+	exit 33
 fi
