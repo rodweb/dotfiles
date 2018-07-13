@@ -1,8 +1,6 @@
 source /usr/share/zsh/share/antigen.zsh
-source /usr/share/fzf/key-bindings.zsh
-source /usr/share/fzf/completion.zsh
-# /usr/share/git/completion/git-completion.zsh
 
+antigen use oh-my-zsh
 antigen bundle git
 antigen bundle command-not-found
 antigen bundle zsh-users/zsh-syntax-highlighting
@@ -46,3 +44,6 @@ alias I='$EDITOR $HOME/.config/i3/config'
 alias B='$EDITOR $HOME/.config/i3/i3blocks.conf'
 
 bindkey -v
+
+source /usr/share/fzf/completion.zsh
+source /usr/share/fzf/key-bindings.zsh
