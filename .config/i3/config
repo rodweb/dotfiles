@@ -244,3 +244,4 @@ exec --no-startup-id $term -t 'Scratchpad terminal'
 exec --no-startup-id thunar -d
 exec --no-startup-id udiskie -2
 exec --no-startup-id unclutter
+exec --no-startup-id dunst
