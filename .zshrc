@@ -1,3 +1,4 @@
+autoload -U promptinit; promptinit
 source /usr/share/zsh/share/antigen.zsh
 
 antigen use oh-my-zsh
@@ -18,6 +19,8 @@ EDITOR='nvim'
 setopt appendhistory
 setopt sharehistory
 setopt incappendhistory
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_SAVE_NO_DUPS
 
 alias B='$EDITOR $HOME/.config/i3/i3blocks.conf'
 alias I='$EDITOR $HOME/.config/i3/config'
@@ -42,6 +45,7 @@ alias v='$EDITOR'
 alias Z='$EDITOR $HOME/.zshrc'
 alias I='$EDITOR $HOME/.config/i3/config'
 alias B='$EDITOR $HOME/.config/i3/i3blocks.conf'
+alias install='sudo pacman -S --noconfirm'
 
 bindkey -v
 
