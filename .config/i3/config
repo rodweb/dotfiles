@@ -98,16 +98,16 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 
-#set $Locker i3lock -i ~/images/wp.png && sleep 1
-#set $Locker i3lock-fancy -- scrot -z
-set $Locker ~/scripts/lockscreen.sh
+#set $locker i3lock -i ~/images/wp.png && sleep 1
+#set $locker i3lock-fancy -- scrot -z
+set $locker ~/scripts/lockscreen.sh
 
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
-    bindsym l exec --no-startup-id $Locker, mode "default"
+    bindsym l exec --no-startup-id $locker, mode "default"
     bindsym e exec --no-startup-id i3-msg exit, mode "default"
-    bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
-    bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
+    bindsym s exec --no-startup-id $locker && systemctl suspend, mode "default"
+    bindsym h exec --no-startup-id $locker && systemctl hibernate, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
     bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
 
@@ -243,7 +243,5 @@ exec --no-startup-id google-chrome-unstable
 exec --no-startup-id pamixer --set-volume 10 && pkill -RTMIN+11 i3blocks
 exec --no-startup-id libinput-gestures-setup start
 exec --no-startup-id $term -t 'Scratchpad terminal'
-exec --no-startup-id thunar -d
 exec --no-startup-id udiskie -2
-exec --no-startup-id unclutter
 exec --no-startup-id dunst
