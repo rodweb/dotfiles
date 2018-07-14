@@ -228,6 +228,8 @@ for_window [instance="code" title="gupy-front"] move container to workspace $ws3
 for_window [instance="st-256color" title="Scratchpad terminal"] floating enable, resize grow left 100, resize grow right 100, move scratchpad
 
 exec_always --no-startup-id xrdb ~/.Xresources
+exec --no-startup-id setxkbmap br
+exec --no-startup-id xmodmap ~/.Xmodmap
 exec --no-startup-id ~/.fehbg
 exec --no-startup-id nm-applet
 exec --no-startup-id compton -f -b
@@ -236,8 +238,9 @@ exec --no-startup-id greenclip daemon
 exec --no-startup-id slack
 #exec --no-startup-id sleep 20 && spotify
 exec --no-startup-id google-chrome-unstable
-exec --no-startup-id pamixer --set-volume 10
+exec --no-startup-id pamixer --set-volume 10 && pkill -RTMIN+11 i3blocks
 exec --no-startup-id libinput-gestures-setup start
 exec --no-startup-id $term -t 'Scratchpad terminal'
 exec --no-startup-id thunar -d
 exec --no-startup-id udiskie -2
+exec --no-startup-id unclutter
