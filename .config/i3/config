@@ -220,7 +220,7 @@ for_window [class="Pavucontrol"] floating enable
 for_window [class="Google-chrome-unstable"] focus
 for_window [class="Slack"] move container to workspace $ws4
 for_window [class="Spotify"] move container to workspace $ws5
-for_window [class="DBeaver"] move container to workspace $ws6
+for_window [title="(?i)dbeaver"] move container to workspace $ws6
 for_window [class="Postman"] move container to workspace $ws7
 for_window [class="GitKraken"] move container to workspace $ws8
 for_window [window_role="GtkFileChooserDialog"] fullscreen enable
@@ -228,9 +228,10 @@ for_window [instance="code" title="gupy-api"] move container to workspace $ws2
 for_window [instance="code" title="gupy-front"] move container to workspace $ws3
 for_window [instance="st-256color" title="Scratchpad terminal"] floating enable, resize grow left 100, resize grow right 100, move scratchpad
 
-exec_always --no-startup-id xrdb ~/.Xresources
+exec_always --no-startup-id xrdb -merge ~/.Xresources
 exec --no-startup-id setxkbmap br
-exec --no-startup-id xmodmap ~/.Xmodmap
+exec --no-startup-id ~/scripts/switch-capslock-escape.sh
+exec --no-startup-id ~/scripts/config-touchpad.sh
 exec --no-startup-id ~/.fehbg
 exec --no-startup-id nm-applet
 exec --no-startup-id compton -f -b
