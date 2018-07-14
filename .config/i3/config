@@ -99,7 +99,8 @@ bindsym $mod+a focus parent
 
 
 #set $Locker i3lock -i ~/images/wp.png && sleep 1
-set $Locker i3lock-fancy -- scrot -z
+#set $Locker i3lock-fancy -- scrot -z
+set $Locker ~/scripts/lockscreen.sh
 
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
