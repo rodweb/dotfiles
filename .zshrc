@@ -45,5 +45,7 @@ alias B='$EDITOR $HOME/.config/i3/i3blocks.conf'
 
 bindkey -v
 
+transset-df --id $WINDOWID .95 > /dev/null
+
 source /usr/share/fzf/completion.zsh
 source /usr/share/fzf/key-bindings.zsh
