@@ -1,4 +1,4 @@
-# vi: ft=i3config
+# vi: ft=i3
 set $mod Mod4
 set $term st -f "Hack:size=10"
 
@@ -33,8 +33,8 @@ bindsym $mod+F12 exec --no-startup-id "xbacklight -set $($HOME/scripts/rofi/brig
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer -i 10 && pkill -RTMIN+11 i3blocks
-bindsym XF86AudioLowerVolume exec --no-startup-id pamixer -d 10 && pkill -RTMIN+11 i3blocks
+bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer -i 5 && pkill -RTMIN+11 i3blocks
+bindsym XF86AudioLowerVolume exec --no-startup-id pamixer -d 5 && pkill -RTMIN+11 i3blocks
 bindsym XF86AudioMute exec --no-startup-id pamixer -t && pkill -RTMIN+11 i3blocks
 
 # Sreen brightness controls
@@ -220,9 +220,10 @@ for_window [class="Pavucontrol"] floating enable
 for_window [class="Google-chrome-unstable"] focus
 for_window [class="Slack"] move container to workspace $ws4
 for_window [class="Spotify"] move container to workspace $ws5
-for_window [title="(?i)dbeaver"] move container to workspace $ws6
-for_window [class="Postman"] move container to workspace $ws7
-for_window [class="GitKraken"] move container to workspace $ws8
+for_window [title="(?i)dbeaver"] move container to workspace $ws6; workspace $ws6; focus
+for_window [class="Postman"] move container to workspace $ws7; workspace $ws7; focus
+for_window [class="Poedit"] move container to workspace $ws7; workspace $ws7; focus
+for_window [class="GitKraken"] move container to workspace $ws8; workspace $ws8; focus
 for_window [window_role="GtkFileChooserDialog"] fullscreen enable
 for_window [instance="code" title="gupy-api"] move container to workspace $ws2
 for_window [instance="code" title="gupy-front"] move container to workspace $ws3
