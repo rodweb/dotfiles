@@ -1,30 +1,21 @@
 call plug#begin('~/.local/share/nvim/plugged')
+Plug 'itchyny/lightline.vim'
+Plug 'tpope/vim-eunuch'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-surround'
+Plug 'airblade/vim-gitgutter'
+Plug 'skywind3000/asyncrun.vim'
+Plug 'w0rp/ale'
+Plug 'mattn/emmet-vim'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
 Plug 'moll/vim-node'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'mboughaba/i3config.vim'
-Plug 'vim-syntastic/syntastic'
-" Make sure you use single quotes
-" Plug 'junegunn/seoul256.vim'
-" Plug 'junegunn/vim-easy-align'
-
-" Group dependencies, vim-snippets depends on ultisnips
-" Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-
-" On-demand loading
+"Plug 'vim-syntastic/syntastic'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-" Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
-
-" Using git URL
-" Plug 'https://github.com/junegunn/vim-github-dashboard.git'
-
-" Plugin options
-" Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
-
-" Plugin outside ~/.vim/plugged with post-update hook
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
-
-" Unmanaged plugin (manually installed and updated)
-" Plug '~/my-prototype-plugin'
+Plug '/usr/bin/fzf'
+Plug 'junegunn/fzf.vim'
 call plug#end()
 
 set nocompatible
@@ -51,3 +42,13 @@ set t_Co=256
 set background=dark
 
 map <C-e> :NERDTreeToggle<CR>
+
+let g:user_emmet_leader_key='<Tab>'
+imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+let g:user_emmet_settings = {
+  \  'javascript.jsx' : {
+  \    'extends' : 'jsx',
+  \  },
+  \}
+
+autocmd BufWritePost *.js AsyncRun -post=checktime ./node_modules/.bin/eslint --fix %
