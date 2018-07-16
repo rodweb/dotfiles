@@ -1,8 +1,10 @@
 call plug#begin('~/.local/share/nvim/plugged')
-Plug 'itchyny/lightline.vim'
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
-Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-fugitive'
+Plug 'itchyny/lightline.vim'
+Plug 'terryma/vim-multiple-cursors'
 Plug 'airblade/vim-gitgutter'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'w0rp/ale'
@@ -11,9 +13,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'moll/vim-node'
 Plug 'editorconfig/editorconfig-vim'
-"Plug 'mboughaba/i3config.vim'
 Plug 'PotatoesMaster/i3-vim-syntax'
-"Plug 'vim-syntastic/syntastic'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug '/usr/bin/fzf'
 Plug 'junegunn/fzf.vim'
@@ -41,6 +41,56 @@ set showmatch
 
 set t_Co=256
 set background=dark
+
+let mapleader = "\<Space>"
+nnoremap <leader>sv :source %<CR>
+
+nnoremap <leader><tab> <C-^>
+nnoremap <leader><leader> :Maps<CR>
+nnoremap <leader>qq :q!<CR>
+
+" Comment
+nmap <leader>/ <Plug>CommentaryLine
+vmap <leader>/ <Plug>CommentaryLine
+
+" Buffers
+nnoremap <leader>bb :Buffers<CR>
+nnoremap <leader>bd :bdelete<CR>
+nnoremap <leader>bn :bn<CR>
+nnoremap <leader>bp :bp<CR>
+
+" Errors
+nnoremap <leader>en :ALENext<CR>
+nnoremap <leader>ep :ALEPrevious<CR>
+nnoremap <leader>ed :ALEDetail<CR>
+
+" Files
+nnoremap <leader>ff :Files<CR>
+nnoremap <leader>fs :w<CR>
+nnoremap <leader>fS :wa<CR>
+nnoremap <leader>fn :enew<CR>
+nnoremap <leader>ft :NERDTreeToggle<CR>
+nnoremap <leader>fed :e ~/.config/nvim/init.vim<CR>
+
+" Git
+nnoremap <leader>gb :Gblame<CR>
+nnoremap <leader>gd :Gdiff<CR>
+nnoremap <leader>gs :Gstatus<CR>
+
+" Options
+nnoremap <leader>ll :Filetypes<CR>
+
+" Search
+nnoremap <leader>sc :noh<CR>
+
+" Windows
+nnoremap <leader>wj <C-w>j
+nnoremap <leader>wk <C-w>k
+nnoremap <leader>wh <C-w>h
+nnoremap <leader>wl <C-w>l
+nnoremap <leader>wl <C-w>l
+nnoremap <leader>wd :q<CR>
+nnoremap <leader>ww :Windows<CR>
 
 map <C-e> :NERDTreeToggle<CR>
 
