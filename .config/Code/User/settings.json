@@ -22,5 +22,6 @@
     "git.autofetch": true,
     "search.exclude": {
         "**/node_modules": true,
-    }
+    },
+    "editor.lineNumbers": "relative"
 }
