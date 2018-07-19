@@ -1,3 +1,4 @@
+" vim:set ft=vim et sw=2:
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
@@ -14,21 +15,24 @@ Plug 'mxw/vim-jsx'
 Plug 'moll/vim-node'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'PotatoesMaster/i3-vim-syntax'
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug '/usr/bin/fzf'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'junegunn/fzf.vim'
 call plug#end()
 
 set nocompatible
 
-" syntax enable
-" filetype plugin indent on
-
-set tabstop=2
 set autoindent
+set backspace=indent,eol,start
+set smarttab
+
+set laststatus=2
+set ruler
+set wildmenu
 
 set number
 set relativenumber
+set scrolloff=5
+set sidescrolloff=5
 
 set visualbell
 set encoding=utf-8
@@ -59,11 +63,6 @@ nnoremap <leader>bd :bdelete<CR>
 nnoremap <leader>bn :bn<CR>
 nnoremap <leader>bp :bp<CR>
 
-" Errors
-nnoremap <leader>en :ALENext<CR>
-nnoremap <leader>ep :ALEPrevious<CR>
-nnoremap <leader>ed :ALEDetail<CR>
-
 " Files
 nnoremap <leader>ff :Files<CR>
 nnoremap <leader>fs :w<CR>
@@ -76,6 +75,11 @@ nnoremap <leader>fed :e ~/.config/nvim/init.vim<CR>
 nnoremap <leader>gb :Gblame<CR>
 nnoremap <leader>gd :Gdiff<CR>
 nnoremap <leader>gs :Gstatus<CR>
+
+" Linting
+nnoremap <leader>ln :ALENext<CR>
+nnoremap <leader>lp :ALEPrevious<CR>
+nnoremap <leader>ld :ALEDetail<CR>
 
 " Options
 nnoremap <leader>ll :Filetypes<CR>
