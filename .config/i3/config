@@ -4,6 +4,17 @@ set $term st -f "Hack:size=10"
 
 font pango: Hack, monospace 9
 
+set $webws "1 web "
+set $backws "2 back "
+set $frontws "3 front "
+set $chatws "4 chat "
+set $musicws "5 music "
+set $dbws "6 db "
+set $restws "7 rest "
+set $gitws "8 git "
+set $sshws "9 server "
+set $miscws "10 misc "
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -15,7 +26,7 @@ bindsym $mod+Shift+q kill
 
 # focus urgent
 bindsym $mod+x [urgent=latest] focus
-
+# alternate between two workspaces
 bindsym $mod+Tab workspace back_and_forth
 
 # start dmenu (a program launcher)
@@ -26,11 +37,6 @@ bindsym Mod1+Tab exec --no-startup-id rofi -show window -window-format {w}{n}{t}
 bindsym --release $mod+Print exec --no-startup-id scrot ~/screenshot.png
 bindsym --release $mod+Delete exec --no-startup-id xkill
 bindsym $mod+F12 exec --no-startup-id "xbacklight -set $($HOME/scripts/rofi/brightness | rofi -dmenu || xbacklight -get)"
-
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer -i 5 && pkill -RTMIN+11 i3blocks
@@ -97,9 +103,6 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
-
-#set $locker i3lock -i ~/images/wp.png && sleep 1
-#set $locker i3lock-fancy -- scrot -z
 set $locker ~/scripts/lockscreen.sh
 
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
@@ -120,40 +123,30 @@ bindsym Mod1+Ctrl+Delete mode "$mode_system"
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1 "
-set $ws2 "2 "
-set $ws3 "3 "
-set $ws4 "4 "
-set $ws5 "5 "
-set $ws6 "6 "
-set $ws7 "7 "
-set $ws8 "8 "
-set $ws9 "9"
-set $ws10 "10"
 
 # switch to workspace
-bindsym $mod+1 workspace $ws1
-bindsym $mod+2 workspace $ws2
-bindsym $mod+3 workspace $ws3
-bindsym $mod+4 workspace $ws4
-bindsym $mod+5 workspace $ws5
-bindsym $mod+6 workspace $ws6
-bindsym $mod+7 workspace $ws7
-bindsym $mod+8 workspace $ws8
-bindsym $mod+9 workspace $ws9
-bindsym $mod+0 workspace $ws10
+bindsym $mod+1 workspace $webws
+bindsym $mod+2 workspace $backws
+bindsym $mod+3 workspace $frontws
+bindsym $mod+4 workspace $chatws
+bindsym $mod+5 workspace $musicws
+bindsym $mod+6 workspace $dbws
+bindsym $mod+7 workspace $restws
+bindsym $mod+8 workspace $gitws
+bindsym $mod+9 workspace $sshws
+bindsym $mod+0 workspace $miscws
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace $ws1
-bindsym $mod+Shift+2 move container to workspace $ws2
-bindsym $mod+Shift+3 move container to workspace $ws3
-bindsym $mod+Shift+4 move container to workspace $ws4
-bindsym $mod+Shift+5 move container to workspace $ws5
-bindsym $mod+Shift+6 move container to workspace $ws6
-bindsym $mod+Shift+7 move container to workspace $ws7
-bindsym $mod+Shift+8 move container to workspace $ws8
-bindsym $mod+Shift+9 move container to workspace $ws9
-bindsym $mod+Shift+0 move container to workspace $ws10
+bindsym $mod+Shift+1 move container to workspace $webws
+bindsym $mod+Shift+2 move container to workspace $backws
+bindsym $mod+Shift+3 move container to workspace $frontws
+bindsym $mod+Shift+4 move container to workspace $chatws
+bindsym $mod+Shift+5 move container to workspace $musicws
+bindsym $mod+Shift+6 move container to workspace $dbws
+bindsym $mod+Shift+7 move container to workspace $restws
+bindsym $mod+Shift+8 move container to workspace $gitws
+bindsym $mod+Shift+9 move container to workspace $sshws
+bindsym $mod+Shift+0 move container to workspace $miscws
 
 # cycle active workspaces
 bindsym $mod+Shift+Tab workspace next
@@ -207,7 +200,7 @@ bar {
 hide_edge_borders both
 smart_gaps on
 
-assign[class="Google-chrome-unstable"] $ws1
+assign[class="Google-chrome-unstable"] $webws
 
 for_window [class="^.*"] border pixel 1
 for_window [window_type="dialog"] move position center
@@ -219,15 +212,17 @@ for_window [class="Pavucontrol"] floating enable
 for_window [class="Gnome-system-monitor"] floating enable; move position center
 for_window [class="Solaar"] floating enable; move position center
 for_window [class="Google-chrome-unstable"] focus
-for_window [class="Slack"] move container to workspace $ws4
-for_window [class="Spotify"] move container to workspace $ws5
-for_window [title="(?i)dbeaver"] move container to workspace $ws6; workspace $ws6; focus
-for_window [class="Postman"] move container to workspace $ws7; workspace $ws7; focus
-for_window [class="Poedit"] move container to workspace $ws7; workspace $ws7; focus
-for_window [class="GitKraken"] move container to workspace $ws8; workspace $ws8; focus
+for_window [class="Slack"] move container to workspace $chatws
+for_window [class="^whats-app"] move container to workspace $chatws; focus
+for_window [class="TelegramDesktop"] move container to workspace $chatws; focus
+for_window [class="Spotify"] move container to workspace $musicws
+for_window [title="(?i)dbeaver"] move container to workspace $dbws; workspace $dbws; focus
+for_window [class="Postman"] move container to workspace $restws; workspace $restws; focus
+for_window [class="Poedit"] move container to workspace $miscws; workspace $miscws; focus
+for_window [class="GitKraken"] move container to workspace $gitws; workspace $gitws; focus
 for_window [window_role="GtkFileChooserDialog"] fullscreen enable
-for_window [instance="code" title="gupy-api"] move container to workspace $ws2
-for_window [instance="code" title="gupy-front"] move container to workspace $ws3
+for_window [instance="code" title="gupy-api"] move container to workspace $backws
+for_window [instance="code" title="gupy-front"] move container to workspace $frontws
 for_window [instance="st-256color" title="Scratchpad terminal"] floating enable, resize grow left 100, resize grow right 100, move scratchpad
 
 for_window [urgent="latest" instance="code"] focus
