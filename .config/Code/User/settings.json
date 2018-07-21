@@ -1,4 +1,5 @@
 {
+    "vim.surround": true,
     "vim.easymotion": true,
     "vim.sneak": true,
     "vim.incsearch": true,
@@ -23,5 +24,5 @@
     "search.exclude": {
         "**/node_modules": true,
     },
-    "editor.lineNumbers": "relative"
+    "editor.lineNumbers": "relative",
 }
