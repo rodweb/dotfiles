@@ -1,5 +1,6 @@
 # vi: ft=i3
 set $mod Mod4
+set $alt Mod1
 set $term st -f "Hack:size=10"
 
 font pango: Hack, monospace 9
@@ -27,13 +28,13 @@ bindsym $mod+Shift+q kill
 # focus urgent
 bindsym $mod+x [urgent=latest] focus
 # alternate between two workspaces
-bindsym $mod+Tab workspace back_and_forth
+bindsym $alt+Tab workspace back_and_forth
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec --no-startup-id dmenu_run
 bindsym $mod+space exec --no-startup-id "rofi -show combi -combi-modi window,drun -modi combi"
 bindsym $mod+apostrophe exec --no-startup-id "rofi -modi 'clipboard:greenclip print' -show clipboard -run-command '{cmd}'"
-bindsym Mod1+Tab exec --no-startup-id rofi -show window -window-format {w}{n}{t}{c}
+# bindsym Mod1+Tab exec --no-startup-id rofi -show window -window-format {w}{n}{t}{c}
 bindsym --release $mod+Print exec --no-startup-id scrot ~/screenshot.png
 bindsym --release $mod+Delete exec --no-startup-id xkill
 bindsym $mod+F12 exec --no-startup-id "xbacklight -set $($HOME/scripts/rofi/brightness | rofi -dmenu || xbacklight -get)"
@@ -149,7 +150,8 @@ bindsym $mod+Shift+9 move container to workspace $sshws
 bindsym $mod+Shift+0 move container to workspace $miscws
 
 # cycle active workspaces
-bindsym $mod+Shift+Tab workspace next
+bindsym $mod+Tab workspace next
+bindsym $mod+Shift+Tab workspace prev
 bindsym Control+Mod1+Right workspace next
 bindsym Control+Mod1+Left workspace prev
 
@@ -213,6 +215,7 @@ for_window [class="Gnome-system-monitor"] floating enable; move position center
 for_window [class="Solaar"] floating enable; move position center
 for_window [class="Google-chrome-unstable"] focus
 for_window [class="Slack"] move container to workspace $chatws
+for_window [class="Slack" title="Slack Call Minipanel"] floating enable; sticky enable
 for_window [class="^whats-app"] move container to workspace $chatws; focus
 for_window [class="TelegramDesktop"] move container to workspace $chatws; focus
 for_window [class="Spotify"] move container to workspace $musicws
