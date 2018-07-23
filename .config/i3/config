@@ -1,6 +1,7 @@
 # vi: ft=i3
-set $mod Mod4
+set $win Mod4
 set $alt Mod1
+set $ctrl Control
 set $term st -f "Hack:size=10"
 
 font pango: Hack, monospace 9
@@ -16,28 +17,29 @@ set $gitws "8 git "
 set $sshws "9 server "
 set $miscws "10 misc "
 
-# Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
+# Use Mouse+$win to drag floating windows to their wanted position
+floating_modifier $win
 
 # start a terminal
-bindsym $mod+Return exec --no-startup-id $term #i3-sensible-terminal
-bindsym $mod+q scratchpad show
+bindsym $win+Return exec --no-startup-id $term #i3-sensible-terminal
+bindsym $win+q scratchpad show
 # kill focused window
-bindsym $mod+Shift+q kill
+bindsym $win+Shift+q kill
 
 # focus urgent
-bindsym $mod+x [urgent=latest] focus
+bindsym $win+x [urgent=latest] focus
 # alternate between two workspaces
 bindsym $alt+Tab workspace back_and_forth
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id dmenu_run
-bindsym $mod+space exec --no-startup-id "rofi -show combi -combi-modi window,drun -modi combi"
-bindsym $mod+apostrophe exec --no-startup-id "rofi -modi 'clipboard:greenclip print' -show clipboard -run-command '{cmd}'"
+bindsym $win+d exec --no-startup-id dmenu_run
+bindsym $win+space exec --no-startup-id "rofi -show combi -combi-modi window,drun -modi combi"
+bindsym $win+apostrophe exec --no-startup-id "rofi -modi 'clipboard:greenclip print' -show clipboard -run-command '{cmd}'"
 # bindsym Mod1+Tab exec --no-startup-id rofi -show window -window-format {w}{n}{t}{c}
-bindsym --release $mod+Print exec --no-startup-id scrot ~/screenshot.png
-bindsym --release $mod+Delete exec --no-startup-id xkill
-bindsym $mod+F12 exec --no-startup-id "xbacklight -set $($HOME/scripts/rofi/brightness | rofi -dmenu || xbacklight -get)"
+#bindsym --release Print exec --no-startup-id scrot ~/screenshot.png
+bindsym $win+Print exec --no-startup-id xfce4-screenshooter -r -c
+bindsym --release $win+Delete exec --no-startup-id xkill
+bindsym $win+F12 exec --no-startup-id "xbacklight -set $($HOME/scripts/rofi/brightness | rofi -dmenu || xbacklight -get)"
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer -i 5 && pkill -RTMIN+11 i3blocks
@@ -55,54 +57,54 @@ bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 
 # change focus
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
+bindsym $win+h focus left
+bindsym $win+j focus down
+bindsym $win+k focus up
+bindsym $win+l focus right
 
 # alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+bindsym $win+Left focus left
+bindsym $win+Down focus down
+bindsym $win+Up focus up
+bindsym $win+Right focus right
 
 # move focused window
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
+bindsym $win+Shift+h move left
+bindsym $win+Shift+j move down
+bindsym $win+Shift+k move up
+bindsym $win+Shift+l move right
 
 # alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+bindsym $win+Shift+Left move left
+bindsym $win+Shift+Down move down
+bindsym $win+Shift+Up move up
+bindsym $win+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+slash split h
+bindsym $win+slash split h
 
 # split in vertical orientation
-bindsym $mod+minus split v
+bindsym $win+minus split v
 
 # enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
+bindsym $win+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $win+s layout stacking
+bindsym $win+w layout tabbed
+bindsym $win+e layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+bindsym $win+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+z focus mode_toggle
+bindsym $win+z focus mode_toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
+bindsym $win+a focus parent
 
 # focus the child container
-#bindsym $mod+d focus child
+#bindsym $win+d focus child
 
 set $locker ~/scripts/lockscreen.sh
 
@@ -120,47 +122,47 @@ mode "$mode_system" {
     bindsym Escape mode "default"
 }
 
-bindsym Mod1+Ctrl+Delete mode "$mode_system"
+bindsym $alt+$ctrl+Delete mode "$mode_system"
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
 
 # switch to workspace
-bindsym $mod+1 workspace $webws
-bindsym $mod+2 workspace $backws
-bindsym $mod+3 workspace $frontws
-bindsym $mod+4 workspace $chatws
-bindsym $mod+5 workspace $musicws
-bindsym $mod+6 workspace $dbws
-bindsym $mod+7 workspace $restws
-bindsym $mod+8 workspace $gitws
-bindsym $mod+9 workspace $sshws
-bindsym $mod+0 workspace $miscws
+bindsym $win+1 workspace $webws
+bindsym $win+2 workspace $backws
+bindsym $win+3 workspace $frontws
+bindsym $win+4 workspace $chatws
+bindsym $win+5 workspace $musicws
+bindsym $win+6 workspace $dbws
+bindsym $win+7 workspace $restws
+bindsym $win+8 workspace $gitws
+bindsym $win+9 workspace $sshws
+bindsym $win+0 workspace $miscws
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace $webws
-bindsym $mod+Shift+2 move container to workspace $backws
-bindsym $mod+Shift+3 move container to workspace $frontws
-bindsym $mod+Shift+4 move container to workspace $chatws
-bindsym $mod+Shift+5 move container to workspace $musicws
-bindsym $mod+Shift+6 move container to workspace $dbws
-bindsym $mod+Shift+7 move container to workspace $restws
-bindsym $mod+Shift+8 move container to workspace $gitws
-bindsym $mod+Shift+9 move container to workspace $sshws
-bindsym $mod+Shift+0 move container to workspace $miscws
+bindsym $win+Shift+1 move container to workspace $webws
+bindsym $win+Shift+2 move container to workspace $backws
+bindsym $win+Shift+3 move container to workspace $frontws
+bindsym $win+Shift+4 move container to workspace $chatws
+bindsym $win+Shift+5 move container to workspace $musicws
+bindsym $win+Shift+6 move container to workspace $dbws
+bindsym $win+Shift+7 move container to workspace $restws
+bindsym $win+Shift+8 move container to workspace $gitws
+bindsym $win+Shift+9 move container to workspace $sshws
+bindsym $win+Shift+0 move container to workspace $miscws
 
 # cycle active workspaces
-bindsym $mod+Tab workspace next
-bindsym $mod+Shift+Tab workspace prev
+bindsym $win+Tab workspace next
+bindsym $win+Shift+Tab workspace prev
 bindsym Control+Mod1+Right workspace next
 bindsym Control+Mod1+Left workspace prev
 
 # reload the configuration file
-bindsym $mod+Shift+c reload
+bindsym $win+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
+bindsym $win+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $win+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -181,13 +183,13 @@ mode "resize" {
         bindsym Up resize shrink height 10 px or 10 ppt
         bindsym Right resize grow width 10 px or 10 ppt
 
-        # back to normal: Enter or Escape or $mod+r
+        # back to normal: Enter or Escape or $win+r
         bindsym Return mode "default"
         bindsym Escape mode "default"
-        bindsym $mod+r mode "default"
+        bindsym $win+r mode "default"
 }
 
-bindsym $mod+r mode "resize"
+bindsym $win+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
