@@ -16,5 +16,32 @@
     {
         "key": "ctrl+shift+-",
         "command": "-workbench.action.navigateForward"
-    }
+    },
+    {
+        "key": "alt+1",
+        "command": "workbench.view.explorer"
+    },
+    {
+        "key": "escape",
+        "command": "workbench.action.terminal.hideFindWidget",
+        "when": "terminalFindWidgetVisible && terminalFocus"
+    },
+    {
+        "key": "alt+q",
+        "command": "workbench.action.toggleSidebarVisibility"
+    },
+    {
+        "key": "alt+2",
+        "command": "workbench.view.search",
+        "when": "!searchViewletVisible"
+    },
+    {
+        "key": "alt+4",
+        "command": "workbench.view.debug"
+    },
+    {
+        "key": "alt+3",
+        "command": "workbench.view.scm",
+        "when": "gitlens:enabled && gitlens:keymap == 'chorded'"
+    },
 ]

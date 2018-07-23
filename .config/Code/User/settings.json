@@ -12,6 +12,22 @@
             "after": ["<Esc>"]
         }
     ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": ["<leader>","f","s"],
+            "commands": [":w"]
+        },
+        {
+            "before": ["<leader>","s","c"],
+            "commands": [":nohl"]
+        },
+        {
+            "before":["<C-n>"],
+            "commands": [
+                ":nohl"
+            ]
+        }
+    ],
     "vim.leader": "<space>",
     "vim.handleKeys":{
         "<C-a>": false,
@@ -25,4 +41,9 @@
         "**/node_modules": true,
     },
     "editor.lineNumbers": "relative",
+    "workbench.statusBar.visible": true,
+    "window.menuBarVisibility": "toggle",
+    "workbench.activityBar.visible": false,
+    "workbench.editor.showTabs": false,
+    "window.zoomLevel": 0,
 }
