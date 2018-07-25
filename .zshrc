@@ -1,6 +1,7 @@
 autoload -U promptinit; promptinit
 source /usr/share/zsh/share/antigen.zsh
 source /usr/share/nvm/init-nvm.sh
+source /usr/share/doc/pkgfile/command-not-found.zsh
 
 antigen use oh-my-zsh
 antigen bundle git
