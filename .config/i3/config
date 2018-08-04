@@ -219,7 +219,7 @@ for_window [class="Gnome-system-monitor"] floating enable; move position center
 for_window [class="Solaar"] floating enable; move position center
 for_window [class="Google-chrome-unstable"] focus
 for_window [class="Slack"] move container to workspace $chatws
-for_window [class="Slack" title="Slack Call Minipanel"] floating enable; sticky enable
+for_window [class="Slack" title="Slack Call Minipanel"] sticky enable; move position 1085 90
 for_window [class="Skype"] move container to workspace $chatws; floating disable
 for_window [class="^whats-app"] move container to workspace $chatws; focus
 for_window [class="TelegramDesktop"] move container to workspace $chatws; focus
