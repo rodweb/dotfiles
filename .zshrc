@@ -10,6 +10,7 @@ antigen bundle command-not-found
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-completions
+antigen bundle lukechilds/zsh-better-npm-completion
 
 antigen theme refined
 antigen apply
@@ -50,6 +51,8 @@ alias Z='$EDITOR $HOME/.zshrc'
 alias I='$EDITOR $HOME/.config/i3/config'
 alias B='$EDITOR $HOME/.config/i3/i3blocks.conf'
 alias install='sudo pacman -S --noconfirm'
+alias update='sudo pacman -Syy'
+alias upgrade='sudo pacman -Syu'
 alias remove='yay -Rns'
 alias yst='cd $HOME && yadm status'
 alias yd='cd $HOME && yadm diff'
