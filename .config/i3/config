@@ -235,6 +235,7 @@ for_window [instance="code" title="gupy-api"] move container to workspace $backw
 for_window [instance="code" title="gupy-front"] move container to workspace $frontws
 for_window [instance="st-256color" title="Scratchpad terminal"] floating enable, resize grow left 100, resize grow right 100, move scratchpad
 for_window [class="Nm-connection-editor"] floating enable
+for_window [class="jetbrains-webstorm" title="Changelist"] fullscreen enable; focus
 
 
 exec_always --no-startup-id xrdb -merge ~/.Xresources
