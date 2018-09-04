@@ -1,2 +1,21 @@
-set relativenumber
-set number
+set incsearch
+set ignorecase
+set smartcase
+set scrolloff=3
+
+set clipboard=unnamedplus,unnamed
+
+" set relativenumber
+" set number
+set surround
+
+let mapleader = " "
+nmap <leader>fs <c-s>
+nmap <leader>ff :action GotoFile<cr>
+nmap <leader>bb :action RecentFiles<cr>
+
+nmap <leader>gb :action Back<cr>
+nmap <leader>gf :action Forward<cr>
+nmap <leader>gw :action JumpToLastWindow<cr>
+nmap <leader>gd :action GotoDeclaration<cr>
+nmap <leader>gi :action GotoImplementation<cr>

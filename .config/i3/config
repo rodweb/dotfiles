@@ -17,8 +17,8 @@ set $gitws "8 git "
 set $sshws "9 server "
 set $miscws "10 misc "
 
-# Use Mouse+$win to drag floating windows to their wanted position
 floating_modifier $win
+# focus_follows_mouse no
 
 # start a terminal
 bindsym $win+Return exec --no-startup-id $term #i3-sensible-terminal
@@ -236,6 +236,8 @@ for_window [instance="code" title="gupy-front"] move container to workspace $fro
 for_window [instance="st-256color" title="Scratchpad terminal"] floating enable, resize grow left 100, resize grow right 100, move scratchpad
 for_window [class="Nm-connection-editor"] floating enable
 for_window [class="jetbrains-webstorm" title="Changelist"] fullscreen enable; focus
+for_window [class="jetbrains-webstorm" title="win3"] focus
+for_window [class="^jetbrains-.+"][window_type=dialog] focus
 
 
 exec_always --no-startup-id xrdb -merge ~/.Xresources
