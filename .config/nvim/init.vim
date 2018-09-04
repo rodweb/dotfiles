@@ -51,6 +51,7 @@ set t_Co=256
 set background=dark
 
 au BufRead /tmp/psql.edit.* set syntax=sql
+let g:ale_completion_enabled = 1
 
 let mapleader = "\<Space>"
 nnoremap <leader>sv :source %<CR>
@@ -77,10 +78,16 @@ nnoremap <leader>fn :enew<CR>
 nnoremap <leader>ft :NERDTreeToggle<CR>
 nnoremap <leader>fed :e ~/.config/nvim/init.vim<CR>
 
+" Find
+nnoremap <leader>fr :ALEFindReferences<CR>
+
 " Git
 nnoremap <leader>gb :Gblame<CR>
 nnoremap <leader>gd :Gdiff<CR>
 nnoremap <leader>gs :Gstatus<CR>
+
+" Goto
+nnoremap <leader>gi :ALEGoToDefinition<CR>
 
 " Linting
 nnoremap <leader>ln :ALENext<CR>
