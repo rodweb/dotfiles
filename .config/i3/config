@@ -14,7 +14,7 @@ set $musicws "5 music "
 set $dbws "6 db "
 set $restws "7 rest "
 set $gitws "8 git "
-set $sshws "9 server "
+set $mailws "9 mail "
 set $miscws "10 misc "
 
 floating_modifier $win
@@ -137,19 +137,19 @@ bindsym $win+5 workspace $musicws
 bindsym $win+6 workspace $dbws
 bindsym $win+7 workspace $restws
 bindsym $win+8 workspace $gitws
-bindsym $win+9 workspace $sshws
+bindsym $win+9 workspace $mailws
 bindsym $win+0 workspace $miscws
 
 # move focused container to workspace
 bindsym $win+Shift+1 move container to workspace $webws
-bindsym $win+Shift+2 move container to workspace $backws
-bindsym $win+Shift+3 move container to workspace $frontws
+bindsym $win+Shift+2 move container to workspace $backws; workspace $backws
+bindsym $win+Shift+3 move container to workspace $frontws; workspace $frontws
 bindsym $win+Shift+4 move container to workspace $chatws
 bindsym $win+Shift+5 move container to workspace $musicws
 bindsym $win+Shift+6 move container to workspace $dbws
 bindsym $win+Shift+7 move container to workspace $restws
 bindsym $win+Shift+8 move container to workspace $gitws
-bindsym $win+Shift+9 move container to workspace $sshws
+bindsym $win+Shift+9 move container to workspace $mailws
 bindsym $win+Shift+0 move container to workspace $miscws
 
 # cycle active workspaces
@@ -192,16 +192,6 @@ mode "resize" {
 
 bindsym $win+r mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-bar {
-	status_command i3blocks -c ~/.config/i3/i3blocks.conf
-	font pango: Hack, FontAwesome 9
-	height 18
-	position top
-#  mode hide
-}
-
 hide_edge_borders both
 smart_gaps on
 
@@ -218,6 +208,7 @@ for_window [class="Pavucontrol"] floating enable
 for_window [class="Gnome-system-monitor"] floating enable; move position center
 for_window [class="Solaar"] floating enable; move position center
 for_window [class="Google-chrome-unstable"] focus
+for_window [class="Keybase"] move container to workspace $chatws
 for_window [class="Slack"] move container to workspace $chatws
 for_window [class="Slack" title="Slack Call Minipanel"] sticky enable; move position 1085 90
 for_window [class="Skype"] move container to workspace $chatws; floating disable
@@ -258,3 +249,50 @@ exec --no-startup-id $term -t 'Scratchpad terminal'
 exec --no-startup-id udiskie -2
 exec --no-startup-id dunst
 exec --no-startup-id unclutter -b
+
+
+set $base00 #000000
+set $base01 #121212
+set $base02 #222222
+set $base03 #333333
+set $base04 #999999
+set $base05 #c1c1c1
+set $base06 #999999
+set $base07 #c1c1c1
+set $base08 #5f8787
+set $base09 #aaaaaa
+set $base0A #e78a53
+set $base0B #fbcb97
+set $base0C #aaaaaa
+set $base0D #888888
+set $base0E #999999
+set $base0F #444444
+
+
+bar {
+	status_command i3blocks -c ~/.config/i3/i3blocks.conf
+	font pango: Hack, FontAwesome 9
+	height 18
+	position top
+#  mode hide
+    colors {
+        background $base00
+        separator  $base01
+        statusline $base04
+
+        # State             Border  BG      Text
+        focused_workspace   $base05 $base0D $base00
+        active_workspace    $base05 $base03 $base00
+        inactive_workspace  $base03 $base01 $base05
+        urgent_workspace    $base08 $base08 $base00
+        binding_mode        $base00 $base0A $base00
+    }
+}
+
+# Property Name         Border  BG      Text    Indicator Child Border
+client.focused          $base05 $base0D $base00 $base0D $base0D
+client.focused_inactive $base01 $base01 $base05 $base03 $base01
+client.unfocused        $base01 $base00 $base05 $base01 $base01
+client.urgent           $base08 $base08 $base00 $base08 $base08
+client.placeholder      $base00 $base00 $base05 $base00 $base00
+client.background       $base07
