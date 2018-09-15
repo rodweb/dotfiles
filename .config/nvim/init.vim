@@ -19,6 +19,7 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'junegunn/fzf.vim'
+Plug 'chriskempson/base16-vim'
 call plug#end()
 
 set nocompatible
@@ -29,7 +30,7 @@ set autoindent
 set backspace=indent,eol,start
 set smarttab
 
-set laststatus=2
+" set laststatus=2
 set ruler
 set wildmenu
 
@@ -48,7 +49,10 @@ set smartcase
 set showmatch
 
 set t_Co=256
-set background=dark
+" set background=dark
+
+" won't show duplicated INSERT
+set noshowmode
 
 au BufRead /tmp/psql.edit.* set syntax=sql
 let g:ale_completion_enabled = 1
@@ -123,3 +127,8 @@ let g:user_emmet_settings = {
   \}
 
 autocmd BufWritePost *.js AsyncRun -post=checktime ./node_modules/.bin/eslint --fix %
+
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+endif
