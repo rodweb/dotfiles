@@ -2,3 +2,5 @@
 	email = rod.apd@gmail.com
 	name = Rodrigo Campos
 	login = rodweb
+[core]
+	editor = nvim
