@@ -19,6 +19,7 @@ HISTSIZE=3000
 SAVEHIST=3000
 HISTFILE=~/.histfile
 EDITOR='nvim'
+NODE_OPTIONS=--max_old_space_size=4096
 
 setopt appendhistory
 setopt sharehistory
@@ -71,3 +72,6 @@ transset-df --id $WINDOWID .95 > /dev/null
 
 source /usr/share/fzf/completion.zsh
 source /usr/share/fzf/key-bindings.zsh
+
+BASE16_SHELL=$HOME/.config/base16-shell/
+[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
