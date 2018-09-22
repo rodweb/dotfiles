@@ -221,6 +221,7 @@ for_window [class="Postman"] move container to workspace $restws; workspace $res
 for_window [class="Poedit"] move container to workspace $miscws; workspace $miscws; focus
 for_window [class="GitKraken"] move container to workspace $gitws; workspace $gitws; focus
 for_window [class="Pcmanfm" title="rodrigo"] move container to workspace $miscws; workspace $miscws; focus
+for_window [class="Mailspring"] move container to workspace $mailws
 for_window [window_role="GtkFileChooserDialog"] fullscreen enable
 for_window [instance="code" title="gupy-api"] move container to workspace $backws
 for_window [instance="code" title="gupy-front"] move container to workspace $frontws
