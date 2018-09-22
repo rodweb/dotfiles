@@ -20,6 +20,7 @@ Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'junegunn/fzf.vim'
 Plug 'chriskempson/base16-vim'
+Plug 'Yggdroot/indentLine'
 call plug#end()
 
 set nocompatible
@@ -38,9 +39,12 @@ set number
 set relativenumber
 set scrolloff=5
 set sidescrolloff=5
-
+set cursorline
 set visualbell
 set encoding=utf-8
+" set list
+" set showbreak=↪\ 
+" set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
 
 set hlsearch
 set incsearch
@@ -54,6 +58,9 @@ set t_Co=256
 " won't show duplicated INSERT
 set noshowmode
 
+" git gutter should be faster
+set updatetime=100
+
 au BufRead /tmp/psql.edit.* set syntax=sql
 let g:ale_completion_enabled = 1
 
@@ -65,8 +72,11 @@ nnoremap <leader><leader> :Maps<CR>
 nnoremap <leader>qq :q!<CR>
 
 " Comment
-nmap <leader>/ <Plug>CommentaryLine
-vmap <leader>/ <Plug>CommentaryLine
+nmap <leader>cl <Plug>CommentaryLine
+vmap <leader>cl <Plug>CommentaryLine
+
+" Commands
+nnoremap <leader>cc :Commands<CR>
 
 " Buffers
 nnoremap <leader>bb :Buffers<CR>
@@ -80,18 +90,20 @@ nnoremap <leader>fs :w<CR>
 nnoremap <leader>fS :wa<CR>
 nnoremap <leader>fn :enew<CR>
 nnoremap <leader>ft :NERDTreeToggle<CR>
-nnoremap <leader>fed :e ~/.config/nvim/init.vim<CR>
+nnoremap <leader>fed :e $MYVIMRC<CR>
 
 " Find
 nnoremap <leader>fr :ALEFindReferences<CR>
 
 " Git
-nnoremap <leader>gb :Gblame<CR>
+" nnoremap <leader>gb :Gblame<CR>
 nnoremap <leader>gd :Gdiff<CR>
 nnoremap <leader>gs :Gstatus<CR>
 
 " Goto
 nnoremap <leader>gi :ALEGoToDefinition<CR>
+nnoremap <leader>gb <C-o><CR>
+nnoremap <leader>gf <C-i><CR>
 
 " Linting
 nnoremap <leader>ln :ALENext<CR>
@@ -101,8 +113,15 @@ nnoremap <leader>ld :ALEDetail<CR>
 " Options
 nnoremap <leader>ll :Filetypes<CR>
 
+" Project
+nnoremap <leader>pf :GitFiles<CR>
+
 " Search
 nnoremap <leader>sc :noh<CR>
+nnoremap <leader>ss :Ag<CR>
+
+" Source
+nnoremap <leader>sz :so $MYVIMRC<CR>
 
 " Windows
 nnoremap <leader>wj <C-w>j
@@ -116,19 +135,37 @@ nnoremap <leader>ww :Windows<CR>
 let g:tsuquyomi_disable_quickfix = 1
 let g:syntastic_typescript_checkers = ['tsuquyomi']
 
-map <C-e> :NERDTreeToggle<CR>
+" map <C-e> :NERDTreeToggle<CR>
 
-let g:user_emmet_leader_key='<Tab>'
-imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
-let g:user_emmet_settings = {
-  \  'javascript.jsx' : {
-  \    'extends' : 'jsx',
-  \  },
-  \}
+" let g:user_emmet_leader_key='<Tab>'
+" imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+" let g:user_emmet_settings = {
+"   \  'javascript.jsx' : {
+"   \    'extends' : 'jsx',
+"   \  },
+"   \}
 
 autocmd BufWritePost *.js AsyncRun -post=checktime ./node_modules/.bin/eslint --fix %
 
+" Autoreload when changing theme
 if filereadable(expand("~/.vimrc_background"))
   let base16colorspace=256
   source ~/.vimrc_background
 endif
+
+" Source vim configuration upon save
+augroup vimrc     
+  autocmd! BufWritePost $MYVIMRC source % | echom "Reloaded " . $MYVIMRC | redraw
+augroup END
+
+" Cursor line on current window
+augroup CursorLine
+  au!
+  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  au WinLeave * setlocal nocursorline
+augroup END
+
+
+" indentLine
+let g:indentLine_setColors = 0
+let g:indentLine_char = '│'
