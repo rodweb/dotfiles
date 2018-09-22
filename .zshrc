@@ -2,6 +2,7 @@ autoload -U promptinit; promptinit
 source /usr/share/zsh/share/antigen.zsh
 source /usr/share/nvm/init-nvm.sh
 source /usr/share/doc/pkgfile/command-not-found.zsh
+source ~/scripts/zsh/fzf-git-checkout.zsh
 
 antigen use oh-my-zsh
 antigen bundle git
@@ -50,13 +51,15 @@ alias mkdir='mkdir -pv'
 alias p='ping google.com'
 alias s='sudo !!'
 alias sz='source $HOME/.zshrc'
+alias et='emacs -nw'
 alias v='$EDITOR'
 alias Z='$EDITOR $HOME/.zshrc'
 alias I='$EDITOR $HOME/.config/i3/config'
 alias B='$EDITOR $HOME/.config/i3/i3blocks.conf'
 alias install='sudo pacman -S --noconfirm'
-alias update='sudo pacman -Syy'
-alias upgrade='sudo pacman -Syu'
+alias update='yay -Syy'
+alias upgrade='yay -Syu'
+alias search='yay -Ssy'
 alias remove='yay -Rns'
 alias yst='cd $HOME && yadm status'
 alias yd='cd $HOME && yadm diff'
