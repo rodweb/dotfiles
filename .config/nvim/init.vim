@@ -21,12 +21,13 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'junegunn/fzf.vim'
 Plug 'chriskempson/base16-vim'
 Plug 'Yggdroot/indentLine'
+Plug 'jiangmiao/auto-pairs'
 call plug#end()
 
 set nocompatible
 
 set clipboard=unnamedplus
-
+" set hidden
 set autoindent
 set backspace=indent,eol,start
 set smarttab
