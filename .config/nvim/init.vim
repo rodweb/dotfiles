@@ -22,10 +22,11 @@ Plug 'junegunn/fzf.vim'
 Plug 'chriskempson/base16-vim'
 Plug 'Yggdroot/indentLine'
 Plug 'jiangmiao/auto-pairs'
+Plug 'easymotion/vim-easymotion'
 call plug#end()
 
 set nocompatible
-
+set mouse=a
 set clipboard=unnamedplus
 " set hidden
 set autoindent
@@ -52,6 +53,7 @@ set incsearch
 set ignorecase
 set smartcase
 set showmatch
+set inccommand=split
 
 set t_Co=256
 " set background=dark
@@ -63,13 +65,15 @@ set noshowmode
 set updatetime=100
 
 au BufRead /tmp/psql.edit.* set syntax=sql
+
+" ALE
 let g:ale_completion_enabled = 1
 
 let mapleader = "\<Space>"
 nnoremap <leader>sv :source %<CR>
 
 nnoremap <leader><tab> <C-^>
-nnoremap <leader><leader> :Maps<CR>
+nnoremap <leader>? :Maps<CR>
 nnoremap <leader>qq :q!<CR>
 
 " Comment
@@ -169,4 +173,11 @@ augroup END
 
 " indentLine
 let g:indentLine_setColors = 0
-let g:indentLine_char = '│'
+let g:indantLine_char = '│'
+
+" easymotion
+map <leader><leader> <Plug>(easymotion-prefix)
+nmap s <Plug>(easymotion-s2)
+nmap t <Plug>(easymotion-t2)
+map  / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
