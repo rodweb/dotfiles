@@ -12,8 +12,9 @@ Plug 'airblade/vim-gitgutter'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'w0rp/ale'
 Plug 'mattn/emmet-vim'
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
+" Plug 'pangloss/vim-javascript'
+" Plug 'mxw/vim-jsx'
+Plug 'sheerun/vim-polyglot'
 Plug 'moll/vim-node'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'PotatoesMaster/i3-vim-syntax'
@@ -23,6 +24,8 @@ Plug 'chriskempson/base16-vim'
 Plug 'Yggdroot/indentLine'
 Plug 'jiangmiao/auto-pairs'
 Plug 'easymotion/vim-easymotion'
+Plug 'janko-m/vim-test'
+Plug 'liuchengxu/vim-which-key'
 call plug#end()
 
 set nocompatible
@@ -68,6 +71,13 @@ au BufRead /tmp/psql.edit.* set syntax=sql
 
 " ALE
 let g:ale_completion_enabled = 1
+let g:ale_fixers = {
+\   'javascript': ['eslint'],
+\}
+let g:ale_fix_on_save = 1
+
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+set timeoutlen=200
 
 let mapleader = "\<Space>"
 nnoremap <leader>sv :source %<CR>
@@ -124,9 +134,17 @@ nnoremap <leader>pf :GitFiles<CR>
 " Search
 nnoremap <leader>sc :noh<CR>
 nnoremap <leader>ss :Ag<CR>
+nnoremap <leader>tt :Tags<CR>
 
 " Source
 nnoremap <leader>sz :so $MYVIMRC<CR>
+
+" Testing
+nnoremap <silent><leader>tn :TestNearest<CR>
+nnoremap <silent><leader>tf :TestFile<CR>
+nnoremap <silent><leader>tp :TestSuite<CR>
+nnoremap <silent><leader>tl :TestLast<CR>
+nnoremap <silent><leader>tv :TestVisit<CR> 
 
 " Windows
 nnoremap <leader>wj <C-w>j
