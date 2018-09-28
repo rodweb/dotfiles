@@ -73,6 +73,7 @@ au BufRead /tmp/psql.edit.* set syntax=sql
 let g:ale_completion_enabled = 1
 let g:ale_fixers = {
 \   'javascript': ['eslint'],
+\   'typescript': ['tslint'],
 \}
 let g:ale_fix_on_save = 1
 
@@ -134,6 +135,7 @@ nnoremap <leader>pf :GitFiles<CR>
 " Search
 nnoremap <leader>sc :noh<CR>
 nnoremap <leader>ss :Ag<CR>
+nnoremap <leader>ag :Ag<C-r><C-w><CR>
 nnoremap <leader>tt :Tags<CR>
 
 " Source
@@ -194,6 +196,7 @@ let g:indentLine_setColors = 0
 let g:indantLine_char = '│'
 
 " easymotion
+let g:EasyMotion_smartcase = 1
 map <leader><leader> <Plug>(easymotion-prefix)
 nmap s <Plug>(easymotion-s2)
 nmap t <Plug>(easymotion-t2)
