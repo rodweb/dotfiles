@@ -4,3 +4,4 @@
 	login = rodweb
 [core]
 	editor = nvim
+	excludesfile = /home/rodrigo/.global_ignore
