@@ -12,8 +12,6 @@ Plug 'airblade/vim-gitgutter'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'w0rp/ale'
 Plug 'mattn/emmet-vim'
-" Plug 'pangloss/vim-javascript'
-" Plug 'mxw/vim-jsx'
 Plug 'sheerun/vim-polyglot'
 Plug 'moll/vim-node'
 Plug 'editorconfig/editorconfig-vim'
@@ -35,6 +33,7 @@ set clipboard=unnamedplus
 set autoindent
 set backspace=indent,eol,start
 set smarttab
+set expandtab
 
 " set laststatus=2
 set ruler
@@ -50,6 +49,7 @@ set encoding=utf-8
 " set list
 " set showbreak=↪\ 
 " set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
+set listchars=tab:→\ ,eol:↲
 
 set hlsearch
 set incsearch
@@ -78,7 +78,7 @@ let g:ale_fixers = {
 let g:ale_fix_on_save = 1
 
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
-set timeoutlen=200
+set timeoutlen=500
 
 let mapleader = "\<Space>"
 nnoremap <leader>sv :source %<CR>
@@ -147,6 +147,9 @@ nnoremap <silent><leader>tf :TestFile<CR>
 nnoremap <silent><leader>tp :TestSuite<CR>
 nnoremap <silent><leader>tl :TestLast<CR>
 nnoremap <silent><leader>tv :TestVisit<CR> 
+
+" Toggle
+nnoremap <leader>ts :set list!<CR>
 
 " Windows
 nnoremap <leader>wj <C-w>j
