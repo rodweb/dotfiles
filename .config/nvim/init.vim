@@ -104,6 +104,7 @@ nnoremap <leader>fS :wa<CR>
 nnoremap <leader>fn :enew<CR>
 nnoremap <leader>ft :NERDTreeToggle<CR>
 nnoremap <leader>fed :e $MYVIMRC<CR>
+nnoremap <leader>fev :vsplit $MYVIMRC<CR>
 nnoremap <leader>fi :Filetypes<CR>
 
 " Find
@@ -122,6 +123,13 @@ nnoremap <leader>gf <C-i><CR>
 nnoremap ]l :ALENext<CR>
 nnoremap [l :ALEPrevious<CR>
 nnoremap ld :ALEDetail<CR>
+
+" Moving
+nmap <C-S-k> ddkP
+nmap <C-S-j> ddp
+
+vmap <C-S-k> xkP`[V`]
+vmap <C-S-j> xp`[V`]
 
 " Options
 nnoremap <leader>ol :set list!<CR>
@@ -155,7 +163,6 @@ nnoremap <silent><leader>tv :TestVisit<CR>
 nnoremap <leader>wj <C-w>j
 nnoremap <leader>wk <C-w>k
 nnoremap <leader>wh <C-w>h
-nnoremap <leader>wl <C-w>l
 nnoremap <leader>wl <C-w>l
 nnoremap <leader>wd :q<CR>
 nnoremap <leader>ww :Windows<CR>
