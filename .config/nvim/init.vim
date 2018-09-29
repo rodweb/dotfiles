@@ -30,7 +30,6 @@ set nocompatible
 set mouse=a
 set clipboard=unnamedplus
 set hidden
-set spell
 
 set autoindent
 set backspace=indent,eol,start
@@ -105,6 +104,7 @@ nnoremap <leader>fS :wa<CR>
 nnoremap <leader>fn :enew<CR>
 nnoremap <leader>ft :NERDTreeToggle<CR>
 nnoremap <leader>fed :e $MYVIMRC<CR>
+nnoremap <leader>fi :Filetypes<CR>
 
 " Find
 nnoremap <leader>fr :ALEFindReferences<CR>
@@ -119,12 +119,13 @@ nnoremap <leader>gb <C-o><CR>
 nnoremap <leader>gf <C-i><CR>
 
 " Linting
-nnoremap <leader>ln :ALENext<CR>
-nnoremap <leader>lp :ALEPrevious<CR>
-nnoremap <leader>ld :ALEDetail<CR>
+nnoremap ]l :ALENext<CR>
+nnoremap [l :ALEPrevious<CR>
+nnoremap ld :ALEDetail<CR>
 
 " Options
-nnoremap <leader>ll :Filetypes<CR>
+nnoremap <leader>ol :set list!<CR>
+nnoremap <leader>os :set spell!<CR>
 
 " Project
 nnoremap <leader>pf :GitFiles<CR>
@@ -149,9 +150,6 @@ nnoremap <silent><leader>tf :TestFile<CR>
 nnoremap <silent><leader>tp :TestSuite<CR>
 nnoremap <silent><leader>tl :TestLast<CR>
 nnoremap <silent><leader>tv :TestVisit<CR> 
-
-" Toggle
-nnoremap <leader>ts :set list!<CR>
 
 " Windows
 nnoremap <leader>wj <C-w>j
@@ -184,7 +182,6 @@ augroup CursorLine
   au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
   au WinLeave * setlocal nocursorline
 augroup END
-
 
 " Indent Line
 let g:indentLine_setColors = 0
