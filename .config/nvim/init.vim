@@ -29,13 +29,14 @@ call plug#end()
 set nocompatible
 set mouse=a
 set clipboard=unnamedplus
-" set hidden
+set hidden
+set spell
+
 set autoindent
 set backspace=indent,eol,start
 set smarttab
 set expandtab
 
-" set laststatus=2
 set ruler
 set wildmenu
 
@@ -46,9 +47,6 @@ set sidescrolloff=5
 set cursorline
 set visualbell
 set encoding=utf-8
-" set list
-" set showbreak=↪\ 
-" set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
 set listchars=tab:→\ ,eol:↲
 
 set hlsearch
@@ -112,7 +110,6 @@ nnoremap <leader>fed :e $MYVIMRC<CR>
 nnoremap <leader>fr :ALEFindReferences<CR>
 
 " Git
-" nnoremap <leader>gb :Gblame<CR>
 nnoremap <leader>gd :Gdiff<CR>
 nnoremap <leader>gs :Gstatus<CR>
 
@@ -137,6 +134,11 @@ nnoremap <leader>sc :noh<CR>
 nnoremap <leader>ss :Ag<CR>
 nnoremap <leader>ag :Ag<C-r><C-w><CR>
 nnoremap <leader>tt :Tags<CR>
+
+" Spelling
+nnoremap <leader>sa zg
+nnoremap <leader>sr zw
+nnoremap <leader>sg z=
 
 " Source
 nnoremap <leader>sz :so $MYVIMRC<CR>
@@ -163,25 +165,15 @@ nnoremap <leader>ww :Windows<CR>
 let g:tsuquyomi_disable_quickfix = 1
 let g:syntastic_typescript_checkers = ['tsuquyomi']
 
-" map <C-e> :NERDTreeToggle<CR>
-
-" let g:user_emmet_leader_key='<Tab>'
-" imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
-" let g:user_emmet_settings = {
-"   \  'javascript.jsx' : {
-"   \    'extends' : 'jsx',
-"   \  },
-"   \}
-
 autocmd BufWritePost *.js AsyncRun -post=checktime ./node_modules/.bin/eslint --fix %
 
-" Autoreload when changing theme
+" Auto Reload when changing theme
 if filereadable(expand("~/.vimrc_background"))
   let base16colorspace=256
   source ~/.vimrc_background
 endif
 
-" Source vim configuration upon save
+" Source Vim configuration upon save
 augroup vimrc     
   autocmd! BufWritePost $MYVIMRC source % | echom "Reloaded " . $MYVIMRC | redraw
 augroup END
@@ -194,11 +186,11 @@ augroup CursorLine
 augroup END
 
 
-" indentLine
+" Indent Line
 let g:indentLine_setColors = 0
 let g:indantLine_char = '│'
 
-" easymotion
+" Easy Motion
 let g:EasyMotion_smartcase = 1
 map <leader><leader> <Plug>(easymotion-prefix)
 nmap s <Plug>(easymotion-s2)
