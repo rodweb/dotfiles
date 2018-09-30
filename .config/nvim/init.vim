@@ -27,8 +27,8 @@ Plug 'liuchengxu/vim-which-key'
 Plug 'soramugi/auto-ctags.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'prettier/vim-prettier', {
-  \ 'do': 'npm install',
-  \ 'for': ['javascript', 'typescript', 'css', 'scss', 'json', 'graphql', 'markdown', 'vue'] }
+      \ 'do': 'npm install',
+      \ 'for': ['javascript', 'typescript', 'css', 'scss', 'json', 'graphql', 'markdown', 'vue'] }
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-startify'
 Plug 'Shougo/neosnippet.vim'
@@ -81,9 +81,9 @@ au BufRead /tmp/psql.edit.* set syntax=sql
 " ALE
 let g:ale_completion_enabled = 1
 let g:ale_fixers = {
-\   'javascript': ['eslint'],
-\   'typescript': ['tslint'],
-\}
+      \   'javascript': ['eslint'],
+      \   'typescript': ['tslint'],
+      \}
 let g:ale_fix_on_save = 1
 let g:ale_set_highlights = 0
 let g:ale_sign_error = '•'
@@ -178,7 +178,7 @@ nnoremap <silent><leader>tn :TestNearest<CR>
 nnoremap <silent><leader>tf :TestFile<CR>
 nnoremap <silent><leader>tp :TestSuite<CR>
 nnoremap <silent><leader>tl :TestLast<CR>
-nnoremap <silent><leader>tv :TestVisit<CR> 
+nnoremap <silent><leader>tv :TestVisit<CR>
 
 " Windows
 nnoremap <leader>wj <C-w>j
@@ -197,7 +197,7 @@ nnoremap <leader>3 :3wincmd w<CR>
 " autocmd BufWritePost *.js AsyncRun -post=checktime ./node_modules/.bin/eslint --fix %
 
 " Source Vim configuration upon save
-augroup vimrc     
+augroup vimrc
   autocmd! BufWritePost $MYVIMRC source % | echom "Reloaded " . $MYVIMRC | redraw
 augroup END
 
@@ -224,11 +224,6 @@ omap / <Plug>(easymotion-tn)
 " FZF
 imap <C-f> <plug>(fzf-complete-path)
 
-" Snippets
-" let g:UltiSnipsExpandTrigger="<C-Enter>"
-" let g:UltiSnipsEditSplit="vertical"
-" let g:UltiSnipsSnippetDirectories = ['/home/rodrigo/.vim/UltiSnips', 'UltiSnips']
-
 " Auto CTAGS
 let g:auto_ctags = 1
 let g:auto_ctags_directory_list = ['.git']
@@ -241,7 +236,6 @@ imap <expr><TAB>
       \    "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " NeoSnippet
-" let g:neosnippet#disable_runtime_snippets = 1
 let g:neosnippet#enable_snipmate_compatibility = 1
 let g:neosnippet#snippets_directory='~/.vim/vim-snippets'
 let g:neosnippet#disable_runtime_snippets = {
@@ -261,23 +255,23 @@ let g:prettier#nvim_unstable_async=1
 autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.css,*.scss,*.json,*.graphql,*.md PrettierAsync
 
 " Tagbar
-let g:tagbar_type_typescript = {                                                  
-      \ 'ctagsbin' : 'tstags',                                                        
-      \ 'ctagsargs' : '-f-',                                                           
-      \ 'kinds': [                                                                     
-      \ 'e:enums:0:1',                                                               
-      \ 'f:function:0:1',                                                            
-      \ 't:typealias:0:1',                                                           
-      \ 'M:Module:0:1',                                                              
-      \ 'I:import:0:1',                                                              
-      \ 'i:interface:0:1',                                                           
-      \ 'C:class:0:1',                                                               
-      \ 'm:method:0:1',                                                              
-      \ 'p:property:0:1',                                                            
-      \ 'v:variable:0:1',                                                            
-      \ 'c:const:0:1',                                                              
-      \ ],                                                                            
-      \ 'sort' : 0                                                                    
-      \ } 
+let g:tagbar_type_typescript = {
+      \ 'ctagsbin' : 'tstags',
+      \ 'ctagsargs' : '-f-',
+      \ 'kinds': [
+      \ 'e:enums:0:1',
+      \ 'f:function:0:1',
+      \ 't:typealias:0:1',
+      \ 'M:Module:0:1',
+      \ 'I:import:0:1',
+      \ 'i:interface:0:1',
+      \ 'C:class:0:1',
+      \ 'm:method:0:1',
+      \ 'p:property:0:1',
+      \ 'v:variable:0:1',
+      \ 'c:const:0:1',
+      \ ],
+      \ 'sort' : 0
+      \ }
 
 set secure
