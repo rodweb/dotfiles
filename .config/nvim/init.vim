@@ -24,13 +24,14 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'easymotion/vim-easymotion'
 Plug 'janko-m/vim-test'
 Plug 'liuchengxu/vim-which-key'
-Plug 'SirVer/ultisnips'
 Plug 'soramugi/auto-ctags.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'prettier/vim-prettier', {
   \ 'do': 'npm install',
   \ 'for': ['javascript', 'typescript', 'css', 'scss', 'json', 'graphql', 'markdown', 'vue'] }
 Plug 'majutsushi/tagbar'
+Plug 'mhinz/vim-startify'
+Plug 'Shougo/neosnippet.vim'
 call plug#end()
 
 set nocompatible
@@ -159,7 +160,6 @@ nnoremap <leader>pf :GitFiles<CR>
 nnoremap <leader>sc :noh<CR>
 nnoremap <leader>ss :Ag<CR>
 nnoremap <leader>ag :Ag <C-r><C-w><CR>
-nnoremap <leader>st :Tags<CR>
 
 " Spelling
 nnoremap <leader>sa zg
@@ -170,7 +170,8 @@ nnoremap <leader>sg z=
 nnoremap <leader>sz :so $MYVIMRC<CR>
 
 " Tags
-nnoremap <leader>tt :TagbarToggle<CR>
+nnoremap <leader>tt :Tags<CR>
+nnoremap <leader>tb :TagbarToggle<CR>
 
 " Testing
 nnoremap <silent><leader>tn :TestNearest<CR>
@@ -224,9 +225,9 @@ omap / <Plug>(easymotion-tn)
 imap <C-f> <plug>(fzf-complete-path)
 
 " Snippets
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsEditSplit="vertical"
-let g:UltiSnipsSnippetDirectories = ['/home/rodrigo/.vim/UltiSnips', 'UltiSnips']
+" let g:UltiSnipsExpandTrigger="<C-Enter>"
+" let g:UltiSnipsEditSplit="vertical"
+" let g:UltiSnipsSnippetDirectories = ['/home/rodrigo/.vim/UltiSnips', 'UltiSnips']
 
 " Auto CTAGS
 let g:auto_ctags = 1
@@ -234,6 +235,18 @@ let g:auto_ctags_directory_list = ['.git']
 
 " Deoplete
 let g:deoplete#enable_at_startup = 1
+
+imap <expr><TAB>
+      \ neosnippet#expandable_or_jumpable() ?
+      \    "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+
+" NeoSnippet
+" let g:neosnippet#disable_runtime_snippets = 1
+let g:neosnippet#enable_snipmate_compatibility = 1
+let g:neosnippet#snippets_directory='~/.vim/vim-snippets'
+let g:neosnippet#disable_runtime_snippets = {
+      \   '_' : 1,
+      \ }
 
 " Auto Reload when changing theme
 if filereadable(expand("~/.vimrc_background"))
@@ -248,18 +261,23 @@ let g:prettier#nvim_unstable_async=1
 autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.css,*.scss,*.json,*.graphql,*.md PrettierAsync
 
 " Tagbar
-let g:tagbar_type_typescript = {
-  \ 'ctagstype': 'typescript',
-  \ 'kinds': [
-    \ 'c:classes',
-    \ 'n:modules',
-    \ 'f:functions',
-    \ 'v:variables',
-    \ 'v:varlambdas',
-    \ 'm:members',
-    \ 'i:interfaces',
-    \ 'e:enums',
-  \ ]
-\ }
+let g:tagbar_type_typescript = {                                                  
+      \ 'ctagsbin' : 'tstags',                                                        
+      \ 'ctagsargs' : '-f-',                                                           
+      \ 'kinds': [                                                                     
+      \ 'e:enums:0:1',                                                               
+      \ 'f:function:0:1',                                                            
+      \ 't:typealias:0:1',                                                           
+      \ 'M:Module:0:1',                                                              
+      \ 'I:import:0:1',                                                              
+      \ 'i:interface:0:1',                                                           
+      \ 'C:class:0:1',                                                               
+      \ 'm:method:0:1',                                                              
+      \ 'p:property:0:1',                                                            
+      \ 'v:variable:0:1',                                                            
+      \ 'c:const:0:1',                                                              
+      \ ],                                                                            
+      \ 'sort' : 0                                                                    
+      \ } 
 
 set secure
