@@ -25,10 +25,10 @@ Plug 'easymotion/vim-easymotion'
 Plug 'janko-m/vim-test'
 Plug 'liuchengxu/vim-which-key'
 Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
 Plug 'soramugi/auto-ctags.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'prettier/vim-prettier'
+Plug 'majutsushi/tagbar'
 call plug#end()
 
 set nocompatible
@@ -156,7 +156,7 @@ nnoremap <leader>pf :GitFiles<CR>
 nnoremap <leader>sc :noh<CR>
 nnoremap <leader>ss :Ag<CR>
 nnoremap <leader>ag :Ag<C-r><C-w><CR>
-nnoremap <leader>tt :Tags<CR>
+nnoremap <leader>st :Tags<CR>
 
 " Spelling
 nnoremap <leader>sa zg
@@ -165,6 +165,9 @@ nnoremap <leader>sg z=
 
 " Source
 nnoremap <leader>sz :so $MYVIMRC<CR>
+
+" Tags
+nnoremap <leader>tt :TagbarToggle<CR>
 
 " Testing
 nnoremap <silent><leader>tn :TestNearest<CR>
@@ -219,9 +222,12 @@ imap <C-f> <plug>(fzf-complete-path)
 
 " Snippets
 let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsSnippetDirectories = ['/home/rodrigo/.vim/UltiSnips', 'UltiSnips']
 
 " Auto CTAGS
 let g:auto_ctags = 1
+let g:auto_ctags_directory_list = ['.git']
 
 " Deoplete
 let g:deoplete#enable_at_startup = 1
