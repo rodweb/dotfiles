@@ -3,6 +3,10 @@ source /usr/share/zsh/share/antigen.zsh
 source /usr/share/nvm/init-nvm.sh
 source /usr/share/doc/pkgfile/command-not-found.zsh
 source ~/scripts/zsh/fzf-git-checkout.zsh
+source ~/scripts/zsh/fzf-base16.zsh
+if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+  source /etc/profile.d/vte.sh
+fi
 
 antigen use oh-my-zsh
 antigen bundle git
