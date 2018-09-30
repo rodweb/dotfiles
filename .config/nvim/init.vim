@@ -27,7 +27,9 @@ Plug 'liuchengxu/vim-which-key'
 Plug 'SirVer/ultisnips'
 Plug 'soramugi/auto-ctags.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'prettier/vim-prettier'
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'npm install',
+  \ 'for': ['javascript', 'typescript', 'css', 'scss', 'json', 'graphql', 'markdown', 'vue'] }
 Plug 'majutsushi/tagbar'
 call plug#end()
 
@@ -107,6 +109,7 @@ nnoremap <leader>cc :Commands<CR>
 " Buffers
 nnoremap <leader>bb :Buffers<CR>
 nnoremap <leader>bd :bdelete<CR>
+nnoremap <leader>bD :bdelete!<CR>
 nnoremap <leader>bn :bn<CR>
 nnoremap <leader>bp :bp<CR>
 
@@ -155,7 +158,7 @@ nnoremap <leader>pf :GitFiles<CR>
 " Search
 nnoremap <leader>sc :noh<CR>
 nnoremap <leader>ss :Ag<CR>
-nnoremap <leader>ag :Ag<C-r><C-w><CR>
+nnoremap <leader>ag :Ag <C-r><C-w><CR>
 nnoremap <leader>st :Tags<CR>
 
 " Spelling
@@ -240,6 +243,23 @@ endif
 
 " Prettier
 let g:prettier#autoformat = 0
+let g:prettier#exec_cmd_async = 1
+let g:prettier#nvim_unstable_async=1
 autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.css,*.scss,*.json,*.graphql,*.md PrettierAsync
+
+" Tagbar
+let g:tagbar_type_typescript = {
+  \ 'ctagstype': 'typescript',
+  \ 'kinds': [
+    \ 'c:classes',
+    \ 'n:modules',
+    \ 'f:functions',
+    \ 'v:variables',
+    \ 'v:varlambdas',
+    \ 'm:members',
+    \ 'i:interfaces',
+    \ 'e:enums',
+  \ ]
+\ }
 
 set secure
