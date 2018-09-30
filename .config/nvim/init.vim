@@ -1,6 +1,6 @@
 " vim:set ft=vim et sw=2:
 call plug#begin('~/.local/share/nvim/plugged')
-Plug 'Quramy/tsuquyomi'
+" Plug 'Quramy/tsuquyomi'
 Plug 'leafgarland/typescript-vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
@@ -24,6 +24,11 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'easymotion/vim-easymotion'
 Plug 'janko-m/vim-test'
 Plug 'liuchengxu/vim-which-key'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'soramugi/auto-ctags.vim'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'prettier/vim-prettier'
 call plug#end()
 
 set nocompatible
@@ -36,6 +41,7 @@ set backspace=indent,eol,start
 set smarttab
 set expandtab
 
+set colorcolumn=100
 set ruler
 set wildmenu
 
@@ -64,6 +70,9 @@ set noshowmode
 " git gutter should be faster
 set updatetime=100
 
+" project local .vimrc
+set exrc
+
 au BufRead /tmp/psql.edit.* set syntax=sql
 
 " ALE
@@ -73,6 +82,10 @@ let g:ale_fixers = {
 \   'typescript': ['tslint'],
 \}
 let g:ale_fix_on_save = 1
+let g:ale_set_highlights = 0
+let g:ale_sign_error = '•'
+let g:ale_sign_warning = '•'
+let g:ale_sign_column_always = 1
 
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 set timeoutlen=500
@@ -134,6 +147,7 @@ vmap <C-S-j> xp`[V`]
 " Options
 nnoremap <leader>ol :set list!<CR>
 nnoremap <leader>os :set spell!<CR>
+nnoremap <leader>oi :IndentLinesToggle<CR>
 
 " Project
 nnoremap <leader>pf :GitFiles<CR>
@@ -166,17 +180,14 @@ nnoremap <leader>wh <C-w>h
 nnoremap <leader>wl <C-w>l
 nnoremap <leader>wd :q<CR>
 nnoremap <leader>ww :Windows<CR>
+nnoremap <leader>1 :1wincmd w<CR>
+nnoremap <leader>2 :2wincmd w<CR>
+nnoremap <leader>3 :3wincmd w<CR>
 
-let g:tsuquyomi_disable_quickfix = 1
-let g:syntastic_typescript_checkers = ['tsuquyomi']
+" let g:tsuquyomi_disable_quickfix = 1
+" let g:syntastic_typescript_checkers = ['tsuquyomi']
 
-autocmd BufWritePost *.js AsyncRun -post=checktime ./node_modules/.bin/eslint --fix %
-
-" Auto Reload when changing theme
-if filereadable(expand("~/.vimrc_background"))
-  let base16colorspace=256
-  source ~/.vimrc_background
-endif
+" autocmd BufWritePost *.js AsyncRun -post=checktime ./node_modules/.bin/eslint --fix %
 
 " Source Vim configuration upon save
 augroup vimrc     
@@ -193,6 +204,7 @@ augroup END
 " Indent Line
 let g:indentLine_setColors = 0
 let g:indantLine_char = '│'
+let g:indentLine_enabled = 0
 
 " Easy Motion
 let g:EasyMotion_smartcase = 1
@@ -201,3 +213,27 @@ nmap s <Plug>(easymotion-s2)
 nmap t <Plug>(easymotion-t2)
 map  / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
+
+" FZF
+imap <C-f> <plug>(fzf-complete-path)
+
+" Snippets
+let g:UltiSnipsExpandTrigger="<tab>"
+
+" Auto CTAGS
+let g:auto_ctags = 1
+
+" Deoplete
+let g:deoplete#enable_at_startup = 1
+
+" Auto Reload when changing theme
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+endif
+
+" Prettier
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.css,*.scss,*.json,*.graphql,*.md PrettierAsync
+
+set secure
