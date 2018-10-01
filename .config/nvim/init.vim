@@ -105,7 +105,7 @@ let mapleader = "\<Space>"
 nnoremap <leader>sv :source %<CR>
 
 nnoremap <leader><tab> <C-^>
-nnoremap <leader>? :Maps<CR>
+nnoremap <leader>mm :Maps<CR>
 nnoremap <leader>qq :qall<CR>
 nnoremap <leader>qQ :qall!<CR>
 
@@ -179,6 +179,9 @@ nnoremap <leader>sg z=
 
 " Source
 nnoremap <leader>sz :so $MYVIMRC<CR>
+
+" Snippets
+nnoremap <leader>st :NeoSnippetEdit<CR>
 
 " Tags
 nnoremap <leader>bt :BTags<CR>
