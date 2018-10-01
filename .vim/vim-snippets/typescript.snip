@@ -1,0 +1,31 @@
+snippet it it('should...')
+        it('${1:should...}', () => {
+                ${0}
+        })
+
+snippet des describe('when...')
+        describe('${1:when...}', () => {
+                ${0}
+        })
+
+snippet eclass class Name extends Entity
+        import { IDomainEventEmitter } from 'domain/domain-events'
+        import { Entity } from 'domain/entity'
+
+        export class ${1:Name} extends Entity {
+          constructor(domainEvents: IDomainEventEmitter, _id: string) {
+            super(domainEvents, _id)
+          }
+
+          ${0}
+        }
+
+snippet be beforeEach(() => { ... })
+        beforeEach(${1:async }() => {
+          ${0}
+        })
+
+snippet ae afterEach(() => { ... })
+        afterEach(${1:async }() => {
+          ${0}
+        })
