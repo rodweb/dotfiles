@@ -6,7 +6,9 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
-Plug 'itchyny/lightline.vim'
+" Plug 'itchyny/lightline.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'airblade/vim-gitgutter'
 Plug 'skywind3000/asyncrun.vim'
@@ -32,12 +34,14 @@ Plug 'prettier/vim-prettier', {
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-startify'
 Plug 'Shougo/neosnippet.vim'
+Plug 'takac/vim-hardtime'
 call plug#end()
 
 set nocompatible
 set mouse=a
 set clipboard=unnamedplus
 set hidden
+set autoread
 
 set autoindent
 set backspace=indent,eol,start
@@ -89,6 +93,10 @@ let g:ale_set_highlights = 0
 let g:ale_sign_error = '•'
 let g:ale_sign_warning = '•'
 let g:ale_sign_column_always = 1
+let g:ale_echo_msg_error_str = '✹ Error'
+let g:ale_echo_msg_warning_str = '⚠ Warning'
+let g:ale_echo_msg_format = '[#%linter%#] %s [%severity%]'
+let g:ale_statusline_format = ['E•%d', 'W•%d', 'OK']
 
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 set timeoutlen=500
@@ -98,7 +106,8 @@ nnoremap <leader>sv :source %<CR>
 
 nnoremap <leader><tab> <C-^>
 nnoremap <leader>? :Maps<CR>
-nnoremap <leader>qq :q!<CR>
+nnoremap <leader>qq :qall<CR>
+nnoremap <leader>qQ :qall!<CR>
 
 " Comment
 nmap <leader>cl <Plug>CommentaryLine
@@ -123,6 +132,7 @@ nnoremap <leader>ft :NERDTreeToggle<CR>
 nnoremap <leader>fed :e $MYVIMRC<CR>
 nnoremap <leader>fev :vsplit $MYVIMRC<CR>
 nnoremap <leader>fi :Filetypes<CR>
+nnoremap <leader>hh :History<CR>
 
 " Find
 nnoremap <leader>fr :ALEFindReferences<CR>
@@ -152,6 +162,7 @@ vmap <C-S-j> xp`[V`]
 nnoremap <leader>ol :set list!<CR>
 nnoremap <leader>os :set spell!<CR>
 nnoremap <leader>oi :IndentLinesToggle<CR>
+nnoremap <leader>oh :HardTimeToggle<CR>
 
 " Project
 nnoremap <leader>pf :GitFiles<CR>
@@ -170,6 +181,7 @@ nnoremap <leader>sg z=
 nnoremap <leader>sz :so $MYVIMRC<CR>
 
 " Tags
+nnoremap <leader>bt :BTags<CR>
 nnoremap <leader>tt :Tags<CR>
 nnoremap <leader>tb :TagbarToggle<CR>
 
@@ -215,7 +227,7 @@ let g:indentLine_enabled = 0
 
 " Easy Motion
 let g:EasyMotion_smartcase = 1
-map <leader><leader> <Plug>(easymotion-prefix)
+map <leader><leader> <Plug>(easymotion-w)
 nmap s <Plug>(easymotion-s2)
 nmap t <Plug>(easymotion-t2)
 map  / <Plug>(easymotion-sn)
