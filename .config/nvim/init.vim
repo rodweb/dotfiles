@@ -6,10 +6,10 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
-" Plug 'itchyny/lightline.vim'
+"" Plug 'itchyny/lightline.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'terryma/vim-multiple-cursors'
+" Plug 'terryma/vim-multiple-cursors'
 Plug 'airblade/vim-gitgutter'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'w0rp/ale'
@@ -23,18 +23,22 @@ Plug 'junegunn/fzf.vim'
 Plug 'chriskempson/base16-vim'
 Plug 'Yggdroot/indentLine'
 Plug 'jiangmiao/auto-pairs'
-Plug 'easymotion/vim-easymotion'
+" Plug 'easymotion/vim-easymotion'
+Plug 'justinmk/vim-sneak'
 Plug 'janko-m/vim-test'
 Plug 'liuchengxu/vim-which-key'
-Plug 'soramugi/auto-ctags.vim'
+Plug 'ludovicchabant/vim-gutentags'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'prettier/vim-prettier', {
       \ 'do': 'npm install',
-      \ 'for': ['javascript', 'typescript', 'css', 'scss', 'json', 'graphql', 'markdown', 'vue'] }
+      \ 'for': ['typescript'] }
+"" \ 'for': ['javascript', 'typescript', 'css', 'scss', 'json', 'graphql', 'markdown', 'vue'] }
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-startify'
 Plug 'Shougo/neosnippet.vim'
 Plug 'takac/vim-hardtime'
+Plug 'tomasiser/vim-code-dark'
+Plug 'Shougo/echodoc.vim'
 call plug#end()
 
 set nocompatible
@@ -48,7 +52,7 @@ set backspace=indent,eol,start
 set smarttab
 set expandtab
 
-set colorcolumn=100
+" set colorcolumn=100
 set ruler
 set wildmenu
 
@@ -56,6 +60,7 @@ set number
 set relativenumber
 set scrolloff=5
 set sidescrolloff=5
+set display+=lastline
 set cursorline
 set visualbell
 set encoding=utf-8
@@ -68,8 +73,12 @@ set smartcase
 set showmatch
 set inccommand=split
 
+set cmdheight=1
 set t_Co=256
+set t_ut=
 " set background=dark
+colorscheme codedark
+let g:airline_theme = 'codedark'
 
 " won't show duplicated INSERT
 set noshowmode
@@ -78,7 +87,7 @@ set noshowmode
 set updatetime=100
 
 " project local .vimrc
-set exrc
+" set exrc
 
 au BufRead /tmp/psql.edit.* set syntax=sql
 
@@ -98,16 +107,28 @@ let g:ale_echo_msg_warning_str = '⚠ Warning'
 let g:ale_echo_msg_format = '[#%linter%#] %s [%severity%]'
 let g:ale_statusline_format = ['E•%d', 'W•%d', 'OK']
 
-nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 set timeoutlen=500
 
 let mapleader = "\<Space>"
+nnoremap <silent><leader> :WhichKey '<Space>'<CR>
 nnoremap <leader>sv :source %<CR>
 
+" Vim
 nnoremap <leader><tab> <C-^>
 nnoremap <leader>mm :Maps<CR>
 nnoremap <leader>qq :qall<CR>
 nnoremap <leader>qQ :qall!<CR>
+
+" Motions
+" map <leader><leader> <Plug>(easymotion-w)
+" nmap s <Plug>(easymotion-s2)
+" nmap t <Plug>(easymotion-t2)
+" map  / <Plug>(easymotion-sn)
+" omap / <Plug>(easymotion-tn)
+map f <Plug>Sneak_s
+map F <Plug>Sneak_S
+map t <Plug>Sneak_t
+map T <Plug>Sneak_T
 
 " Comment
 nmap <leader>cl <Plug>CommentaryLine
@@ -124,7 +145,7 @@ nnoremap <leader>bn :bn<CR>
 nnoremap <leader>bp :bp<CR>
 
 " Files
-nnoremap <leader>ff :Files<CR>
+nnoremap <leader>fa :Files<CR>
 nnoremap <leader>fs :w<CR>
 nnoremap <leader>fS :wa<CR>
 nnoremap <leader>fn :enew<CR>
@@ -165,12 +186,16 @@ nnoremap <leader>oi :IndentLinesToggle<CR>
 nnoremap <leader>oh :HardTimeToggle<CR>
 
 " Project
-nnoremap <leader>pf :GitFiles<CR>
+nnoremap <leader>ff :GitFiles<CR>
+
+" Replacing
+nnoremap <leader>rr :%s/<c-r><c-w>/
 
 " Search
 nnoremap <leader>sc :noh<CR>
 nnoremap <leader>ss :Ag<CR>
 nnoremap <leader>ag :Ag <C-r><C-w><CR>
+nnoremap <leader>bl :BLines<CR>
 
 " Spelling
 nnoremap <leader>sa zg
@@ -216,6 +241,10 @@ augroup vimrc
   autocmd! BufWritePost $MYVIMRC source % | echom "Reloaded " . $MYVIMRC | redraw
 augroup END
 
+augroup xresources
+  autocmd! BufWritePost ~/.Xresources !xrdb -merge ~/.Xresources
+augroup END
+
 " Cursor line on current window
 augroup CursorLine
   au!
@@ -230,14 +259,19 @@ let g:indentLine_enabled = 0
 
 " Easy Motion
 let g:EasyMotion_smartcase = 1
-map <leader><leader> <Plug>(easymotion-w)
-nmap s <Plug>(easymotion-s2)
-nmap t <Plug>(easymotion-t2)
-map  / <Plug>(easymotion-sn)
-omap / <Plug>(easymotion-tn)
+
+" Sneak
+let g:sneak#label = 1
+
 
 " FZF
 imap <C-f> <plug>(fzf-complete-path)
+
+" Insert mode completion
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+imap <c-x><c-l> <plug>(fzf-complete-line)
 
 " Auto CTAGS
 let g:auto_ctags = 1
@@ -258,16 +292,17 @@ let g:neosnippet#disable_runtime_snippets = {
       \ }
 
 " Auto Reload when changing theme
-if filereadable(expand("~/.vimrc_background"))
-  let base16colorspace=256
-  source ~/.vimrc_background
-endif
+" if filereadable(expand("~/.vimrc_background"))
+"   let base16colorspace=256
+"   source ~/.vimrc_background
+" endif
 
 " Prettier
 let g:prettier#autoformat = 0
 let g:prettier#exec_cmd_async = 1
 let g:prettier#nvim_unstable_async=1
-autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.css,*.scss,*.json,*.graphql,*.md PrettierAsync
+" autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.css,*.scss,*.json,*.graphql,*.md PrettierAsync
+autocmd BufWritePre *.ts PrettierAsync
 
 " Tagbar
 let g:tagbar_type_typescript = {
