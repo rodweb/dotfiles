@@ -66,6 +66,7 @@ nnoremap <leader>wk <C-w>k
 nnoremap <leader>wh <C-w>h
 nnoremap <leader>wl <C-w>l
 nnoremap <leader>wd :q<CR>
+nnoremap <leader><space> <C-w><C-p>
 nnoremap <leader>1 :1wincmd w<CR>
 nnoremap <leader>2 :2wincmd w<CR>
 nnoremap <leader>3 :3wincmd w<CR>

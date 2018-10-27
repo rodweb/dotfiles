@@ -1,4 +1,2 @@
-augroup filetypes
-  autocmd!
-  autocmd FileType markdown set wrap spell
-augroup END
+autocmd! FileType markdown set wrap spell
+

@@ -15,7 +15,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'moll/vim-node'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'PotatoesMaster/i3-vim-syntax'
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug 'junegunn/fzf.vim'
 Plug 'chriskempson/base16-vim'
 Plug 'Yggdroot/indentLine'
@@ -33,6 +33,7 @@ Plug 'takac/vim-hardtime'
 Plug 'tomasiser/vim-code-dark'
 Plug 'Shougo/echodoc.vim'
 Plug 'junegunn/limelight.vim'
+Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
 call plug#end()
 
 let mapleader = "\<Space>"

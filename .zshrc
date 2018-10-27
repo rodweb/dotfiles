@@ -26,6 +26,8 @@ HISTFILE=~/.histfile
 EDITOR='nvim'
 NODE_OPTIONS=--max_old_space_size=4096
 
+FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow-glob "!.git/*"'
+
 setopt appendhistory
 setopt sharehistory
 setopt incappendhistory
@@ -36,7 +38,7 @@ alias D='$EDITOR $HOME/.config/dunst/dunstrc'
 alias B='$EDITOR $HOME/.config/i3/i3blocks.conf'
 alias I='$EDITOR $HOME/.config/i3/config'
 alias T='$EDITOR $HOME/.tmux.conf'
-alias V='$EDITOR $HOME/.config/nvim/init.vim'
+alias V='$EDITOR -c "cd $HOME/.config/nvim" $HOME/.config/nvim/init.vim'
 alias X='$EDITOR $HOME/.Xresources'
 alias Z='$EDITOR $HOME/.zshrc'
 alias back='cd $HOME/dev/gupy-api-darthvader'

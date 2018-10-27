@@ -3,7 +3,7 @@ nnoremap <leader>bb :Buffers<CR>
 nnoremap <leader>bt :BTags<CR>
 nnoremap <leader>cc :Commands<CR>
 nnoremap <leader>fa :Files<CR>
-nnoremap <leader>fi :Filetypes<CR>
+nnoremap <leader>fy :Filetypes<CR>
 nnoremap <leader>ff :GitFiles<CR>
 nnoremap <leader>hh :History<CR>
 nnoremap <leader>mm :Maps<CR>
