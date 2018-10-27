@@ -192,6 +192,7 @@ nnoremap <leader>ff :GitFiles<CR>
 
 " Replacing
 nnoremap <leader>rr :%s/<c-r><c-w>/
+vnoremap <leader>rr y:%s/<c-r>"/
 
 " Search
 nnoremap <leader>sc :noh<CR>
