@@ -33,7 +33,7 @@ bindsym $alt+Tab workspace back_and_forth
 
 # start dmenu (a program launcher)
 bindsym $win+d exec --no-startup-id dmenu_run
-bindsym $alt+space exec --no-startup-id "rofi -show combi -combi-modi window,drun -modi combi"
+bindsym $alt+space exec --no-startup-id "rofi -show combi -combi-modi window,drun,run -modi combi"
 bindsym $ctrl+apostrophe exec --no-startup-id "rofi -modi 'clipboard:greenclip print' -show clipboard -run-command '{cmd}'"
 # bindsym Mod1+Tab exec --no-startup-id rofi -show window -window-format {w}{n}{t}{c}
 #bindsym --release Print exec --no-startup-id scrot ~/screenshot.png
@@ -195,7 +195,9 @@ bindsym $win+r mode "resize"
 hide_edge_borders both
 smart_gaps on
 
-assign[class="Google-chrome-unstable"] $webws
+# gaps inner 10
+
+assign[class="Google-chrome-stable"] $webws
 
 for_window [urgent="latest" instance="code"] focus
 for_window [class="^.*"] border pixel 1
@@ -207,7 +209,7 @@ for_window [class="Lxrandr"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="Gnome-system-monitor"] floating enable; move position center
 for_window [class="Solaar"] floating enable; move position center
-for_window [class="Google-chrome-unstable"] focus
+for_window [class="Google-chrome-stable"] focus
 for_window [class="Keybase"] move container to workspace $chatws
 for_window [class="Slack"] move container to workspace $chatws
 for_window [class="Slack" title="Slack Call Minipanel"] sticky enable; move position 1085 90
@@ -222,6 +224,7 @@ for_window [class="Poedit"] move container to workspace $miscws; workspace $misc
 for_window [class="GitKraken"] move container to workspace $gitws; workspace $gitws; focus
 for_window [class="Pcmanfm" title="rodrigo"] move container to workspace $miscws; workspace $miscws; focus
 for_window [class="Mailspring"] move container to workspace $mailws
+for_window [class="Zeal"] move container to workspace $miscws
 for_window [window_role="GtkFileChooserDialog"] fullscreen enable
 for_window [instance="code" title="gupy-api"] move container to workspace $backws
 for_window [instance="code" title="gupy-front"] move container to workspace $frontws
@@ -242,8 +245,8 @@ exec --no-startup-id compton -f -b
 exec --no-startup-id transmission-daemon -c ~/tmp/ -w ~/tmp/
 exec --no-startup-id greenclip daemon
 exec --no-startup-id slack
-#exec --no-startup-id sleep 20 && spotify
-exec --no-startup-id google-chrome-unstable
+exec --no-startup-id sleep 20 && spotify
+exec --no-startup-id google-chrome-stable
 exec --no-startup-id pamixer --set-volume 10 && pkill -RTMIN+11 i3blocks
 exec --no-startup-id libinput-gestures-setup start
 exec --no-startup-id $term -t 'Scratchpad terminal'
