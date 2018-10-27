@@ -1,15 +1,12 @@
 " vim:set ft=vim et sw=2:
 call plug#begin('~/.local/share/nvim/plugged')
-" Plug 'Quramy/tsuquyomi'
 Plug 'leafgarland/typescript-vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
-"" Plug 'itchyny/lightline.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-" Plug 'terryma/vim-multiple-cursors'
 Plug 'airblade/vim-gitgutter'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'w0rp/ale'
@@ -23,23 +20,22 @@ Plug 'junegunn/fzf.vim'
 Plug 'chriskempson/base16-vim'
 Plug 'Yggdroot/indentLine'
 Plug 'jiangmiao/auto-pairs'
-" Plug 'easymotion/vim-easymotion'
 Plug 'justinmk/vim-sneak'
 Plug 'janko-m/vim-test'
 Plug 'liuchengxu/vim-which-key'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'prettier/vim-prettier', {
-      \ 'do': 'npm install',
-      \ 'for': ['typescript'] }
-"" \ 'for': ['javascript', 'typescript', 'css', 'scss', 'json', 'graphql', 'markdown', 'vue'] }
+Plug 'prettier/vim-prettier', { 'do': 'npm install', 'for': ['typescript'] }
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-startify'
 Plug 'Shougo/neosnippet.vim'
 Plug 'takac/vim-hardtime'
 Plug 'tomasiser/vim-code-dark'
 Plug 'Shougo/echodoc.vim'
+Plug 'junegunn/limelight.vim'
 call plug#end()
+
+set completeopt=noinsert,menuone,noselect
 
 set nocompatible
 set mouse=a
@@ -98,7 +94,7 @@ let g:ale_fixers = {
       \   'typescript': ['tslint'],
       \}
 let g:ale_fix_on_save = 1
-let g:ale_set_highlights = 0
+let g:ale_set_highlights = 1
 let g:ale_sign_error = '•'
 let g:ale_sign_warning = '•'
 let g:ale_sign_column_always = 1
@@ -106,10 +102,13 @@ let g:ale_echo_msg_error_str = '✹ Error'
 let g:ale_echo_msg_warning_str = '⚠ Warning'
 let g:ale_echo_msg_format = '[#%linter%#] %s [%severity%]'
 let g:ale_statusline_format = ['E•%d', 'W•%d', 'OK']
+highlight ALEErrorSign ctermbg=NONE ctermfg=red
+highlight ALEWarningSign ctermbg=NONE ctermfg=grey
 
 set timeoutlen=500
 
 let mapleader = "\<Space>"
+let maplocalleader = ","
 nnoremap <silent><leader> :WhichKey '<Space>'<CR>
 nnoremap <leader>sv :source %<CR>
 
@@ -125,14 +124,15 @@ nnoremap <leader>qQ :qall!<CR>
 " nmap t <Plug>(easymotion-t2)
 " map  / <Plug>(easymotion-sn)
 " omap / <Plug>(easymotion-tn)
-map f <Plug>Sneak_s
-map F <Plug>Sneak_S
+map s <Plug>Sneak_s
+map S <Plug>Sneak_S
 map t <Plug>Sneak_t
 map T <Plug>Sneak_T
 
 " Comment
 nmap <leader>cl <Plug>CommentaryLine
 vmap <leader>cl <Plug>CommentaryLine
+nmap <leader>; A;<esc>
 
 " Commands
 nnoremap <leader>cc :Commands<CR>
@@ -151,6 +151,7 @@ nnoremap <leader>fS :wa<CR>
 nnoremap <leader>fn :enew<CR>
 nnoremap <leader>ft :NERDTreeToggle<CR>
 nnoremap <leader>fed :e $MYVIMRC<CR>
+nnoremap <leader>fev :vsplit $MYVIMRC<CR>
 nnoremap <leader>fev :vsplit $MYVIMRC<CR>
 nnoremap <leader>fi :Filetypes<CR>
 nnoremap <leader>hh :History<CR>
@@ -184,6 +185,7 @@ nnoremap <leader>ol :set list!<CR>
 nnoremap <leader>os :set spell!<CR>
 nnoremap <leader>oi :IndentLinesToggle<CR>
 nnoremap <leader>oh :HardTimeToggle<CR>
+nnoremap <leader>of :Limelight!!<CR>
 
 " Project
 nnoremap <leader>ff :GitFiles<CR>
@@ -195,6 +197,7 @@ nnoremap <leader>rr :%s/<c-r><c-w>/
 nnoremap <leader>sc :noh<CR>
 nnoremap <leader>ss :Ag<CR>
 nnoremap <leader>ag :Ag <C-r><C-w><CR>
+vnoremap <leader>ag y:Ag <C-r>"<CR>
 nnoremap <leader>bl :BLines<CR>
 
 " Spelling
@@ -207,6 +210,9 @@ nnoremap <leader>sz :so $MYVIMRC<CR>
 
 " Snippets
 nnoremap <leader>st :NeoSnippetEdit<CR>
+
+" Tabs
+nnoremap <leader>te :tabedit %<CR>
 
 " Tags
 nnoremap <leader>bt :BTags<CR>
@@ -231,10 +237,19 @@ nnoremap <leader>1 :1wincmd w<CR>
 nnoremap <leader>2 :2wincmd w<CR>
 nnoremap <leader>3 :3wincmd w<CR>
 
-" let g:tsuquyomi_disable_quickfix = 1
-" let g:syntastic_typescript_checkers = ['tsuquyomi']
+" Learning
+iabbrev adn and
+iabbrev waht what
+iabbrev tehn then
 
-" autocmd BufWritePost *.js AsyncRun -post=checktime ./node_modules/.bin/eslint --fix %
+nnoremap H ^
+nnoremap L g_
+inoremap jk <esc>
+
+augroup filetypes
+  autocmd!
+  autocmd FileType markdown set wrap spell
+augroup END
 
 " Source Vim configuration upon save
 augroup vimrc
@@ -242,7 +257,7 @@ augroup vimrc
 augroup END
 
 augroup xresources
-  autocmd! BufWritePost ~/.Xresources !xrdb -merge ~/.Xresources
+  autocmd! BufWritePost ~/.Xresources !xrdb -load ~/.Xresources
 augroup END
 
 " Cursor line on current window
@@ -263,6 +278,9 @@ let g:EasyMotion_smartcase = 1
 " Sneak
 let g:sneak#label = 1
 
+" Limelight
+let g:limelight_conceal_ctermfg = 'gray'
+let g:limelight_conceal_ctermfg = 240
 
 " FZF
 imap <C-f> <plug>(fzf-complete-path)
@@ -301,8 +319,10 @@ let g:neosnippet#disable_runtime_snippets = {
 let g:prettier#autoformat = 0
 let g:prettier#exec_cmd_async = 1
 let g:prettier#nvim_unstable_async=1
-" autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.css,*.scss,*.json,*.graphql,*.md PrettierAsync
-autocmd BufWritePre *.ts PrettierAsync
+
+augroup prettiers
+  autocmd BufWritePre *.ts PrettierAsync %
+augroup END
 
 " Tagbar
 let g:tagbar_type_typescript = {
@@ -324,4 +344,8 @@ let g:tagbar_type_typescript = {
       \ 'sort' : 0
       \ }
 
+set nobackup
+set nowritebackup
 set secure
+
+nnoremap <leader>to :!npm run test-only<CR>
