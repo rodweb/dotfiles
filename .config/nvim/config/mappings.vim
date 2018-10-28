@@ -1,6 +1,3 @@
-" Source vim
-nnoremap <leader>sv :source %<CR>
-
 " Vim
 nnoremap <leader><tab> <C-^>
 nnoremap <leader>qq :qall<CR>
@@ -28,6 +25,9 @@ nnoremap <leader>fev :vsplit $MYVIMRC<CR>
 nnoremap <leader>gb <C-o><CR>
 nnoremap <leader>gf <C-i><CR>
 
+" Indent
+nnoremap <leader>= Gvgg=<CR>
+
 " Movement
 nmap <C-S-k> ddkP
 nmap <C-S-j> ddp
@@ -53,9 +53,6 @@ nnoremap <leader>sc :noh<CR>
 nnoremap <leader>sa zg
 nnoremap <leader>sr zw
 nnoremap <leader>sg z=
-
-" Source
-nnoremap <leader>sz :so $MYVIMRC<CR>
 
 " Tabs
 nnoremap <leader>te :tabedit %<CR>

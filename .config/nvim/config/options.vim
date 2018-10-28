@@ -23,7 +23,7 @@ set display+=lastline
 set cursorline
 set visualbell
 set encoding=utf-8
-set listchars=tab:→\ ,eol:↲
+set listchars=tab:→\ ,trail:·,eol:¬,extends:…,precedes:…
 
 set hlsearch
 set incsearch
@@ -42,6 +42,7 @@ set t_ut=
 " set background=dark
 colorscheme codedark
 
+set nobackup
 set swapfile
 set dir=~/tmp
 
