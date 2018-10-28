@@ -217,8 +217,9 @@ for_window [class="Skype"] move container to workspace $chatws; floating disable
 for_window [class="^whats-app"] move container to workspace $chatws; focus
 for_window [class="TelegramDesktop"] move container to workspace $chatws; focus
 for_window [class="Spotify"] move container to workspace $musicws
-for_window [title="(?i)dbeaver"] move container to workspace $dbws; workspace $dbws; focus
-for_window [class="Dbeaver" title="Version update "] kill
+for_window [class="DBeaver" title="Version update "] kill
+for_window [class="DBeaver" title="Can't connect to database "] kill
+for_window [title="DBeaver"] move container to workspace $dbws; workspace $dbws; focus
 for_window [class="Postman"] move container to workspace $restws; workspace $restws; focus
 for_window [class="Poedit"] move container to workspace $miscws; workspace $miscws; focus
 for_window [class="GitKraken"] move container to workspace $gitws; workspace $gitws; focus
