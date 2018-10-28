@@ -1,2 +1,6 @@
-autocmd! FileType markdown set wrap spell
+augroup FileTypeMarkdown
+  au!
+  au FileType markdown setlocal wrap spell
+  au FileType markdown :Goyo
+augroup END
 

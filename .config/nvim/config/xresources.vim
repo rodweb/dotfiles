@@ -1,4 +1,5 @@
-augroup xresources
-  autocmd! BufWritePost ~/.Xresources !xrdb -load ~/.Xresources
+augroup AutoReloadXResources
+  au!
+  au BufWritePost ~/.Xresources !xrdb -load ~/.Xresources
 augroup END
 
