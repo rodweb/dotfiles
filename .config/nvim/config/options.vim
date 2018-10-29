@@ -35,8 +35,8 @@ set grepprg=rg\ --vimgrep
 
 set timeoutlen=500
 set updatetime=100
-set noshowmode
 set cmdheight=1
+set noshowmode
 set t_Co=256
 set t_ut=
 " set background=dark

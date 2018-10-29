@@ -3,6 +3,13 @@ nnoremap <leader><tab> <C-^>
 nnoremap <leader>qq :qall<CR>
 nnoremap <leader>qQ :qall!<CR>
 
+" Operator pending
+
+onoremap in( :<c-u>normal! f(vi(<cr>
+onoremap in) :<c-u>normal! F)vi(<cr>
+onoremap an( :<c-u>normal! f(va(<cr>
+onoremap an) :<c-u>normal! F(va(<cr>
+
 " Motions
 
 nmap <leader>; A;<esc>
@@ -26,7 +33,7 @@ nnoremap <leader>gb <C-o><CR>
 nnoremap <leader>gf <C-i><CR>
 
 " Indent
-nnoremap <leader>= Gvgg=<CR>
+nnoremap <leader>= gg=G<CR>
 
 " Movement
 nmap <C-S-k> ddkP
