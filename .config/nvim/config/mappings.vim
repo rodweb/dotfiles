@@ -2,16 +2,20 @@
 nnoremap <leader><tab> <C-^>
 nnoremap <leader>qq :qall<CR>
 nnoremap <leader>qQ :qall!<CR>
+nnoremap j gj
+nnoremap k gk
+vnoremap j gj
+vnoremap k gk
 
 " Operator pending
-
-onoremap in( :<c-u>normal! f(vi(<cr>
-onoremap in) :<c-u>normal! F)vi(<cr>
-onoremap an( :<c-u>normal! f(va(<cr>
-onoremap an) :<c-u>normal! F(va(<cr>
+onoremap in( :<c-u>normal! f(vi(<CR>
+onoremap in) :<c-u>normal! F)vi(<CR>
+onoremap an( :<c-u>normal! f(va(<CR>
+onoremap an) :<c-u>normal! F(va(<CR>
+onoremap ef :<c-u>normal! Gvgg<CR>
 
 " Motions
-
+nmap <leader>, A,<esc>
 nmap <leader>; A;<esc>
 
 " Buffers

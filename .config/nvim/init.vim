@@ -1,4 +1,3 @@
-" vim:set ft=vim et sw=2:
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'leafgarland/typescript-vim'
 Plug 'tpope/vim-commentary'
@@ -25,7 +24,8 @@ Plug 'justinmk/vim-sneak'
 Plug 'janko-m/vim-test'
 Plug 'liuchengxu/vim-which-key'
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'ajh17/VimCompletesMe'
 Plug 'prettier/vim-prettier', { 'do': 'npm install', 'for': ['typescript'] }
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-startify'
@@ -35,6 +35,9 @@ Plug 'tomasiser/vim-code-dark'
 Plug 'Shougo/echodoc.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
+Plug 'wincent/loupe'
+Plug 'wincent/ferret'
+Plug 'wakatime/vim-wakatime'
 call plug#end()
 
 let mapleader = "\<Space>"

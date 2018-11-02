@@ -36,6 +36,7 @@ let g:which_key_map['f'] = {
       \ }                                                  ,
       \ 'f' : ['<Space>ff'    , 'find all git files']      ,
       \ 'n' : ['<Space>fn'    , 'new file']                ,
+      \ 'r' : ['<Space>fr'    , 'find references']         ,
       \ 's' : ['<Space>fs'    , 'save file']               ,
       \ 'S' : ['<Space>fS'    , 'save all files']          ,
       \ 't' : ['<Space>ft'    , 'toggle file tree']        ,
