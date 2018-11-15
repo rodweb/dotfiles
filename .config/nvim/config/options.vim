@@ -1,9 +1,16 @@
 set completeopt=noinsert,menuone,noselect
 
 set nocompatible
+
+" enable mouse for all modes
 set mouse=a
+
+" use clipboard for all operations
 set clipboard=unnamedplus
+
+" enable leaving buffer without saving
 set hidden
+
 set autoread
 
 set autoindent
@@ -14,6 +21,8 @@ set expandtab
 " set colorcolumn=100
 set ruler
 set wildmenu
+
+set foldlevelstart=0
 
 set number
 set relativenumber

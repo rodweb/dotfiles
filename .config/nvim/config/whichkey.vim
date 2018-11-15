@@ -10,6 +10,15 @@ for s:i in range(1, 3)
   let g:which_key_map[s:i] = 'window-'.s:i
 endfor
 
+let g:which_key_map['a'] = {
+      \ 'name': '+ferret/ripgrep'                          ,
+      \ 'c' : ['<Space>ac'    , 'ferret search']           ,
+      \ 'g' : ['<Space>ag'    , 'ripgrep all with fzf selection'],
+      \ 'l' : ['<Space>al'    , 'ferret search with list'] ,
+      \ 'r' : ['<Space>ar'    , 'ferret replace']          ,
+      \ 's' : ['<Space>as'    , 'ferret search selection'] ,
+      \ }
+
 let g:which_key_map['b'] = {
       \ 'name': '+buffer'                                  ,
       \ 'b' : ['<Space>bb'    , 'find buffers']            ,
@@ -20,7 +29,7 @@ let g:which_key_map['b'] = {
       \ }
 
 let g:which_key_map['c'] = {
-      \ 'name': '+command/commant'                         ,
+      \ 'name': '+command/comment'                         ,
       \ 'c' : ['<Space>cc'    , 'find commands']           ,
       \ 'l' : ['<Space>cl'    , 'comment line']            ,
       \ }
@@ -51,9 +60,9 @@ let g:which_key_map['g'] = {
       \ }
 
 let g:which_key_map['h'] = {
-      \ 'name': '+history'                                 ,
+      \ 'name': '+history/hunk'                            ,
       \ 'h' : ['<Space>hh'    , 'find recent file']        ,
-      \ 'l' : ['<Space>cl'    , 'comment line']            ,
+      \ 'p' : ['<Space>hp'    , 'preview hunk']            ,
       \ }
 
 let g:which_key_map['m'] = {
@@ -85,6 +94,9 @@ let g:which_key_map['r'] = {
 let g:which_key_map['s'] = {
       \ 'name': '+search'     ,
       \ 'c' : ['<Space>sc'    , 'clear highlight']         ,
+      \ 'a' : ['<Space>sa'    , 'add word']                ,
+      \ 'r' : ['<Space>sr'    , 'remove word']             ,
+      \ 'g' : ['<Space>sg'    , 'suggest word']            ,
       \ }
 
 let g:which_key_map['t'] = {

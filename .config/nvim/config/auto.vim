@@ -11,5 +11,5 @@ augroup END
 
 augroup FileTypeVim
   au!
-  au FileType vim setlocal sw=2
+  au FileType vim setlocal sw=2 foldmethod=marker
 augroup END

@@ -38,6 +38,7 @@ Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
 Plug 'wincent/loupe'
 Plug 'wincent/ferret'
 Plug 'wakatime/vim-wakatime'
+Plug 'benmills/vimux'
 call plug#end()
 
 let mapleader = "\<Space>"
