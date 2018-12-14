@@ -5,3 +5,8 @@
 [core]
 	editor = nvim
 	excludesfile = /home/rodrigo/.global_ignore
+
+[commit]
+	template = ~/.gitmessage
+[pull]
+	rebase = true
