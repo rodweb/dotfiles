@@ -6,16 +6,29 @@ set $term st -f "Hack:size=10"
 
 font pango: Hack, monospace 9
 
-set $webws "1 web "
-set $backws "2 back "
-set $frontws "3 front "
-set $chatws "4 chat "
-set $musicws "5 music "
-set $dbws "6 db "
-set $restws "7 rest "
-set $gitws "8 git "
-set $mailws "9 mail "
-set $miscws "10 misc "
+# set $webws "1 web "
+# set $backws "2 back "
+# set $frontws "3 front "
+# set $chatws "4 chat "
+# set $musicws "5 music "
+# set $dbws "6 db "
+# set $restws "7 rest "
+# set $gitws "8 git "
+# set $mailws "9 mail "
+# set $miscws "10 misc "
+# set $custom "11 customization "
+
+set $webws "web"
+set $backws "back"
+set $frontws "front"
+set $chatws "chat"
+set $musicws "music"
+set $dbws "db"
+set $restws "rest"
+set $gitws "git"
+set $mailws "mail"
+set $miscws "misc"
+set $custom "custom"
 
 floating_modifier $win
 # focus_follows_mouse no
@@ -33,7 +46,9 @@ bindsym $alt+Tab workspace back_and_forth
 
 # start dmenu (a program launcher)
 bindsym $win+d exec --no-startup-id dmenu_run
-bindsym $alt+space exec --no-startup-id "rofi -show combi -combi-modi window,drun,run -modi combi"
+bindsym $win+n exec ~/scripts/rofi/workspaces.sh
+bindsym $win+m exec ~/scripts/rofi/move-to-workspace.sh
+bindsym $alt+space exec --no-startup-id "rofi -show combi -combi-modi window,drun,run -modi combi
 bindsym $ctrl+apostrophe exec --no-startup-id "rofi -modi 'clipboard:greenclip print' -show clipboard -run-command '{cmd}'"
 bindsym $win+Print exec --no-startup-id xfce4-screenshooter -r -c -s ~/tmp/ss
 bindsym --release $win+Delete exec --no-startup-id xkill
@@ -104,11 +119,11 @@ bindsym $win+a focus parent
 # focus the child container
 #bindsym $win+d focus child
 
-set $locker ~/scripts/lockscreen.sh
+set $lock ~/scripts/i3/lock
 
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
-    bindsym l exec --no-startup-id $locker, mode "default"
+    bindsym l exec --no-startup-id $lock, mode "default"
     bindsym e exec --no-startup-id i3-msg exit, mode "default"
     bindsym s exec --no-startup-id $locker && systemctl suspend, mode "default"
     bindsym h exec --no-startup-id $locker && systemctl hibernate, mode "default"
@@ -192,7 +207,7 @@ bindsym $win+r mode "resize"
 hide_edge_borders both
 smart_gaps on
 
-# gaps inner 10
+# gaps inner 2
 
 assign[class="Google-chrome-stable"] $webws
 
@@ -210,9 +225,10 @@ for_window [class="Google-chrome-stable"] focus
 for_window [class="Keybase"] move container to workspace $chatws
 for_window [class="Slack"] move container to workspace $chatws
 for_window [class="Slack" title="Slack Call Minipanel"] sticky enable; move position 1085 90
+assign [class="Slack" title="Slack Call Minipanel"] sticky enable; move position 1085 90
 for_window [class="Skype"] move container to workspace $chatws; floating disable
 for_window [class="^whats-app"] move container to workspace $chatws; focus
-for_window [class="TelegramDesktop"] move container to workspace $chatws; focus
+for_window [class="TelegramDesktop"] move container to workspace telegram; workspace telegram; focus
 for_window [class="Spotify"] move container to workspace $musicws
 for_window [class="DBeaver" title="Version update "] kill
 for_window [class="DBeaver" title="Can't connect to database "] kill
@@ -229,14 +245,14 @@ for_window [instance="code" title="gupy-front"] move container to workspace $fro
 for_window [instance="st-256color" title="Scratchpad terminal"] floating enable, resize grow left 100, resize grow right 100, move scratchpad
 for_window [class="Nm-connection-editor"] floating enable
 for_window [class="jetbrains-webstorm" title="Changelist"] fullscreen enable; focus
-for_window [class="jetbrains-webstorm" title="win3"] focus
+for_window [class="jetbrains-webstorm" title="win"] focus
 for_window [class="^jetbrains-.+"][window_type=dialog] focus
 
 
 exec_always --no-startup-id xrdb -merge ~/.Xresources
 exec_always --no-startup-id setxkbmap br
 exec_always --no-startup-id ~/scripts/config-touchpad.sh
-exec --no-startup-id ~/scripts/switch-capslock-escape.sh
+exec_always --no-startup-id ~/scripts/switch-capslock-escape.sh
 exec --no-startup-id ~/.fehbg
 exec --no-startup-id nm-applet
 exec --no-startup-id compton -f -b
@@ -276,7 +292,7 @@ bar {
 	font pango: Hack, FontAwesome 9
 	height 18
 	position top
-#  mode hide
+    # mode hide
     colors {
         background $base00
         separator  $base01
