@@ -2,6 +2,8 @@
 nnoremap <leader><tab> <C-^>
 nnoremap <leader>qq :qall<CR>
 nnoremap <leader>qQ :qall!<CR>
+nnoremap cp :let @+ = expand("%")<cr>
+nnoremap <leader>cd :cd %:p:h<CR>
 " }}}
 
 " Operator pending {{{
@@ -34,6 +36,10 @@ nnoremap <leader>fev :vsplit $MYVIMRC<CR>
 
 " Folding {{{
 nnoremap <tab> za
+" }}}
+
+" Git {{{
+nnoremap <leader>gc :Git commit<cr>
 " }}}
 
 " Indent {{{
@@ -99,3 +105,9 @@ nnoremap <leader>3 :3wincmd w<CR>
 " Project specific {{{
 nnoremap <leader>to :!npm run test-only<CR>
 " }}}
+
+" Most Used {{{
+nnoremap <leader>e :! 
+nmap <leader>f :GitFiles<cr>
+" }}}
+
