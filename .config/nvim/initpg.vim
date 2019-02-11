@@ -117,5 +117,5 @@ let g:user_emmet_settings = {
 
 autocmd BufWritePost *.js AsyncRun -post=checktime ./node_modules/.bin/eslint --fix %
 
-
+set nowrap
 set syntax=dbout
