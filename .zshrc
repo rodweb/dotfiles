@@ -8,6 +8,8 @@ if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
   source /etc/profile.d/vte.sh
 fi
 
+PATH=$PATH:~/scripts/rofi/:~/bin
+
 antigen use oh-my-zsh
 antigen bundle git
 antigen bundle docker
@@ -23,7 +25,7 @@ antigen apply
 HISTSIZE=3000
 SAVEHIST=3000
 HISTFILE=~/.histfile
-EDITOR='nvim'
+export EDITOR='nvim'
 NODE_OPTIONS=--max_old_space_size=4096
 
 FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow-glob "!.git/*"'
@@ -41,14 +43,6 @@ alias T='$EDITOR $HOME/.tmux.conf'
 alias V='$EDITOR -c "cd $HOME/.config/nvim" $HOME/.config/nvim/init.vim'
 alias X='$EDITOR $HOME/.Xresources'
 alias Z='$EDITOR $HOME/.zshrc'
-alias back='cd $HOME/dev/gupy-api-darthvader'
-alias publ='cd $HOME/dev/gupy-api-darthvader/public-api'
-alias front='cd $HOME/dev/gupy-front'
-alias pp='cd $HOME/dev/gupy-public-pages'
-alias ops='cd $HOME/dev/DevOps-5'
-alias mig='cd $HOME/dev/gupy-database-migration'
-alias bud='cd $HOME/dev/budget-api'
-alias api='back'
 alias c='clear'
 alias check='git checkout $(git branch | grep -v "*" | fzf)'
 alias q='exit'
@@ -72,15 +66,33 @@ alias remove='yay -Rns'
 alias yst='cd $HOME && yadm status'
 alias yd='cd $HOME && yadm diff'
 alias pdf='apvlv'
+alias st='st -f "Hack:size=10"'
+
+# Git
+alias grhh='git reset HEAD --hard'
+
+# Gupy
+alias back='cd $HOME/dev/gupy-api-darthvader'
+alias api='cd $HOME/dev/gupy-api-darthvader/interfaces/http/public-api'
+alias devops='cd $HOME/dev/DevOps-5'
+alias front='cd $HOME/dev/gupy-front'
+alias pp='cd $HOME/dev/gupy-public-pages'
+alias ops='cd $HOME/dev/ops'
+alias mig='cd $HOME/dev/gupy-database-migration'
+alias bud='cd $HOME/dev/budget-api'
+alias pr='npm run pull-request'
+
 alias pgcli='PAGER="nvim -R -u ~/.config/nvim/initpg.vim -" EDITOR=nvim /usr/bin/pgcli -h localhost -U postgres gupy_development_prod'
 alias pgdev='PAGER="nvim -R -u ~/.config/nvim/initpg.vim -" EDITOR=nvim /usr/bin/pgcli -h localhost -U postgres gupy_development'
 alias pgtest='PAGER="nvim -R -u ~/.config/nvim/initpg.vim -" EDITOR=nvim /usr/bin/pgcli -h localhost -U postgres gupy_test'
+alias pgprod='PAGER="nvim -R -u ~/.config/nvim/initpg.vim -" EDITOR=nvim /usr/bin/pgcli'
 alias pgbud='PAGER="nvim -R -u ~/.config/nvim/initpg.vim -" EDITOR=nvim /usr/bin/pgcli -h localhost -U postgres budget'
 alias gupydate='cat $HOME/scripts/gupy/gupy-repos.csv | sed -e "s/,/\t/g" | xargs -L1 $HOME/scripts/gupy/gupydate.sh'
 
+
 bindkey -v
 
-transset-df --id $WINDOWID .95 > /dev/null
+# transset-df --id $WINDOWID .95 > /dev/null
 
 source /usr/share/fzf/completion.zsh
 source /usr/share/fzf/key-bindings.zsh
@@ -89,14 +101,22 @@ BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
 
-autoload -U add-zsh-hook
-load-nvmrc() {
-  if [[ -f .nvmrc && -r .nvmrc ]]; then
-    nvm use
-  elif [[ $(nvm version) != $(nvm version default)  ]]; then
-    echo "Reverting to nvm default version"
-    nvm use default
-  fi
-}
-add-zsh-hook chpwd load-nvmrc
-load-nvmrc
+# autoload -U add-zsh-hook
+# load-nvmrc() {
+#   if [[ -f .nvmrc && -r .nvmrc ]]; then
+#     nvm use
+#   elif [[ $(nvm version) != $(nvm version default)  ]]; then
+#     echo "Reverting to nvm default version"
+#     nvm use default
+#   fi
+# }
+# add-zsh-hook chpwd load-nvmrc
+# load-nvmrc
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /home/rodrigo/.nvm/versions/node/v10.14.1/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /home/rodrigo/.nvm/versions/node/v10.14.1/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /home/rodrigo/.nvm/versions/node/v10.14.1/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /home/rodrigo/.nvm/versions/node/v10.14.1/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
+function gi() { curl -sL gitignore.io/api/$@ ;}
