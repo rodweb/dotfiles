@@ -46,4 +46,5 @@
     "workbench.activityBar.visible": false,
     "workbench.editor.showTabs": false,
     "window.zoomLevel": 0,
+    "editor.minimap.enabled": false,
 }
