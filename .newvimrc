@@ -1,6 +1,73 @@
+set mouse=a
 set number
 set numberwidth=4
 set relativenumber
 
 set wrap
 set textwidth=80
+set expandtab
+set shiftwidth=4
+set smarttab
+
+set showbreak=\\ 
+set list
+set listchars=tab:→\ ,trail:•,nbsp:␣
+
+let mapleader = " "
+let maplocalleader=","
+
+nnoremap ; :
+
+nnoremap <leader>s :w<cr>:so %<cr>:echo "Reloaded!"<cr>
+
+" convert current word to uppercase
+inoremap <c-u> <esc>viwUea
+
+nnoremap - ddp
+nnoremap _ ddkP
+
+inoremap jk <esc>
+
+nnoremap Y yg_
+nnoremap H g0
+nnoremap L g$
+
+"nnoremap <cr> o<esc>k
+
+nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel
+nnoremap <leader>' viw<esc>a'<esc>bi'<esc>lel
+
+vnoremap <leader>" <esc>`<i"<esc>`>la"<esc>
+vnoremap <leader>' <esc>`<i'<esc>`>la'<esc>
+
+iabbrev whiel while
+iabbrev tehn then
+
+augroup WriteFilesGroup
+    autocmd!
+    autocmd BufNewFile *.js,*.jsx,*.ts,*.tsx :write
+    autocmd FocusLost *js,*.jsx,*.ts,*.tsx :write
+augroup END
+
+augroup HtmlFilesGroup
+    autocmd!
+    autocmd BufRead *.html setlocal nowrap
+augroup END
+
+augroup JavascriptFilesGroup
+    autocmd!
+    autocmd FileType javascript nnoremap <buffer> <localleader>c I//<esc>
+    autocmd FileType javascript :iabbrev <buffer> cl console.log()<left>
+augroup END
+
+augroup VimFilesGroup
+    autocmd!
+    autocmd FileType vim nnoremap <buffer> <localleader>c I"<esc>
+augroup END
+
+augroup MarkdownFilesGroup
+    autocmd!
+    autocmd FileType markdown setlocal spell list nonumber norelativenumber
+augroup END
+
+
