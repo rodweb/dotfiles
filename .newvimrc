@@ -1,0 +1,6 @@
+set number
+set numberwidth=4
+set relativenumber
+
+set wrap
+set textwidth=80
