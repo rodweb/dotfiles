@@ -1,3 +1,4 @@
+syntax on
 set mouse=a
 set number
 set numberwidth=4
@@ -9,6 +10,9 @@ set expandtab
 set shiftwidth=4
 set smarttab
 
+set ignorecase
+set smartcase
+
 set showbreak=\\ 
 set list
 set listchars=tab:→\ ,trail:•,nbsp:␣
@@ -18,7 +22,9 @@ let maplocalleader=","
 
 nnoremap ; :
 
-nnoremap <leader>s :w<cr>:so %<cr>:echo "Reloaded!"<cr>
+nnoremap <leader>r :w<cr>:so %<cr>:echo "Reloaded!"<cr>
+nnoremap <leader>s :write<cr>
+nnoremap <leader>ev :vsplit ~/.newvimrc<cr>
 
 " convert current word to uppercase
 inoremap <c-u> <esc>viwUea
@@ -34,6 +40,8 @@ nnoremap L g$
 
 "nnoremap <cr> o<esc>k
 
+nnoremap <leader>; A;<esc>
+
 nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel
 nnoremap <leader>' viw<esc>a'<esc>bi'<esc>lel
 
@@ -43,10 +51,16 @@ vnoremap <leader>' <esc>`<i'<esc>`>la'<esc>
 iabbrev whiel while
 iabbrev tehn then
 
+"inoremap " ""<left>
+"inoremap ' ''<left>
+inoremap ( ()<left>
+inoremap [ []<left>
+inoremap {<cr> {<cr>}<esc>O
+
 augroup WriteFilesGroup
     autocmd!
-    autocmd BufNewFile *.js,*.jsx,*.ts,*.tsx :write
-    autocmd FocusLost *js,*.jsx,*.ts,*.tsx :write
+    autocmd BufNewFile *.js,*.jsx,*.ts,*.tsx,*.c :write
+    autocmd FocusLost *js,*.jsx,*.ts,*.tsx,*.c :write
 augroup END
 
 augroup HtmlFilesGroup
@@ -69,5 +83,4 @@ augroup MarkdownFilesGroup
     autocmd!
     autocmd FileType markdown setlocal spell list nonumber norelativenumber
 augroup END
-
 
