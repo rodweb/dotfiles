@@ -1,15 +1,24 @@
-syntax enable
 filetype plugin indent on
+syntax enable
 
+" Plugins {{{
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf.vim'
 Plug 'pangloss/vim-javascript'
+Plug 'editorconfig/editorconfig-vim'
 Plug 'tpope/vim-dispatch'
 "Plug 'dunstontc/vim-vscode-theme'
 Plug 'chriskempson/base16-vim'
 call plug#end()
+" }}}
+
+let mapleader = " "
+let maplocalleader=","
 
 "colorscheme dark_plus
+
+" Settings {{{
+set t_Co=256
 
 set mouse=a
 set number
@@ -29,15 +38,16 @@ set smartcase
 set showbreak=↪\ 
 set list
 set listchars=tab:→\ ,trail:•,nbsp:␣
+set scrolloff=100
 
 set foldlevelstart=1
 
-let mapleader = " "
-let maplocalleader=","
+set splitright
+" }}}
 
 " Normal mappings {{{
 
-" FZF mappings {{{
+" FZF mappings
 nnoremap <leader>f :GitFiles<cr>
 nnoremap <leader>bl :BLines<CR>
 nnoremap <leader>bb :Buffers<CR>
@@ -47,14 +57,15 @@ nnoremap <leader>yy :Filetypes<CR>
 nnoremap <leader>hh :History<CR>
 nnoremap <leader>mm :Maps<CR>
 nnoremap <leader>tt :Tags<CR>
-nnoremap <leader>ww :Windows<CR>
-" }}}
+" nnoremap <leader>ww :Windows<CR>
 
 nnoremap ; :
 
+nnoremap <leader><tab> <c-^>
 nnoremap <leader>n :nohl<cr>
 nnoremap <leader>r :w<cr>:so %<cr>:echo "Reloaded!"<cr>
 nnoremap <leader>s :write<cr>
+nnoremap <leader>w <c-w><c-w>
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>ed :e $MYVIMRC<cr>
 
@@ -65,7 +76,15 @@ nnoremap Y yg_
 nnoremap H g0
 nnoremap L g$
 
-nnoremap <leader>; A;<esc>
+nnoremap j gj
+nnoremap k gk
+
+nnoremap cw ciw
+
+nnoremap / /\v
+
+nnoremap <leader>; :execute "normal!\ mqA;\e`q"<cr>
+nnoremap <leader>, :execute "normal!\ mqA,\e`q"<cr>
 
 nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel
 nnoremap <leader>' viw<esc>a'<esc>bi'<esc>lel
@@ -86,11 +105,15 @@ inoremap {<cr> {<cr>}<esc>O
 " Operator pending mappings {{{
 onoremap in( :<c-u>normal! f(vi(<cr>
 onoremap an( :<c-u>normal! f(va(<cr>
+onoremap c :execute "normal! /[A-Z]/\r:nohlsearch\r"<cr>
+onoremap B :<c-u>normal! ggVG<cr>
 " }}}
 
 " Abbreviations {{{
 iabbrev whiel while
 iabbrev tehn then
+iabbrev cosnt const
+iabbrev applicaiton application
 " }}}
 
 " File write settings {{{
@@ -140,9 +163,18 @@ augroup CFilesGroup
 augroup END
 " }}}
 
+" Buffer settings {{{
+augroup BufferSettings
+    autocmd!
+    autocmd BufEnter * set cursorline
+    autocmd BufLeave * set nocursorline
+augroup END
+" }}}
+
 " Base16 color scheme settings {{{
 if filereadable(expand("~/.vimrc_background"))
     let base16colorspace=256
     source ~/.vimrc_background
 endif
 " }}}
+
