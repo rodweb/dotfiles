@@ -20,6 +20,7 @@ let maplocalleader=","
 " Settings {{{
 set t_Co=256
 
+set clipboard=unnamedplus
 set mouse=a
 set number
 set numberwidth=4
@@ -38,7 +39,7 @@ set smartcase
 set showbreak=↪\ 
 set list
 set listchars=tab:→\ ,trail:•,nbsp:␣
-set scrolloff=100
+set scrolloff=0
 
 set foldlevelstart=1
 
@@ -62,8 +63,10 @@ nnoremap <leader>tt :Tags<CR>
 nnoremap ; :
 
 nnoremap <leader><tab> <c-^>
+nnoremap <leader>q :q<cr>
 nnoremap <leader>n :nohl<cr>
-nnoremap <leader>r :w<cr>:so %<cr>:echo "Reloaded!"<cr>
+nnoremap <leader>a :w<cr>:so %<cr>:echo "Reloaded!"<cr>
+nnoremap <leader>r "qyiw:%s/\v<c-r>q//c<left><left>
 nnoremap <leader>s :write<cr>
 nnoremap <leader>w <c-w><c-w>
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
@@ -88,6 +91,13 @@ nnoremap <leader>, :execute "normal!\ mqA,\e`q"<cr>
 
 nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel
 nnoremap <leader>' viw<esc>a'<esc>bi'<esc>lel
+
+let i = 1
+while i <= 3
+    execute 'nnoremap <leader>' . i . ' :' . i . 'wincmd w<cr>'
+    let i = i + 1
+endwhile
+
 " }}}
 
 " Visual mappings {{{
