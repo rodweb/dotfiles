@@ -19,3 +19,5 @@ nmap <leader>gf :action Forward<cr>
 nmap <leader>gw :action JumpToLastWindow<cr>
 nmap <leader>gd :action GotoDeclaration<cr>
 nmap <leader>gi :action GotoImplementation<cr>
+
+nmap <leader><space> :action AceAction<cr>
