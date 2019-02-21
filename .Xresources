@@ -17,3 +17,8 @@ rofi.color-normal: #1e1e1e, #d4d4d4, #1e1e1e, #569cd6, #1e1e1e
 rofi.color-active: #1e1e1e, #9cdcfe, #1e1e1e, #569cd6, #d4d4d4 
 rofi.font: Hack 12
 
+URxvt*scrollBar: false
+URxvt*scrollBar_right: false
+URxvt.font:         xft:Hack-Regular:pixelsize=12,xft:Symbola
+URxvt.boldFont:     xft:Hack-Bold:pixelsize=12:weight=bold,xft:Symbola
+URxvt.italicFont:   xft:Hack-RegularOblique:pixelsize=12:slant=italic,xft:Symbola
