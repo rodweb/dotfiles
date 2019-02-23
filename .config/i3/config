@@ -1,4 +1,4 @@
-# vi: ft=i3
+# vi: ft=i3config
 set $win Mod4
 set $alt Mod1
 set $ctrl Control
@@ -7,29 +7,16 @@ set $term urxvtc
 
 font pango: Hack, monospace 9
 
-set $webws "1 web "
-set $backws "2 back "
-set $frontws "3 front "
-set $chatws "4 chat "
-set $musicws "5 music "
-set $dbws "6 db "
-set $restws "7 rest "
-set $gitws "8 git "
-set $mailws "9 mail "
-set $miscws "10 misc "
-set $custom "11 customization "
-
-# set $webws "web"
-# set $backws "back"
-# set $frontws "front"
-# set $chatws "chat"
-# set $musicws "music"
-# set $dbws "db"
-# set $restws "rest"
-# set $gitws "git"
-# set $mailws "mail"
-# set $miscws "misc"
-# set $custom "custom"
+set $webws "1: web "
+set $backws "2: back "
+set $frontws "3: front "
+set $chatws "4: chat "
+set $musicws "5: music "
+set $dbws "6: db "
+set $restws "7: rest "
+set $gitws "8: git "
+set $mailws "9: mail "
+set $miscws "10: misc "
 
 floating_modifier $win
 # focus_follows_mouse no
@@ -38,6 +25,7 @@ bindsym $ctrl+$alt+l exec --no-startup-id dm-tool lock
 
 # start a terminal
 bindsym $win+Return exec --no-startup-id $term #i3-sensible-terminal
+# scratchpad
 bindsym $win+q scratchpad show
 # kill focused window
 bindsym $win+Shift+q kill
@@ -100,9 +88,11 @@ bindsym $win+Shift+Right move right
 
 # split in horizontal orientation
 bindsym $win+slash split h
+bindsym $win+o split h; exec $term
 
 # split in vertical orientation
 bindsym $win+minus split v
+bindsym $win+p split v; exec $term
 
 # enter fullscreen mode for the focused container
 bindsym $win+f fullscreen toggle
@@ -255,10 +245,10 @@ for_window [class="^jetbrains-.+"][window_type=dialog] focus
 for_window [window_type=dialog] focus
 
 exec_always --no-startup-id xrdb -load ~/.Xresources
-exec_always --no-startup-id setxkbmap br
+#exec_always --no-startup-id setxkbmap br
 exec_always --no-startup-id ~/scripts/config-touchpad.sh
 #exec_always --no-startup-id ~/scripts/switch-capslock-escape.sh
-exec_always --no-startup-id ~/.profile
+exec --no-startup-id ~/.profile
 exec --no-startup-id ~/.fehbg
 exec --no-startup-id nm-applet
 exec --no-startup-id compton -f -b
