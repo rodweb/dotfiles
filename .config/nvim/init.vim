@@ -3,8 +3,10 @@ syntax enable
 
 " Plugins {{{
 call plug#begin('~/.vim/plugged')
-Plug 'andreypopp/vim-colors-plain'
 "Plug 'chriskempson/base16-vim'
+Plug 'andreypopp/vim-colors-plain'
+Plug 'mhinz/vim-startify'
+Plug 'mboughaba/i3config.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'junegunn/fzf.vim'
@@ -12,28 +14,35 @@ Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-dispatch'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --all' }
 Plug 'janko/vim-test'
+Plug 'itchyny/lightline.vim'
+Plug 'tmux-plugins/vim-tmux-focus-events'
 call plug#end()
 " }}}
 
 let mapleader = " "
 let maplocalleader=","
 
-colorscheme plain
+"colorscheme plain
+colorscheme rod
 
 let g:ycm_error_symbol = '✖'
 let g:ycm_warning_symbol = '⚠'
 let test#strategy = "dispatch"
+let g:lightline = { 'colorscheme': 'wombat' }
 
 " Settings {{{
 set t_Co=256
 set background=dark
 set visualbell
+set noshowmode
+set timeoutlen=300
 
 set clipboard=unnamedplus
 set mouse=a
 set number
 set numberwidth=4
 set relativenumber
+set hidden
 
 set wrap
 set textwidth=80
@@ -70,7 +79,7 @@ nnoremap <leader>hh :History<cr>
 nnoremap <leader>mm :Maps<cr>
 nnoremap <leader>tt :Tags<cr>
 " nnoremap <leader>ww :Windows<cr>
-nnoremap <leader>g :Rg <c-r><c-w><cr>
+"nnoremap <leader>g :Rg <c-r><c-w><cr>
 
 imap <c-f> <plug>(fzf-complete-path)
 imap <c-x><c-k> <plug>(fzf-complete-word)
@@ -80,11 +89,12 @@ imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 nnoremap <leader><tab> <c-^>
 nnoremap <leader>q :q<cr>
 nnoremap <leader>n :nohl<cr>
-nnoremap <leader>r "qyiw:%s/\v<c-r>q//c<left><left>
+nnoremap <leader>r "qyiw:%s/\v<c-r>q//c<left><left> " TODO improve
 nnoremap <leader>s :update<cr>
 nnoremap <leader>w <c-w><c-w>
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>ed :e $MYVIMRC<cr>
+nnoremap <leader>cd :cd expand('%:h')<cr>
 
 nnoremap ; :
 nnoremap Y yg_
@@ -143,7 +153,7 @@ iabbrev applicaiton application
 " File write settings {{{
 augroup WriteFilesGroup
     autocmd!
-    autocmd BufNewFile,FocusLost *.js,*.jsx,*.ts,*.tsx,*.c :write
+    autocmd BufNewFile,FocusLost *.js,*.jsx,*.ts,*.tsx,*.c :update
 augroup END
 " }}}
 
@@ -158,9 +168,10 @@ augroup END
 augroup JavascriptFilesGroup
     autocmd!
     autocmd FileType javascript
-                \ nnoremap <buffer> <localleader>c I//<esc>
+                \ nnoremap <buffer> <localleader>c mqI//<esc>'q
                 \|nnoremap <buffer> <localleader>t :TestNearest<cr>
                 \|iabbrev <buffer> cl console.log()<left>
+                \|setlocal foldmethod=indent foldlevelstart=2
 augroup END
 " }}}
 
@@ -187,6 +198,14 @@ augroup CFilesGroup
     autocmd FileType c
                 \ iabbrev iio #include <stdio.h>
                 \|iabbrev ilib #include <stdlib.h>
+augroup END
+" }}}
+
+" Mmakefile settings {{{
+augroup MakeFilesGroup
+    autocmd!
+    autocmd FileType make
+                \ setlocal noexpandtab shiftwidth=4
 augroup END
 " }}}
 
