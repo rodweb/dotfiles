@@ -3,22 +3,31 @@ syntax enable
 
 " Plugins {{{
 call plug#begin('~/.vim/plugged')
-Plug 'junegunn/fzf.vim'
+Plug 'andreypopp/vim-colors-plain'
+"Plug 'chriskempson/base16-vim'
 Plug 'pangloss/vim-javascript'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'junegunn/fzf.vim'
+Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-dispatch'
-"Plug 'dunstontc/vim-vscode-theme'
-Plug 'chriskempson/base16-vim'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --all' }
+Plug 'janko/vim-test'
 call plug#end()
 " }}}
 
 let mapleader = " "
 let maplocalleader=","
 
-"colorscheme dark_plus
+colorscheme plain
+
+let g:ycm_error_symbol = '✖'
+let g:ycm_warning_symbol = '⚠'
+let test#strategy = "dispatch"
 
 " Settings {{{
 set t_Co=256
+set background=dark
+set visualbell
 
 set clipboard=unnamedplus
 set mouse=a
@@ -35,14 +44,16 @@ set smarttab
 set incsearch
 set ignorecase
 set smartcase
+set inccommand=nosplit
+set grepprg=rg\ --vimgrep
 
 set showbreak=↪\ 
 set list
 set listchars=tab:→\ ,trail:•,nbsp:␣
-set scrolloff=0
+set scrolloff=100
+set sidescrolloff=5
 
 set foldlevelstart=1
-
 set splitright
 " }}}
 
@@ -50,45 +61,45 @@ set splitright
 
 " FZF mappings
 nnoremap <leader>f :GitFiles<cr>
-nnoremap <leader>bl :BLines<CR>
-nnoremap <leader>bb :Buffers<CR>
-nnoremap <leader>bt :BTags<CR>
-nnoremap <leader>cc :Commands<CR>
-nnoremap <leader>yy :Filetypes<CR>
-nnoremap <leader>hh :History<CR>
-nnoremap <leader>mm :Maps<CR>
-nnoremap <leader>tt :Tags<CR>
-" nnoremap <leader>ww :Windows<CR>
+nnoremap <leader>bl :BLines<cr>
+nnoremap <leader>bb :Buffers<cr>
+nnoremap <leader>bt :BTags<cr>
+nnoremap <leader>cc :Commands<cr>
+nnoremap <leader>yy :Filetypes<cr>
+nnoremap <leader>hh :History<cr>
+nnoremap <leader>mm :Maps<cr>
+nnoremap <leader>tt :Tags<cr>
+" nnoremap <leader>ww :Windows<cr>
+nnoremap <leader>g :Rg <c-r><c-w><cr>
 
-nnoremap ; :
+imap <c-f> <plug>(fzf-complete-path)
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 
 nnoremap <leader><tab> <c-^>
 nnoremap <leader>q :q<cr>
 nnoremap <leader>n :nohl<cr>
-nnoremap <leader>a :w<cr>:so %<cr>:echo "Reloaded!"<cr>
 nnoremap <leader>r "qyiw:%s/\v<c-r>q//c<left><left>
-nnoremap <leader>s :write<cr>
+nnoremap <leader>s :update<cr>
 nnoremap <leader>w <c-w><c-w>
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>ed :e $MYVIMRC<cr>
 
-nnoremap - ddp
-nnoremap _ ddkP
-
+nnoremap ; :
 nnoremap Y yg_
-nnoremap H g0
-nnoremap L g$
-
+"nnoremap H g0
+"nnoremap L g$
+nnoremap <s-l> gt
+nnoremap <s-h> gT
 nnoremap j gj
 nnoremap k gk
-
 nnoremap cw ciw
-
 nnoremap / /\v
+nnoremap Q @q
 
 nnoremap <leader>; :execute "normal!\ mqA;\e`q"<cr>
 nnoremap <leader>, :execute "normal!\ mqA,\e`q"<cr>
-
 nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel
 nnoremap <leader>' viw<esc>a'<esc>bi'<esc>lel
 
@@ -97,12 +108,14 @@ while i <= 3
     execute 'nnoremap <leader>' . i . ' :' . i . 'wincmd w<cr>'
     let i = i + 1
 endwhile
-
 " }}}
 
 " Visual mappings {{{
+vmap > >gv
+vmap < <gv
 vnoremap <leader>" <esc>`<i"<esc>`>la"<esc>
 vnoremap <leader>' <esc>`<i'<esc>`>la'<esc>
+vnoremap <leader>ag "qy:Rg <c-r>q<cr>
 " }}}
 
 " Insert mappings {{{
@@ -120,6 +133,7 @@ onoremap B :<c-u>normal! ggVG<cr>
 " }}}
 
 " Abbreviations {{{
+iabbrev adn and
 iabbrev whiel while
 iabbrev tehn then
 iabbrev cosnt const
@@ -129,8 +143,7 @@ iabbrev applicaiton application
 " File write settings {{{
 augroup WriteFilesGroup
     autocmd!
-    autocmd BufNewFile *.js,*.jsx,*.ts,*.tsx,*.c :write
-    autocmd FocusLost *js,*.jsx,*.ts,*.tsx,*.c :write
+    autocmd BufNewFile,FocusLost *.js,*.jsx,*.ts,*.tsx,*.c :write
 augroup END
 " }}}
 
@@ -144,47 +157,65 @@ augroup END
 " Javascript file settings {{{
 augroup JavascriptFilesGroup
     autocmd!
-    autocmd FileType javascript nnoremap <buffer> <localleader>c I//<esc>
-    autocmd FileType javascript :iabbrev <buffer> cl console.log()<left>
+    autocmd FileType javascript
+                \ nnoremap <buffer> <localleader>c I//<esc>
+                \|nnoremap <buffer> <localleader>t :TestNearest<cr>
+                \|iabbrev <buffer> cl console.log()<left>
 augroup END
 " }}}
 
 " Vimscript file settings {{{
 augroup VimFilesGroup
     autocmd!
-    autocmd FileType vim nnoremap <buffer> <localleader>c I"<esc>
-    autocmd FileType vim setlocal foldmethod=marker foldlevel=0
+    autocmd FileType vim
+                \ setlocal foldmethod=marker foldlevel=0
+                \|nnoremap <buffer> <localleader>c I"<esc>
+    autocmd BufWritePost *.vim source % | echom "Reloaded " . expand("%") | redraw
 augroup END
 " }}}
 
 " Markdown file settings {{{
 augroup MarkdownFilesGroup
     autocmd!
-    autocmd FileType markdown setlocal spell list nonumber norelativenumber
+    autocmd FileType markdown setlocal spell list wrap nonumber norelativenumber
 augroup END
 " }}}
 
 " C file settings {{{
 augroup CFilesGroup
     autocmd!
-    autocmd FileType c iabbrev iio #include <stdio.h>
-    autocmd FileType c iabbrev ilib #include <stdlib.h>
-    autocmd FileType c nnoremap <buffer> <localleader>b :Dispatch cc -std=c99 -Wall % && ./a.out<cr>
+    autocmd FileType c
+                \ iabbrev iio #include <stdio.h>
+                \|iabbrev ilib #include <stdlib.h>
+augroup END
+" }}}
+
+" Pgcli file settings {{{
+augroup PgcliFilesGroup
+    autocmd!
+    autocmd BufRead /tmp/psql.edit.* setlocal syntax=sql
 augroup END
 " }}}
 
 " Buffer settings {{{
 augroup BufferSettings
     autocmd!
-    autocmd BufEnter * set cursorline
-    autocmd BufLeave * set nocursorline
+    autocmd BufEnter * setlocal cursorline
+    autocmd BufLeave * setlocal nocursorline
+augroup END
+" }}}
+
+" XResources settings {{{
+augroup XResourcesGroup
+  autocmd!
+  autocmd BufWritePost ~/.Xresources !xrdb -load ~/.Xresources
 augroup END
 " }}}
 
 " Base16 color scheme settings {{{
-if filereadable(expand("~/.vimrc_background"))
-    let base16colorspace=256
-    source ~/.vimrc_background
-endif
+"if filereadable(expand("~/.vimrc_background"))
+"    let base16colorspace=256
+"    source ~/.vimrc_background
+"endif
 " }}}
 
