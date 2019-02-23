@@ -1,5 +1,5 @@
-nnoremap <leader>g :set operatorfunc=<sid>GrepOperator<cr>g@
-vnoremap <leader>g :<c-u>call <sid>GrepOperator(visualmode())<cr>
+nnoremap <silent> <leader>g :set operatorfunc=<sid>GrepOperator<cr>g@
+vnoremap <silent> <leader>g :<c-u>call <sid>GrepOperator(visualmode())<cr>
 
 function! s:GrepOperator(type)
     let saved_unnamed_register = @@
