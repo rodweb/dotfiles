@@ -1,6 +1,9 @@
+BASE16_SHELL=$HOME/.config/base16-shell/
+[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+
 autoload -U promptinit; promptinit
 source /usr/share/zsh/share/antigen.zsh
-source /usr/share/nvm/init-nvm.sh
+#source /usr/share/nvm/init-nvm.sh
 source /usr/share/doc/pkgfile/command-not-found.zsh
 source ~/scripts/zsh/fzf-git-checkout.zsh
 source ~/scripts/zsh/fzf-base16.zsh
@@ -10,6 +13,8 @@ fi
 
 PATH=$PATH:~/scripts/rofi/:~/bin
 
+export NVM_LAZY_LOAD=true
+
 antigen use oh-my-zsh
 antigen bundle git
 antigen bundle docker
@@ -18,6 +23,7 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-completions
 antigen bundle lukechilds/zsh-better-npm-completion
+antigen bundle lukechilds/zsh-nvm
 
 antigen theme refined
 antigen apply
@@ -25,6 +31,7 @@ antigen apply
 HISTSIZE=3000
 SAVEHIST=3000
 HISTFILE=~/.histfile
+
 export EDITOR='nvim'
 NODE_OPTIONS=--max_old_space_size=4096
 
@@ -67,6 +74,7 @@ alias yst='cd $HOME && yadm status'
 alias yd='cd $HOME && yadm diff'
 alias pdf='apvlv'
 alias st='st -f "Hack:size=10"'
+alias tmux='TERM=tmux-256color tmux'
 
 # Git
 alias grhh='git reset HEAD --hard'
@@ -92,26 +100,8 @@ alias gupydate='cat $HOME/scripts/gupy/gupy-repos.csv | sed -e "s/,/\t/g" | xarg
 
 bindkey -v
 
-# transset-df --id $WINDOWID .95 > /dev/null
-
 source /usr/share/fzf/completion.zsh
 source /usr/share/fzf/key-bindings.zsh
-
-BASE16_SHELL=$HOME/.config/base16-shell/
-[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
-
-
-# autoload -U add-zsh-hook
-# load-nvmrc() {
-#   if [[ -f .nvmrc && -r .nvmrc ]]; then
-#     nvm use
-#   elif [[ $(nvm version) != $(nvm version default)  ]]; then
-#     echo "Reverting to nvm default version"
-#     nvm use default
-#   fi
-# }
-# add-zsh-hook chpwd load-nvmrc
-# load-nvmrc
 
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
