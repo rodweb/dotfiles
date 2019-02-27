@@ -1,15 +1,13 @@
 BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
-autoload -U promptinit; promptinit
+autoload -U promptinit; promptinit;
+autoload -U edit-command-line
 source /usr/share/zsh/share/antigen.zsh
 #source /usr/share/nvm/init-nvm.sh
 source /usr/share/doc/pkgfile/command-not-found.zsh
 source ~/scripts/zsh/fzf-git-checkout.zsh
 source ~/scripts/zsh/fzf-base16.zsh
-if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
-  source /etc/profile.d/vte.sh
-fi
 
 PATH=$PATH:~/scripts/rofi/:~/bin
 
@@ -28,8 +26,8 @@ antigen bundle lukechilds/zsh-nvm
 antigen theme refined
 antigen apply
 
-HISTSIZE=3000
-SAVEHIST=3000
+HISTSIZE=10000
+SAVEHIST=10000
 HISTFILE=~/.histfile
 
 export EDITOR='nvim'
@@ -99,6 +97,8 @@ alias gupydate='cat $HOME/scripts/gupy/gupy-repos.csv | sed -e "s/,/\t/g" | xarg
 
 
 bindkey -v
+zle -N edit-command-line
+bindkey -M vicmd v edit-command-line
 
 source /usr/share/fzf/completion.zsh
 source /usr/share/fzf/key-bindings.zsh
