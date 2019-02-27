@@ -6,16 +6,22 @@ call plug#begin('~/.vim/plugged')
 "Plug 'chriskempson/base16-vim'
 Plug 'andreypopp/vim-colors-plain'
 Plug 'mhinz/vim-startify'
-Plug 'mboughaba/i3config.vim'
-Plug 'pangloss/vim-javascript'
+Plug 'sheerun/vim-polyglot'
+Plug 'ap/vim-css-color'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'machakann/vim-sandwich'
+Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-fugitive'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --all' }
 Plug 'janko/vim-test'
 Plug 'itchyny/lightline.vim'
 Plug 'tmux-plugins/vim-tmux-focus-events'
+"Plug '~/dev/rod/vim-eslint'
+Plug 'mattn/emmet-vim'
+Plug 'tapayne88/vim-mochajs'
 call plug#end()
 " }}}
 
@@ -36,6 +42,7 @@ set background=dark
 set visualbell
 set noshowmode
 set timeoutlen=300
+set autowrite
 
 set clipboard=unnamedplus
 set mouse=a
@@ -45,7 +52,6 @@ set relativenumber
 set hidden
 
 set wrap
-set textwidth=80
 set expandtab
 set shiftwidth=4
 set smarttab
@@ -68,33 +74,16 @@ set splitright
 
 " Normal mappings {{{
 
-" FZF mappings
-nnoremap <leader>f :GitFiles<cr>
-nnoremap <leader>bl :BLines<cr>
-nnoremap <leader>bb :Buffers<cr>
-nnoremap <leader>bt :BTags<cr>
-nnoremap <leader>cc :Commands<cr>
-nnoremap <leader>yy :Filetypes<cr>
-nnoremap <leader>hh :History<cr>
-nnoremap <leader>mm :Maps<cr>
-nnoremap <leader>tt :Tags<cr>
-" nnoremap <leader>ww :Windows<cr>
-"nnoremap <leader>g :Rg <c-r><c-w><cr>
-
-imap <c-f> <plug>(fzf-complete-path)
-imap <c-x><c-k> <plug>(fzf-complete-word)
-imap <c-x><c-f> <plug>(fzf-complete-path)
-imap <c-x><c-j> <plug>(fzf-complete-file-ag)
-
 nnoremap <leader><tab> <c-^>
 nnoremap <leader>q :q<cr>
 nnoremap <leader>n :nohl<cr>
-nnoremap <leader>r "qyiw:%s/\v<c-r>q//c<left><left> " TODO improve
+nnoremap <leader>r "qyiw:%s/\v<c-r>q//c<left><left>
 nnoremap <leader>s :update<cr>
 nnoremap <leader>w <c-w><c-w>
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>ed :e $MYVIMRC<cr>
-nnoremap <leader>cd :cd expand('%:h')<cr>
+nnoremap <leader>cd :cd expand('%:p:h')<cr>
+nnoremap <leader>cp :let @+ = expand('%')<cr>
 
 nnoremap ; :
 nnoremap Y yg_
@@ -112,12 +101,38 @@ nnoremap <leader>; :execute "normal!\ mqA;\e`q"<cr>
 nnoremap <leader>, :execute "normal!\ mqA,\e`q"<cr>
 nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel
 nnoremap <leader>' viw<esc>a'<esc>bi'<esc>lel
+nnoremap <leader>= gg=G<cr>
+
+nnoremap <leader>bd :bdelete<cr>
+
+nnoremap <tab> za
 
 let i = 1
 while i <= 3
     execute 'nnoremap <leader>' . i . ' :' . i . 'wincmd w<cr>'
     let i = i + 1
 endwhile
+
+" FZF mappings
+nnoremap <leader>f :GitFiles<cr>
+nnoremap <leader>bl :BLines<cr>
+nnoremap <leader>bb :Buffers<cr>
+nnoremap <leader>bt :BTags<cr>
+nnoremap <leader>cc :Commands<cr>
+nnoremap <leader>yy :Filetypes<cr>
+nnoremap <leader>hh :History<cr>
+nnoremap <leader>mm :Maps<cr>
+nnoremap <leader>tt :Tags<cr>
+imap <c-f> <plug>(fzf-complete-path)
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+imap <c-x><c-l> <plug>(fzf-complete-line)
+
+" Fugitive mappins
+nnoremap <leader>gd :Gdiff<cr>
+nnoremap <leader>gs :Gstatus<cr>
+nnoremap <leader>gc :Git commit<cr>
 " }}}
 
 " Visual mappings {{{
@@ -139,7 +154,7 @@ inoremap {<cr> {<cr>}<esc>O
 onoremap in( :<c-u>normal! f(vi(<cr>
 onoremap an( :<c-u>normal! f(va(<cr>
 onoremap c :execute "normal! /[A-Z]/\r:nohlsearch\r"<cr>
-onoremap B :<c-u>normal! ggVG<cr>
+onoremap ef :<c-u>normal! ggVG<cr>
 " }}}
 
 " Abbreviations {{{
@@ -169,7 +184,7 @@ augroup JavascriptFilesGroup
     autocmd!
     autocmd FileType javascript
                 \ nnoremap <buffer> <localleader>c mqI//<esc>'q
-                \|nnoremap <buffer> <localleader>t :TestNearest<cr>
+                \|nnoremap <buffer> <localleader>t :compiler mochajs<cr>:TestNearest<cr>
                 \|iabbrev <buffer> cl console.log()<left>
                 \|setlocal foldmethod=indent foldlevelstart=2
 augroup END
@@ -181,7 +196,7 @@ augroup VimFilesGroup
     autocmd FileType vim
                 \ setlocal foldmethod=marker foldlevel=0
                 \|nnoremap <buffer> <localleader>c I"<esc>
-    autocmd BufWritePost *.vim source % | echom "Reloaded " . expand("%") | redraw
+    autocmd BufWritePost $MYVIMRC source % | echom "Reloaded " . expand("%") | redraw
 augroup END
 " }}}
 
@@ -227,7 +242,7 @@ augroup END
 " XResources settings {{{
 augroup XResourcesGroup
   autocmd!
-  autocmd BufWritePost ~/.Xresources !xrdb -load ~/.Xresources
+  autocmd BufWritePost ~/.Xresources silent !xrdb -load ~/.Xresources
 augroup END
 " }}}
 
