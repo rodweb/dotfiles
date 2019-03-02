@@ -39,7 +39,7 @@ bindsym $alt+Tab workspace back_and_forth
 bindsym $win+d exec --no-startup-id dmenu_run
 bindsym $win+space exec ~/scripts/rofi/workspaces.sh
 bindsym $win+m exec ~/scripts/rofi/move-to-workspace.sh
-bindsym $alt+space exec --no-startup-id "rofi -show combi -combi-modi window,drun,run -modi combi"
+bindsym $alt+space exec --no-startup-id "bash ~/scripts/rofi/SEARCH"
 bindsym $ctrl+apostrophe exec --no-startup-id "rofi -modi 'clipboard:greenclip print' -show clipboard -run-command '{cmd}'"
 bindsym $win+Print exec --no-startup-id xfce4-screenshooter -r -c -s ~/tmp/ss
 bindsym --release $win+Delete exec --no-startup-id xkill
@@ -263,6 +263,7 @@ exec --no-startup-id udiskie -2
 exec --no-startup-id dunst
 exec --no-startup-id unclutter -b
 exec --no-startup-id urxvtd -q -o -f
+exec --no-startup-id xautolock -time 3 -locker $locker
 
 
 set $base00 #000000

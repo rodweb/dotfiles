@@ -1,20 +1,20 @@
-rofi.eh: 2
-rofi.padding: 200
-rofi.fullscreen: true
-rofi.bw: 0
-rofi.width: 100
-rofi.location: 1
-rofi.lines: 5
-rofi.yoffset: -2
-rofi.separator-style: none
-rofi.hide-scrollbar: true
-rofi.color-enabled: true
-!                  'background', 'border', 'separator'
-rofi.color-window: argb:cc1e1e1e, #1e1e1e, argb:cc1e1e1e
-! State:           'bg',         'fg',    'bgalt',        'hlbg',  'hlfg'
-rofi.color-normal: argb:001e1e1e, #ffffff, argb:001e1e1e, argb:ccc0c0c0, #121212
-rofi.color-active: argb:001e1e1e, #808080, argb:001e1e1e, argb:ccc0c0c0, #121212
-rofi.font: Hack 12
+!rofi.eh: 2
+!rofi.padding: 200
+!rofi.fullscreen: true
+!rofi.bw: 0
+!rofi.width: 100
+!rofi.location: 1
+!rofi.lines: 5
+!rofi.yoffset: -2
+!rofi.separator-style: none
+!rofi.hide-scrollbar: true
+!rofi.color-enabled: true
+!!                  'background', 'border', 'separator'
+!rofi.color-window: argb:cc1e1e1e, #1e1e1e, argb:cc1e1e1e
+!! State:           'bg',         'fg',    'bgalt',        'hlbg',  'hlfg'
+!rofi.color-normal: argb:001e1e1e, #ffffff, argb:001e1e1e, argb:ccc0c0c0, #121212
+!rofi.color-active: argb:001e1e1e, #808080, argb:001e1e1e, argb:ccc0c0c0, #121212
+!rofi.font: Hack 12
 
 URxvt*scrollBar: false
 URxvt*scrollBar_right: false
