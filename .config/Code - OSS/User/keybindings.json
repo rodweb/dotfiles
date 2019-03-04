@@ -1,0 +1,5 @@
+// Place your key bindings in this file to override the defaults
+[
+    { "key": "ctrl+j", "when": "listFocus", "command": "list.focusDown" },
+    { "key": "ctrl+k", "when": "listFocus", "command": "list.focusUp" },
+]
