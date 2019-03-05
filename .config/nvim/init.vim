@@ -4,35 +4,40 @@ syntax enable
 " Plugins {{{
 call plug#begin('~/.vim/plugged')
 "Plug 'chriskempson/base16-vim'
-Plug 'andreypopp/vim-colors-plain'
-Plug 'mhinz/vim-startify'
+"Plug 'tomasiser/vim-code-dark'
+"Plug 'andreypopp/vim-colors-plain'
+"Plug 'mhinz/vim-startify'
 Plug 'sheerun/vim-polyglot'
 Plug 'ap/vim-css-color'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'machakann/vim-sandwich'
 Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/fzf.vim'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --all' }
+Plug 'w0rp/ale'
 Plug 'janko/vim-test'
 Plug 'itchyny/lightline.vim'
 Plug 'tmux-plugins/vim-tmux-focus-events'
-"Plug '~/dev/rod/vim-eslint'
-Plug 'mattn/emmet-vim'
-Plug 'tapayne88/vim-mochajs'
+"Plug 'mattn/emmet-vim'
+"Plug 'tapayne88/vim-mochajs'
 call plug#end()
 " }}}
 
 let mapleader = " "
 let maplocalleader=","
 
+"colorscheme codedark
 "colorscheme plain
 colorscheme rod
 
 let g:ycm_error_symbol = '✖'
 let g:ycm_warning_symbol = '⚠'
+let g:ycm_confirm_extra_conf = 0
+let g:ale_completion_enabled = 1
 let test#strategy = "dispatch"
 let g:lightline = { 'colorscheme': 'wombat' }
 
@@ -42,7 +47,9 @@ set background=dark
 set visualbell
 set noshowmode
 set timeoutlen=300
+set updatetime=750
 set autowrite
+set backupcopy=yes
 
 set clipboard=unnamedplus
 set mouse=a
@@ -65,7 +72,7 @@ set grepprg=rg\ --vimgrep
 set showbreak=↪\ 
 set list
 set listchars=tab:→\ ,trail:•,nbsp:␣
-set scrolloff=100
+"set scrolloff=100
 set sidescrolloff=5
 
 set foldlevelstart=1
@@ -73,7 +80,6 @@ set splitright
 " }}}
 
 " Normal mappings {{{
-
 nnoremap <leader><tab> <c-^>
 nnoremap <leader>q :q<cr>
 nnoremap <leader>n :nohl<cr>
@@ -82,7 +88,7 @@ nnoremap <leader>s :update<cr>
 nnoremap <leader>w <c-w><c-w>
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>ed :e $MYVIMRC<cr>
-nnoremap <leader>cd :cd expand('%:p:h')<cr>
+nnoremap <leader>cd :cd expand('%:h')<cr>
 nnoremap <leader>cp :let @+ = expand('%')<cr>
 
 nnoremap ; :
@@ -91,10 +97,13 @@ nnoremap Y yg_
 "nnoremap L g$
 nnoremap <s-l> gt
 nnoremap <s-h> gT
-nnoremap j gj
-nnoremap k gk
+nnoremap j gjzz
+nnoremap k gkzz
+"nnoremap n nzz
+"nnoremap N nzz
+nnoremap G Gzz
 nnoremap cw ciw
-nnoremap / /\v
+"nnoremap / /\v
 nnoremap Q @q
 
 nnoremap <leader>; :execute "normal!\ mqA;\e`q"<cr>
@@ -113,21 +122,37 @@ while i <= 3
     let i = i + 1
 endwhile
 
+" Damian Conway's Die Blinkënmatchen: highlight matches
+nnoremap <silent> n nzz:call HLNext(0.1)<cr>
+nnoremap <silent> N Nzz:call HLNext(0.1)<cr>
+
+function! HLNext (blinktime)
+  let target_pat = '\c\%#'.@/
+  let ring = matchadd('ErrorMsg', target_pat, 101)
+  redraw
+  exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+  call matchdelete(ring)
+  redraw
+endfunction
+
 " FZF mappings
 nnoremap <leader>f :GitFiles<cr>
 nnoremap <leader>bl :BLines<cr>
-nnoremap <leader>bb :Buffers<cr>
-nnoremap <leader>bt :BTags<cr>
+nnoremap <leader>b :Buffers<cr>
+nnoremap <leader>t :BTags<cr>
 nnoremap <leader>cc :Commands<cr>
-nnoremap <leader>yy :Filetypes<cr>
-nnoremap <leader>hh :History<cr>
+nnoremap <leader>y :Filetypes<cr>
+nnoremap <leader>h :History<cr>
 nnoremap <leader>mm :Maps<cr>
-nnoremap <leader>tt :Tags<cr>
+"nnoremap <leader>tt :Tags<cr>
 imap <c-f> <plug>(fzf-complete-path)
 imap <c-x><c-k> <plug>(fzf-complete-word)
 imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
+
+nnoremap <leader>tt :TagbarToggle<cr>
+nnoremap <leader>e :NERDTreeToggle<cr>
 
 " Fugitive mappins
 nnoremap <leader>gd :Gdiff<cr>
