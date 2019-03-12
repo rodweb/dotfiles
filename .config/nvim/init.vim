@@ -23,7 +23,7 @@ Plug 'janko/vim-test'
 Plug 'itchyny/lightline.vim'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 "Plug 'mattn/emmet-vim'
-"Plug 'tapayne88/vim-mochajs'
+Plug 'tapayne88/vim-mochajs'
 call plug#end()
 " }}}
 
@@ -71,6 +71,7 @@ set grepprg=rg\ --vimgrep
 
 set showbreak=↪\ 
 set list
+"set listchars=tab:→\ ,trail:•,nbsp:␣,eol:↲
 set listchars=tab:→\ ,trail:•,nbsp:␣
 "set scrolloff=100
 set sidescrolloff=5
@@ -135,6 +136,8 @@ function! HLNext (blinktime)
   redraw
 endfunction
 
+nnoremap <leader>td :Rg TODO\(rod\)<cr>
+
 " FZF mappings
 nnoremap <leader>f :GitFiles<cr>
 nnoremap <leader>bl :BLines<cr>
@@ -153,6 +156,9 @@ imap <c-x><c-l> <plug>(fzf-complete-line)
 
 nnoremap <leader>tt :TagbarToggle<cr>
 nnoremap <leader>e :NERDTreeToggle<cr>
+
+nnoremap ]e :ALENext<cr>
+nnoremap [e :ALEPrevious<cr>
 
 " Fugitive mappins
 nnoremap <leader>gd :Gdiff<cr>
@@ -224,6 +230,15 @@ augroup VimFilesGroup
     autocmd BufWritePost $MYVIMRC source % | echom "Reloaded " . expand("%") | redraw
 augroup END
 " }}}
+
+" Rust file settings {{{
+augroup RustFilesGroup
+    autocmd!
+    autocmd FileType rust nnoremap <buffer> <localleader>r :make run<cr>
+    autocmd BufWritePost *.rs :Make build
+augroup END
+" }}}
+
 
 " Markdown file settings {{{
 augroup MarkdownFilesGroup
