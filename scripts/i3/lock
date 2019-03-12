@@ -1,4 +1,3 @@
 #!/bin/bash
-killall -SIGUSR1 dunst &&
-i3lock-fancy -n -- scrot -z &&
-killall -SIGUSR2 dunst
+killall -SIGUSR1 dunst
+i3lock-fancy -n -- scrot -z && killall -SIGUSR2 dunst
