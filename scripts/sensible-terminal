@@ -1,0 +1,12 @@
+#!/bin/bash
+ID=$(xdpyinfo | grep focus | cut -f4 -d " ")
+PID=$(($(xprop -id $ID | grep -m 1 PID | cut -d " " -f 3) + 2))
+echo "ID=$ID,PID=$PID"
+if [ -e "/proc/$PID/cwd" ]
+then
+    urxvtc -cd $(readlink /proc/$PID/cwd) &
+    echo "found $(readlink /proc/$PID/cws)"
+else
+    echo "not found"
+    urxvtc
+fi
