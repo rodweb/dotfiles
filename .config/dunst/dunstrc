@@ -231,13 +231,13 @@
     close = ctrl+space
 
     # Close all notifications.
-    close_all = ctrl+shift+space
+    close_all = mod4+apostrophe
 
     # Redisplay last message(s).
     # On the US keyboard layout "grave" is normally above TAB and left
     # of "1". Make sure this key actually exists on your keyboard layout,
     # e.g. check output of 'xmodmap -pke'
-    history = mod4+apostrophe
+    history = ctrl+shift+space
 
     # Context menu.
     context = mod4+shift+d
