@@ -141,8 +141,10 @@ call s:h("Statement",     {"fg": s:norm, "gui": "bold"})
 hi! link Conditonal       Statement
 hi! link Repeat           Statement
 hi! link Label            Statement
-hi! link Keyword          Statement
 hi! link Exception        Statement
+
+" __Keyword__
+call s:h("Keyword",     {"fg": s:norm, "cterm": "bold"})
 
 " __ErrorMsg__
 call s:h("ErrorMsg",      {"fg": s:error})
