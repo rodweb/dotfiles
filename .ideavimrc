@@ -10,14 +10,16 @@ set clipboard=unnamedplus,unnamed
 set surround
 
 let mapleader = " "
-nmap <leader>fs <c-s>
-nmap <leader>ff :action GotoFile<cr>
-nmap <leader>bb :action RecentFiles<cr>
+nmap <leader>s <c-s>
+nmap <leader>f :action GotoFile<cr>
+nmap <leader>b :action RecentFiles<cr>
 
 nmap <leader>gb :action Back<cr>
 nmap <leader>gf :action Forward<cr>
-nmap <leader>gw :action JumpToLastWindow<cr>
+nmap <leader>w :action JumpToLastWindow<cr>
 nmap <leader>gd :action GotoDeclaration<cr>
 nmap <leader>gi :action GotoImplementation<cr>
 
 nmap <leader><space> :action AceAction<cr>
+
+source ~/.confi/nvim/init.vim
