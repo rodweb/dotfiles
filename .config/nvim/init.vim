@@ -256,6 +256,16 @@ augroup CFilesGroup
 augroup END
 " }}}
 
+
+" Rust file settings {{{
+augroup RustFilesGroupd
+    autocmd!
+    autocmd FileType rust nnoremap <buffer> <localleader>r :make run<cr>
+    autocmd BufWritePost *.rs :Make build
+augroup END
+" }}}
+
+
 " Mmakefile settings {{{
 augroup MakeFilesGroup
     autocmd!
