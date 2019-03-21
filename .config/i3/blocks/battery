@@ -1,5 +1,7 @@
 #!/bin/bash
 
+command -v acpi || exit
+
 BATTERY_INFO=$(acpi -b | grep -v "unavailable")
 BATTERY_STATE=$(echo "${BATTERY_INFO}" | grep -wo "Full\|Charging\|Discharging")
 BATTERY_POWER=$(echo "${BATTERY_INFO}" | grep -o '[0-9]\+%' | tr -d '%')
