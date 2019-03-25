@@ -41,7 +41,7 @@ bindsym $win+space exec ~/scripts/rofi/workspaces.sh
 bindsym $win+m exec ~/scripts/rofi/move-to-workspace.sh
 bindsym $alt+space exec --no-startup-id "bash ~/scripts/rofi/SEARCH"
 bindsym $ctrl+apostrophe exec --no-startup-id "rofi -modi 'clipboard:greenclip print' -show clipboard -run-command '{cmd}'"
-bindsym $win+Print exec --no-startup-id xfce4-screenshooter -r -c -s ~/tmp/ss
+bindsym $win+Print exec --no-startup-id xfce4-screenshooter -r -c ~/tmp/ss
 bindsym --release $win+Delete exec --no-startup-id xkill
 
 bindsym $win+g exec ~/scripts/rofi/rofi-gupy.sh
@@ -122,7 +122,7 @@ mode "$mode_system" {
     bindsym s exec --no-startup-id $locker && systemctl suspend, mode "default"
     bindsym h exec --no-startup-id $locker && systemctl hibernate, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
+    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
@@ -130,6 +130,17 @@ mode "$mode_system" {
 }
 
 bindsym $alt+$ctrl+Delete mode "$mode_system"
+
+set $displayMode Set display mode [g]upy [b]oth [d]efault
+mode "$displayMode" {
+    bindsym g exec "~/.screenlayout/gupy.sh", mode "default"
+    bindsym d exec "~/.screenlayout/default.sh", mode "default"
+    bindsym b exec "~/.screenlayout/both.sh", mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $win+F12 mode "$displayMode"
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
@@ -158,6 +169,9 @@ bindsym $win+Shift+8 move container to workspace $gitws
 bindsym $win+Shift+9 move container to workspace $backgroundws
 bindsym $win+Shift+0 move container to workspace $miscws
 
+bindsym $win+$alt+l move workspace to output right
+bindsym $win+$alt+h move workspace to output left
+
 # cycle active workspaces
 bindsym $win+Tab workspace next
 bindsym $win+Shift+Tab workspace prev
@@ -179,16 +193,16 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym h resize shrink width 4 px or 4 ppt
-        bindsym j resize grow height 4 px or 4 ppt
-        bindsym k resize shrink height 4 px or 4 ppt
-        bindsym l resize grow width 4 px or 4 ppt
+        bindsym h resize shrink width 8 px or 8 ppt
+        bindsym j resize grow height 8 px or 8 ppt
+        bindsym k resize shrink height 8 px or 8 ppt
+        bindsym l resize grow width 8 px or 8 ppt
 
         # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 4 px or 4 ppt
-        bindsym Down resize grow height 4 px or 4 ppt
-        bindsym Up resize shrink height 4 px or 4 ppt
-        bindsym Right resize grow width 4 px or 4 ppt
+        bindsym Left resize shrink width 8 px or 8 ppt
+        bindsym Down resize grow height 8 px or 8 ppt
+        bindsym Up resize shrink height 8 px or 8 ppt
+        bindsym Right resize grow width 8 px or 8 ppt
 
         # back to normal: Enter or Escape or $win+r
         bindsym Return mode "default"
@@ -218,8 +232,8 @@ for_window [class="Solaar"] floating enable; move position center
 for_window [class="Google-chrome-stable"] focus
 for_window [class="Keybase"] move container to workspace $chatws
 for_window [class="Slack"] move container to workspace $chatws
-for_window [class="Slack" title="Slack Call Minipanel"] sticky enable; move position 1085 90
-assign [class="Slack" title="Slack Call Minipanel"] sticky enable; move position 1085 90
+#for_window [class="Slack" title="Slack Call Minipanel"] sticky enable; move position 1085 90
+assign [class="Slack" title="Slack Call Minipanel"] sticky enable; move right 300px,move down 90px
 for_window [class="Skype"] move container to workspace $chatws; floating disable
 for_window [class="^whats-app"] move container to workspace $chatws; focus
 for_window [class="TelegramDesktop"] move container to workspace $chatws; workspace $chatws; focus
@@ -260,6 +274,7 @@ exec --no-startup-id libinput-gestures-setup start
 exec --no-startup-id $stterm -t 'Scratchpad terminal'
 exec --no-startup-id udiskie -2
 exec --no-startup-id dunst
+exec --no-startup-id srandrd ~/scripts/i3/srandr.sh
 exec --no-startup-id unclutter -b
 exec --no-startup-id urxvtd -q -o -f
 exec --no-startup-id xautolock -time 3 -locker $locker
