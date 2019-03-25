@@ -1,5 +1,5 @@
 {
-    "files.autoSave": "onFocusChange",
+    // "files.autoSave": "onFocusChange",
     "editor.renderWhitespace": "none",
     "editor.wordWrap": "on",
     "files.exclude": {
@@ -10,7 +10,7 @@
     "editor.mouseWheelZoom": true,
     "editor.fontLigatures": true,
     "editor.minimap.enabled": false,
-    "workbench.activityBar.visible": false,
+    "workbench.activityBar.visible": true,
     "workbench.statusBar.feedback.visible": false,
     "workbench.statusBar.visible": true,
     "vim.leader": "<space>",
@@ -19,8 +19,8 @@
     "vim.surround": true,
     "vim.normalModeKeyBindingsNonRecursive": [
         { "before": [";"], "after": [":"] },
-        { "before": ["j"], "after": ["j", "z", "z"] },
-        { "before": ["k"], "after": ["k", "z", "z"] },
+        { "before": ["j"], "after": ["g", "j", "z", "z"] },
+        { "before": ["k"], "after": ["g", "k", "z", "z"] },
         { "before": ["G"], "after": ["G", "z", "z"] },
         { "before": ["<leader>","c"], "after": [":", "q", "<cr>"] },
         { "before": ["<leader>","f"], "commands": ["workbench.action.quickOpen"] },
@@ -31,5 +31,6 @@
     ],
     "editor.renderControlCharacters": false,
     "window.menuBarVisibility": "toggle",
-    "window.titleBarStyle": "native"
+    "window.titleBarStyle": "native",
+    "typescript.updateImportsOnFileMove.enabled": "always"
 }
