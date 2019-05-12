@@ -278,6 +278,7 @@ exec --no-startup-id srandrd ~/scripts/i3/srandr.sh
 exec --no-startup-id unclutter -b
 exec --no-startup-id urxvtd -q -o -f
 exec --no-startup-id xautolock -time 3 -locker $locker
+exec --no-startup-id ~/autostart.sh
 
 
 set $base00 #000000
