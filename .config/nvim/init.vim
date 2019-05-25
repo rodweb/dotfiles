@@ -4,7 +4,7 @@ syntax enable
 " Plugins {{{
 call plug#begin('~/.vim/plugged')
 "Plug 'chriskempson/base16-vim'
-"Plug 'tomasiser/vim-code-dark'
+Plug 'tomasiser/vim-code-dark'
 "Plug 'andreypopp/vim-colors-plain'
 "Plug 'mhinz/vim-startify'
 Plug 'sheerun/vim-polyglot'
@@ -17,7 +17,8 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --all' }
+Plug 'tpope/vim-commentary'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --rust-completer --all' }
 Plug 'w0rp/ale'
 Plug 'janko/vim-test'
 Plug 'itchyny/lightline.vim'
@@ -30,16 +31,19 @@ call plug#end()
 let mapleader = " "
 let maplocalleader=","
 
-"colorscheme codedark
-"colorscheme plain
-colorscheme rod
+colorscheme codedark
+" colorscheme plain
+" colorscheme rod
 
 let g:ycm_error_symbol = '✖'
 let g:ycm_warning_symbol = '⚠'
 let g:ycm_confirm_extra_conf = 0
+let g:ycm_rust_src_path = '/home/rod/dev/rust/src'
 let g:ale_completion_enabled = 1
 let test#strategy = "dispatch"
 let g:lightline = { 'colorscheme': 'wombat' }
+let g:syntastic_error_symbol = '✗✗'
+let g:syntastic_style_error_symbol = '✗✗'
 
 " Settings {{{
 set t_Co=256
@@ -111,7 +115,7 @@ nnoremap <leader>; :execute "normal!\ mqA;\e`q"<cr>
 nnoremap <leader>, :execute "normal!\ mqA,\e`q"<cr>
 nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel
 nnoremap <leader>' viw<esc>a'<esc>bi'<esc>lel
-nnoremap <leader>= gg=G<cr>
+nnoremap <leader>= mqgg=G<cr>'q
 
 nnoremap <leader>bd :bdelete<cr>
 

@@ -79,14 +79,13 @@ alias tmux='TERM=tmux-256color tmux'
 alias grhh='git reset HEAD --hard'
 
 # Gupy
-alias back='cd $HOME/dev/gupy-api-darthvader'
-alias api='cd $HOME/dev/gupy-api-darthvader/interfaces/http/public-api'
+alias back='cd $HOME/dev/gupy/backend'
+alias api='cd $HOME/dev/gupy/backend/interfaces/http/public-api'
 alias devops='cd $HOME/dev/DevOps-5'
-alias front='cd $HOME/dev/gupy-front'
+alias front='cd $HOME/dev/gupy/frontend'
 alias pp='cd $HOME/dev/gupy-public-pages'
 alias ops='cd $HOME/dev/ops'
-alias mig='cd $HOME/dev/gupy-database-migration'
-alias bud='cd $HOME/dev/budget-api'
+alias mig='cd $HOME/dev/migration'
 alias pr='npm run pull-request'
 
 alias pgcli='PAGER="nvim -R -u ~/.config/nvim/initpg.vim -" EDITOR=nvim /usr/bin/pgcli -h localhost -U postgres gupy_development_prod'
