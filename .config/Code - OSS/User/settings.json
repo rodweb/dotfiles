@@ -9,6 +9,7 @@
     "editor.foldingStrategy": "indentation",
     "editor.mouseWheelZoom": true,
     "editor.fontLigatures": true,
+    "editor.lineNumbers": "relative",
     "editor.minimap.enabled": false,
     "workbench.activityBar.visible": true,
     "workbench.statusBar.feedback.visible": false,
@@ -32,5 +33,9 @@
     "editor.renderControlCharacters": false,
     "window.menuBarVisibility": "toggle",
     "window.titleBarStyle": "native",
-    "typescript.updateImportsOnFileMove.enabled": "always"
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "window.zoomLevel": 0
 }
