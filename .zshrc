@@ -113,7 +113,8 @@ function gi() { curl -sL gitignore.io/api/$@ ;}
 #source ~/.cache/yay/rvm/rvm.sh
 
 function cn () {
-  nvim $(cat ~/.configfiles | fzf)
+  selected=$(cat ~/.configfiles | fzf)
+  [[ ! -z $selected ]] && nvim $selected
 }
 
 source $HOME/.zshenv
