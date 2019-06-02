@@ -85,7 +85,7 @@ alias devops='cd $HOME/dev/DevOps-5'
 alias front='cd $HOME/dev/gupy/frontend'
 alias pp='cd $HOME/dev/gupy-public-pages'
 alias ops='cd $HOME/dev/ops'
-alias mig='cd $HOME/dev/migration'
+alias mig='cd $HOME/dev/gupy/migration'
 alias pr='npm run pull-request'
 
 alias pgcli='PAGER="nvim -R -u ~/.config/nvim/initpg.vim -" EDITOR=nvim /usr/bin/pgcli -h localhost -U postgres gupy_development_prod'
@@ -110,3 +110,10 @@ source /usr/share/fzf/key-bindings.zsh
 # uninstall by removing these lines or running `tabtab uninstall sls`
 [[ -f /home/rodrigo/.nvm/versions/node/v10.14.1/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /home/rodrigo/.nvm/versions/node/v10.14.1/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
 function gi() { curl -sL gitignore.io/api/$@ ;}
+#source ~/.cache/yay/rvm/rvm.sh
+
+function cn () {
+  nvim $(cat ~/.configfiles | fzf)
+}
+
+source $HOME/.zshenv

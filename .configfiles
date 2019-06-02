@@ -1,0 +1,5 @@
+.config/i3/config
+.config/awesome/rc.lua
+.config/compton/compton.conf
+.zshrc
+.xinitrc
