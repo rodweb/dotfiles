@@ -113,7 +113,7 @@ function gi() { curl -sL gitignore.io/api/$@ ;}
 #source ~/.cache/yay/rvm/rvm.sh
 
 function cn () {
-  selected=$(cat ~/.configfiles | fzf)
+  selected=$(yadm ls-tree --full-tree -r --name-only HEAD| fzf)
   [[ ! -z $selected ]] && nvim $selected
 }
 
