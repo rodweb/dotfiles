@@ -117,4 +117,4 @@ function cn () {
   [[ ! -z $selected ]] && nvim $selected
 }
 
-source $HOME/.zshenv
+[[ -f $HOME/.zshenv ]] && source $HOME/.zshenv
