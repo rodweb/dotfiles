@@ -4,7 +4,7 @@ function list_options() {
     printf "vpn\nproject\ngit\nvim"
 }
 
-option=$(list_options | sort | rofi -dmenu -no-match -p 'Gupy')
+option=$(list_options | sort | ~/scripts/rofi/trofi -dmenu -no-match -p 'Gupy')
 
 cd ~/scripts/rofi
 

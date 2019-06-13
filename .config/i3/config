@@ -249,7 +249,7 @@ for_window [class="Zeal"] move container to workspace $miscws
 for_window [window_role="GtkFileChooserDialog"] fullscreen enable
 for_window [instance="code" title="gupy-api"] move container to workspace $backws
 for_window [instance="code" title="gupy-front"] move container to workspace $frontws
-for_window [instance="st-256color" title="Scratchpad terminal"] floating enable, resize grow left 100, resize grow right 100, move scratchpad
+for_window [instance="st-256color" title="scratch"] floating enable, resize grow left 100, resize grow right 100, move scratchpad
 for_window [class="Nm-connection-editor"] floating enable
 for_window [class="jetbrains-webstorm" title="Changelist"] fullscreen enable; focus
 for_window [class="jetbrains-webstorm" title="win"] focus
@@ -271,7 +271,7 @@ exec --no-startup-id sleep 20 && spotify
 exec --no-startup-id google-chrome-stable
 exec --no-startup-id pamixer --set-volume 10 && pkill -RTMIN+11 i3blocks
 exec --no-startup-id libinput-gestures-setup start
-exec --no-startup-id $stterm -t 'Scratchpad terminal'
+exec --no-startup-id $stterm -t 'scratch'
 exec --no-startup-id udiskie -2
 exec --no-startup-id dunst
 exec --no-startup-id srandrd ~/scripts/i3/srandr.sh
@@ -300,10 +300,10 @@ set $base0F #444444
 
 
 bar {
-	status_command i3blocks -c ~/.config/i3/i3blocks.conf
-	font pango: Hack, FontAwesome 9
-	height 18
-	position top
+    status_command i3blocks -c ~/.config/i3/i3blocks.conf
+    font pango: Hack, FontAwesome 9
+    height 18
+    position top
     # mode hide
     colors {
         background $base00
