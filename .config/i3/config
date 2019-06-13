@@ -60,6 +60,9 @@ bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
 bindsym XF86AudioStop exec --no-startup-id playerctl stop
 bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
+bindsym $win+$ctrl+Down exec --no-startup-id playerctl play-pause
+bindsym $win+$ctrl+Right exec --no-startup-id playerctl next
+bindsym $win+$ctrl+Left exec --no-startup-id playerctl previous
 
 # change focus
 bindsym $win+h focus left
@@ -256,29 +259,20 @@ for_window [class="jetbrains-webstorm" title="win"] focus
 for_window [class="^jetbrains-.+"][window_type=dialog] focus
 for_window [window_type=dialog] focus
 
-exec_always --no-startup-id xrdb -load ~/.Xresources
 #exec_always --no-startup-id setxkbmap br
 exec_always --no-startup-id ~/scripts/config-touchpad.sh
 #exec_always --no-startup-id ~/scripts/switch-capslock-escape.sh
-exec --no-startup-id ~/.profile
-exec --no-startup-id ~/.fehbg
 exec --no-startup-id nm-applet
-exec --no-startup-id compton -f -b
 #exec --no-startup-id transmission-daemon -c ~/tmp/ -w ~/tmp/
-exec --no-startup-id greenclip daemon
-exec --no-startup-id slack
-exec --no-startup-id sleep 20 && spotify
+#exec --no-startup-id slack
+exec --no-startup-id spotify
 exec --no-startup-id google-chrome-stable
 exec --no-startup-id pamixer --set-volume 10 && pkill -RTMIN+11 i3blocks
 exec --no-startup-id libinput-gestures-setup start
 exec --no-startup-id $stterm -t 'scratch'
 exec --no-startup-id udiskie -2
-exec --no-startup-id dunst
 exec --no-startup-id srandrd ~/scripts/i3/srandr.sh
-exec --no-startup-id unclutter -b
-exec --no-startup-id urxvtd -q -o -f
 exec --no-startup-id xautolock -time 3 -locker $locker
-exec --no-startup-id ~/autostart.sh
 
 
 set $base00 #000000
