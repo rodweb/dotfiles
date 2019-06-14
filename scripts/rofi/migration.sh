@@ -1,22 +1,20 @@
 #!/bin/bash
 task=$1
-echo "migration: #$task"
+script="@migration"
+echo "$migration: #$task"
 
 function update() {
-    cd ~/dev/gupy/migration
-    git stash
-    git checkout master
-    git pull
-    npm start
-    npm run migrate-test
-    git checkout -
-    git stash pop
+  if tmux ls | grep -q "migration"; then
+    tmux kill-session -t "migration"
+  fi
+  dir=$(dirname "$0")
+  tmux new -d -s "migration" "bash --init-file $dir/update-migrations"
 }
 
 case "$task" in
-    update)
-        update
-        ;;
-    *)
-        exit 1
+  update)
+    update
+    ;;
+  *)
+    exit 1
 esac

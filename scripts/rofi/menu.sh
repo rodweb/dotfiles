@@ -24,6 +24,7 @@ if [[ $option =~ $regex ]]
 then
     script="${BASH_REMATCH[1]}"
     operation="${BASH_REMATCH[2]}"
+    dir=$(dirname "$0")
     echo "script=$script.sh,operation=$operation"
-    "./$script.sh" "$operation"
+    "$dir/$script.sh" "$operation"
 fi
