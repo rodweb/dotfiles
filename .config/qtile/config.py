@@ -26,7 +26,7 @@
 
 from libqtile.config import Key, Screen, Group, Drag, Click, Match
 from libqtile.command import lazy
-from libqtile import layout, bar, widget
+from libqtile import layout, bar, widget, hook
 
 try:
     from typing import List  # noqa: F401
@@ -94,12 +94,12 @@ groups = [
     Group('web', spawn="google-chrome-stable", layout="monadtall"),
     Group('back'),
     Group('front'),
-    Group('chat', matches=[Match(wm_class=["TelegramDesktop"])]),
-    Group('music', spawn="spotify"),
+    Group('chat', layout="max", matches=[Match(wm_class=["Slack", "TelegramDesktop", "Whatsie"])]),
+    Group('music', layout="max", spawn="spotify"),
     Group('db', matches=[Match(wm_class=["Java", "DBeaver"])]),
     Group('rest', matches=[Match(wm_class=["Postman"])]),
     Group('git'),
-    Group('jobs', layout="tile"),
+    Group('jobs', layout="matrix"),
     Group('misc')
 ]
 
@@ -120,6 +120,7 @@ layouts = [
     layout.xmonad.MonadTall(margin=5, border_focus=focus_color,border_width=1),
     layout.Max(),
     layout.Tile(),
+    layout.Matrix()
 ]
 
 widget_defaults = dict(
@@ -140,8 +141,9 @@ screens = [
                     urgent_alert_method="text",
                     urgent_text=urgent_color,
                 ),
-                widget.Spacer(),
                 widget.Prompt(prompt="run: "),
+                widget.DebugInfo(),
+                widget.Spacer(),
                 widget.CurrentLayout(),
                 widget.Systray(),
                 widget.Clock(format='%d/%m %H:%M'),
@@ -186,7 +188,7 @@ floating_layout = layout.Floating(float_rules=[
     {'wname': 'conencto to database'},
 ])
 auto_fullscreen = True
-focus_on_window_activation = "smart"
+focus_on_window_activation = "focus"
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
 # string besides java UI toolkits; you can see several discussions on the
