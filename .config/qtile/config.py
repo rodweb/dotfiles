@@ -24,6 +24,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+import os
+import subprocess
 from libqtile.config import Key, Screen, Group, Drag, Click, Match
 from libqtile.command import lazy
 from libqtile import layout, bar, widget, hook
@@ -67,7 +69,7 @@ keys = [
     # Unsplit = 1 window displayed, like Max layout, but still with
     # multiple stack panes
     Key([mod, "shift"], "Return", lazy.layout.toggle_split()),
-    Key([mod], "Return", lazy.spawn("urxvtc")),
+    Key([mod], "Return", lazy.spawn("st")),
 
     # Toggle between different layouts as defined below
     Key([mod], "space", lazy.next_layout()),
@@ -83,8 +85,8 @@ keys = [
     Key([mod, "control"], "Right", lazy.spawn("playerctl next")),
     Key([mod, "control"], "Left", lazy.spawn("playerctl previous")),
 
-    Key([alt], "space", lazy.spawn("SEARCH")),
-    Key([mod], "g", lazy.spawn("menu.sh")),
+    Key([alt], "space", lazy.spawn("/home/rod/scripts/rofi/SEARCH")),
+    Key([mod], "g", lazy.spawn("/home/rod/scripts/rofi/menu.sh")),
 Key([mod], "Right", lazy.layout.increase_ratio()),
     Key([mod], "Left", lazy.layout.decrease_ratio()),
 ]
@@ -94,11 +96,11 @@ groups = [
     Group('', spawn="google-chrome-stable", layout="monadtall"),
     Group(''),
     Group(''),
-    Group('', layout="max", matches=[Match(wm_class=["Slack", "TelegramDesktop", "Whatsie"])]),
+    Group('', layout="max", matches=[Match(wm_class=["Slack", "TelegramDesktop", "Whatsie", "discord"])]),
     Group('', layout="max", spawn="spotify"),
     Group('', matches=[Match(wm_class=["Java", "DBeaver"])]),
     Group('', matches=[Match(wm_class=["Postman"])]),
-    Group(''),
+    Group('', matches=[Match(wm_class=["GitKraken"])]),
     Group('', layout="matrix"),
     Group('')
 ]
@@ -189,6 +191,7 @@ floating_layout = layout.Floating(float_rules=[
     {'wname': 'branchdialog'},  # gitk
     {'wname': 'pinentry'},  # GPG key password entry
     {'wmclass': 'ssh-askpass'},  # ssh-askpass
+    # DBeaver
     {'wname': 'Tip of the day '},
     {'wname': 'Exit DBeaver '},
     {'wname': 'Version update '},
@@ -206,3 +209,8 @@ focus_on_window_activation = "focus"
 # We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
 # java that happens to be on java's whitelist.
 wmname = "LG3D"
+
+@hook.subscribe.startup_once
+def autostart():
+    script = os.path.expanduser('~/.autostart.sh')
+    subprocess.call([script])
