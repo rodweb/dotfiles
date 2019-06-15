@@ -191,8 +191,8 @@ floating_layout = layout.Floating(float_rules=[
     {'wmclass': 'ssh-askpass'},  # ssh-askpass
     {'wname': 'Tip of the day '},
     {'wname': 'Exit DBeaver '},
-    {'wname': 'Version update'},
-    {'wname': 'Can\'t connect to database'}
+    {'wname': 'Version update '},
+    {'wname': 'Can\'t connect to database '}
 ])
 auto_fullscreen = True
 focus_on_window_activation = "focus"
