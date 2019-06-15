@@ -85,22 +85,22 @@ keys = [
 
     Key([alt], "space", lazy.spawn("SEARCH")),
     Key([mod], "g", lazy.spawn("menu.sh")),
-
-    Key([mod], "Right", lazy.layout.increase_ratio()),
+Key([mod], "Right", lazy.layout.increase_ratio()),
     Key([mod], "Left", lazy.layout.decrease_ratio()),
 ]
 
+
 groups = [
-    Group('web', spawn="google-chrome-stable", layout="monadtall"),
-    Group('back'),
-    Group('front'),
-    Group('chat', layout="max", matches=[Match(wm_class=["Slack", "TelegramDesktop", "Whatsie"])]),
-    Group('music', layout="max", spawn="spotify"),
-    Group('db', matches=[Match(wm_class=["Java", "DBeaver"])]),
-    Group('rest', matches=[Match(wm_class=["Postman"])]),
-    Group('git'),
-    Group('jobs', layout="matrix"),
-    Group('misc')
+    Group('', spawn="google-chrome-stable", layout="monadtall"),
+    Group(''),
+    Group(''),
+    Group('', layout="max", matches=[Match(wm_class=["Slack", "TelegramDesktop", "Whatsie"])]),
+    Group('', layout="max", spawn="spotify"),
+    Group('', matches=[Match(wm_class=["Java", "DBeaver"])]),
+    Group('', matches=[Match(wm_class=["Postman"])]),
+    Group(''),
+    Group('', layout="matrix"),
+    Group('')
 ]
 
 for index, grp in enumerate(groups):
@@ -117,7 +117,13 @@ focus_color="#dc143c"
 urgent_color="#ff4500"
 
 layouts = [
-    layout.xmonad.MonadTall(margin=5, border_focus=focus_color,border_width=1),
+    layout.xmonad.MonadTall(
+        margin=5,
+        single_margin=0,
+        border_focus=focus_color,
+        border_width=1,
+        single_border_width=0,
+    ),
     layout.Max(),
     layout.Tile(),
     layout.Matrix()
@@ -185,7 +191,8 @@ floating_layout = layout.Floating(float_rules=[
     {'wmclass': 'ssh-askpass'},  # ssh-askpass
     {'wname': 'Tip of the day '},
     {'wname': 'Exit DBeaver '},
-    {'wname': 'conencto to database'},
+    {'wname': 'Version update'},
+    {'wname': 'Can\'t connect to database'}
 ])
 auto_fullscreen = True
 focus_on_window_activation = "focus"
