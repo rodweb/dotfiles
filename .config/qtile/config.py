@@ -24,7 +24,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from libqtile.config import Key, Screen, Group, Drag, Click
+from libqtile.config import Key, Screen, Group, Drag, Click, Match
 from libqtile.command import lazy
 from libqtile import layout, bar, widget
 
@@ -34,18 +34,30 @@ except ImportError:
     pass
 
 mod = "mod4"
+alt = "mod1"
 
 keys = [
+    # Fullscreen
+    Key([mod], "f", lazy.window.toggle_fullscreen()),
+
+    # MonadTall
+    Key([mod], "h", lazy.layout.shrink_main()),
+    Key([mod], "l", lazy.layout.grow_main()),
+
     # Switch between windows in current stack pane
-    Key([mod], "k", lazy.layout.down()),
-    Key([mod], "j", lazy.layout.up()),
+    Key([mod], "j", lazy.layout.down()),
+    Key([mod], "k", lazy.layout.up()),
 
     # Move windows up or down in current stack
-    Key([mod, "control"], "k", lazy.layout.shuffle_down()),
-    Key([mod, "control"], "j", lazy.layout.shuffle_up()),
+    Key([mod, "shift"], "j", lazy.layout.shuffle_down()),
+    Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
 
     # Switch window focus to other pane(s) of stack
-    Key([mod], "space", lazy.layout.next()),
+
+    # Switch between groups
+    Key([alt], "Tab", lazy.screen.toggle_group()),
+    Key([mod], "Tab", lazy.screen.next_group(skip_empty=True)),
+    Key([mod, "shift"], "Tab", lazy.screen.prev_group(skip_empty=True)),
 
     # Swap panes of split stack
     Key([mod, "shift"], "space", lazy.layout.rotate()),
@@ -58,28 +70,56 @@ keys = [
     Key([mod], "Return", lazy.spawn("urxvtc")),
 
     # Toggle between different layouts as defined below
-    Key([mod], "Tab", lazy.next_layout()),
-    Key([mod], "w", lazy.window.kill()),
+    Key([mod], "space", lazy.next_layout()),
+
+    # Kill
+    Key([mod, "shift"], "q", lazy.window.kill()),
 
     Key([mod, "control"], "r", lazy.restart()),
     Key([mod, "control"], "q", lazy.shutdown()),
     Key([mod], "r", lazy.spawncmd()),
+
+    Key([mod, "control"], "Down", lazy.spawn("playerctl play-pause")),
+    Key([mod, "control"], "Right", lazy.spawn("playerctl next")),
+    Key([mod, "control"], "Left", lazy.spawn("playerctl previous")),
+
+    Key([alt], "space", lazy.spawn("SEARCH")),
+    Key([mod], "g", lazy.spawn("menu.sh")),
+
+    Key([mod], "Right", lazy.layout.increase_ratio()),
+    Key([mod], "Left", lazy.layout.decrease_ratio()),
 ]
 
-groups = [Group(i) for i in "asdfuiop"]
+groups = [
+    Group('web', spawn="google-chrome-stable", layout="monadtall"),
+    Group('back'),
+    Group('front'),
+    Group('chat', matches=[Match(wm_class=["TelegramDesktop"])]),
+    Group('music', spawn="spotify"),
+    Group('db', matches=[Match(wm_class=["Java", "DBeaver"])]),
+    Group('rest', matches=[Match(wm_class=["Postman"])]),
+    Group('git'),
+    Group('jobs', layout="tile"),
+    Group('misc')
+]
 
-for i in groups:
+for index, grp in enumerate(groups):
+    i = 0 if index == 9 else index+1
     keys.extend([
-        # mod1 + letter of group = switch to group
-        Key([mod], i.name, lazy.group[i.name].toscreen()),
+        # mod1 + number of group = switch to group
+        Key([mod], str(i), lazy.group[grp.name].toscreen()),
 
-        # mod1 + shift + letter of group = switch to & move focused window to group
-        Key([mod, "shift"], i.name, lazy.window.togroup(i.name)),
+        # mod1 + shift + nmber of group = switch to & move focused window to group
+        Key([mod, "shift"], str(i), lazy.window.togroup(grp.name)),
     ])
 
+focus_color="#dc143c"
+urgent_color="#ff4500"
+
 layouts = [
+    layout.xmonad.MonadTall(margin=5, border_focus=focus_color,border_width=1),
     layout.Max(),
-    layout.Stack(num_stacks=2)
+    layout.Tile(),
 ]
 
 widget_defaults = dict(
@@ -93,12 +133,18 @@ screens = [
     Screen(
         bottom=bar.Bar(
             [
-                widget.GroupBox(),
-                widget.Prompt(),
-                widget.WindowName(),
-                widget.TextBox("default config", name="default"),
+                widget.GroupBox(
+                    hide_unused=False,
+                    highlight_method="text",
+                    this_current_screen_border=focus_color,
+                    urgent_alert_method="text",
+                    urgent_text=urgent_color,
+                ),
+                widget.Spacer(),
+                widget.Prompt(prompt="run: "),
+                widget.CurrentLayout(),
                 widget.Systray(),
-                widget.Clock(format='%Y-%m-%d %a %I:%M %p'),
+                widget.Clock(format='%d/%m %H:%M'),
             ],
             24,
         ),
@@ -135,6 +181,9 @@ floating_layout = layout.Floating(float_rules=[
     {'wname': 'branchdialog'},  # gitk
     {'wname': 'pinentry'},  # GPG key password entry
     {'wmclass': 'ssh-askpass'},  # ssh-askpass
+    {'wname': 'Tip of the day '},
+    {'wname': 'Exit DBeaver '},
+    {'wname': 'conencto to database'},
 ])
 auto_fullscreen = True
 focus_on_window_activation = "smart"
