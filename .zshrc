@@ -64,7 +64,7 @@ alias v='$EDITOR'
 alias Z='$EDITOR $HOME/.zshrc'
 alias I='$EDITOR $HOME/.config/i3/config'
 alias B='$EDITOR $HOME/.config/i3/i3blocks.conf'
-alias install='sudo pacman -S --noconfirm'
+#alias install='sudo pacman -S --noconfirm'
 alias update='yay -Syy'
 alias upgrade='yay -Syu --answeredit n --answerdiff n --answerclean n'
 alias search='yay -Ssy'
@@ -113,8 +113,14 @@ function gi() { curl -sL gitignore.io/api/$@ ;}
 #source ~/.cache/yay/rvm/rvm.sh
 
 function cn () {
-  selected=$(yadm ls-tree --full-tree -r --name-only HEAD| fzf)
-  [[ ! -z $selected ]] && nvim $selected
+  yadm ls-tree --full-tree -r --name-only HEAD ~ | fzf | xargs -I{} nvim  ~/{}
 }
 
 [[ -f $HOME/.zshenv ]] && source $HOME/.zshenv
+
+eval "$RUN"
+
+function install () {
+  sudo pacman -S --noconfirm $@
+  [[ "$?" -eq 1 ]] && yay -S --noeditmenu --nodiffmenu --nocleanmenu --noremovemake --noconfirm $@
+}
