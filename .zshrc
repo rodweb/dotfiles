@@ -3,12 +3,15 @@ BASE16_SHELL=$HOME/.config/base16-shell/
 
 autoload -U promptinit; promptinit;
 autoload -U edit-command-line
+
+[[ -f $HOME/.profile ]] && source $HOME/.profile
+[[ -f $HOME/.zshenv ]] && source $HOME/.zshenv
+
 source /usr/share/zsh/share/antigen.zsh
 #source /usr/share/nvm/init-nvm.sh
-source /usr/share/doc/pkgfile/command-not-found.zsh
 source ~/scripts/zsh/fzf-git-checkout.zsh
 source ~/scripts/zsh/fzf-base16.zsh
-source ~/.profile
+source /usr/share/doc/pkgfile/command-not-found.zsh
 
 export NVM_LAZY_LOAD=true
 
@@ -63,7 +66,6 @@ alias v='$EDITOR'
 alias Z='$EDITOR $HOME/.zshrc'
 alias I='$EDITOR $HOME/.config/i3/config'
 alias B='$EDITOR $HOME/.config/i3/i3blocks.conf'
-#alias install='sudo pacman -S --noconfirm'
 alias update='yay -Syy'
 alias upgrade='yay -Syu --answeredit n --answerdiff n --answerclean n'
 alias search='yay -Ssy'
@@ -123,11 +125,44 @@ function cna() {
   yadm add -p ~/$(yadm ls-files ~ -m | fzf)
 }
 
-[[ -f $HOME/.zshenv ]] && source $HOME/.zshenv
 
 eval "$RUN"
 
 function install () {
-  sudo pacman -S --noconfirm $@ 1>/dev/null
-  [[ "$?" -eq 1 ]] && yay -S --noeditmenu --nodiffmenu --nocleanmenu --noremovemake --noconfirm $@ 1>/dev/null
+  # sudo pacman -S --noconfirm $@ 1>/dev/null
+  yay -S --noeditmenu --nodiffmenu --nocleanmenu --noremovemake --noconfirm $@ 1>/dev/null
+}
+
+function mcd() {
+  mkdir -p "$1" && cd "$1";
+}
+
+unalias g
+function g() {
+  if [[ $# -gt 0 ]]; then
+    git "$@"
+  else
+    git status -s
+  fi
+}
+unalias gm
+function gm() {
+  args="$@"
+  git commit -m ""$args""
+}
+unalias ga
+function ga() {
+  git ls-files --modified --other --exclude-standard | fzf --prompt "add: " --print0 --multi | xargs --null --verbose git add
+}
+
+function y() {
+  if [[ $# -gt 0 ]]; then
+    yadm "$@"
+  else
+    yadm status -s
+  fi
+}
+
+function pdfs() {
+  fd --type file .pdf ~/docs | fzf | xargs apvlv
 }

@@ -1,0 +1,5 @@
+map d <C-d>
+map u <C-u>
+
+set fullscreen=true
+set guioptions=
