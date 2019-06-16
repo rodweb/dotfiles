@@ -1,0 +1,9 @@
+#!/bin/sh
+# 'st -f Hack:size=10'
+for terminal in $TERMINAL st urxvt kitty xterm; do
+    if command -v $terminal > /dev/null 2>&1; then
+        exec $terminal "$@"
+    fi
+done
+
+rofi -e "Failed to find a suitable terminal"

@@ -8,8 +8,7 @@ source /usr/share/zsh/share/antigen.zsh
 source /usr/share/doc/pkgfile/command-not-found.zsh
 source ~/scripts/zsh/fzf-git-checkout.zsh
 source ~/scripts/zsh/fzf-base16.zsh
-
-PATH=$PATH:~/scripts/rofi/:~/bin
+source ~/.profile
 
 export NVM_LAZY_LOAD=true
 
@@ -116,11 +115,19 @@ function cn () {
   yadm ls-tree --full-tree -r --name-only HEAD ~ | fzf | xargs -I{} nvim  ~/{}
 }
 
+function cnd() {
+  yadm ls-files ~ -m | fzf -m | xargs -I{} yadm difftool -y -t meld ~/{}
+}
+
+function cna() {
+  yadm add -p ~/$(yadm ls-files ~ -m | fzf)
+}
+
 [[ -f $HOME/.zshenv ]] && source $HOME/.zshenv
 
 eval "$RUN"
 
 function install () {
-  sudo pacman -S --noconfirm $@
-  [[ "$?" -eq 1 ]] && yay -S --noeditmenu --nodiffmenu --nocleanmenu --noremovemake --noconfirm $@
+  sudo pacman -S --noconfirm $@ 1>/dev/null
+  [[ "$?" -eq 1 ]] && yay -S --noeditmenu --nodiffmenu --nocleanmenu --noremovemake --noconfirm $@ 1>/dev/null
 }

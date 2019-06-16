@@ -1,1 +1,1 @@
-PATH=~/scripts:$PATH
+export PATH=~/bin:~/scripts:~/scripts/rofi:$PATH

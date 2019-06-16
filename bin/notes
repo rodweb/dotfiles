@@ -1,0 +1,4 @@
+#!/bin/sh
+rofi=~/bin/trofi
+term=~/bin/sensible-terminal
+fd -t f .md  ~/.notable/notes | $rofi -dmenu -i -matching fuzzy | xargs -I{} $term -e nvim {}

@@ -1,0 +1,4 @@
+#!/bin/bash
+ROFI_OPTIONS=(-theme $HOME/.config/rofi/rofi_full -m -1 -fullscreen 0 -theme-str "*{accent: #FFFFFF;}")
+
+rofi "${ROFI_OPTIONS[@]}" "$@"

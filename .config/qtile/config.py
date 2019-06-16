@@ -1,4 +1,4 @@
-# Copyright (c) 2010 Aldo Cortesi
+#spacespace Copyright (c) 2010 Aldo Cortesi
 # Copyright (c) 2010, 2014 dequis
 # Copyright (c) 2012 Randall Ma
 # Copyright (c) 2012-2014 Tycho Andersen
@@ -24,8 +24,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import os
-import subprocess
+from os import path
+from subprocess import call
 from libqtile.config import Key, Screen, Group, Drag, Click, Match
 from libqtile.command import lazy
 from libqtile import layout, bar, widget, hook
@@ -40,39 +40,59 @@ alt = "mod1"
 
 keys = [
     # Fullscreen
-    Key([mod], "f", lazy.window.toggle_fullscreen()),
+    Key([mod], "space", lazy.window.toggle_fullscreen()),
 
-    # MonadTall
-    Key([mod], "h", lazy.layout.shrink_main()),
-    Key([mod], "l", lazy.layout.grow_main()),
+    # Toggle between different layouts as defined below
+    Key([mod], "w", lazy.next_layout()),
+    Key([mod], "f", lazy.window.toggle_floating()),
 
-    # Switch between windows in current stack pane
+    Key([mod], "h", lazy.layout.previous()),
+    Key([mod], "l", lazy.layout.next()),
+
     Key([mod], "j", lazy.layout.down()),
     Key([mod], "k", lazy.layout.up()),
 
-    # Move windows up or down in current stack
-    Key([mod, "shift"], "j", lazy.layout.shuffle_down()),
-    Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
-
-    # Switch window focus to other pane(s) of stack
+    Key(
+        [mod, "shift"], "k",
+        lazy.layout.shuffle_up(),         # Stack, xmonad-tall
+    ),
+    Key(
+        [mod, "shift"], "j",
+        lazy.layout.shuffle_down(),       # Stack, xmonad-tall
+    ),
+    Key(
+        [mod, "control"], "l",
+        lazy.layout.add(),                # Stack
+        lazy.layout.increase_ratio(),     # Tile
+        lazy.layout.maximize(),           # xmonad-tall
+    ),
+    Key(
+        [mod, "control"], "h",
+        lazy.layout.delete(),             # Stack
+        lazy.layout.decrease_ratio(),     # Tile
+        lazy.layout.normalize(),          # xmonad-tall
+    ),
+    Key(
+        [mod, "control"], "k",
+        lazy.layout.shrink(),             # xmonad-tall
+        lazy.layout.decrease_nmaster(),   # Tile
+    ),
+    Key(
+        [mod, "control"], "j",
+        lazy.layout.grow(),               # xmonad-tall
+        lazy.layout.increase_nmaster(),   # Tile
+    ),
 
     # Switch between groups
     Key([alt], "Tab", lazy.screen.toggle_group()),
     Key([mod], "Tab", lazy.screen.next_group(skip_empty=True)),
     Key([mod, "shift"], "Tab", lazy.screen.prev_group(skip_empty=True)),
 
-    # Swap panes of split stack
-    Key([mod, "shift"], "space", lazy.layout.rotate()),
-
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed
     # Unsplit = 1 window displayed, like Max layout, but still with
     # multiple stack panes
     Key([mod, "shift"], "Return", lazy.layout.toggle_split()),
-    Key([mod], "Return", lazy.spawn("st")),
-
-    # Toggle between different layouts as defined below
-    Key([mod], "space", lazy.next_layout()),
 
     # Kill
     Key([mod, "shift"], "q", lazy.window.kill()),
@@ -82,13 +102,16 @@ keys = [
     Key([mod], "r", lazy.spawncmd()),
 
     Key([mod, "control"], "Down", lazy.spawn("playerctl play-pause")),
-    Key([mod, "control"], "Right", lazy.spawn("playerctl next")),
-    Key([mod, "control"], "Left", lazy.spawn("playerctl previous")),
+    Key([mod], "bracketright", lazy.spawn("playerctl next")),
+    Key([mod], "bracketleft", lazy.spawn("playerctl previous")),
+    Key([mod], "equal", lazy.spawn("pamixer -i 5")),
+    Key([mod], "minus", lazy.spawn("pamixer -d 5")),
 
+    Key([mod], "Return", lazy.spawn("/home/rod/bin/sensible-terminal")),
     Key([alt], "space", lazy.spawn("/home/rod/scripts/rofi/SEARCH")),
     Key([mod], "g", lazy.spawn("/home/rod/scripts/rofi/menu.sh")),
-Key([mod], "Right", lazy.layout.increase_ratio()),
-    Key([mod], "Left", lazy.layout.decrease_ratio()),
+    Key([mod], "n", lazy.spawn("/home/rod/bin/notes")),
+    Key([mod], "apostrophe", lazy.spawn("/home/rod/bin/clip")),
 ]
 
 
@@ -96,8 +119,8 @@ groups = [
     Group('', spawn="google-chrome-stable", layout="monadtall"),
     Group(''),
     Group(''),
-    Group('', layout="max", matches=[Match(wm_class=["Slack", "TelegramDesktop", "Whatsie", "discord"])]),
-    Group('', layout="max", spawn="spotify"),
+    Group('', matches=[Match(wm_class=["Slack", "TelegramDesktop", "Whatsie", "discord"])]),
+    Group('', spawn="spotify"),
     Group('', matches=[Match(wm_class=["Java", "DBeaver"])]),
     Group('', matches=[Match(wm_class=["Postman"])]),
     Group('', matches=[Match(wm_class=["GitKraken"])]),
@@ -117,16 +140,17 @@ for index, grp in enumerate(groups):
 
 focus_color="#dc143c"
 urgent_color="#ff4500"
+cpu_color="#ff0000"
 
 layouts = [
     layout.xmonad.MonadTall(
+        ratio=0.60,
         margin=5,
         single_margin=0,
         border_focus=focus_color,
         border_width=1,
         single_border_width=0,
     ),
-    layout.Max(),
     layout.Tile(),
     layout.Matrix()
 ]
@@ -149,12 +173,21 @@ screens = [
                     urgent_alert_method="text",
                     urgent_text=urgent_color,
                 ),
+                widget.CPUGraph(
+                    width=30,
+                    line_width=1,
+                    border_width=0,
+                    graph_color=cpu_color,
+                    samples=60,
+                    type="line",
+                ),
                 widget.Prompt(prompt="run: "),
                 widget.DebugInfo(),
                 widget.Spacer(),
-                widget.CurrentLayout(),
+                widget.Volume(),
                 widget.Systray(),
                 widget.Clock(format='%d/%m %H:%M'),
+                widget.CurrentLayoutIcon(scale=0.50),
             ],
             24,
         ),
@@ -212,5 +245,5 @@ wmname = "LG3D"
 
 @hook.subscribe.startup_once
 def autostart():
-    script = os.path.expanduser('~/.autostart.sh')
-    subprocess.call([script])
+    script = path.expanduser('~/.autostart.sh')
+    call([script])

@@ -12,7 +12,8 @@ unclutter -b &
 greenclip daemon &
 compton -f -b &
 urxvtd -q -o -f &
-setxkbmap -option 'caps:ctrl_modifier' &
-xcape -t 200 -e 'Caps_Lock=Escape' &
+setxkbmap -option 'caps:ctrl_modifier'
+xcape -t 200 -e 'Caps_Lock=Escape'
 setxkbmap br &
+
 
