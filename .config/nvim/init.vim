@@ -108,8 +108,8 @@ nnoremap <c-f> <c-f>zz
 nnoremap <c-b> <c-b>zz
 nnoremap <c-u> <c-u>zz
 nnoremap <c-d> <c-d>zz
-"nnoremap n nzz
-"nnoremap N nzz
+nnoremap n nzzzv
+nnoremap N nzzzv
 nnoremap G Gzz
 nnoremap cw ciw
 "nnoremap / /\v
