@@ -58,13 +58,13 @@ set backupcopy=yes
 set clipboard=unnamedplus
 set mouse=a
 set number
-set numberwidth=4
+set numberwidth=2
 set relativenumber
 set hidden
 
 set wrap
 set expandtab
-set shiftwidth=4
+set shiftwidth=2
 set smarttab
 
 set incsearch
@@ -104,6 +104,10 @@ nnoremap <s-l> gt
 nnoremap <s-h> gT
 nnoremap j gjzz
 nnoremap k gkzz
+nnoremap <c-f> <c-f>zz
+nnoremap <c-b> <c-b>zz
+nnoremap <c-u> <c-u>zz
+nnoremap <c-d> <c-d>zz
 "nnoremap n nzz
 "nnoremap N nzz
 nnoremap G Gzz
@@ -123,8 +127,8 @@ nnoremap <tab> za
 
 let i = 1
 while i <= 3
-    execute 'nnoremap <leader>' . i . ' :' . i . 'wincmd w<cr>'
-    let i = i + 1
+  execute 'nnoremap <leader>' . i . ' :' . i . 'wincmd w<cr>'
+  let i = i + 1
 endwhile
 
 " Damian Conway's Die Blinkënmatchen: highlight matches
@@ -140,7 +144,7 @@ function! HLNext (blinktime)
   redraw
 endfunction
 
-nnoremap <leader>td :Rg TODO\(rod\)<cr>
+" nnoremap <leader>td :Rg TODO\(rod\)<cr>
 
 " FZF mappings
 nnoremap <leader>f :GitFiles<cr>
@@ -158,7 +162,6 @@ imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 
-nnoremap <leader>tt :TagbarToggle<cr>
 nnoremap <leader>e :NERDTreeToggle<cr>
 
 nnoremap ]e :ALENext<cr>
@@ -202,94 +205,115 @@ iabbrev applicaiton application
 
 " File write settings {{{
 augroup WriteFilesGroup
-    autocmd!
-    autocmd BufNewFile,FocusLost *.js,*.jsx,*.ts,*.tsx,*.c :update
+  autocmd!
+  autocmd BufNewFile,FocusLost *.js,*.jsx,*.ts,*.tsx,*.c :update
 augroup END
 " }}}
 
 " HTML file settings {{{
 augroup HtmlFilesGroup
-    autocmd!
-    autocmd BufRead *.html setlocal nowrap
+  autocmd!
+  autocmd BufRead *.html setlocal nowrap
 augroup END
 " }}}
 
 " Javascript file settings {{{
 augroup JavascriptFilesGroup
-    autocmd!
-    autocmd FileType javascript
-                \ nnoremap <buffer> <localleader>c mqI//<esc>'q
-                \|nnoremap <buffer> <localleader>t :compiler mochajs<cr>:TestNearest<cr>
-                \|iabbrev <buffer> cl console.log()<left>
-                \|setlocal foldmethod=indent foldlevelstart=2
+  autocmd!
+  autocmd FileType javascript
+        \ nnoremap <buffer> <localleader>c mqI//<esc>'q
+        \|nnoremap <buffer> <localleader>t :compiler mochajs<cr>:TestNearest<cr>
+        \|iabbrev <buffer> cl console.log()<left>
+        \|setlocal foldmethod=indent foldlevelstart=2
 augroup END
+" }}}
+
+" Typescript {{{
+augroup TypescriptFilesGroup
+  autocmd!
+  autocmd BufWritePre *.ts Neoformat
+augroup END
+" }}}
+
+" {{{ TypeScript file settings
+" let g:test#javascript#mocha#file_pattern = '\v.*\.test\.(ts|tsx)$'
+" function! TypeScriptTransform(cmd) abort
+"   return substitute(a:cmd, '\v(.*)mocha', 'TS_NODE_FILES=true \1ts-mocha', '')
+" endfunction
+" let g:test#custom_transformations = {'typescript': function('TypeScriptTransform')}
+" let g:test#transformation = 'typescript'
 " }}}
 
 " Vimscript file settings {{{
 augroup VimFilesGroup
-    autocmd!
-    autocmd FileType vim
-                \ setlocal foldmethod=marker foldlevel=0
-                \|nnoremap <buffer> <localleader>c I"<esc>
-    autocmd BufWritePost $MYVIMRC source % | echom "Reloaded " . expand("%") | redraw
+  autocmd!
+  autocmd FileType vim
+        \ setlocal foldmethod=marker foldlevel=0
+        \|nnoremap <buffer> <localleader>c I"<esc>
+  autocmd BufWritePost $MYVIMRC source % | echom "Reloaded " . expand("%") | redraw
 augroup END
 " }}}
 
 " Rust file settings {{{
 augroup RustFilesGroup
-    autocmd!
-    autocmd FileType rust nnoremap <buffer> <localleader>r :make run<cr>
-    autocmd BufWritePost *.rs :Make build
+  autocmd!
+  autocmd FileType rust nnoremap <buffer> <localleader>r :make run<cr>
+  autocmd BufWritePost *.rs :Make build
 augroup END
 " }}}
 
-
 " Markdown file settings {{{
 augroup MarkdownFilesGroup
-    autocmd!
-    autocmd FileType markdown setlocal spell list wrap nonumber norelativenumber
+  autocmd!
+  autocmd FileType markdown setlocal spell list wrap nonumber norelativenumber
 augroup END
 " }}}
 
 " C file settings {{{
 augroup CFilesGroup
-    autocmd!
-    autocmd FileType c
-                \ iabbrev iio #include <stdio.h>
-                \|iabbrev ilib #include <stdlib.h>
+  autocmd!
+  autocmd FileType c
+        \ iabbrev iio #include <stdio.h>
+        \|iabbrev ilib #include <stdlib.h>
 augroup END
 " }}}
 
+" Shell file settings {{{
+augroup ShellGroup
+  autocmd!
+  autocmd FileType sh
+        \ nnoremap <buffer><localleader>, :!chmod +x %<cr>:Dispatch ./%<cr>
+augroup END
+" }}}
 
 " Rust file settings {{{
 augroup RustFilesGroupd
-    autocmd!
-    autocmd FileType rust nnoremap <buffer> <localleader>r :make run<cr>
-    autocmd BufWritePost *.rs :Make build
+  autocmd!
+  autocmd FileType rust nnoremap <buffer> <localleader>r :make run<cr>
+  autocmd BufWritePost *.rs :Make build
 augroup END
 " }}}
 
-
 " Mmakefile settings {{{
 augroup MakeFilesGroup
-    autocmd!
-    autocmd FileType make
-                \ setlocal noexpandtab shiftwidth=4
+  autocmd!
+  autocmd FileType make
+        \ setlocal noexpandtab shiftwidth=4
 augroup END
 " }}}
 
 " Pgcli file settings {{{
 augroup PgcliFilesGroup
-    autocmd!
-    autocmd BufRead /tmp/psql.edit.* setlocal syntax=sql
+  autocmd!
+  autocmd BufRead /tmp/psql.edit.* setlocal syntax=sql
 augroup END
 " }}}
 
 " Buffer settings {{{
 augroup BufferSettings
-    autocmd!
-    autocmd BufEnter * setlocal cursorline
-    autocmd BufLeave * setlocal nocursorline
+  autocmd!
+  autocmd BufEnter * setlocal cursorline
+  autocmd BufLeave * setlocal nocursorline
 augroup END
 " }}}
 
