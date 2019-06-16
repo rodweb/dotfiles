@@ -4,6 +4,8 @@ BASE16_SHELL=$HOME/.config/base16-shell/
 autoload -U promptinit; promptinit;
 autoload -U edit-command-line
 
+ZSH_CONFIGS=$HOME/.config/zsh
+
 [[ -f $HOME/.profile ]] && source $HOME/.profile
 [[ -f $HOME/.zshenv ]] && source $HOME/.zshenv
 
@@ -33,7 +35,6 @@ HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE=~/.histfile
 
-export EDITOR='nvim'
 NODE_OPTIONS=--max_old_space_size=4096
 
 FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow-glob "!.git/*"'
@@ -66,10 +67,10 @@ alias v='$EDITOR'
 alias Z='$EDITOR $HOME/.zshrc'
 alias I='$EDITOR $HOME/.config/i3/config'
 alias B='$EDITOR $HOME/.config/i3/i3blocks.conf'
+alias P='$EDITOR $HOME/.config/qtile/config.py'
 alias update='yay -Syy'
 alias upgrade='yay -Syu --answeredit n --answerdiff n --answerclean n'
 alias search='yay -Ssy'
-alias remove='yay -Rns'
 alias yst='cd $HOME && yadm status'
 alias yd='cd $HOME && yadm diff'
 alias pdf='apvlv'
@@ -113,56 +114,6 @@ source /usr/share/fzf/key-bindings.zsh
 function gi() { curl -sL gitignore.io/api/$@ ;}
 #source ~/.cache/yay/rvm/rvm.sh
 
-function cn () {
-  yadm ls-tree --full-tree -r --name-only HEAD ~ | fzf | xargs -I{} nvim  ~/{}
-}
-
-function cnd() {
-  yadm ls-files ~ -m | fzf -m | xargs -I{} yadm difftool -y -t meld ~/{}
-}
-
-function cna() {
-  yadm add -p ~/$(yadm ls-files ~ -m | fzf)
-}
-
-
 eval "$RUN"
 
-function install () {
-  # sudo pacman -S --noconfirm $@ 1>/dev/null
-  yay -S --noeditmenu --nodiffmenu --nocleanmenu --noremovemake --noconfirm $@ 1>/dev/null
-}
-
-function mcd() {
-  mkdir -p "$1" && cd "$1";
-}
-
-unalias g
-function g() {
-  if [[ $# -gt 0 ]]; then
-    git "$@"
-  else
-    git status -s
-  fi
-}
-unalias gm
-function gm() {
-  args="$@"
-  git commit -m ""$args""
-}
-unalias ga
-function ga() {
-  git ls-files --modified --other --exclude-standard | fzf --prompt "add: " --print0 --multi | xargs --null --verbose git add
-}
-
-function y() {
-  if [[ $# -gt 0 ]]; then
-    yadm "$@"
-  else
-    yadm status -s
-  fi
-}
-
-function pdfs() {
-  fd --type file .pdf ~/docs | fzf | xargs apvlv
-}
+[[ -f $ZSH_CONFIGS/functions.zsh ]] && source $ZSH_CONFIGS/functions.zsh
