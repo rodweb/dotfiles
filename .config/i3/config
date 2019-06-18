@@ -3,7 +3,7 @@ set $win Mod4
 set $alt Mod1
 set $ctrl Control
 set $stterm st -f "Hack:size=10"
-set $term sensible-terminal
+set $term ~/bin/sensible-terminal
 
 font pango: Hack, monospace 9
 
