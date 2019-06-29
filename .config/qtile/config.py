@@ -40,11 +40,11 @@ alt = "mod1"
 
 keys = [
     # Fullscreen
-    Key([mod], "space", lazy.window.toggle_fullscreen()),
+    Key([mod], "f", lazy.window.toggle_fullscreen()),
 
     # Toggle between different layouts as defined below
     Key([mod], "w", lazy.next_layout()),
-    Key([mod], "f", lazy.window.toggle_floating()),
+    Key([mod], "space", lazy.window.toggle_floating()),
 
     Key([mod], "h", lazy.layout.previous()),
     Key([mod], "l", lazy.layout.next()),
@@ -145,14 +145,15 @@ cpu_color="#ff0000"
 layouts = [
     layout.xmonad.MonadTall(
         ratio=0.60,
-        margin=5,
-        single_margin=0,
+        margin=0,
+        single_margin=5,
         border_focus=focus_color,
         border_width=1,
         single_border_width=0,
     ),
     layout.Tile(),
-    layout.Matrix()
+    layout.Matrix(),
+    layout.Zoomy(),
 ]
 
 widget_defaults = dict(

@@ -44,7 +44,7 @@ bindsym $ctrl+apostrophe exec --no-startup-id "rofi -modi 'clipboard:greenclip p
 bindsym $win+Print exec --no-startup-id xfce4-screenshooter -r -c ~/tmp/ss
 bindsym --release $win+Delete exec --no-startup-id xkill
 
-bindsym $win+g exec ~/scripts/rofi/rofi-gupy.sh
+bindsym $win+g exec ~/scripts/rofi/menu.sh
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer -i 5 && pkill -RTMIN+11 i3blocks

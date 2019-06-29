@@ -87,3 +87,10 @@ function git_commit() {
 }
 zle -N git_commit
 bindkey "^g" git_commit
+
+# function accept_suggestion() {
+#   zle forward-char
+#   zle accept-line
+# }
+# zle -N accept_suggestion
+# bindkey "^a" accept_suggestion

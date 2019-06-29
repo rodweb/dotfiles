@@ -2,22 +2,22 @@
 cmd="@migration #update"
 dunstify -t 1000 "$cmd" updating...
 
-cd ~/dev/gupy/backend
-git stash
+cd ~/dev/gupy/backend/migrations
+modified=$(git ls-files -m | wc -l)
+if [[ "$modified" -gt 0 ]]; then git stash; fi
 git checkout master
 git pull
-./node_modules/.bin/sequelize db:migrate --url postgresql://postgres@localhost/gupy_development
-./node_modules/.bin/sequelize db:migrate --url postgresql://postgres@localhost/gupy_test
+../node_modules/.bin/sequelize db:migrate --url postgresql://postgres@localhost/gupy_development
+result=$?
+../node_modules/.bin/sequelize db:migrate --url postgresql://postgres@localhost/gupy_test
 git checkout -
-if [[ $(git stash list | wc -l) -gt 0 ]]; then
-  git stash pop
-fi
+if [[ "$modified" -gt 0 ]]; then git stash pop; fi
 
-if [[ "$?" -eq 0 ]]; then
+if [[ "$result" -eq 0 ]]; then
   dunstify "$cmd" "done."
-  tmux send -t migration ls ENTER
+  tmux send -t migration clear ENTER
 else
   dunstify "$cmd" "FAILED."
-  urxvt -e tmux a -t migration &
+  st -e zsh -i -c 'tmux a -t migration' &
 fi
 

@@ -3,7 +3,7 @@ syntax enable
 
 " Plugins {{{
 call plug#begin('~/.vim/plugged')
-"Plug 'chriskempson/base16-vim'
+Plug 'chriskempson/base16-vim'
 Plug 'tomasiser/vim-code-dark'
 "Plug 'andreypopp/vim-colors-plain'
 "Plug 'mhinz/vim-startify'
@@ -18,32 +18,50 @@ Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --rust-completer --all' }
+" Plug 'Valloric/YouCompleteMe', { 'do': './install.py --rust-completer --all' }
 Plug 'w0rp/ale'
 Plug 'janko/vim-test'
 Plug 'itchyny/lightline.vim'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 "Plug 'mattn/emmet-vim'
 Plug 'tapayne88/vim-mochajs'
+Plug 'Shougo/deoplete.nvim'
+Plug 'jpalardy/vim-slime'
+Plug 'flrnprz/plastic.vim'
+Plug 'sbdchd/neoformat'
+Plug 'Quramy/tsuquyomi'
 call plug#end()
 " }}}
 
 let mapleader = " "
 let maplocalleader=","
 
-colorscheme codedark
+colorscheme plastic
+" colorscheme codedark
 " colorscheme plain
 " colorscheme rod
 
+let g:ycm_min_num_of_chars_for_completion = 99
 let g:ycm_error_symbol = '✖'
 let g:ycm_warning_symbol = '⚠'
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_rust_src_path = '/home/rod/dev/rust/src'
-let g:ale_completion_enabled = 1
+if !exists("g:ycm_semantic_triggers")
+  let g:ycm_semantic_triggers = {}
+endif
+let g:ycm_semantic_triggers['typescript'] = ['.']
+let g:ale_completion_enabled = 0
+let g:ale_sign_column_always = 1
+let g:ale_sign_error = '✗'
+let g:ale_sign_warning = '-'
+let g:deoplete#enable_at_startup = 1
+" set omnifunc=ale#completion#OmniFunc
+let b:ale_fixers = ['prettier', 'tslint']
 let test#strategy = "dispatch"
 let g:lightline = { 'colorscheme': 'wombat' }
 let g:syntastic_error_symbol = '✗✗'
 let g:syntastic_style_error_symbol = '✗✗'
+let g:slime_target = "tmux"
 
 " Settings {{{
 set t_Co=256
@@ -55,7 +73,7 @@ set updatetime=750
 set autowrite
 set backupcopy=yes
 
-set clipboard=unnamedplus
+set clipboard+=unnamedplus
 set mouse=a
 set number
 set numberwidth=2
@@ -325,9 +343,9 @@ augroup END
 " }}}
 
 " Base16 color scheme settings {{{
-"if filereadable(expand("~/.vimrc_background"))
-"    let base16colorspace=256
-"    source ~/.vimrc_background
-"endif
+if filereadable(expand("~/.vimrc_background"))
+    let base16colorspace=256
+    source ~/.vimrc_background
+endif
 " }}}
 
