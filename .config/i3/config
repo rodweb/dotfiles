@@ -17,6 +17,9 @@ set $restws "7: rest "
 set $gitws "8: git "
 set $backgroundws "9: bg "
 set $miscws "10: misc "
+set $meetws "meet"
+
+workspace $meetws output DVI-I-1
 
 floating_modifier $win
 # focus_follows_mouse no
@@ -24,7 +27,7 @@ floating_modifier $win
 bindsym $ctrl+$alt+l exec --no-startup-id dm-tool lock
 
 # start a terminal
-bindsym $win+Return exec --no-startup-id $term #i3-sensible-terminal
+bindsym $win+Return exec --no-startup-id $stterm
 # scratchpad
 bindsym $win+q scratchpad show
 # kill focused window
@@ -41,7 +44,7 @@ bindsym $win+space exec ~/scripts/rofi/workspaces.sh
 bindsym $win+m exec ~/scripts/rofi/move-to-workspace.sh
 bindsym $alt+space exec --no-startup-id "bash ~/scripts/rofi/SEARCH"
 bindsym $ctrl+apostrophe exec --no-startup-id "rofi -modi 'clipboard:greenclip print' -show clipboard -run-command '{cmd}'"
-bindsym $win+Print exec --no-startup-id xfce4-screenshooter -r -c ~/tmp/ss
+bindsym $win+Print exec --no-startup-id xfce4-screenshooter -r -c
 bindsym --release $win+Delete exec --no-startup-id xkill
 
 bindsym $win+g exec ~/scripts/rofi/menu.sh
@@ -90,11 +93,11 @@ bindsym $win+Shift+Right move right
 
 # split in horizontal orientation
 bindsym $win+slash split h
-bindsym $win+o split h; exec $term
+bindsym $win+o split h; exec $stterm
 
 # split in vertical orientation
 bindsym $win+minus split v
-bindsym $win+p split v; exec $term
+bindsym $win+p split v; exec $stterm
 
 # enter fullscreen mode for the focused container
 bindsym $win+f fullscreen toggle

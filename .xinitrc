@@ -1,5 +1,6 @@
 # vi:ft=sh
 source ~/.xsession
+xrandr --auto
 
 # exec i3
 # exec awesome

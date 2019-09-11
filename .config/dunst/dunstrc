@@ -2,7 +2,7 @@
     ### Display ###
 
     # Which monitor should the notifications be displayed on.
-    monitor = 0
+    monitor = 1
 
     # Display notification on focused monitor.  Possible modes are:
     #   mouse: follow mouse pointer
@@ -231,7 +231,7 @@
     close = ctrl+space
 
     # Close all notifications.
-    close_all = mod4+apostrophe
+    close_all = ctrl+alt+space
 
     # Redisplay last message(s).
     # On the US keyboard layout "grave" is normally above TAB and left

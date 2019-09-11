@@ -61,7 +61,6 @@ let test#strategy = "dispatch"
 let g:lightline = { 'colorscheme': 'wombat' }
 let g:syntastic_error_symbol = '✗✗'
 let g:syntastic_style_error_symbol = '✗✗'
-let g:slime_target = "tmux"
 
 " Settings {{{
 set t_Co=256
@@ -113,6 +112,10 @@ nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>ed :e $MYVIMRC<cr>
 nnoremap <leader>cd :cd expand('%:h')<cr>
 nnoremap <leader>cp :let @+ = expand('%')<cr>
+nnoremap <m-h> <c-w>h
+nnoremap <m-j> <c-w>j
+nnoremap <m-k> <c-w>k
+nnoremap <m-l> <c-w>l
 
 nnoremap ; :
 nnoremap Y yg_
@@ -162,7 +165,7 @@ function! HLNext (blinktime)
   redraw
 endfunction
 
-" nnoremap <leader>td :Rg TODO\(rod\)<cr>
+nnoremap <leader>td :Rg TODO\(rod\)<cr>
 
 " FZF mappings
 nnoremap <leader>f :GitFiles<cr>
@@ -180,6 +183,7 @@ imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 
+nnoremap <leader>tt :TagbarToggle<cr>
 nnoremap <leader>e :NERDTreeToggle<cr>
 
 nnoremap ]e :ALENext<cr>
@@ -280,6 +284,7 @@ augroup RustFilesGroup
 augroup END
 " }}}
 
+
 " Markdown file settings {{{
 augroup MarkdownFilesGroup
   autocmd!
@@ -311,6 +316,7 @@ augroup RustFilesGroupd
   autocmd BufWritePost *.rs :Make build
 augroup END
 " }}}
+
 
 " Mmakefile settings {{{
 augroup MakeFilesGroup
