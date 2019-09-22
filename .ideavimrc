@@ -23,6 +23,7 @@ nmap <leader>t :action GotoSymbol<cr>
 nmap <leader>gb :action Back<cr>
 nmap <leader>gf :action Forward<cr>
 nmap <leader>w :action JumpToLastWindow<cr>
+nmap <leader>gu :action FindUsages<cr>
 nmap <leader>gd :action GotoDeclaration<cr>
 nmap <leader>gi :action GotoImplementation<cr>
 nmap <leader>= :action ReformatWithPrettierAction<cr>
