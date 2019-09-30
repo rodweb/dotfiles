@@ -7,8 +7,8 @@ set scrolloff=3
 
 set clipboard=unnamedplus,unnamed
 
-" set relativenumber
-" set number
+set relativenumber
+set number
 set surround
 
 let mapleader = " "

@@ -1,21 +1,42 @@
 snippet con
----
 context('${1:given}', () => {
   $0
 })
 endsnippet
 
 snippet des
----
 describe('$1', () => {
   $0
 })
 endsnippet
 
-
 snippet it
----
 it('$1', ${2:async }() => {
   $0
 })
 endsnippet
+
+snippet bef
+before(${1:async }() => {
+  $0
+})
+endsnippet
+
+snippet befe
+beforeEach(${1:async }() => {
+  $0
+})
+endsnippet
+
+snippet aft
+after(${1:async }() => {
+  $0
+})
+endsnippet
+
+snippet afte
+afterEach(${1:async }() => {
+  $0
+})
+endsnippet
+

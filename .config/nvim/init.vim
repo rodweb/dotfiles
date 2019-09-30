@@ -4,11 +4,8 @@ syntax enable
 " Plugins {{{
 call plug#begin('~/.vim/plugged')
 Plug 'chriskempson/base16-vim'
-Plug 'tomasiser/vim-code-dark'
-"Plug 'andreypopp/vim-colors-plain'
-"Plug 'mhinz/vim-startify'
+" Plug 'tomasiser/vim-code-dark'
 Plug 'sheerun/vim-polyglot'
-Plug 'ap/vim-css-color'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'machakann/vim-sandwich'
 Plug 'airblade/vim-gitgutter'
@@ -18,53 +15,61 @@ Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
-" Plug 'Valloric/YouCompleteMe', { 'do': './install.py --rust-completer --all' }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'w0rp/ale'
 Plug 'janko/vim-test'
-Plug 'itchyny/lightline.vim'
 Plug 'tmux-plugins/vim-tmux-focus-events'
-"Plug 'mattn/emmet-vim'
-Plug 'tapayne88/vim-mochajs'
-Plug 'Shougo/deoplete.nvim'
-Plug 'jpalardy/vim-slime'
-Plug 'flrnprz/plastic.vim'
-Plug 'sbdchd/neoformat'
-Plug 'Quramy/tsuquyomi'
+Plug 'itchyny/lightline.vim'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'easymotion/vim-easymotion'
+Plug 'powerman/vim-plugin-autosess'
 call plug#end()
 " }}}
 
 let mapleader = " "
 let maplocalleader=","
 
-colorscheme plastic
-" colorscheme codedark
-" colorscheme plain
-" colorscheme rod
-
-let g:ycm_min_num_of_chars_for_completion = 99
-let g:ycm_error_symbol = '✖'
-let g:ycm_warning_symbol = '⚠'
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_rust_src_path = '/home/rod/dev/rust/src'
-if !exists("g:ycm_semantic_triggers")
-  let g:ycm_semantic_triggers = {}
-endif
-let g:ycm_semantic_triggers['typescript'] = ['.']
-let g:ale_completion_enabled = 0
-let g:ale_sign_column_always = 1
-let g:ale_sign_error = '✗'
-let g:ale_sign_warning = '-'
-let g:deoplete#enable_at_startup = 1
-" set omnifunc=ale#completion#OmniFunc
-let b:ale_fixers = ['prettier', 'tslint']
-let test#strategy = "dispatch"
-let g:lightline = { 'colorscheme': 'wombat' }
-let g:syntastic_error_symbol = '✗✗'
-let g:syntastic_style_error_symbol = '✗✗'
-
-" Settings {{{
 set t_Co=256
 set background=dark
+"colorscheme codedark
+"colorscheme rod
+
+let test#strategy = "dispatch"
+let g:EditorConfig_exclude_patterns = ['fugitive://.\*']
+let g:lightline = { 'colorscheme': 'wombat' }
+let g:deoplete#enable_at_startup = 1
+call deoplete#custom#option('sources', {
+\ '_': ['ale'],
+\})
+
+" FZF {{{
+let g:fzf_tags_command = 'ctags -R --exclude=.git --exclude=node_modules --exclude=dist --exclude=docs --exclude="*.json"'
+" }}}
+
+" EasyMotion {{{
+let g:EasyMotion_smartcase = 1
+
+map f <Plug>(easymotion-overwin-f2)
+" }}}
+
+" ALE {{{
+let g:ale_fix_on_save = 1
+let g:ale_completion_enabled = 0
+let g:ale_sign_column_always = 1
+let g:ale_set_highlights = 0
+let g:ale_sign_error = 'x'
+let g:ale_sign_warning = '-'
+let b:ale_fixers = {'typescript': ['prettier', 'tslint']}
+" }}}
+
+" UltiSnips {{{
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" }}}
+
+" Settings {{{
 set visualbell
 set noshowmode
 set timeoutlen=300
@@ -92,9 +97,8 @@ set grepprg=rg\ --vimgrep
 
 set showbreak=↪\ 
 set list
-"set listchars=tab:→\ ,trail:•,nbsp:␣,eol:↲
 set listchars=tab:→\ ,trail:•,nbsp:␣
-"set scrolloff=100
+" set listchars=tab:→\ ,trail:•,nbsp:␣,eol:↲
 set sidescrolloff=5
 
 set foldlevelstart=1
@@ -105,6 +109,7 @@ set splitright
 nnoremap <leader><tab> <c-^>
 nnoremap <leader>q :q<cr>
 nnoremap <leader>n :nohl<cr>
+nnoremap <leader>o :only<cr>
 nnoremap <leader>r "qyiw:%s/\v<c-r>q//c<left><left>
 nnoremap <leader>s :update<cr>
 nnoremap <leader>w <c-w><c-w>
@@ -183,7 +188,6 @@ imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 
-nnoremap <leader>tt :TagbarToggle<cr>
 nnoremap <leader>e :NERDTreeToggle<cr>
 
 nnoremap ]e :ALENext<cr>
@@ -225,21 +229,21 @@ iabbrev cosnt const
 iabbrev applicaiton application
 " }}}
 
-" File write settings {{{
+" File write {{{
 augroup WriteFilesGroup
   autocmd!
   autocmd BufNewFile,FocusLost *.js,*.jsx,*.ts,*.tsx,*.c :update
 augroup END
 " }}}
 
-" HTML file settings {{{
+" HTML {{{
 augroup HtmlFilesGroup
   autocmd!
   autocmd BufRead *.html setlocal nowrap
 augroup END
 " }}}
 
-" Javascript file settings {{{
+" Javascript {{{
 augroup JavascriptFilesGroup
   autocmd!
   autocmd FileType javascript
@@ -253,20 +257,16 @@ augroup END
 " Typescript {{{
 augroup TypescriptFilesGroup
   autocmd!
-  autocmd BufWritePre *.ts Neoformat
+  autocmd BufWritePre *.ts :ALEFix prettier
+  autocmd FileType typescript
+        \ nnoremap <buffer> <localleader>h :ALEHover<cr>
+        \|nnoremap <buffer> <localleader>d :ALEGoToDefinition<cr>
+        \|nnoremap <buffer> <localleader>r :ALEFindReferences<cr>
+        \|inoremap <buffer> <C-h> <esc>:ALEHover<cr>
 augroup END
 " }}}
 
-" {{{ TypeScript file settings
-" let g:test#javascript#mocha#file_pattern = '\v.*\.test\.(ts|tsx)$'
-" function! TypeScriptTransform(cmd) abort
-"   return substitute(a:cmd, '\v(.*)mocha', 'TS_NODE_FILES=true \1ts-mocha', '')
-" endfunction
-" let g:test#custom_transformations = {'typescript': function('TypeScriptTransform')}
-" let g:test#transformation = 'typescript'
-" }}}
-
-" Vimscript file settings {{{
+" Vimscript {{{
 augroup VimFilesGroup
   autocmd!
   autocmd FileType vim
@@ -276,7 +276,7 @@ augroup VimFilesGroup
 augroup END
 " }}}
 
-" Rust file settings {{{
+" Rust {{{
 augroup RustFilesGroup
   autocmd!
   autocmd FileType rust nnoremap <buffer> <localleader>r :make run<cr>
@@ -284,15 +284,14 @@ augroup RustFilesGroup
 augroup END
 " }}}
 
-
-" Markdown file settings {{{
+" Markdown {{{
 augroup MarkdownFilesGroup
   autocmd!
   autocmd FileType markdown setlocal spell list wrap nonumber norelativenumber
 augroup END
 " }}}
 
-" C file settings {{{
+" C {{{
 augroup CFilesGroup
   autocmd!
   autocmd FileType c
@@ -301,7 +300,7 @@ augroup CFilesGroup
 augroup END
 " }}}
 
-" Shell file settings {{{
+" Shell {{{
 augroup ShellGroup
   autocmd!
   autocmd FileType sh
@@ -309,16 +308,15 @@ augroup ShellGroup
 augroup END
 " }}}
 
-" Rust file settings {{{
-augroup RustFilesGroupd
+" Rust {{{
+augroup RustFilesGroup
   autocmd!
   autocmd FileType rust nnoremap <buffer> <localleader>r :make run<cr>
   autocmd BufWritePost *.rs :Make build
 augroup END
 " }}}
 
-
-" Mmakefile settings {{{
+" Make {{{
 augroup MakeFilesGroup
   autocmd!
   autocmd FileType make
@@ -326,29 +324,32 @@ augroup MakeFilesGroup
 augroup END
 " }}}
 
-" Pgcli file settings {{{
+" Pgcli {{{
 augroup PgcliFilesGroup
   autocmd!
   autocmd BufRead /tmp/psql.edit.* setlocal syntax=sql
 augroup END
 " }}}
 
-" Buffer settings {{{
+" Buffer {{{
 augroup BufferSettings
   autocmd!
   autocmd BufEnter * setlocal cursorline
+        \| highlight ALEWarningSign ctermbg=0 ctermfg=16
+        \| highlight ALEErrorSign ctermbg=0 ctermfg=1
+        \| highlight LineNr ctermbg=002635 ctermfg=59
   autocmd BufLeave * setlocal nocursorline
 augroup END
 " }}}
 
-" XResources settings {{{
+" XResources {{{
 augroup XResourcesGroup
   autocmd!
   autocmd BufWritePost ~/.Xresources silent !xrdb -load ~/.Xresources
 augroup END
 " }}}
 
-" Base16 color scheme settings {{{
+" Base16 color scheme {{{
 if filereadable(expand("~/.vimrc_background"))
     let base16colorspace=256
     source ~/.vimrc_background
