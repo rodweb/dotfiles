@@ -37,7 +37,7 @@ HISTFILE=~/.histfile
 
 NODE_OPTIONS=--max_old_space_size=4096
 
-FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow-glob "!.git/*"'
+FZF_DEFAULT_COMMAND='rg --files --hidden'
 
 setopt appendhistory
 setopt sharehistory
@@ -45,6 +45,8 @@ setopt incappendhistory
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_SAVE_NO_DUPS
 
+alias iii='setxkbmap br'
+alias aaa='setxkbmap br -variant nativo'
 alias D='$EDITOR $HOME/.config/dunst/dunstrc'
 alias B='$EDITOR $HOME/.config/i3/i3blocks.conf'
 alias I='$EDITOR $HOME/.config/i3/config'
@@ -81,13 +83,12 @@ alias tmux='TERM=tmux-256color tmux'
 alias grhh='git reset HEAD --hard'
 
 # Gupy
-alias back='cd $HOME/dev/gupy/backend'
-alias api='cd $HOME/dev/gupy/backend/interfaces/http/public-api'
+alias back='cd $HOME/dev/gupy/gupy-api-darthvader'
+alias api='cd $HOME/dev/gupy/gupy-api-darthvader/interfaces/http/public-api'
 alias devops='cd $HOME/dev/DevOps-5'
-alias front='cd $HOME/dev/gupy/frontend'
+alias front='cd $HOME/dev/gupy/gupy-front'
 alias pp='cd $HOME/dev/gupy-public-pages'
 alias ops='cd $HOME/dev/ops'
-alias mig='cd $HOME/dev/gupy/migration'
 alias pr='npm run pull-request'
 
 alias pgcli='PAGER="nvim -R -u ~/.config/nvim/initpg.vim -" EDITOR=nvim /usr/bin/pgcli -h localhost -U postgres gupy_development_prod'

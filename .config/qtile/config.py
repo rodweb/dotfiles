@@ -45,12 +45,14 @@ keys = [
     # Toggle between different layouts as defined below
     Key([mod], "w", lazy.next_layout()),
     Key([mod], "space", lazy.window.toggle_floating()),
+    Key([mod, "shift"], "space", lazy.layout.flip()),
 
-    Key([mod], "h", lazy.layout.previous()),
-    Key([mod], "l", lazy.layout.next()),
-
+    Key([mod], "h", lazy.layout.left()),
+    Key([mod], "l", lazy.layout.right()),
     Key([mod], "j", lazy.layout.down()),
     Key([mod], "k", lazy.layout.up()),
+    # Key([mod], "k", lazy.layout.shuffle_up()),
+    # Key([mod], "j", lazy.layout.shuffle_down()),
 
     Key(
         [mod, "shift"], "k",
@@ -62,25 +64,19 @@ keys = [
     ),
     Key(
         [mod, "control"], "l",
-        lazy.layout.add(),                # Stack
-        lazy.layout.increase_ratio(),     # Tile
         lazy.layout.maximize(),           # xmonad-tall
     ),
     Key(
         [mod, "control"], "h",
-        lazy.layout.delete(),             # Stack
-        lazy.layout.decrease_ratio(),     # Tile
         lazy.layout.normalize(),          # xmonad-tall
     ),
     Key(
         [mod, "control"], "k",
         lazy.layout.shrink(),             # xmonad-tall
-        lazy.layout.decrease_nmaster(),   # Tile
     ),
     Key(
         [mod, "control"], "j",
         lazy.layout.grow(),               # xmonad-tall
-        lazy.layout.increase_nmaster(),   # Tile
     ),
 
     # Switch between groups
@@ -124,7 +120,7 @@ groups = [
     Group('', matches=[Match(wm_class=["Java", "DBeaver"])]),
     Group('', matches=[Match(wm_class=["Postman"])]),
     Group('', matches=[Match(wm_class=["GitKraken"])]),
-    Group('', layout="matrix"),
+    Group('',),
     Group('')
 ]
 
@@ -143,6 +139,7 @@ urgent_color="#ff4500"
 cpu_color="#ff0000"
 
 layouts = [
+    layout.Max(),
     layout.xmonad.MonadTall(
         ratio=0.60,
         margin=0,
@@ -150,10 +147,8 @@ layouts = [
         border_focus=focus_color,
         border_width=1,
         single_border_width=0,
+        new_at_current=True,
     ),
-    layout.Tile(),
-    layout.Matrix(),
-    layout.Zoomy(),
 ]
 
 widget_defaults = dict(
@@ -173,14 +168,6 @@ screens = [
                     this_current_screen_border=focus_color,
                     urgent_alert_method="text",
                     urgent_text=urgent_color,
-                ),
-                widget.CPUGraph(
-                    width=30,
-                    line_width=1,
-                    border_width=0,
-                    graph_color=cpu_color,
-                    samples=60,
-                    type="line",
                 ),
                 widget.Prompt(prompt="run: "),
                 widget.DebugInfo(),

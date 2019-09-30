@@ -2,6 +2,7 @@
 source ~/.xsession
 xrandr --auto
 
+# exec openbox
 exec i3
 # exec awesome
 # exec dwm
