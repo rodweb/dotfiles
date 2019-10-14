@@ -12,7 +12,7 @@ if [[ "${BLOCK_BUTTON}" -eq 1 ]]; then
   notify-send "Battery" "${BATTERY_INFO}"
 fi
 
-if [[ "${BATTERY_STATE}" = "Charging" ]]; then
+if [[ "${BATTERY_STATE}" = "Charging" || "${BATTERY_STATE}" = "Full" ]]; then
   echo "${BATTERY_POWER}%+"
   echo "${BATTERY_POWER}%+"
   echo ""
