@@ -1,0 +1,6 @@
+#!/bin/sh
+cd "$HOME/tmp"
+teensy-loader-cli -mmcu=atmega32u4 -w $(ls -1t *.hex | head -1)
+sleep 3
+setxkbmap br
+dunstify Flashed
