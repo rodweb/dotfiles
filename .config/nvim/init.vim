@@ -7,7 +7,6 @@ Plug 'chriskempson/base16-vim'
 " Plug 'tomasiser/vim-code-dark'
 Plug 'sheerun/vim-polyglot'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'machakann/vim-sandwich'
 Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
@@ -15,7 +14,10 @@ Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'carlitux/deoplete-ternjs'
+Plug 'ternjs/tern_for_vim', { 'do': 'npm install && npm install -g tern' }
 Plug 'w0rp/ale'
 Plug 'janko/vim-test'
 Plug 'tmux-plugins/vim-tmux-focus-events'
@@ -24,6 +26,7 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'easymotion/vim-easymotion'
 Plug 'powerman/vim-plugin-autosess'
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 " }}}
 
@@ -32,16 +35,25 @@ let maplocalleader=","
 
 set t_Co=256
 set background=dark
-"colorscheme codedark
-"colorscheme rod
+" colorscheme codedark
+colorscheme rod
 
 let test#strategy = "dispatch"
 let g:EditorConfig_exclude_patterns = ['fugitive://.\*']
 let g:lightline = { 'colorscheme': 'wombat' }
 let g:deoplete#enable_at_startup = 1
-call deoplete#custom#option('sources', {
-\ '_': ['ale'],
-\})
+call deoplete#custom#option('auto_complete_delay', 200)
+let g:tern#command = ["tern"]
+let g:tern#arguments = ["--persistent"]
+
+" nmap <silent> gd <Plug>(coc-definition)
+" nmap <silent> gy <Plug>(coc-type-definition)
+" nmap <silent> gi <Plug>(coc-implementation)
+" nmap <silent> gr <Plug>(coc-references)
+" nmap <silent> gd <Plug>(coc-definition)
+" nmap <silent> gy <Plug>(coc-type-definition)
+" nmap <silent> gi <Plug>(coc-implementation)
+" nmap <silent> gr <Plug>(coc-references)
 
 " FZF {{{
 let g:fzf_tags_command = 'ctags -R --exclude=.git --exclude=node_modules --exclude=dist --exclude=docs --exclude="*.json"'
@@ -50,7 +62,7 @@ let g:fzf_tags_command = 'ctags -R --exclude=.git --exclude=node_modules --exclu
 " EasyMotion {{{
 let g:EasyMotion_smartcase = 1
 
-map f <Plug>(easymotion-overwin-f2)
+map s <Plug>(easymotion-overwin-f2)
 " }}}
 
 " ALE {{{
@@ -96,11 +108,9 @@ set inccommand=nosplit
 set grepprg=rg\ --vimgrep
 
 set showbreak=↪\ 
-set list
-set listchars=tab:→\ ,trail:•,nbsp:␣
-" set listchars=tab:→\ ,trail:•,nbsp:␣,eol:↲
+set nolist
+set listchars=tab:→\ ,trail:•,nbsp:␣,eol:↲
 set sidescrolloff=5
-
 set foldlevelstart=1
 set splitright
 " }}}
@@ -110,7 +120,8 @@ nnoremap <leader><tab> <c-^>
 nnoremap <leader>q :q<cr>
 nnoremap <leader>n :nohl<cr>
 nnoremap <leader>o :only<cr>
-nnoremap <leader>r "qyiw:%s/\v<c-r>q//c<left><left>
+nnoremap <leader>l :set list!<cr>
+nnoremap <leader>r "qyiw:%s/\v<c-r>q//gc<left><left>
 nnoremap <leader>s :update<cr>
 nnoremap <leader>w <c-w><c-w>
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
@@ -287,7 +298,7 @@ augroup END
 " Markdown {{{
 augroup MarkdownFilesGroup
   autocmd!
-  autocmd FileType markdown setlocal spell list wrap nonumber norelativenumber
+  autocmd FileType markdown setlocal wrap nonumber norelativenumber
 augroup END
 " }}}
 
@@ -349,10 +360,25 @@ augroup XResourcesGroup
 augroup END
 " }}}
 
+" Sxhkd {{{
+augroup Sxhkd
+  autocmd!
+  autocmd BufWritePost ~/.sxhkd/sxhkdrc silent !killall sxhkd
+augroup END
+" }}}
+
 " Base16 color scheme {{{
 if filereadable(expand("~/.vimrc_background"))
     let base16colorspace=256
     source ~/.vimrc_background
 endif
+" }}}
+
+" Omnifunc {{{
+" augroup Omnifunc
+"   autocmd!
+"   autocmd FileType javascript,jsx,javascript.jsx setlocal omnifunc=tern#Complete
+"   autocmd FileType typescript setlocal omnifunc=ale#Complete
+" augroup END
 " }}}
 

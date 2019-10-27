@@ -35,9 +35,9 @@ HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE=~/.histfile
 
-NODE_OPTIONS=--max_old_space_size=4096
+export NODE_OPTIONS=--max_old_space_size=4096
 
-FZF_DEFAULT_COMMAND='rg --files --hidden'
+export FZF_DEFAULT_COMMAND='rg --files --hidden'
 
 setopt appendhistory
 setopt sharehistory
@@ -91,7 +91,8 @@ alias pp='cd $HOME/dev/gupy-public-pages'
 alias ops='cd $HOME/dev/ops'
 alias pr='npm run pull-request'
 
-alias pgcli='PAGER="nvim -R -u ~/.config/nvim/initpg.vim -" EDITOR=nvim /usr/bin/pgcli -h localhost -U postgres gupy_development_prod'
+# alias pgcli='PAGER="nvim -R -u ~/.config/nvim/initpg.vim -" EDITOR=nvim /usr/bin/pgcli -h localhost -U postgres gupy_development_prod'
+alias pgcli='PAGER="nvim -R -u ~/.config/nvim/initpg.vim -" EDITOR=nvim ~/.local/bin/pgcli -h localhost -U postgres gupy_development_prod'
 alias pgdev='PAGER="nvim -R -u ~/.config/nvim/initpg.vim -" EDITOR=nvim /usr/bin/pgcli -h localhost -U postgres gupy_development'
 alias pgtest='PAGER="nvim -R -u ~/.config/nvim/initpg.vim -" EDITOR=nvim /usr/bin/pgcli -h localhost -U postgres gupy_test'
 alias pgprod='PAGER="nvim -R -u ~/.config/nvim/initpg.vim -" EDITOR=nvim /usr/bin/pgcli'
@@ -118,3 +119,7 @@ function gi() { curl -sL gitignore.io/api/$@ ;}
 eval "$RUN"
 
 [[ -f $ZSH_CONFIGS/functions.zsh ]] && source $ZSH_CONFIGS/functions.zsh
+
+# tabtab source for slss package
+# uninstall by removing these lines or running `tabtab uninstall slss`
+[[ -f /home/rod/dev/gupy-integrations-service/node_modules/tabtab/.completions/slss.zsh ]] && . /home/rod/dev/gupy-integrations-service/node_modules/tabtab/.completions/slss.zsh
