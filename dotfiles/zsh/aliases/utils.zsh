@@ -1,0 +1,5 @@
+alias cat='bat'
+alias diff='diff-so-fancy'
+alias find='fd'
+alias l='exa -lahF'
+alias ls='exa'
