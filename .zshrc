@@ -119,7 +119,3 @@ function gi() { curl -sL gitignore.io/api/$@ ;}
 eval "$RUN"
 
 [[ -f $ZSH_CONFIGS/functions.zsh ]] && source $ZSH_CONFIGS/functions.zsh
-
-# tabtab source for slss package
-# uninstall by removing these lines or running `tabtab uninstall slss`
-[[ -f /home/rod/dev/gupy-integrations-service/node_modules/tabtab/.completions/slss.zsh ]] && . /home/rod/dev/gupy-integrations-service/node_modules/tabtab/.completions/slss.zsh

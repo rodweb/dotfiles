@@ -11,24 +11,117 @@
     "editor.fontLigatures": true,
     "editor.lineNumbers": "relative",
     "editor.minimap.enabled": false,
-    "workbench.activityBar.visible": true,
-    "workbench.statusBar.feedback.visible": false,
-    "workbench.statusBar.visible": true,
+    "workbench.statusBar.visible": false,
     "vim.leader": "<space>",
     "vim.useSystemClipboard": true,
     "vim.easymotion": true,
     "vim.surround": true,
     "vim.normalModeKeyBindingsNonRecursive": [
-        { "before": [";"], "after": [":"] },
-        { "before": ["j"], "after": ["g", "j", "z", "z"] },
-        { "before": ["k"], "after": ["g", "k", "z", "z"] },
-        { "before": ["G"], "after": ["G", "z", "z"] },
-        { "before": ["<leader>","c"], "after": [":", "q", "<cr>"] },
-        { "before": ["<leader>","f"], "commands": ["workbench.action.quickOpen"] },
-        { "before": ["<leader>", "l"], "commands": ["editor.action.marker.nextInFiles"] },
-        { "before": ["<leader>", "s"], "commands": ["workbench.action.files.save"] },
-        { "before": ["<leader>", "t"], "commands": ["workbench.action.toggleSidebarVisibility"] },
-
+        {
+            "before": [
+                ";"
+            ],
+            "after": [
+                ":"
+            ]
+        },
+        {
+            "before": [
+                "j"
+            ],
+            "after": [
+                "g",
+                "j",
+                "z",
+                "z"
+            ]
+        },
+        {
+            "before": [
+                "k"
+            ],
+            "after": [
+                "g",
+                "k",
+                "z",
+                "z"
+            ]
+        },
+        {
+            "before": [
+                "G"
+            ],
+            "after": [
+                "G",
+                "z",
+                "z"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "c"
+            ],
+            "after": [
+                ":",
+                "q",
+                "<cr>"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "f"
+            ],
+            "commands": [
+                "workbench.action.quickOpen"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "l"
+            ],
+            "commands": [
+                "editor.action.marker.nextInFiles"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "s"
+            ],
+            "commands": [
+                "workbench.action.files.save"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "t"
+            ],
+            "commands": [
+                "workbench.action.toggleSidebarVisibility"
+            ]
+        },
+        {
+            "before": [
+                "]",
+                "e"
+            ],
+            "commands": [
+                "editor.action.marker.nextInFiles"
+            ]
+        },
+        {
+            "before": [
+                "[",
+                "e"
+            ],
+            "commands": [
+                "editor.action.marker.prevInFiles"
+            ]
+        }
     ],
     "editor.renderControlCharacters": false,
     "window.menuBarVisibility": "toggle",
@@ -38,6 +131,10 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "window.zoomLevel": 0,
+    "editor.formatOnSave": true,
+    "workbench.activityBar.visible": false,
+    "breadcrumbs.enabled": false,
+    "workbench.editor.showTabs": false,
     "peacock.favoriteColors": [
         {
             "name": "Angular Red",
@@ -92,5 +189,7 @@
             "value": "#42b883"
         }
     ],
-    "editor.formatOnSave": true
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
 }

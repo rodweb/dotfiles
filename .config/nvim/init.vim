@@ -35,8 +35,8 @@ let maplocalleader=","
 
 set t_Co=256
 set background=dark
-" colorscheme codedark
-colorscheme rod
+"colorscheme codedark
+"colorscheme rod
 
 let test#strategy = "dispatch"
 let g:EditorConfig_exclude_patterns = ['fugitive://.\*']
@@ -111,7 +111,8 @@ set showbreak=↪\
 set nolist
 set listchars=tab:→\ ,trail:•,nbsp:␣,eol:↲
 set sidescrolloff=5
-set foldlevelstart=1
+
+set foldlevelstart=0
 set splitright
 " }}}
 
@@ -121,7 +122,7 @@ nnoremap <leader>q :q<cr>
 nnoremap <leader>n :nohl<cr>
 nnoremap <leader>o :only<cr>
 nnoremap <leader>l :set list!<cr>
-nnoremap <leader>r "qyiw:%s/\v<c-r>q//gc<left><left>
+nnoremap <leader>r "qyiw:%s/\v<c-r>q//gc<left><left><left>
 nnoremap <leader>s :update<cr>
 nnoremap <leader>w <c-w><c-w>
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
@@ -261,7 +262,6 @@ augroup JavascriptFilesGroup
         \ nnoremap <buffer> <localleader>c mqI//<esc>'q
         \|nnoremap <buffer> <localleader>t :compiler mochajs<cr>:TestNearest<cr>
         \|iabbrev <buffer> cl console.log()<left>
-        \|setlocal foldmethod=indent foldlevelstart=2
 augroup END
 " }}}
 
