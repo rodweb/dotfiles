@@ -1,5 +1,6 @@
 source ./docker.zsh
 source ./git.zsh
 source ./npm.zsh
-source ./yarn.zsh
 source ./system.zsh
+source ./utils.zsh
+source ./yarn.zsh
