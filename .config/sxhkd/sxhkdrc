@@ -1,6 +1,6 @@
 #
 # wm independent hotkeys
 #
-super + ctrl + {1,5,7}
-        jumpapp {google-chrome-unstable,spotify,postman}
+alt + shift + ctrl + {d,g,p,s,t}
+        jumpapp {discord,google-chrome-unstable,postman,spotify,telegram-desktop}
 
