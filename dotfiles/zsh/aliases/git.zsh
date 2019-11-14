@@ -13,4 +13,6 @@ alias gpf='gp -f'
 alias gpr='git pull -r origin master'
 alias grh='git reset HEAD --head'
 alias gri='git rebase -i'
+alias grs='git reset HEAD -- .' # reset staged
 alias gs='git status -s'
+# TODO: git cherry-pick -p A^..B

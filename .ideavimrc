@@ -16,7 +16,8 @@ nmap ; :
 nmap j jzz
 nmap k kzz
 nmap <leader><tab> <C-Tab>
-nmap <leader>s :action FindInPath<cr>
+nmap <leader>s :action SaveAll<cr>
+nmap <leader>/ :action FindInPath<cr>
 nmap <leader>f :action GotoFile<cr>
 nmap <leader>h :action RecentFiles<cr>
 nmap <leader>t :action GotoSymbol<cr>

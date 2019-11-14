@@ -11,7 +11,6 @@
     "editor.fontLigatures": true,
     "editor.lineNumbers": "relative",
     "editor.minimap.enabled": false,
-    "workbench.statusBar.visible": false,
     "vim.leader": "<space>",
     "vim.useSystemClipboard": true,
     "vim.easymotion": true,
@@ -132,9 +131,7 @@
     },
     "window.zoomLevel": 0,
     "editor.formatOnSave": true,
-    "workbench.activityBar.visible": false,
     "breadcrumbs.enabled": false,
-    "workbench.editor.showTabs": false,
     "peacock.favoriteColors": [
         {
             "name": "Angular Red",
@@ -191,5 +188,9 @@
     ],
     "[typescriptreact]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
-    }
+    },
+    "workbench.activityBar.visible": false,
+    "workbench.statusBar.visible": false,
+    "workbench.editor.showTabs": false,
+    "workbench.editor.tabCloseButton": "off"
 }

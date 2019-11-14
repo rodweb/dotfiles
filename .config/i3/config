@@ -137,11 +137,12 @@ mode "$mode_system" {
 
 bindsym $alt+$ctrl+Delete mode "$mode_system"
 
-set $displayMode Set display mode [g]upy [b]oth [d]efault
+set $displayMode Set display mode [g]upy [b]oth [r]reset [d]efault
 mode "$displayMode" {
     bindsym g exec "~/.screenlayout/gupy.sh", mode "default"
     bindsym d exec "~/.screenlayout/default.sh", mode "default"
     bindsym b exec "~/.screenlayout/both.sh", mode "default"
+    bindsym r exec "~/.screenlayout/reset.sh", mode "default"
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
