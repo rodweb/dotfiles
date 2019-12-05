@@ -262,7 +262,8 @@ for_window [instance="st-256color" title="scratch"] floating enable, resize grow
 for_window [class="Nm-connection-editor"] floating enable
 for_window [class="jetbrains-webstorm" title="Changelist"] fullscreen enable; focus
 for_window [class="jetbrains-webstorm" title="win"] focus
-for_window [class="^jetbrains-.+"][window_type=dialog] focus
+for_window [class="jetbrains-webstorm" title="Comparison"] focus
+for_window [class="^jetbrains-.+"][window_type=dialog] fullscreen enable; focus
 for_window [window_type=dialog] focus
 
 #exec_always --no-startup-id setxkbmap br
