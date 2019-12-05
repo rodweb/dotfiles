@@ -15,6 +15,8 @@ let mapleader = " "
 nmap ; :
 nmap j jzz
 nmap k kzz
+nmap n nzz
+nmap N Nzz
 nmap <leader><tab> <C-Tab>
 nmap <leader>s :action SaveAll<cr>
 nmap <leader>/ :action FindInPath<cr>
