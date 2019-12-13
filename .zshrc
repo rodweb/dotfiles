@@ -89,7 +89,7 @@ alias devops='cd $HOME/dev/DevOps-5'
 alias front='cd $HOME/dev/gupy/gupy-front'
 alias pp='cd $HOME/dev/gupy-public-pages'
 alias ops='cd $HOME/dev/ops'
-alias pr='npm run pull-request'
+alias pr='hub pull-request -b gupy-io:master'
 
 # alias pgcli='PAGER="nvim -R -u ~/.config/nvim/initpg.vim -" EDITOR=nvim /usr/bin/pgcli -h localhost -U postgres gupy_development_prod'
 alias pgcli='PAGER="nvim -R -u ~/.config/nvim/initpg.vim -" EDITOR=nvim ~/.local/bin/pgcli -h localhost -U postgres gupy_development_prod'
@@ -119,3 +119,8 @@ function gi() { curl -sL gitignore.io/api/$@ ;}
 eval "$RUN"
 
 [[ -f $ZSH_CONFIGS/functions.zsh ]] && source $ZSH_CONFIGS/functions.zsh
+
+
+alias mt='back; NODE_ENV=test npx mocha --require=test/MochaBootstrap.js $(fzf)'
+
+export YADM_COMPATIBILITY=1
