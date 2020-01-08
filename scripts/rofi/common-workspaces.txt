@@ -1,0 +1,12 @@
+web
+back
+front
+chat
+music
+db
+git
+mail
+postman
+kraken
+poedit
+jenkins

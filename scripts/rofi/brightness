@@ -1,0 +1,8 @@
+#!/bin/bash
+
+current=$(xbacklight -get)
+echo $current
+for i in {10..100..10}
+do
+  echo "$i"
+done
