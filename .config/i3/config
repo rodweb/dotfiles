@@ -137,9 +137,10 @@ mode "$mode_system" {
 
 bindsym $alt+$ctrl+Delete mode "$mode_system"
 
-set $displayMode Set display mode [g]upy [b]oth [r]reset [d]efault
+set $displayMode Set display mode [g]upy [l]eft [b]oth [r]reset [d]efault
 mode "$displayMode" {
     bindsym g exec "~/.screenlayout/gupy.sh", mode "default"
+    bindsym l exec "~/.screenlayout/both-left.sh", mode "default"
     bindsym d exec "~/.screenlayout/default.sh", mode "default"
     bindsym b exec "~/.screenlayout/both.sh", mode "default"
     bindsym r exec "~/.screenlayout/reset.sh", mode "default"
@@ -263,7 +264,7 @@ for_window [class="Nm-connection-editor"] floating enable
 for_window [class="jetbrains-webstorm" title="Changelist"] fullscreen enable; focus
 for_window [class="jetbrains-webstorm" title="win"] focus
 for_window [class="jetbrains-webstorm" title="Comparison"] focus
-for_window [class="^jetbrains-.+"][window_type=dialog] fullscreen enable; focus
+for_window [class="^jetbrains-.+"][window_type=dialog] focus
 for_window [window_type=dialog] focus
 
 #exec_always --no-startup-id setxkbmap br
