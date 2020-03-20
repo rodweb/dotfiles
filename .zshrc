@@ -107,12 +107,6 @@ bindkey -M vicmd v edit-command-line
 source /usr/share/fzf/completion.zsh
 source /usr/share/fzf/key-bindings.zsh
 
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[[ -f /home/rodrigo/.nvm/versions/node/v10.14.1/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /home/rodrigo/.nvm/versions/node/v10.14.1/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[[ -f /home/rodrigo/.nvm/versions/node/v10.14.1/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /home/rodrigo/.nvm/versions/node/v10.14.1/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
 function gi() { curl -sL gitignore.io/api/$@ ;}
 #source ~/.cache/yay/rvm/rvm.sh
 
@@ -124,3 +118,10 @@ eval "$RUN"
 alias mt='back; NODE_ENV=test npx mocha --require=test/MochaBootstrap.js $(fzf)'
 
 export YADM_COMPATIBILITY=1
+
+# tabtab source for packages
+# uninstall by removing these lines
+[[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
+
+
+source ./dotfiles/zsh/index.zsh
