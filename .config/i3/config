@@ -241,6 +241,7 @@ for_window [class="Solaar"] floating enable; move position center
 for_window [class="Google-chrome-stable"] focus
 for_window [class="Keybase"] move container to workspace $chatws
 for_window [class="Slack"] move container to workspace $chatws
+for_window [class="Mumble"] move container to workspace $chatws
 for_window [class="discord"] move container to workspace $chatws
 #for_window [class="Slack" title="Slack Call Minipanel"] sticky enable; move position 1085 90
 assign [class="Slack" title="Slack Call Minipanel"] sticky enable; move right 300px,move down 90px
