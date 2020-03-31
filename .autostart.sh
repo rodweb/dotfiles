@@ -9,9 +9,9 @@ export SSH_AUTH_SOCK
 if ! pgrep -x "dunst" > /dev/null; then
   dunst &
 fi
-if ! pgrep -x "unclutter" > /dev/null; then
-  unclutter -b &
-fi
+# if ! pgrep -x "unclutter" > /dev/null; then
+#   unclutter -b &
+# fi
 if ! pgrep -x "greenclip" > /dev/null; then
   greenclip daemon &
 fi
