@@ -2,8 +2,8 @@
 set $win Mod4
 set $alt Mod1
 set $ctrl Control
-set $stterm st -f "Hack:size=10"
 set $term ~/bin/sensible-terminal
+set $stterm ~/bin/sensible-terminal
 
 font pango: Hack, monospace 9
 
@@ -274,7 +274,7 @@ exec --no-startup-id nm-applet
 #exec --no-startup-id transmission-daemon -c ~/tmp/ -w ~/tmp/
 #exec --no-startup-id slack
 exec --no-startup-id spotify
-exec --no-startup-id google-chrome-stable
+exec --no-startup-id google-chrome-unstable
 exec --no-startup-id pamixer --set-volume 10 && pkill -RTMIN+11 i3blocks
 exec --no-startup-id libinput-gestures-setup start
 exec --no-startup-id $stterm -t 'scratch'
