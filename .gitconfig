@@ -3,6 +3,7 @@
 	name = Rodrigo Campos
 	login = rodweb
 [core]
+	pager = diff-so-fancy | less --tabs=4 -RFX
 	editor = nvim
 	excludesfile = /home/rodrigo/.global_ignore
 
