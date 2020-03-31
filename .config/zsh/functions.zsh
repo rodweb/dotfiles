@@ -30,7 +30,7 @@ function y() {
   fi
 }
 
-function cn () {
+function cfg () {
   yadm ls-tree --full-tree -r --name-only HEAD ~ | fzf | xargs -I{} nvim  ~/{}
 }
 
