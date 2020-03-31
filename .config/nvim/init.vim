@@ -4,7 +4,7 @@ syntax enable
 " Plugins {{{
 call plug#begin('~/.vim/plugged')
 Plug 'chriskempson/base16-vim'
-" Plug 'tomasiser/vim-code-dark'
+Plug 'tomasiser/vim-code-dark'
 Plug 'sheerun/vim-polyglot'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'airblade/vim-gitgutter'
@@ -16,8 +16,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'carlitux/deoplete-ternjs'
-Plug 'ternjs/tern_for_vim', { 'do': 'npm install && npm install -g tern' }
+" Plug 'carlitux/deoplete-ternjs'
+" Plug 'ternjs/tern_for_vim', { 'do': 'npm install && npm install -g tern' }
 Plug 'w0rp/ale'
 Plug 'janko/vim-test'
 Plug 'tmux-plugins/vim-tmux-focus-events'
@@ -35,7 +35,7 @@ let maplocalleader=","
 
 set t_Co=256
 set background=dark
-"colorscheme codedark
+colorscheme codedark
 "colorscheme rod
 
 let test#strategy = "dispatch"
@@ -251,7 +251,7 @@ augroup END
 " HTML {{{
 augroup HtmlFilesGroup
   autocmd!
-  autocmd BufRead *.html setlocal nowrap
+  autocmd BufRead *.html :setlocal nowrap
 augroup END
 " }}}
 
@@ -370,7 +370,7 @@ augroup END
 " Base16 color scheme {{{
 if filereadable(expand("~/.vimrc_background"))
     let base16colorspace=256
-    source ~/.vimrc_background
+"    source ~/.vimrc_background
 endif
 " }}}
 
