@@ -1,6 +1,6 @@
 #!/bin/sh
 # 'st -f Hack:size=10'
-for terminal in $TERMINAL termite st urxvt kitty xterm gnome-terminal; do
+for terminal in $TERMINAL st termite st urxvt kitty xterm gnome-terminal; do
     if command -v $terminal > /dev/null 2>&1; then
         exec $terminal "$@"
     fi
