@@ -54,6 +54,10 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.\*']
 
 " FZF {{{
 let g:fzf_tags_command = 'ctags -R --exclude=.git --exclude=node_modules --exclude=dist --exclude=docs --exclude="*.json"'
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   fzf#vim#with_preview(), <bang>0)
 " }}}
 
 " EasyMotion {{{
@@ -191,11 +195,9 @@ nnoremap <leader>y :Filetypes<cr>
 nnoremap <leader>h :History<cr>
 nnoremap <leader>mm :Maps<cr>
 "nnoremap <leader>tt :Tags<cr>
-imap <c-f> <plug>(fzf-complete-path)
+imap <c-f> <plug>(fzf-complete-file-ag)
+imap <c-l> <plug>(fzf-complete-line)
 imap <c-x><c-k> <plug>(fzf-complete-word)
-imap <c-x><c-f> <plug>(fzf-complete-path)
-imap <c-x><c-j> <plug>(fzf-complete-file-ag)
-imap <c-x><c-l> <plug>(fzf-complete-line)
 
 " NERDTree
 nnoremap <leader>e :NERDTreeToggle<cr>
