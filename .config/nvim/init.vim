@@ -16,8 +16,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" Plug 'carlitux/deoplete-ternjs'
-" Plug 'ternjs/tern_for_vim', { 'do': 'npm install && npm install -g tern' }
 Plug 'w0rp/ale'
 Plug 'janko/vim-test'
 Plug 'tmux-plugins/vim-tmux-focus-events'
@@ -26,34 +24,33 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'easymotion/vim-easymotion'
 Plug 'powerman/vim-plugin-autosess'
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'tapayne88/vim-mochajs'
 call plug#end()
 " }}}
 
 let mapleader = " "
 let maplocalleader=","
 
+" Theme {{{
 set t_Co=256
 set background=dark
 colorscheme codedark
-"colorscheme rod
-
-let test#strategy = "dispatch"
-let g:EditorConfig_exclude_patterns = ['fugitive://.\*']
+" colorscheme rod
 let g:lightline = { 'colorscheme': 'wombat' }
+" }}}
+
+" Vim Test {{{
+let test#strategy = "dispatch"
+" }}}
+
+" Deoplete {{{
 let g:deoplete#enable_at_startup = 1
 call deoplete#custom#option('auto_complete_delay', 200)
-let g:tern#command = ["tern"]
-let g:tern#arguments = ["--persistent"]
+" }}}
 
-" nmap <silent> gd <Plug>(coc-definition)
-" nmap <silent> gy <Plug>(coc-type-definition)
-" nmap <silent> gi <Plug>(coc-implementation)
-" nmap <silent> gr <Plug>(coc-references)
-" nmap <silent> gd <Plug>(coc-definition)
-" nmap <silent> gy <Plug>(coc-type-definition)
-" nmap <silent> gi <Plug>(coc-implementation)
-" nmap <silent> gr <Plug>(coc-references)
+" Editor Config {{{
+let g:EditorConfig_exclude_patterns = ['fugitive://.\*']
+" }}}
 
 " FZF {{{
 let g:fzf_tags_command = 'ctags -R --exclude=.git --exclude=node_modules --exclude=dist --exclude=docs --exclude="*.json"'
@@ -85,7 +82,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 set visualbell
 set noshowmode
 set timeoutlen=300
-set updatetime=750
+set updatetime=100
 set autowrite
 set backupcopy=yes
 
@@ -201,6 +198,7 @@ imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 
 nnoremap <leader>e :NERDTreeToggle<cr>
+nnoremap <leader>p :NERDTreeFind<cr>
 
 nnoremap ]e :ALENext<cr>
 nnoremap [e :ALEPrevious<cr>
@@ -372,13 +370,5 @@ if filereadable(expand("~/.vimrc_background"))
     let base16colorspace=256
 "    source ~/.vimrc_background
 endif
-" }}}
-
-" Omnifunc {{{
-" augroup Omnifunc
-"   autocmd!
-"   autocmd FileType javascript,jsx,javascript.jsx setlocal omnifunc=tern#Complete
-"   autocmd FileType typescript setlocal omnifunc=ale#Complete
-" augroup END
 " }}}
 
