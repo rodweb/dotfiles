@@ -181,7 +181,7 @@ endfunction
 
 nnoremap <leader>td :Rg TODO\(rod\)<cr>
 
-" FZF mappings
+" FZF
 nnoremap <leader>f :GitFiles<cr>
 nnoremap <leader>bl :BLines<cr>
 nnoremap <leader>b :Buffers<cr>
@@ -197,13 +197,15 @@ imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 
+" NERDTree
 nnoremap <leader>e :NERDTreeToggle<cr>
 nnoremap <leader>p :NERDTreeFind<cr>
 
+" ALE
 nnoremap ]e :ALENext<cr>
 nnoremap [e :ALEPrevious<cr>
 
-" Fugitive mappins
+" Fugitive
 nnoremap <leader>gd :Gdiff<cr>
 nnoremap <leader>gs :Gstatus<cr>
 nnoremap <leader>gc :Git commit<cr>
