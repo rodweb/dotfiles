@@ -24,8 +24,7 @@ fi
 
 xrdb -load ~/.Xresources &
 xmodmap ~/.Xmodmap
-setxkbmap -option 'caps:ctrl_modifier'
+setxkbmap br -variant abnt2 -option 'caps:ctrl_modifier'
 xcape -t 200 -e 'Caps_Lock=Escape'
-setxkbmap br
 
 
