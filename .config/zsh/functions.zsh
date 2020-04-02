@@ -65,7 +65,6 @@ function gm() {
   git commit -m ""$args""
 }
 
-unalias ga
 function ga() {
   git ls-files --modified --other --exclude-standard | fzf --prompt "add: " --print0 --multi | xargs --null --verbose git add
 }

@@ -1,6 +1,7 @@
 filetype plugin indent on
 syntax enable
 
+
 " Plugins {{{
 call plug#begin('~/.vim/plugged')
 Plug 'chriskempson/base16-vim'
@@ -23,7 +24,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'easymotion/vim-easymotion'
-Plug 'powerman/vim-plugin-autosess'
+" Plug 'powerman/vim-plugin-autosess'
 Plug 'tapayne88/vim-mochajs'
 call plug#end()
 " }}}

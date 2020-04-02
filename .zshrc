@@ -92,12 +92,10 @@ alias pp='cd $HOME/dev/gupy-public-pages'
 alias ops='cd $HOME/dev/ops'
 alias pr='hub pull-request -b gupy-io:master'
 
-# alias pgcli='PAGER="nvim -R -u ~/.config/nvim/initpg.vim -" EDITOR=nvim /usr/bin/pgcli -h localhost -U postgres gupy_development_prod'
-alias pgcli='PAGER="nvim -R -u ~/.config/nvim/initpg.vim -" EDITOR=nvim ~/.local/bin/pgcli -h localhost -U postgres gupy_development_prod'
-alias pgdev='PAGER="nvim -R -u ~/.config/nvim/initpg.vim -" EDITOR=nvim /usr/bin/pgcli -h localhost -U postgres gupy_development'
-alias pgtest='PAGER="nvim -R -u ~/.config/nvim/initpg.vim -" EDITOR=nvim /usr/bin/pgcli -h localhost -U postgres gupy_test'
-alias pgprod='PAGER="nvim -R -u ~/.config/nvim/initpg.vim -" EDITOR=nvim /usr/bin/pgcli'
-alias pgbud='PAGER="nvim -R -u ~/.config/nvim/initpg.vim -" EDITOR=nvim /usr/bin/pgcli -h localhost -U postgres budget'
+alias pgcli='PAGER="nvim -R -u ~/.config/nvim/initpg.vim -" ~/.local/bin/pgcli'
+alias dpgcli='docker run -it --rm --network gupy-api-darthvader_default dencold/pgcli'
+alias pgdev='pgcli -h localhost -U postgres gupy_development'
+alias pgtest='pgcli -h localhost -U postgres gupy_test'
 alias gupydate='cat $HOME/scripts/gupy/gupy-repos.csv | sed -e "s/,/\t/g" | xargs -L1 $HOME/scripts/gupy/gupydate.sh'
 
 
