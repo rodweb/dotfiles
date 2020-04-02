@@ -24,7 +24,6 @@ Plug 'itchyny/lightline.vim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'easymotion/vim-easymotion'
-" Plug 'powerman/vim-plugin-autosess'
 Plug 'tapayne88/vim-mochajs'
 call plug#end()
 " }}}
@@ -48,6 +47,11 @@ let test#strategy = "dispatch"
 let g:deoplete#enable_at_startup = 1
 call deoplete#custom#option('auto_complete_delay', 200)
 " }}}
+
+" Vim Test {{{
+let g:test#javascript#mocha#file_pattern = '\v.*\.test\.(ts|js)$'
+" }}}
+
 
 " Editor Config {{{
 let g:EditorConfig_exclude_patterns = ['fugitive://.\*']
@@ -277,6 +281,7 @@ augroup TypescriptFilesGroup
         \|nnoremap <buffer> <localleader>d :ALEGoToDefinition<cr>
         \|nnoremap <buffer> <localleader>r :ALEFindReferences<cr>
         \|inoremap <buffer> <C-h> <esc>:ALEHover<cr>
+        \|nnoremap <buffer> <localleader>t :compiler mochajs<cr>:TestNearest<cr>
 augroup END
 " }}}
 
