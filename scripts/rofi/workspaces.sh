@@ -3,7 +3,7 @@ function gen_workspaces()
     i3-msg -t get_workspaces | tr ',' '\n' | grep "name" | sed 's/"name":"\(.*\)"/\1/g' | sort -n
 }
 
-WORKSPACE=$( (echo empty; gen_workspaces)  | rofi -dmenu -p "Select workspace")
+WORKSPACE=$( (echo empty; gen_workspaces) | trofi -dmenu -p "Select workspace")
 
 if [ x"empty" = x"${WORKSPACE}" ]
 then

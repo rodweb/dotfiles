@@ -1,7 +1,6 @@
 filetype plugin indent on
 syntax enable
 
-
 " Plugins {{{
 call plug#begin('~/.vim/plugged')
 Plug 'chriskempson/base16-vim'
@@ -25,6 +24,7 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'easymotion/vim-easymotion'
 Plug 'tapayne88/vim-mochajs'
+Plug 'krisajenkins/vim-postgresql-syntax'
 call plug#end()
 " }}}
 
@@ -41,17 +41,13 @@ let g:lightline = { 'colorscheme': 'wombat' }
 
 " Vim Test {{{
 let test#strategy = "dispatch"
+let g:test#javascript#mocha#file_pattern = '\v.*\.test\.(ts|js)$'
 " }}}
 
 " Deoplete {{{
 let g:deoplete#enable_at_startup = 1
 call deoplete#custom#option('auto_complete_delay', 200)
 " }}}
-
-" Vim Test {{{
-let g:test#javascript#mocha#file_pattern = '\v.*\.test\.(ts|js)$'
-" }}}
-
 
 " Editor Config {{{
 let g:EditorConfig_exclude_patterns = ['fugitive://.\*']
@@ -105,6 +101,7 @@ set hidden
 set wrap
 set expandtab
 set shiftwidth=2
+set shiftround
 set smarttab
 
 set incsearch
@@ -306,7 +303,7 @@ augroup END
 " Markdown {{{
 augroup MarkdownFilesGroup
   autocmd!
-  autocmd FileType markdown setlocal wrap nonumber norelativenumber
+  autocmd FileType markdown setlocal wrap linebreak nonumber norelativenumber spell spelllang=pt_br
 augroup END
 " }}}
 
@@ -381,4 +378,3 @@ if filereadable(expand("~/.vimrc_background"))
 "    source ~/.vimrc_background
 endif
 " }}}
-

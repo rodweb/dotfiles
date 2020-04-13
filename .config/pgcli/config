@@ -1,4 +1,3 @@
-# vi: ft=dosini
 [main]
 
 # Enables context sensitive auto-completion. If this is disabled the all
