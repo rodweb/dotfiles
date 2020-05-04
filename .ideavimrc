@@ -17,7 +17,7 @@ nmap j jzz
 nmap k kzz
 nmap n nzz
 nmap N Nzz
-nmap <leader><tab> <C-Tab>
+nmap <leader><tab> :action Switcher<cr>
 nmap <leader>s :action SaveAll<cr>
 nmap <leader>/ :action FindInPath<cr>
 nmap <leader>f :action GotoFile<cr>
@@ -38,4 +38,5 @@ nmap [e :action GotoPreviousError<cr>
 nmap ]c :action VcsShowNextChangeMarker<cr>
 nmap [c :action VcsShowPreviousChangeMarker<cr>
 
-nmap <leader><space> :action AceAction<cr>
+nmap s :action AceAction<cr>
+
