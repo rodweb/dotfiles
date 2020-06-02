@@ -108,7 +108,7 @@ vi = True
 # Possible values "STOP" or "RESUME"
 on_error = STOP
 
-# Set threshold for row limit prompt. Use 0 to disable prompt.
+# Set threshold for row limit. Use 0 to disable limiting.
 row_limit = 1000
 
 # Skip intro on startup and goodbye on exit
@@ -125,21 +125,22 @@ less_chatty = False
 # \# - "@" sign if logged in as superuser, '>' in other case
 # \n - Newline
 # \dsn_alias - name of dsn alias if -D option is used (empty otherwise)
-prompt = '\u@\h:\d> '
+prompt = "\u@\h:\d> "
 
 # Number of lines to reserve for the suggestion menu
 min_num_menu_lines = 4
 
 # Character used to left pad multi-line queries to match the prompt size.
-multiline_continuation_char = ''
+multiline_continuation_char = ""
 
 # The string used in place of a null value.
-null_string = '<null>'
+null_string = <null>
 
 # manage pager on startup
 enable_pager = True
 
-# Custom colors for the completion menu, toolbar, etc.
+# Use keyring to automatically save and load password in a secure manner 
+keyring = True
 [colors]
 Token.Menu.Completions.Completion.Current = 'bg:#ffffff #000000'
 Token.Menu.Completions.Completion = 'bg:#008888 #ffffff'
@@ -167,8 +168,6 @@ Token.Toolbar.Transaction.Failed = 'bg:#222222 #ff005f bold'
 Token.Output.Header = "#00ff5f bold"
 Token.Output.OddRow = ""
 Token.Output.EvenRow = ""
-
-# Named queries are queries you can execute by name.
 [named queries]
 
 # DSN to call by -D option
