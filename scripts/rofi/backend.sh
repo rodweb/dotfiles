@@ -3,7 +3,7 @@ script="@backend"
 task=$1
 echo "$script: #$task"
 
-cd ~/dev/gupy/backend
+cd $HOME/dev/gupy-api-darthvader
 
 function start_container() {
     docker-compose up -d

@@ -5,7 +5,7 @@ script="@frontend"
 task=$1
 echo "$script: #$task"
 
-cd ~/dev/gupy/frontend
+cd $HOME/dev/gupy-front
 
 function update() {
     git stash
