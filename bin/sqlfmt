@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+image='sqlformatter'
+if [[ ! "$(docker images | grep $image)" ]]; then
+  pushd $HOME/bin
+    docker build -f $image.Dockerfile -t $image .
+  popd
+fi
+
+dir=$(mktemp -d)
+pushd $dir
+  xsel -b > query
+  docker run --rm -v $dir:/app sqlformatter query | xsel -ib
+popd

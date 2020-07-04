@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+cd $HOME/bin
+chosen=$(ls | dmenu)
+[[ -z "$chosen" ]] && exit
+st -e zsh -i -c "nvim $(pwd)/$chosen"

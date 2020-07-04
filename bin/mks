@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+cd $HOME/bin
+filename="$1"
+
+[[ -z "$filename" ]] && exit 1;
+[[ -f "$filename" ]] && exit 2;
+
+echo '#!/usr/bin/env bash' > $filename
+chmod +x $filename
+${EDITOR:=vim} $filename
