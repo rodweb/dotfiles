@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+# vol up
+# vol down
+# vol mute
+# vol set 50
+
+function get_volume {
+  pamixer --get-volume
+}
+
+function set_volume {
+  pamixer --set-volume $1
+}
+
+function is_muted {
+  pamixer --get-mute
+}
+
+function mute {
+  pamixer --mute
+}
+
+function unmute {
+  pamixer --unmute
+}
+
+function notify {
+  # TODO: notify mute
+  volume=`get_volume`
+  bar=$(seq -s "─" $(($volume / 5)) | sed 's/[0-9]//g')
+  dunstify --timeout 1800 --replace 2999 "$volume% $bar"
+}
+
+function print_values {
+  echo `get_volume`, `is_muted`
+}
+
+case $1 in
+  up)
+    set_volume $((`get_volume` + 5))
+    ;;
+  down)
+    set_volume $((`get_volume` - 5))
+    ;;
+  set)
+    value=$2
+    if [[ "$value" -le 0 ]]; then
+      set_volume 0
+    elif [[ "$value" -ge 100 ]]; then
+      set_volume 100
+    else
+      set_volume $value
+    fi
+    ;;
+  mute)
+    if [[ $(is_muted) = true ]]; then
+      unmute
+    else
+      mute
+    fi
+    ;;
+  *)
+    skip_notify=true
+    ;;
+esac
+
+print_values
+[[ ! "$skip_notify" ]] && notify;
+
+exit 0
