@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+level=$(acpi -b | awk '{ print $4 }' | sed 's/%,//g')
+
+status=$(acpi -b | awk '{ print $3 }' | sed 's/,//g')
+
+echo $level, ${status,,}

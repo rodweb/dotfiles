@@ -79,6 +79,7 @@ alias yd='cd $HOME && yadm diff'
 alias pdf='apvlv'
 alias st='st -f "Hack:size=10"'
 alias tmux='TERM=tmux-256color tmux'
+alias please='while [ $? -ne 0 ] && [ $? -le 130 ]; do eval "$(fc -ln -1)"; done'
 
 # Git
 alias grhh='git reset HEAD --hard'

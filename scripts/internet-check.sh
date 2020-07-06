@@ -14,9 +14,9 @@ while true; do
         CURR=$NOW
         if [ $CHANGED -eq 0 ]; then
                 if [ $NOW -eq 0 ]; then
-                        notify-send "Internet" "Up"
+                        dunstify -r 1999 "Internet" "Up"
                 else
-                        notify-send "Internet" "Down"
+                        dunstify -r 1999 "Internet" "Down"
                 fi
         fi
         sleep 5
