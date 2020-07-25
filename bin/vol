@@ -26,13 +26,13 @@ function unmute {
 
 function notify {
   # TODO: notify mute
-  volume=`get_volume`
+  volume=$(get_volume)
   bar=$(seq -s "─" $(($volume / 5)) | sed 's/[0-9]//g')
   dunstify --timeout 1800 --replace 2999 "$volume% $bar"
 }
 
 function print_values {
-  echo `get_volume`, `is_muted`
+  echo $(get_volume), $(is_muted)
 }
 
 case $1 in
