@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+chosen=$(echo -e '[cancel]\nshutdown\nreboot\nlogout\nlock' | tdmenu -p "system")
+
+case "$1" in
+  shutdown)
+    systemctl shutdown;;
+  reboot)
+    systemctl reboot;;
+  logout) i3-msg exit;;
+  lock) lock;;
+esac

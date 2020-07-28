@@ -11,21 +11,27 @@ notify() {
   notify-send "pomodoro $1" -i null
 }
 
+state() {
+  echo $(cut -f1 < "$status_file")
+}
+
 start() {
-  current=$(cut -f1 < "$status_file")
-  echo $current
+  current=$(state)
   work_time=$(awk '/work/{print $2}' < "$config_file")
   break_time=$(awk '/break/{print $2}' < "$config_file")
+  next=$current
   if [ "$current" = "work" ]; then
     current="break"
+    slice=$break_time
   else
     current="work"
+    slice=$work_time
   fi
-  echo $current
 
-  next_break=$(date -d "+1 minutes" +%s)
+  next_break=$(date -d "+$slice minutes" +%s)
   break_at=$(date -d "@$next_break" '+%H:%M')
-  echo "DISPLAY=:0 pomo $current" | at "$break_at"
+  echo "current $current, next $next"
+  echo "DISPLAY=:0 pomo $next" | at "$break_at"
   echo -e "$current\tuntil\t$next_break" > "$status_file"
   notify "started"
   exit 0
@@ -37,13 +43,9 @@ stop() {
   exit 0
 }
 
-status() {
-  notify "remaining $secs_remaining"
-}
-
 ask_for() {
   option=$(echo -e "yes\nno" | dmenu -c -l 3 -p "$1?")
-  [ "$option" = "no" ] && stop
+  [ "$option" != "yes" ] && stop
   start
 }
 
@@ -59,21 +61,20 @@ remaining() {
 menu() {
   secs=$(remaining)
   if [ "$secs" -gt 0 ]; then
-    secs_remaining=$(printf "%02d:%02d" $((secs/60)) $((secs%60)))
+    secs_remaining=$(printf "%s %02d:%02d" $(state) $((secs/60)) $((secs%60)))
   else
     secs_remaining=stopped
   fi
 
-  option=$(echo -e 'start\nstop\nstatus\nconfig' | dmenu -c -l 5 -p "Pomodoro ($secs_remaining):")
+  option=$(echo -e 'start\nstop\nconfig' | dmenu -c -l 5 -p "Pomodoro ($secs_remaining):")
   [ -z "$option" ] || $0 "$option"
 }
 
 case "$1" in
   start)  start;;
   stop)   stop;;
-  status) status;;
   config) edit_config;;
-  break)  ask_for "Work";;
-  work)   ask_for "Break";;
+  break)  ask_for "Break";;
+  work)   ask_for "Work";;
   *)      menu;;
 esac
