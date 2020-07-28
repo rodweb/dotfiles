@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+config_path="$HOME/.config/pomo" 
+config_file="$config_path/config"
+status_file="$config_path/status"
+
+mkdir -p "$config_path"
+[ -f "$config_file" ] || echo -e "work\t25 minutes\nbreak\t5 minutes" > "$config_file"
+
+start() {
+  next_break=$(date -d "+10 seconds" +%s)
+  echo -e "break\t$next_break" > "$status_file"
+}
+
+remaining() {
+  echo $(($(cat /tmp/pomo | awk '/break/ {print $2}') - $(date +%s)))
+}
+
+notify() {
+  notify-send "pomodoro $1" -i null
+}
+
+secs=$(remaining)
+if [ "$secs" -gt 0 ]; then
+  secs_remaining=$(printf "%02d:%02d" $((secs/60)) $((secs%60)))
+else
+  secs_remaining=stopped
+fi
+
+case "$1" in
+  start)
+    start
+    notify "started"
+    ;;
+  stop)
+    notify "stopped"
+    ;;
+  *)
+    option=$(echo -e 'start\nstop\npause' | dmenu -p "Pomo ($secs_remaining):")
+    [ -z "$option" ] || $0 $option
+    ;;
+esac
