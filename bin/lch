@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+selected=$(echo -e "spotify\nchrome\n" | dmenu)
+jumpapp "$selected"

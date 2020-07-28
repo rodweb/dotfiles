@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
 image='sqlformatter'
-if [[ ! "$(docker images | grep $image)" ]]; then
+# if [[ ! "$(docker images | grep $image)" ]]; then
   pushd $HOME/bin
     docker build -f $image.Dockerfile -t $image .
   popd
-fi
+# fi
 
 dir=$(mktemp -d)
 pushd $dir

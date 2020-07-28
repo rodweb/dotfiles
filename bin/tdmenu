@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+dmenu -c -l 20 "$@"

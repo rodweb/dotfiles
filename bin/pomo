@@ -7,36 +7,73 @@ status_file="$config_path/status"
 mkdir -p "$config_path"
 [ -f "$config_file" ] || echo -e "work\t25 minutes\nbreak\t5 minutes" > "$config_file"
 
-start() {
-  next_break=$(date -d "+10 seconds" +%s)
-  echo -e "break\t$next_break" > "$status_file"
-}
-
-remaining() {
-  echo $(($(cat /tmp/pomo | awk '/break/ {print $2}') - $(date +%s)))
-}
-
 notify() {
   notify-send "pomodoro $1" -i null
 }
 
-secs=$(remaining)
-if [ "$secs" -gt 0 ]; then
-  secs_remaining=$(printf "%02d:%02d" $((secs/60)) $((secs%60)))
-else
-  secs_remaining=stopped
-fi
+start() {
+  current=$(cut -f1 < "$status_file")
+  echo $current
+  work_time=$(awk '/work/{print $2}' < "$config_file")
+  break_time=$(awk '/break/{print $2}' < "$config_file")
+  if [ "$current" = "work" ]; then
+    current="break"
+  else
+    current="work"
+  fi
+  echo $current
+
+  next_break=$(date -d "+1 minutes" +%s)
+  break_at=$(date -d "@$next_break" '+%H:%M')
+  echo "DISPLAY=:0 pomo $current" | at "$break_at"
+  echo -e "$current\tuntil\t$next_break" > "$status_file"
+  notify "started"
+  exit 0
+}
+
+stop() {
+  echo -e "break\tuntil\t0" > "$status_file"
+  notify "stopped"
+  exit 0
+}
+
+status() {
+  notify "remaining $secs_remaining"
+}
+
+ask_for() {
+  option=$(echo -e "yes\nno" | dmenu -c -l 3 -p "$1?")
+  [ "$option" = "no" ] && stop
+  start
+}
+
+edit_config() {
+  sensible-terminal -e "$EDITOR" "$config_file"
+}
+
+remaining() {
+  [ -f "$status_file" ] || stop
+  echo $(($(awk '/until/ {print $3}' < "$status_file") - $(date +%s)))
+}
+
+menu() {
+  secs=$(remaining)
+  if [ "$secs" -gt 0 ]; then
+    secs_remaining=$(printf "%02d:%02d" $((secs/60)) $((secs%60)))
+  else
+    secs_remaining=stopped
+  fi
+
+  option=$(echo -e 'start\nstop\nstatus\nconfig' | dmenu -c -l 5 -p "Pomodoro ($secs_remaining):")
+  [ -z "$option" ] || $0 "$option"
+}
 
 case "$1" in
-  start)
-    start
-    notify "started"
-    ;;
-  stop)
-    notify "stopped"
-    ;;
-  *)
-    option=$(echo -e 'start\nstop\npause' | dmenu -p "Pomo ($secs_remaining):")
-    [ -z "$option" ] || $0 $option
-    ;;
+  start)  start;;
+  stop)   stop;;
+  status) status;;
+  config) edit_config;;
+  break)  ask_for "Work";;
+  work)   ask_for "Break";;
+  *)      menu;;
 esac

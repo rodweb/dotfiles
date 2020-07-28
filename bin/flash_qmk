@@ -1,6 +1,7 @@
 #!/bin/sh
 cd "$HOME/tmp"
-teensy-loader-cli -mmcu=atmega32u4 -w $(ls -1t *.hex | head -1)
+filename=$(ls -1t *.hex | head -1)
+teensy-loader-cli -mmcu=atmega32u4 -w "$filename"
 sleep 3
 setxkbmap br
 dunstify Flashed
