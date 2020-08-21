@@ -281,7 +281,7 @@ exec --no-startup-id libinput-gestures-setup start
 exec --no-startup-id $stterm -t 'scratch'
 exec --no-startup-id udiskie -2
 exec --no-startup-id srandrd ~/scripts/i3/srandr.sh
-exec --no-startup-id xautolock -time 3 -locker $locker
+# exec --no-startup-id xautolock -time 3 -locker $locker
 exec --no-startup-id ~/.autostart.sh
 
 

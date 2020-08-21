@@ -4,6 +4,5 @@ source ~/dotfiles/zsh/aliases/npm.zsh
 source ~/dotfiles/zsh/aliases/system.zsh
 source ~/dotfiles/zsh/aliases/utils.zsh
 source ~/dotfiles/zsh/aliases/yarn.zsh
+[ -f ~/dotfiles/zsh/aliases/gupy.zsh ] && source ~/dotfiles/zsh/aliases/gupy.zsh
 alias k='kubectl'
-alias vpn='sudo openvpn $HOME/.vpn/rodrigo.campos.ovpn'
-alias ntp='sudo ntpdate -u b.ntp.br'

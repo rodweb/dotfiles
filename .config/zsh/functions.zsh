@@ -73,7 +73,7 @@ function git_commit() {
   if [ -n "$BUFFER" ]; then
     BUFFER="git add -u && git commit -m \"$BUFFER\" && git push origin $(git_current_branch)"
   elif [ -z "$BUFFER" ]; then
-    BUFFER="git add -u && git commit -v && git push $(git_current_branch)"
+    BUFFER="git add -u && git commit -v && git push origin $(git_current_branch)"
   fi
   zle accept-line
 }

@@ -17,4 +17,5 @@ alias grh='git reset HEAD --head'
 alias gri='git rebase -i'
 alias grs='git reset HEAD -- .' # reset staged
 alias gs='git status -s'
+alias grm='git remote prune origin'
 # TODO: git cherry-pick -p A^..B

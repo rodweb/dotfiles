@@ -95,8 +95,6 @@ alias pr='hub pull-request -b gupy-io:master'
 
 alias pgcli='PAGER="nvim -R -u ~/.config/nvim/initpg.vim -" ~/.local/bin/pgcli'
 alias dpgcli='docker run -it --rm --network gupy-api-darthvader_default dencold/pgcli'
-alias pgdev='pgcli -h localhost -U postgres gupy_development'
-alias pgtest='pgcli -h localhost -U postgres gupy_test'
 alias gupydate='cat $HOME/scripts/gupy/gupy-repos.csv | sed -e "s/,/\t/g" | xargs -L1 $HOME/scripts/gupy/gupydate.sh'
 
 

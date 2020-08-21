@@ -265,6 +265,7 @@ augroup JavascriptFilesGroup
   autocmd FileType javascript
         \ nnoremap <buffer> <localleader>c mqI//<esc>'q
         \|nnoremap <buffer> <localleader>t :compiler mochajs<cr>:TestNearest<cr>
+        \|nnoremap <buffer> <localleader>, :Dispatch node %<cr>
         \|iabbrev <buffer> cl console.log()<left>
 augroup END
 " }}}
@@ -313,6 +314,7 @@ augroup CFilesGroup
   autocmd FileType c
         \ iabbrev iio #include <stdio.h>
         \|iabbrev ilib #include <stdlib.h>
+        \|nnoremap <buffer> <localleader>, :update<cr>:Dispatch cc % && ./a.out<cr>
 augroup END
 " }}}
 
