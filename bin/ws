@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 dev_path="$HOME/dev/"
-chosen=$(fd --hidden --type=directory .idea "$dev_path" | sed 's@'"$dev_path"'@@' | sed 's/\/.idea//' | tdmenu -p "Project")
+chosen=$(fd --no-ignore --hidden --type=directory .idea "$dev_path" | sed 's@'"$dev_path"'@@' | sed 's/\/.idea//' | tdmenu -p "Project")
 [ -z "$chosen" ] && exit 0
 project="$dev_path$chosen"
 [ -d "$project" ] && (webstorm "$project")
