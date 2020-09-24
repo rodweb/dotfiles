@@ -1,0 +1,29 @@
+# /home/rod/.config/tmuxinator/gupy.yml
+
+name: gupy
+root: ~/dev/gupy
+
+attach: false
+on_project_stop: cd ~/dev/gupy/gupy-api-darthvader/ && docker-compose stop
+
+windows:
+  - frontend:
+      layout: even-horizontal
+      pre: cd gupy-front
+      panes:
+        - npm run start-companies
+        - npm run start-candidates
+  - backend:
+      layout: even-horizontal
+      pre: cd gupy-api-darthvader
+      panes:
+        - TRACING_ENABLED=false LOG_MESSAGE_LEVEL=error TS_NODE_TRANSPILE_ONLY=true npm start
+        - docker-compose up
+  - consumers:
+      layout: tiled
+      pre: cd gupy-api-darthvader
+      panes:
+        - TRACING_ENABLED=false LOG_MESSAGE_LEVEL=error TS_NODE_TRANSPILE_ONLY=true npm run dev-task-consumers bulk-move-applications
+        - TRACING_ENABLED=false LOG_MESSAGE_LEVEL=error TS_NODE_TRANSPILE_ONLY=true npm run dev-task-consumers bulk-disqualify-applications
+        - TRACING_ENABLED=false LOG_MESSAGE_LEVEL=error TS_NODE_TRANSPILE_ONLY=true npm run dev-task-consumers completed-task
+        - TRACING_ENABLED=false LOG_MESSAGE_LEVEL=error TS_NODE_TRANSPILE_ONLY=true NODE_ENV=development QUEUE_CONSUMERS=index-application,index-talent-pool npx ts-node interfaces/consumers/consumers.js

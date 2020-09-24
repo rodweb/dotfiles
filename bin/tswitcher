@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+windows=$(tmux list-windows | cut -d' ' -f1,2 | grep -v '*' | sed 's/[\*-]$//')
+selected=$(echo "$windows" | tdmenu)
+[[ -z "$selected" ]] && exit
+tmux select-window -t "$(echo "$selected" | cut -d':' -f1)"
