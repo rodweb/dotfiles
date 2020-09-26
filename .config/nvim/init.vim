@@ -9,22 +9,24 @@ Plug 'sheerun/vim-polyglot'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/fzf.vim'
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'w0rp/ale'
 Plug 'janko/vim-test'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'itchyny/lightline.vim'
-Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'easymotion/vim-easymotion'
-Plug 'tapayne88/vim-mochajs'
 Plug 'krisajenkins/vim-postgresql-syntax'
+Plug 'ap/vim-css-color'
+Plug 'guns/xterm-color-table.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 call plug#end()
 " }}}
 
@@ -34,19 +36,98 @@ let maplocalleader=","
 " Theme {{{
 set t_Co=256
 set background=dark
-colorscheme codedark
-" colorscheme rod
+" colorscheme codedark
+colorscheme rodark
 let g:lightline = { 'colorscheme': 'wombat' }
+
+function! Syn()
+  for id in synstack(line("."), col("."))
+    echo synIDattr(id, "name")
+  endfor
+endfunction
+command! -nargs=0 Syn call Syn()
+
+set statusline=%{synIDattr(synIDtrans(synID(line('.'),col('.'),1)),'name')}
+" }}}
+
+" COC {{{
+let g:coc_global_extensions = [ 'coc-json', 'coc-tsserver', 'coc-eslint', 'coc-snippets', 'coc-jest' ]
+
+function! s:GoToDefinition()
+  if CocAction('jumpDefinition')
+    return v:true
+  endif
+
+  let ret = execute("silent! normal \<C-]>")
+  if ret =~ "Error" || ret =~ "错误"
+    call searchdecl(expand('<cword>'))
+  endif
+endfunction
+
+nmap <silent> gd :call <SID>GoToDefinition()<CR>
+
+inoremap <silent><expr> <Tab> coc#refresh()
+" nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+nmap <silent> ga <Plug>(coc-codeaction)
+nmap <leader>rn <Plug>(coc-rename)
+nmap <leader>qf <Plug>(coc-fix-current)
+
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+" position. Coc only does snippet and additional edit on confirm.
+" <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
+if exists('*complete_info')
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
+
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocActionAsync('doHover')
+  endif
+endfunction
 " }}}
 
 " Vim Test {{{
 let test#strategy = "dispatch"
-let g:test#javascript#mocha#file_pattern = '\v.*\.test\.(ts|js)$'
-" }}}
-
-" Deoplete {{{
-let g:deoplete#enable_at_startup = 1
-call deoplete#custom#option('auto_complete_delay', 200)
+let g:test#javascript#mocha#file_pattern = '\v.*\.(test|spec)\.(ts|js)$'
 " }}}
 
 " Editor Config {{{
@@ -78,9 +159,9 @@ let b:ale_fixers = {'typescript': ['prettier', 'tslint']}
 " }}}
 
 " UltiSnips {{{
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" let g:UltiSnipsExpandTrigger="<tab>"
+" let g:UltiSnipsJumpForwardTrigger="<c-b>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " }}}
 
 " Settings {{{
@@ -130,7 +211,7 @@ nnoremap <leader>s :update<cr>
 nnoremap <leader>w <c-w><c-w>
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>ed :e $MYVIMRC<cr>
-nnoremap <leader>cd :cd expand('%:h')<cr>
+nnoremap <leader>cd :lcd %:p:h<cr>
 nnoremap <leader>cp :let @+ = expand('%')<cr>
 nnoremap <m-h> <c-w>h
 nnoremap <m-j> <c-w>j
@@ -149,8 +230,8 @@ nnoremap <c-f> <c-f>zz
 nnoremap <c-b> <c-b>zz
 nnoremap <c-u> <c-u>zz
 nnoremap <c-d> <c-d>zz
-nnoremap n nzzzv
-nnoremap N nzzzv
+" nnoremap n nzzzv
+" nnoremap N nzzzv
 nnoremap G Gzz
 nnoremap cw ciw
 "nnoremap / /\v
@@ -173,8 +254,8 @@ while i <= 3
 endwhile
 
 " Damian Conway's Die Blinkënmatchen: highlight matches
-nnoremap <silent> n nzz:call HLNext(0.1)<cr>
-nnoremap <silent> N Nzz:call HLNext(0.1)<cr>
+nnoremap <silent> n nzzzv:call HLNext(0.1)<cr>
+nnoremap <silent> N Nzzzv:call HLNext(0.1)<cr>
 
 function! HLNext (blinktime)
   let target_pat = '\c\%#'.@/
@@ -202,8 +283,16 @@ imap <c-l> <plug>(fzf-complete-line)
 imap <c-x><c-k> <plug>(fzf-complete-word)
 
 " NERDTree
-nnoremap <leader>e :NERDTreeToggle<cr>
-nnoremap <leader>p :NERDTreeFind<cr>
+" nnoremap <leader>e :NERDTreeToggle<cr>
+function MyNerdToggle()
+    if &filetype == 'nerdtree'
+        :NERDTreeToggle
+    else
+        :NERDTreeFind
+    endif
+endfunction
+
+nnoremap <leader>e :call MyNerdToggle()<CR>
 
 " ALE
 nnoremap ]e :ALENext<cr>
@@ -288,7 +377,7 @@ augroup VimFilesGroup
   autocmd!
   autocmd FileType vim
         \ setlocal foldmethod=marker foldlevel=0
-        \|nnoremap <buffer> <localleader>c I"<esc>
+        \|nnoremap <buffer> <localleader>, :update<cr>:source %<cr>
   autocmd BufWritePost $MYVIMRC source % | echom "Reloaded " . expand("%") | redraw
 augroup END
 " }}}
@@ -355,7 +444,6 @@ augroup BufferSettings
   autocmd BufEnter * setlocal cursorline
         \| highlight ALEWarningSign ctermbg=0 ctermfg=16
         \| highlight ALEErrorSign ctermbg=0 ctermfg=1
-        \| highlight LineNr ctermbg=002635 ctermfg=59
   autocmd BufLeave * setlocal nocursorline
 augroup END
 " }}}

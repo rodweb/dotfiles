@@ -33,7 +33,7 @@ hi Folded          ctermfg=241     ctermbg=none    cterm=none
 " -------------------------
 " - Window/Tab delimiters - 
 " -------------------------
-hi VertSplit       ctermfg=none    ctermbg=none    cterm=none
+hi VertSplit       ctermfg=241     ctermbg=none    cterm=none
 hi ColorColumn     ctermfg=none    ctermbg=none    cterm=none
 hi TabLine         ctermfg=none    ctermbg=none    cterm=none
 hi TabLineFill     ctermfg=none    ctermbg=none    cterm=none
@@ -68,8 +68,8 @@ hi NonText         ctermfg=none    ctermbg=none    cterm=none
 hi Todo            ctermfg=233     ctermbg=198     cterm=none
 hi Underlined      ctermfg=none    ctermbg=none    cterm=none
 hi Error           ctermfg=196     ctermbg=none    cterm=none
-hi ErrorMsg        ctermfg=none    ctermbg=196     cterm=none
-hi WarningMsg      ctermfg=none    ctermbg=3       cterm=none
+hi ErrorMsg        ctermfg=196     ctermbg=none    cterm=none
+hi WarningMsg      ctermfg=3       ctermbg=none    cterm=none
 hi Ignore          ctermfg=none    ctermbg=none    cterm=none
 hi SpecialKey      ctermfg=none    ctermbg=none    cterm=none
 
@@ -95,7 +95,7 @@ hi Conditional     ctermfg=none    ctermbg=none    cterm=none
 hi Repeat          ctermfg=none    ctermbg=none    cterm=none
 hi Label           ctermfg=none    ctermbg=none    cterm=none
 hi Operator        ctermfg=none    ctermbg=none    cterm=none
-hi Keyword         ctermfg=251     ctermbg=none    cterm=bold
+hi Keyword         ctermfg=241     ctermbg=none    cterm=none
 hi Exception       ctermfg=none    ctermbg=none    cterm=none
 hi Comment         ctermfg=198     ctermbg=none    cterm=italic
 
@@ -103,7 +103,7 @@ hi Special         ctermfg=none    ctermbg=none    cterm=none
 hi SpecialChar     ctermfg=none    ctermbg=none    cterm=none
 hi Tag             ctermfg=none    ctermbg=none    cterm=none
 hi Delimiter       ctermfg=none    ctermbg=none    cterm=none
-hi SpecialComment  ctermfg=none    ctermbg=none    cterm=none
+hi SpecialComment  ctermfg=198    ctermbg=none    cterm=none
 hi Debug           ctermfg=none    ctermbg=none    cterm=none
 
 " ----------
@@ -148,20 +148,40 @@ hi SpellRare       ctermfg=196     ctermbg=none    cterm=none
 " Specific settings                                                 |
 "--------------------------------------------------------------------
 
-hi Values          ctermfg=167    ctermbg=none    cterm=none
-hi link String Values        
-hi link StringDelimiter Values        
-hi link Character Values        
-hi link Number Values        
-hi link Boolean Values        
-hi link Float Values        
+hi GenericValue ctermfg=1
+hi link String                          GenericValue        
+hi link StringDelimiter                 GenericValue        
+hi link Character                       GenericValue        
+hi link Number                          GenericValue        
+hi link Boolean                         GenericValue        
+hi link Float                           GenericValue        
 
 " --------------------------------
 " GitGutter
 " --------------------------------
-hi link GitGutterAdd DiffAdd
-hi link GitGutterChange DiffChange
-hi link GitGutterDelete DiffDelete
-hi link GitGutterChangeDelete DiffDelete
+hi link GitGutterAdd                    DiffAdd
+hi link GitGutterChange                 DiffChange
+hi link GitGutterDelete                 DiffDelete
+hi link GitGutterChangeDelete           DiffDelete
 
-hi link GitGutterAdd DiffAdd
+" --------------------------------
+" Typescript
+" --------------------------------
+hi link typescriptAbstract              Keyword
+hi link typescriptExport                Keyword
+hi link typescriptImport                Keyword
+hi link typescriptCastKeyword           Keyword
+
+hi link typescriptProp                  Normal
+hi link typescriptBlock                 Normal
+hi link typescriptClassBlock            Normal
+hi link typescriptStringMethod          Normal
+hi link typescriptDOMFormProp           Normal
+hi link typescriptES6SetMethod          Normal
+hi link typescriptJSONStaticMethod      Normal
+hi link typescriptFuncCallArg           Normal
+hi link typescriptPaymentShippingOptionProp Normal
+
+hi Types ctermfg=8
+hi link typescriptTypeReference         Types
+hi link typescriptPredefinedType        Types
