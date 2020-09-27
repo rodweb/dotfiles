@@ -1,6 +1,7 @@
+#!/bin/zsh
 # util
 function mcd() {
-  mkdir -p "$1" && cd "$1";
+  mkdir -p "$1" && cd "$1" || return;
 }
 
 function pdfs() {
@@ -28,11 +29,15 @@ function cfg () {
 }
 
 function cnd() {
+  pushd ~
   yadm ls-files ~ -m | fzf -m | xargs -I{} yadm difftool -y -t meld ~/{}
+  popd
 }
 
 function cna() {
-  yadm add -p ~/$(yadm ls-files ~ -m | fzf)
+  pushd ~
+  yadm add -p ~/"$(yadm ls-files ~ -m | fzf)"
+  popd
 }
 
 # yay/pacman
@@ -46,7 +51,7 @@ function u() {
 }
 
 function pkgs() {
-  pacman -Qteq | egrep -v "^(xorg|gnome|lx|xfce4|xf86)"
+  pacman -Qteq | grep -E -v "^(xorg|gnome|lx|xfce4|xf86)"
 }
 
 # git
@@ -55,14 +60,24 @@ function g() {
   if [[ $# -gt 0 ]]; then
     git "$@"
   else
-    git status -s
+    declare -A gitoptions
+    gitoptions["status"]="git status -s"
+    gitoptions["pull from remote"]="git pull"
+    gitoptions["push to remote"]="git push"
+    gitoptions["unstage all"]="git reset HEAD -- ."
+    selected=$(for key in ${(k)gitoptions}; do echo "$key"; done | fzf --prompt "git: ")
+    if [[ -z "$selected" ]]; then
+      git status -s
+    else 
+      eval "${gitoptions[$selected]}"
+    fi
   fi
 }
 
 unalias gm
 function gm() {
   args="$@"
-  git commit -m ""$args""
+  git commit -m \""$args"\"
 }
 
 function ga() {
