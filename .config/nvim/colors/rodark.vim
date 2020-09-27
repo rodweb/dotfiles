@@ -164,6 +164,9 @@ hi link GitGutterChange                 DiffChange
 hi link GitGutterDelete                 DiffDelete
 hi link GitGutterChangeDelete           DiffDelete
 
+hi link diffAdded                       DiffAdd
+hi link diffRemoved                     DiffDelete
+
 " --------------------------------
 " Typescript
 " --------------------------------
