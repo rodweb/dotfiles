@@ -1,23 +1,16 @@
-source ~/dotfiles/zsh/index.zsh
-BASE16_SHELL=$HOME/.config/base16-shell/
-[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
-
-autoload -U promptinit; promptinit;
-autoload -U edit-command-line
+# zmodload zsh/zprof
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
 ZSH_CONFIGS=$HOME/.config/zsh
-
 [[ -f $HOME/.profile ]] && source $HOME/.profile
 [[ -f $HOME/.zshenv ]] && source $HOME/.zshenv
 
 source /usr/share/zsh/share/antigen.zsh
-#source /usr/share/nvm/init-nvm.sh
-source ~/scripts/zsh/fzf-git-checkout.zsh
-source ~/scripts/zsh/fzf-base16.zsh
-source /usr/share/doc/pkgfile/command-not-found.zsh
-
-export NVM_LAZY_LOAD=true
-
 antigen use oh-my-zsh
 antigen bundle git
 antigen bundle docker
@@ -28,17 +21,47 @@ antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-completions
 antigen bundle lukechilds/zsh-better-npm-completion
 antigen bundle lukechilds/zsh-nvm
-
-antigen theme refined
+antigen bundle aws
+antigen bundle zsh-completion
+antigen bundle tmux
+antigen theme romkatv/powerlevel10k
 antigen apply
+
+# make kubectl completion lazy
+function kubectl() {
+    if ! type __start_kubectl >/dev/null 2>&1; then
+        source <(command kubectl completion zsh)
+    fi
+    command kubectl "$@"
+}
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+source ~/dotfiles/zsh/index.zsh
+BASE16_SHELL=$HOME/.config/base16-shell/
+[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+
+autoload -U promptinit; promptinit
+autoload -U compinit && compinit
+autoload bashcompinit && bashcompinit # for aws-cli completion
+autoload -U edit-command-line
+
+source ~/dotfiles/zsh/functions/fzf-zsh-completion.sh
+bindkey '^A' fzf_completion
+
+source ~/scripts/zsh/fzf-git-checkout.zsh
+source ~/scripts/zsh/fzf-base16.zsh
+source /usr/share/doc/pkgfile/command-not-found.zsh
+
+export NVM_LAZY_LOAD=true
+export YADM_COMPATIBILITY=1
+export NODE_OPTIONS=--max_old_space_size=4096
+export FZF_DEFAULT_COMMAND='rg --files --hidden'
 
 HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE=~/.histfile
-
-export NODE_OPTIONS=--max_old_space_size=4096
-
-export FZF_DEFAULT_COMMAND='rg --files --hidden'
 
 setopt appendhistory
 setopt sharehistory
@@ -52,9 +75,9 @@ alias D='$EDITOR $HOME/.config/dunst/dunstrc'
 alias B='$EDITOR $HOME/.config/i3/i3blocks.conf'
 alias I='$EDITOR $HOME/.config/i3/config'
 alias T='$EDITOR $HOME/.tmux.conf'
-alias V='$EDITOR -c "cd $HOME/.config/nvim" $HOME/.config/nvim/init.vim'
 alias X='$EDITOR $HOME/.Xresources'
 alias Z='$EDITOR $HOME/.zshrc'
+alias V='$EDITOR -c "cd $HOME/.config/nvim" $HOME/.config/nvim/init.vim'
 alias c='clear'
 alias check='git checkout $(git branch | grep -v "*" | fzf)'
 alias q='exit'
@@ -65,12 +88,10 @@ alias mkdir='mkdir -pv'
 alias p='ping google.com'
 alias s='sudo !!'
 alias sz='source $HOME/.zshrc'
-alias et='emacs -nw'
 alias v='$EDITOR'
 alias Z='$EDITOR $HOME/.zshrc'
 alias I='$EDITOR $HOME/.config/i3/config'
 alias B='$EDITOR $HOME/.config/i3/i3blocks.conf'
-alias P='$EDITOR $HOME/.config/qtile/config.py'
 alias update='yay -Syy'
 alias upgrade='yay -Syu --answeredit n --answerdiff n --answerclean n'
 alias search='yay -Ssy'
@@ -80,23 +101,8 @@ alias pdf='apvlv'
 alias st='st -f "Hack:size=10"'
 alias tmux='TERM=tmux-256color tmux'
 alias please='while [ $? -ne 0 ] && [ $? -le 130 ]; do eval "$(fc -ln -1)"; done'
-
-# Git
-alias grhh='git reset HEAD --hard'
-
-# Gupy
-alias back='cd $HOME/dev/gupy/gupy-api-darthvader'
-alias api='cd $HOME/dev/gupy/gupy-api-darthvader/interfaces/http/public-api'
-alias devops='cd $HOME/dev/DevOps-5'
-alias front='cd $HOME/dev/gupy/gupy-front'
-alias pp='cd $HOME/dev/gupy-public-pages'
-alias ops='cd $HOME/dev/ops'
-alias pr='hub pull-request -b gupy-io:master'
-
 alias pgcli='PAGER="nvim -R -u ~/.config/nvim/initpg.vim -" ~/.local/bin/pgcli'
 alias dpgcli='docker run -it --rm --network gupy-api-darthvader_default dencold/pgcli'
-alias gupydate='cat $HOME/scripts/gupy/gupy-repos.csv | sed -e "s/,/\t/g" | xargs -L1 $HOME/scripts/gupy/gupydate.sh'
-
 
 bindkey -v
 zle -N edit-command-line
@@ -105,23 +111,15 @@ bindkey -M vicmd v edit-command-line
 source /usr/share/fzf/completion.zsh
 source /usr/share/fzf/key-bindings.zsh
 
-function gi() { curl -sL gitignore.io/api/$@ ;}
-#source ~/.cache/yay/rvm/rvm.sh
-
 eval "$RUN"
 
 [[ -f $ZSH_CONFIGS/functions.zsh ]] && source $ZSH_CONFIGS/functions.zsh
-
-
-alias mt='back; NODE_ENV=test npx mocha --require=test/MochaBootstrap.js $(fzf)'
-
-export YADM_COMPATIBILITY=1
 
 # tabtab source for packages
 # uninstall by removing these lines
 [[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
 
-eval $(thefuck --alias)
+#eval $(thefuck --alias)
 # fkill - kill processes - list only the ones you can kill. Modified the earlier script.
 fkill() {
     local pid 
@@ -136,3 +134,5 @@ fkill() {
         echo $pid | xargs kill -${1:-9}
     fi  
 }
+
+complete -C '/usr/bin/aws_completer' aws
