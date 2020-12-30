@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# deps (scrot, xclip, dmenu, notify-send)
+option="$1"
+if test -z "$option"; then
+  option=$(printf 'selection\nfocused\nscreen' | tdmenu -p 'screenshot:')
+fi
+
+args=''
+case "$option" in
+  selection)
+    args='--select'
+    ;;
+  focused)
+    args='--focused'
+    ;;
+  screen)
+    ;;
+  *)
+    exit
+    ;;
+esac
+
+scrot "$args" -e 'mv $f /tmp && xclip -selection clipboard -t image/png /tmp/$n' \
+  && notify-send "$0" 'Screenshot taken.'
