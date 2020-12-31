@@ -1,12 +1,16 @@
 #!/usr/bin/env bash
 
-chosen=$(echo -e '[cancel]\nshutdown\nreboot\nlogout\nlock' | tdmenu -p "system")
+chosen=$(echo -e '[cancel]\nshutdown\nsuspend\nreboot\nlogout\nlock' | tdmenu -p "system")
 
-case "$1" in
+case "$chosen" in
   shutdown)
-    systemctl shutdown;;
+    systemctl poweroff;;
+  suspend)
+    systemctl suspend;;
   reboot)
     systemctl reboot;;
   logout) i3-msg exit;;
   lock) lock;;
 esac
+
+echo "$1"
