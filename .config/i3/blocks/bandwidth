@@ -69,24 +69,20 @@ if [[ "${PREV_IN}" != "" ]] && [[ "${PREV_OUT}" != "" ]]; then
   if [[ "${DISPLAY}" = "both" ]]; then
     echo "${USAGE_IN} : ${USAGE_OUT}"
     echo "${USAGE_IN} : ${USAGE_OUT}"
-    echo ""
     DIFF_TOTAL=$((DIFF_TOTAL+DIFF_IN))
     DIFF_TOTAL=$((DIFF_TOTAL+DIFF_OUT))
   elif [[ "${DISPLAY}" = "in" ]]; then
     echo "${USAGE_IN}"
     echo "${USAGE_IN}"
-    echo ""
     DIFF_TOTAL=$((DIFF_TOTAL+DIFF_IN))
   elif [[ "${DISPLAY}" = "out" ]]; then
     echo "${USAGE_OUT}"
     echo "${USAGE_OUT}"
-    echo ""
     DIFF_TOTAL=$((DIFF_TOTAL+DIFF_OUT))
   fi
 else
   echo "?"
   echo "?"
-  echo ""
 fi
 
 # Remember the total and idle CPU times for the next check.

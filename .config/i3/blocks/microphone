@@ -21,9 +21,7 @@ fi
 if [[ "${status}" == "on" ]]; then
   echo "${volume}%"
   echo "${volume}%"
-  echo ""
 else
   echo "off"
   echo "off"
-  echo ""
 fi
