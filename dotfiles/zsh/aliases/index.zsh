@@ -5,4 +5,3 @@ source ~/dotfiles/zsh/aliases/system.zsh
 source ~/dotfiles/zsh/aliases/utils.zsh
 source ~/dotfiles/zsh/aliases/yarn.zsh
 [ -f ~/dotfiles/zsh/aliases/gupy.zsh ] && source ~/dotfiles/zsh/aliases/gupy.zsh
-alias k='kubectl'
