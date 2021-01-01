@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+[ "$#" -lt 2 ] && exit 1
+
+option=$1
+file_source=$2
+file_destination=$3
+
+case $option in
+  encrypt)
+    gpg --encrypt --sign --armor -r rod.apd@gmail.com "$file_source"
+    ;;
+  decrypt)
+    gpg --decrypt "$file_source" > "$file_destination"
+    ;;
+esac
+
+
