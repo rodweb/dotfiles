@@ -1,8 +1,15 @@
 #!/usr/bin/env bash
 
+# pruning git
+echo -e 'Prunning git repos...\c'
+fd --hidden --type directory '.git$' ~/dev/gupy \
+  | sed 's/\/\.git//g' \
+  | xargs -P8 -I{} sh -c 'export f="{}"; cd "$f"; git remote prune origin >/dev/null;'
+echo ok
+
 # clean pacman cache
 echo -e 'Cleaning pacman...\c'
-sudo paccache -r -k1 > /dev/null
+sudo paccache --remove --keep 1 > /dev/null
 echo ok
 
 # clean yay cache
@@ -16,6 +23,7 @@ echo ok
 
 # clean downloads
 echo -e 'Cleaning downloads...\c'
+fd --type file --changed-before 365d --print0 . ~/tmp | xargs -r0 rm --
 find ~/tmp -type f -mtime +365 -print0 | xargs -r0 rm --
 echo ok
 
