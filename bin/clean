@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+# clean pacman cache
+echo -e 'Cleaning pacman...\c'
+sudo paccache -r -k1 > /dev/null
+echo ok
+
+# clean yay cache
+echo -e 'Cleaning yay...\c'
+yay -Sc --aur >/dev/null <<EOF
+Y
+Y
+Y
+EOF
+echo ok
+
+# clean downloads
+echo -e 'Cleaning downloads...\c'
+find ~/tmp -type f -mtime +365 -print0 | xargs -r0 rm --
+echo ok
+
+# clean spotify cache
+# echo -e 'Cleaning spotify...\c'
+# rm -rf ~/.cache/spotify/Data/
+# echo ok
+
+# clean docker unused
+# echo -e 'Cleaning docker...\c'
+# docker volune prune -f
+# docker system prune -af
+# echo ok
