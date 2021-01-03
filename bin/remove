@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+function is_empty() {
+  ls -1qA | grep -q "$1"
+}
+
+function remove() {
+  for i in "$@"; do
+    if test -d $i; then
+      # if is_empty $i; then
+      #   read -p "Directory is not empty. Remove anyway? "
+      #   [ "$REPLY" != "y" ] && continue
+      # fi
+      rmdir -p $i
+    else
+      rm $i 2>/dev/null
+    fi
+  done
+}
