@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 FORMAT="${BLOCK_INSTANCE:-%H:%M}"
 DATETIME=$(date "+${FORMAT}")

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 command -v acpi > /dev/null || exit
 test $(acpi | grep -q "No support") && exit

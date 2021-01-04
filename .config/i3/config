@@ -220,10 +220,10 @@ mode "resize" {
 
 bindsym $win+r mode "resize"
 
-hide_edge_borders both
-smart_gaps on
+# hide_edge_borders both
+# smart_gaps on
 
-gaps inner 4
+# gaps inner 4
 
 assign[class="Google-chrome-stable"] $webws
 
@@ -306,7 +306,7 @@ set $base0F #444444
 bar {
     status_command i3blocks -c ~/.config/i3/i3blocks.conf
     font pango: Hack, FontAwesome 9
-    height 18
+    # height 18
     position top
     # mode hide
     colors {

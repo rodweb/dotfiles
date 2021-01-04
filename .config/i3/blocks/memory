@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # First argument is source (mem/swap), second is output value
 # Check /proc/meminfo for possible instances

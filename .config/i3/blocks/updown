@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 status=$(ping -c 1 google.com | grep "1 received" | wc -l)
 

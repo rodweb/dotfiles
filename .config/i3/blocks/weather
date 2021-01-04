@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Based on http://openweathermap.org/current
 
 API_KEY="e59eebcdf8a0e185da7f5eba59a83fd4"
