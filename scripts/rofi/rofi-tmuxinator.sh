@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 function list_projects() {
     tmuxinator list | sed -n '1!p' | sed -r 's/\s+/\n/g'

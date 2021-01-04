@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 function list_available_vpns() {
     nmcli connection | grep -i vpn | cut -d" " -f1

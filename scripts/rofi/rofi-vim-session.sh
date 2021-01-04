@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 function list_sessions() {
     ls ~/*.vim | xargs -n 1 basename
