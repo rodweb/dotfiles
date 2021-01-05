@@ -26,7 +26,12 @@ Plug 'krisajenkins/vim-postgresql-syntax'
 Plug 'ap/vim-css-color'
 Plug 'guns/xterm-color-table.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'benmills/vimux'
+Plug 'kevinoid/vim-jsonc'
 
+" colorschemes
+Plug 'karoliskoncevicius/distilled-vim'
+Plug 'lifepillar/vim-gruvbox8'
 call plug#end()
 " }}}
 
@@ -36,8 +41,8 @@ let maplocalleader=","
 " Theme {{{
 set t_Co=256
 set background=dark
-" colorscheme codedark
-colorscheme rodark
+colorscheme codedark
+
 let g:lightline = { 'colorscheme': 'wombat' }
 
 function! Syn()
@@ -51,7 +56,14 @@ set statusline=%{synIDattr(synIDtrans(synID(line('.'),col('.'),1)),'name')}
 " }}}
 
 " COC {{{
-let g:coc_global_extensions = [ 'coc-json', 'coc-tsserver', 'coc-eslint', 'coc-snippets', 'coc-jest' ]
+let g:coc_global_extensions = [
+      \'coc-json',
+      \'coc-tsserver',
+      \'coc-eslint',
+      \'coc-snippets',
+      \'coc-jest',
+      \'coc-clangd',
+      \'coc-rust-analyzer']
 
 function! s:GoToDefinition()
   if CocAction('jumpDefinition')
@@ -68,12 +80,14 @@ nmap <silent> gd :call <SID>GoToDefinition()<CR>
 
 inoremap <silent><expr> <Tab> coc#refresh()
 " nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-nmap <silent> ga <Plug>(coc-codeaction)
+nmap <silent>gy <Plug>(coc-type-definition)
+nmap <silent>gi <Plug>(coc-implementation)
+nmap <silent>gr <Plug>(coc-references)
+nmap <silent>ga <Plug>(coc-codeaction)
 nmap <leader>rn <Plug>(coc-rename)
 nmap <leader>qf <Plug>(coc-fix-current)
+nnoremap <silent><nowait> <leader>o  :<C-u>CocList outline<cr>
+nnoremap <silent><nowait> <leader>p  :<C-u>CocList -I symbols<cr>
 
 xmap if <Plug>(coc-funcobj-i)
 omap if <Plug>(coc-funcobj-i)
@@ -125,8 +139,12 @@ function! s:show_documentation()
 endfunction
 " }}}
 
+" {{{ NERDTree
+let g:NERDTreeQuitOnOpen = 1
+" }}}
+
 " Vim Test {{{
-let test#strategy = "dispatch"
+let test#strategy = "vimux"
 let g:test#javascript#mocha#file_pattern = '\v.*\.(test|spec)\.(ts|js)$'
 " }}}
 
@@ -201,10 +219,11 @@ set splitright
 " }}}
 
 " Normal mappings {{{
-nnoremap <leader><tab> <c-^>
+nnoremap <leader><tab> <c-^>zz
 nnoremap <leader>q :q<cr>
+nnoremap <leader>a :Alternate<cr>zz
 nnoremap <leader>n :nohl<cr>
-nnoremap <leader>o :only<cr>
+" nnoremap <leader>o :only<cr>
 nnoremap <leader>l :set list!<cr>
 nnoremap <leader>r "qyiw:%s/\v<c-r>q//gc<left><left><left>
 nnoremap <leader>s :update<cr>
@@ -217,6 +236,8 @@ nnoremap <m-h> <c-w>h
 nnoremap <m-j> <c-w>j
 nnoremap <m-k> <c-w>k
 nnoremap <m-l> <c-w>l
+nnoremap <c-j> :cnext<cr>
+nnoremap <c-k> :cprev<cr>
 
 nnoremap ; :
 nnoremap Y yg_
@@ -230,6 +251,10 @@ nnoremap <c-f> <c-f>zz
 nnoremap <c-b> <c-b>zz
 nnoremap <c-u> <c-u>zz
 nnoremap <c-d> <c-d>zz
+nnoremap } }zz
+nnoremap { {zz
+nnoremap * *zz
+nnoremap n nzz
 " nnoremap n nzzzv
 " nnoremap N nzzzv
 nnoremap G Gzz
@@ -241,7 +266,7 @@ nnoremap <leader>; :execute "normal!\ mqA;\e`q"<cr>
 nnoremap <leader>, :execute "normal!\ mqA,\e`q"<cr>
 nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel
 nnoremap <leader>' viw<esc>a'<esc>bi'<esc>lel
-nnoremap <leader>= mqgg=G<cr>'q
+nnoremap <leader>= mqgg=G<cr>'qzz
 
 nnoremap <leader>bd :bdelete<cr>
 
@@ -269,7 +294,8 @@ endfunction
 nnoremap <leader>td :Rg TODO\(rod\)<cr>
 
 " FZF
-nnoremap <leader>f :GitFiles<cr>
+nnoremap <leader>z :Rg 
+nnoremap <leader>f :Files<cr>
 nnoremap <leader>bl :BLines<cr>
 nnoremap <leader>b :Buffers<cr>
 nnoremap <leader>t :BTags<cr>
@@ -295,8 +321,8 @@ endfunction
 nnoremap <leader>e :call MyNerdToggle()<CR>
 
 " ALE
-nnoremap ]e :ALENext<cr>
-nnoremap [e :ALEPrevious<cr>
+nnoremap ]e :ALENext<cr>zz
+nnoremap [e :ALEPrevious<cr>zz
 
 " Fugitive
 nnoremap <leader>gd :Gdiff<cr>
@@ -353,7 +379,9 @@ augroup JavascriptFilesGroup
   autocmd!
   autocmd FileType javascript
         \ nnoremap <buffer> <localleader>c mqI//<esc>'q
-        \|nnoremap <buffer> <localleader>t :compiler mochajs<cr>:TestNearest<cr>
+        \|nnoremap <buffer> <localleader>t :TestNearest<cr>
+        \|nnoremap <buffer> <localleader>f :TestFile<cr>
+        \|nnoremap <buffer> <localleader>l :TestLast<cr>
         \|nnoremap <buffer> <localleader>, :Dispatch node %<cr>
         \|iabbrev <buffer> cl console.log()<left>
 augroup END
@@ -364,11 +392,11 @@ augroup TypescriptFilesGroup
   autocmd!
   autocmd BufWritePre *.ts :ALEFix prettier
   autocmd FileType typescript
-        \ nnoremap <buffer> <localleader>h :ALEHover<cr>
-        \|nnoremap <buffer> <localleader>d :ALEGoToDefinition<cr>
-        \|nnoremap <buffer> <localleader>r :ALEFindReferences<cr>
-        \|inoremap <buffer> <C-h> <esc>:ALEHover<cr>
-        \|nnoremap <buffer> <localleader>t :compiler mochajs<cr>:TestNearest<cr>
+        \ nnoremap <buffer> <localleader>c mqI//<esc>'q
+        \|nnoremap <buffer> <localleader>t :update<cr>|TestNearest<cr>
+        \|nnoremap <buffer> <localleader>f :TestFile<cr>
+        \|nnoremap <buffer> <localleader>l :TestLast<cr>
+        \|nnoremap <buffer> <localleader>, :Dispatch npx ts-node %<cr>
 augroup END
 " }}}
 
@@ -400,10 +428,11 @@ augroup END
 " C {{{
 augroup CFilesGroup
   autocmd!
+  autocmd BufWritePost *.c :Make
   autocmd FileType c
         \ iabbrev iio #include <stdio.h>
         \|iabbrev ilib #include <stdlib.h>
-        \|nnoremap <buffer> <localleader>, :update<cr>:Dispatch cc % && ./a.out<cr>
+        \|nnoremap <buffer> <localleader>, :update<cr>:Dispatch cc -std=c99 % && ./a.out<cr>
 augroup END
 " }}}
 
@@ -458,13 +487,22 @@ augroup END
 " Sxhkd {{{
 augroup Sxhkd
   autocmd!
-  autocmd BufWritePost ~/.sxhkd/sxhkdrc silent !killall sxhkd
+  autocmd BufWritePost sxhkdrc silent !killall sxhkd
+        \| silent !sxhkd -c %
 augroup END
+" }}}
+
+" i3blocks {{{
+augroup i3blocks
+  autocmd!
+  autocmd BufWritePost i3blocks.conf silent !i3-msg restart
+augroup END
+
 " }}}
 
 " Base16 color scheme {{{
 if filereadable(expand("~/.vimrc_background"))
     let base16colorspace=256
-"    source ~/.vimrc_background
+    " source ~/.vimrc_background
 endif
 " }}}
