@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+vm_string=$(VBoxManage list vms --sorted | sed -rn 's/^"([-a-z_0-9]+)".*/\1/p')
+vm_array=($vm_string)
+parsed_string=$(printf '%s\n' "${vm_array[@]}" | sed -rn 's/^([-a-z]+)_.*$/\1/p')
+parsed_array=($parsed_string)
+declare -A map
+for ((i=0; i<${#vm_array[@]}; i++)) do
+  map[${parsed_array[i]}]=${vm_array[i]}
+done
+selected=$(printf "$parsed_string" | tdmenu -p "vm:")
+[ -z "$selected" ] && exit
+VBoxManage startvm "${map[$selected]}" >/dev/null
