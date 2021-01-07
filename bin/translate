@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+word=$(tdmenu -p "translate:")
+[ -z "$word" ] && exit
+trans en:pt -b "$word" | tdmenu -p "translation:"
