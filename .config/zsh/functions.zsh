@@ -1,11 +1,8 @@
 #!/bin/zsh
+
 # util
 function mcd() {
   mkdir -p "$1" && cd "$1" || return;
-}
-
-function pdfs() {
-  fd --type file .pdf ~/docs | fzf | xargs apvlv
 }
 
 function add_sudo() {
@@ -52,26 +49,6 @@ function u() {
 
 function pkgs() {
   pacman -Qteq | grep -E -v "^(xorg|gnome|lx|xfce4|xf86)"
-}
-
-# git
-unalias g
-function g() {
-  if [[ $# -gt 0 ]]; then
-    git "$@"
-  else
-    declare -A gitoptions
-    gitoptions["status"]="git status -s"
-    gitoptions["pull from remote"]="git pull"
-    gitoptions["push to remote"]="git push"
-    gitoptions["unstage all"]="git reset HEAD -- ."
-    selected=$(for key in ${(k)gitoptions}; do echo "$key"; done | fzf --prompt "git: ")
-    if [[ -z "$selected" ]]; then
-      git status -s
-    else 
-      eval "${gitoptions[$selected]}"
-    fi
-  fi
 }
 
 unalias gm

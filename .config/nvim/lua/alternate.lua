@@ -7,7 +7,7 @@ end
 
 local function get_main_buffer_name()
   local buf_name = api.nvim_buf_get_name(0)
-  return buf_name:gsub('.test.', '')
+  return buf_name:gsub('.test', '')
 end
 
 local function is_alternate_buffer()

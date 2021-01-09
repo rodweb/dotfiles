@@ -1,2 +1,8 @@
-alt + shift + ctrl + {p,s,t,w}
-        {pomo,system,todo,ws}
+alt + shift + ctrl + {d,m,p,s,t,w,z}
+        {todo,pomo,passmenu,system,tswitcher,ws,screenshot}
+alt + space
+        SEARCH
+ctrl + apostrophe
+        clip
+{XF86AudioPlay,XF86AudioStop,XF86AudioNext,XF86AudioPrev}
+        playerctl {play-pause,stop,next,previous}

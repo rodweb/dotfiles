@@ -3,5 +3,5 @@
 cat ~/.aws/credentials \
   | sed -n -E 's/\[(\S*)\]/\1/p' \
   | fzf --prompt 'profile:' \
-  | sed -E 's/(.*)/export AWS_PROFILE=\1/p' \
+  | sed -n -E 's/(.*)/export AWS_PROFILE=\1/p' \
   | xclip -selection clipboard

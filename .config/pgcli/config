@@ -142,41 +142,66 @@ enable_pager = True
 # Use keyring to automatically save and load password in a secure manner 
 keyring = True
 [colors]
-Token.Menu.Completions.Completion.Current = 'bg:#ffffff #000000'
-Token.Menu.Completions.Completion = 'bg:#008888 #ffffff'
-Token.Menu.Completions.Meta.Current = 'bg:#44aaaa #000000'
-Token.Menu.Completions.Meta = 'bg:#448888 #ffffff'
-Token.Menu.Completions.MultiColumnMeta = 'bg:#aaffff #000000'
-Token.Menu.Completions.ProgressButton = 'bg:#003333'
-Token.Menu.Completions.ProgressBar = 'bg:#00aaaa'
-Token.SelectedText = '#ffffff bg:#6666aa'
-Token.SearchMatch = '#ffffff bg:#4444aa'
-Token.SearchMatch.Current = '#ffffff bg:#44aa44'
-Token.Toolbar = 'bg:#222222 #aaaaaa'
-Token.Toolbar.Off = 'bg:#222222 #888888'
-Token.Toolbar.On = 'bg:#222222 #ffffff'
-Token.Toolbar.Search = 'noinherit bold'
-Token.Toolbar.Search.Text = 'nobold'
-Token.Toolbar.System = 'noinherit bold'
-Token.Toolbar.Arg = 'noinherit bold'
-Token.Toolbar.Arg.Text = 'nobold'
-Token.Toolbar.Transaction.Valid = 'bg:#222222 #00ff5f bold'
-Token.Toolbar.Transaction.Failed = 'bg:#222222 #ff005f bold'
+completion-menu.completion.current = "bg:#ffffff #000000"
+completion-menu.completion = "bg:#008888 #ffffff"
+completion-menu.meta.completion.current = "bg:#44aaaa #000000"
+completion-menu.meta.completion = "bg:#448888 #ffffff"
+completion-menu.multi-column-meta = "bg:#aaffff #000000"
+scrollbar.arrow = "bg:#003333"
+scrollbar = "bg:#00aaaa"
+selected = "#ffffff bg:#6666aa"
+search = "#ffffff bg:#4444aa"
+search.current = "#ffffff bg:#44aa44"
+bottom-toolbar = "bg:#222222 #aaaaaa"
+bottom-toolbar.off = "bg:#222222 #888888"
+bottom-toolbar.on = "bg:#222222 #ffffff"
+search-toolbar = noinherit bold
+search-toolbar.text = nobold
+system-toolbar = noinherit bold
+arg-toolbar = noinherit bold
+arg-toolbar.text = nobold
+bottom-toolbar.transaction.valid = "bg:#222222 #00ff5f bold"
+bottom-toolbar.transaction.failed = "bg:#222222 #ff005f bold"
 
-# color of table
-# you can use token or custom colors 
+# style classes for colored table output
+output.header = "#00ff5f bold"
+output.odd-row = ""
+output.even-row = ""
+Token.Menu.Completions.Completion.Current = "bg:#ffffff #000000"
+Token.Menu.Completions.Completion = "bg:#008888 #ffffff"
+Token.Menu.Completions.Meta.Current = "bg:#44aaaa #000000"
+Token.Menu.Completions.Meta = "bg:#448888 #ffffff"
+Token.Menu.Completions.MultiColumnMeta = "bg:#aaffff #000000"
+Token.Menu.Completions.ProgressButton = "bg:#003333"
+Token.Menu.Completions.ProgressBar = "bg:#00aaaa"
+Token.SelectedText = "#ffffff bg:#6666aa"
+Token.SearchMatch = "#ffffff bg:#4444aa"
+Token.SearchMatch.Current = "#ffffff bg:#44aa44"
+Token.Toolbar = "bg:#222222 #aaaaaa"
+Token.Toolbar.Off = "bg:#222222 #888888"
+Token.Toolbar.On = "bg:#222222 #ffffff"
+Token.Toolbar.Search = noinherit bold
+Token.Toolbar.Search.Text = nobold
+Token.Toolbar.System = noinherit bold
+Token.Toolbar.Arg = noinherit bold
+Token.Toolbar.Arg.Text = nobold
+Token.Toolbar.Transaction.Valid = "bg:#222222 #00ff5f bold"
+Token.Toolbar.Transaction.Failed = "bg:#222222 #ff005f bold"
 Token.Output.Header = "#00ff5f bold"
 Token.Output.OddRow = ""
 Token.Output.EvenRow = ""
 [named queries]
-
-# DSN to call by -D option
+steps-by-application = '''select aps.id, aps.step_id, js.type, js.name, aps."order", aps.start_date, aps.end_date
+from applications_steps aps
+join jobs_steps js on aps.step_id = js.id
+where application_id = 24108775
+order by aps."order"'''
+logs-by-application = select * from applications_status_logs where application_id = 24108775
+history = '''select action_type, previous_state, new_state, created_at
+from candidates_histories where job_id = 200423
+and candidate_id = 9811849
+and action_type in('status-change', 'approved', 'step-change') order by id'''
 [alias_dsn]
-# example_dsn = postgresql://[user[:password]@][netloc][:port][/dbname]
-
-# Format for number representation
-# for decimal "d" - 12345678, ",d" - 12,345,678
-# for float "g" - 123456.78, ",g" - 123,456.78
 [data_formats]
 decimal = ""
 float = ""

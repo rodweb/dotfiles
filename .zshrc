@@ -10,6 +10,9 @@ ZSH_CONFIGS=$HOME/.config/zsh
 [[ -f $HOME/.profile ]] && source $HOME/.profile
 [[ -f $HOME/.zshenv ]] && source $HOME/.zshenv
 
+export _JAVA_AWT_WM_NONREPARENTING=1
+export _Z_CMD=j
+
 source /usr/share/zsh/share/antigen.zsh
 antigen use oh-my-zsh
 antigen bundle git
@@ -24,6 +27,7 @@ antigen bundle lukechilds/zsh-nvm
 antigen bundle aws
 antigen bundle zsh-completion
 antigen bundle tmux
+antigen bundle mfaerevaag/wd
 antigen theme romkatv/powerlevel10k
 antigen apply
 
@@ -56,11 +60,12 @@ source /usr/share/doc/pkgfile/command-not-found.zsh
 
 export NVM_LAZY_LOAD=true
 export YADM_COMPATIBILITY=1
-export NODE_OPTIONS=--max_old_space_size=4096
+# export NODE_OPTIONS=--max_old_space_size=4096
+export NODE_OPTIONS=--max_old_space_size=1900
 export FZF_DEFAULT_COMMAND='rg --files --hidden'
 
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=100000
+SAVEHIST=100000
 HISTFILE=~/.histfile
 
 setopt appendhistory
@@ -118,7 +123,7 @@ eval "$RUN"
 # uninstall by removing these lines
 [[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
 
-#eval $(thefuck --alias)
+#eval $(thefuck --alias --enable-experimental-instant-mode)
 # fkill - kill processes - list only the ones you can kill. Modified the earlier script.
 fkill() {
     local pid 

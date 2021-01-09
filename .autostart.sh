@@ -8,15 +8,17 @@ export SSH_AUTH_SOCK
 
 
 if ! pgrep -x "sxhkd" > /dev/null; then
-  sxhkd -c ~/bin/sxhkdrc &
+  ~/bin/bind &
 fi
 
 if ! pgrep -x "dunst" > /dev/null; then
   dunst &
 fi
-# if ! pgrep -x "unclutter" > /dev/null; then
-#   unclutter -b &
-# fi
+
+if ! pgrep -x "unclutter" > /dev/null; then
+  unclutter -b &
+fi
+
 if ! pgrep -x "greenclip" > /dev/null; then
   greenclip daemon &
 fi
@@ -30,8 +32,7 @@ fi
 source ~/scripts/config-touchpad.sh
 xrdb -load ~/.Xresources &
 xmodmap ~/.Xmodmap &
-setxkbmap br -variant abnt2 -option 'caps:ctrl_modifier' &
-
+setxkbmap br -variant abnt2 -option 'caps:ctrl_modifier'
 
 if ! pgrep -x "xcape" > /dev/null; then
   xcape -t 200 -e 'Caps_Lock=Escape' &
