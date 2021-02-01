@@ -1,72 +1,256 @@
-filetype plugin indent on
-syntax enable
+set nocompatible
+filetype plugin on
+filetype indent on
 
-" Plugins {{{
+" settings completion {{{
+set omnifunc=syntaxcomplete#Complete
+set path+=src/**,components/**,modules/**,interfaces/**
+set wildmenu
+set wildmode=longest:full,full
+set wildignore+=*/node_modules/*,__sapper__/*,tags,package-lock.json
+set wildignorecase
+" }}}
+
+" settings ui/ux {{{
+set clipboard+=unnamedplus
+set updatetime=50
+set timeoutlen=300
+set hidden
+set autowrite
+set belloff=all
+set noshowmode
+set noshowcmd
+set shortmess+=cF
+set laststatus=1
+set mouse=a
+set number
+set numberwidth=2
+set relativenumber
+set signcolumn=auto
+set scrolloff=5
+set sidescrolloff=5
+set showbreak=↪\
+set list
+set listchars=tab:→\ ,trail:•,nbsp:␣,eol:↲
+set foldlevelstart=0
+set splitright
+set splitbelow
+set background=dark
+" }}}
+
+" settings search {{{
+set nohlsearch
+set incsearch
+set ignorecase
+set smartcase
+set inccommand=split "nosplit
+set grepprg=rg\ --vimgrep\ --smart-case
+" }}}
+
+" settings spacing {{{
+set wrap
+set linebreak
+set autoindent
+set expandtab
+set smarttab
+set shiftwidth=2
+set softtabstop=2
+set tabstop=2
+set shiftround
+" }}}
+
+" settings backup {{{
+set undofile
+set undolevels=100
+set nobackup
+set noswapfile
+set nowritebackup
+" }}}
+
+" settings performance {{{
+set lazyredraw
+" set nocursorline
+" }}}
+
+" plugins {{{
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+endif
+
 call plug#begin('~/.vim/plugged')
-Plug 'chriskempson/base16-vim'
-Plug 'tomasiser/vim-code-dark'
 Plug 'sheerun/vim-polyglot'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/fzf.vim'
-Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'tpope/vim-vinegar'
-Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
-Plug 'w0rp/ale'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-fugitive'
+" Plug 'tpope/vim-sensible'
+" Plug 'tpope/vim-rsi'
+" Plug 'tpope/vim-dotenv'
+" Plug 'tpope/vim-dadbod'
+" Plug 'tpope/vim-abolish'
+" Plug 'tpope/vim-apathy'
+" Plug 'tpope/vim-sleuth'
+" Plug 'tpope/vim-endwise'
+" Plug 'tpope/vim-eunuch'
+" Plug 'tpope/vim-obsession'
+" Plug 'tpope/vim-unimpaired'
+" Plug 'tpope/vim-dispatch'
+" Plug 'tpope/vim-vinegar'
+" Plug 'tpope/vim-projectionist'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'airblade/vim-gitgutter'
 Plug 'janko/vim-test'
-Plug 'tmux-plugins/vim-tmux-focus-events'
-Plug 'itchyny/lightline.vim'
-" Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-Plug 'easymotion/vim-easymotion'
-Plug 'krisajenkins/vim-postgresql-syntax'
-Plug 'ap/vim-css-color'
-Plug 'guns/xterm-color-table.vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'antoinemadec/coc-fzf'
 Plug 'benmills/vimux'
+Plug 'w0rp/ale'
+Plug 'krisajenkins/vim-postgresql-syntax'
+" Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
+" Plug 'Xuyuanp/nerdtree-git-plugin'
+" Plug 'tmux-plugins/vim-tmux-focus-events'
+" Plug 'itchyny/lightline.vim'
+" Plug 'SirVer/ultisnips'
+" Plug 'honza/vim-snippets'
+" Plug 'easymotion/vim-easymotion'
+" Plug 'ap/vim-css-color'
+" Plug 'guns/xterm-color-table.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'antoinemadec/coc-fzf'
 Plug 'kevinoid/vim-jsonc'
-Plug 'nicwest/vim-http'
-Plug 'christoomey/vim-tmux-navigator'
+" Plug 'nicwest/vim-http'
+" Plug 'christoomey/vim-tmux-navigator'
 " colorschemes
-Plug 'karoliskoncevicius/distilled-vim'
-Plug 'lifepillar/vim-gruvbox8'
+Plug 'tomasiser/vim-code-dark'
 call plug#end()
 " }}}
 
-let mapleader = " "
-let maplocalleader=","
-
-" Theme {{{
-set t_Co=256
-set background=dark
+" theme {{{
 colorscheme codedark
-
-let g:lightline = {
-	\ 'colorscheme': 'wombat',
-	\ 'active': {
-	\   'left': [ [ 'mode', 'paste' ],
-	\             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
-	\ },
-	\ 'component_function': {
-	\   'cocstatus': 'coc#status'
-	\ },
-	\ }
-
-function! Syn()
-  for id in synstack(line("."), col("."))
-    echo synIDattr(id, "name")
-  endfor
-  set statusline=%{synIDattr(synIDtrans(synID(line('.'),col('.'),1)),'name')}
-endfunction
-command! -nargs=0 Syn call Syn()
 " }}}
 
-" COC {{{
+" netrw {{{
+let g:netrw_banner=0
+" }}}
+
+" fzf {{{
+let g:fzf_tags_command = 'ctags -R --exclude=.git --exclude=node_modules --exclude=dist --exclude=docs --exclude="*.json"'
+command! -bang -nargs=* Ripgrep
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   fzf#vim#with_preview(), <bang>0)
+" }}}
+
+" ale {{{
+let g:ale_fix_on_save = 1
+let g:ale_completion_enabled = 0
+let g:ale_sign_column_always = 1
+let g:ale_set_highlights = 0
+let g:ale_sign_error = 'x'
+let g:ale_sign_warning = '-'
+let b:ale_fixers = {'typescript': ['prettier', 'eslint']}
+" }}}
+
+" vim test {{{
+let test#strategy = "vimux"
+let g:test#javascript#mocha#file_pattern = '\v.*\.(test|spec)\.(ts|js)$'
+" }}}
+
+" mappings {{{
+let mapleader = " "
+let maplocalleader = ","
+
+"nnoremap Y yg_
+"nnoremap H g0
+"nnoremap L g$
+"nnoremap L gt
+"nnoremap H gT
+nnoremap j gjzz
+nnoremap k gkzz
+nnoremap <silent> n nzzzv:call HLNext(0.1)<cr>
+nnoremap <silent> N Nzzzv:call HLNext(0.1)<cr>
+nnoremap * *zzzv
+nnoremap # #zzzv
+nnoremap G Gzz
+nnoremap } }zz
+nnoremap { {zz
+nnoremap gj jzz
+nnoremap gk kzz
+
+nnoremap ]a :next<cr>
+nnoremap [a :prev<cr>
+nnoremap ]b :bnext<cr>
+nnoremap [b :bprev<cr>
+nnoremap ]l :lnext<cr>
+nnoremap [l :lprev<cr>
+nnoremap ]q :cnext<cr>
+nnoremap [q :cprev<cr>
+" ale
+nnoremap ]e :ALENext<cr>zz
+nnoremap [e :ALEPrevious<cr>zz
+
+nnoremap <c-f> <c-f>zz
+nnoremap <c-b> <c-b>zz
+nnoremap <c-u> <c-u>zz
+nnoremap <c-d> <c-d>zz
+
+nnoremap - :Explore<cr>
+nnoremap \ za
+nnoremap <leader><tab> <c-^>
+" nnoremap <leader>/ :silent grep ''<left>
+nnoremap <leader>/ :Ripgrep 
+nnoremap <leader>= mqgg=G<cr>'qzz
+nnoremap <leader>; :execute "normal!\ mqA;\e`q"<cr>
+nnoremap <leader>, :execute "normal!\ mqA,\e`q"<cr>
+nnoremap <leader>a :Alternate<cr>zz
+nnoremap <leader>q :quit<cr>
+nnoremap <leader>w <c-w><c-w>
+" nnoremap <leader>f :find *
+nnoremap <leader>r :%s/\<<C-r><C-w>\>//cg<left><left>
+nnoremap <leader>s :update<cr>
+nnoremap <leader>n :nohlsearch<cr>
+" fzf
+nnoremap <leader>f :Files<cr>
+nnoremap <leader>b :Buffers<cr>
+nnoremap <leader>t :BTags<cr>
+nnoremap <leader>h :History<cr>
+
+nnoremap <leader>bd :bdelete<cr>
+nnoremap <leader>cd :windo lcd %:h<cr>
+nnoremap <leader>cp :let @+ = expand('%:~')<cr>
+nnoremap <leader>ev :edit $MYVIMRC<cr>
+nnoremap <leader>ol :setlocal list!<cr>
+nnoremap <leader>on :call ToggleNumber()<cr>
+nnoremap <leader>ow :setlocal wrap!<cr>
+" fugitive
+nnoremap <leader>gs :Gstatus<cr>
+nnoremap <leader>gc :Git commit<cr>
+
+nnoremap <down> :cnext<cr>
+nnoremap <up> :cprev<cr>
+nnoremap <right> :tabnext<cr>
+nnoremap <left> :tabprev<cr>
+
+vnoremap > >gv
+vnoremap < <gv
+
+inoremap <c-u> <esc>viwUea
+
+onoremap ef :<c-u>normal! ggVG<cr>
+
+cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
+" }}}
+
+" abbreviations {{{
+iabbrev adn and
+iabbrev whiel while
+iabbrev tehn then
+iabbrev cosnt const
+iabbrev applicaiton application
+
+cnoreabbrev w!! write !sudo tee > /dev/null %
+" }}}
+
+" coc {{{
 let g:coc_global_extensions = [
       \'coc-json',
       \'coc-tsserver',
@@ -75,6 +259,7 @@ let g:coc_global_extensions = [
       \'coc-jest',
       \'coc-clangd',
       \'coc-rust-analyzer',
+      \'coc-java',
       \'coc-pairs']
 
 function! s:GoToDefinition()
@@ -91,7 +276,6 @@ endfunction
 nmap <silent> gd :call <SID>GoToDefinition()<CR>
 
 inoremap <silent><expr> <Tab> coc#refresh()
-" nmap <silent> gd <Plug>(coc-definition)
 nmap <leader>rn <Plug>(coc-rename)
 nmap <leader>qf <Plug>(coc-fix-current)
 nmap <silent>gy <Plug>(coc-type-definition)
@@ -105,7 +289,6 @@ xmap <silent><C-s> <Plug>(coc-range-select)
 nnoremap <silent><nowait> <leader>d :<C-u>CocList diagnostics<cr>
 nnoremap <silent><nowait> <leader>x :<C-u>CocList extensions<cr>
 nnoremap <silent><nowait> <leader>o :<C-u>CocList outline<cr>
-" nnoremap <silent><nowait> <leader>p :<C-u>CocFzfList symbols<cr>
 nnoremap <silent><nowait> <leader>p :<C-u>CocList -I symbols<cr>
 nnoremap <silent><nowait> <leader>j :<C-u>CocNext<cr>
 nnoremap <silent><nowait> <leader>k :<C-u>CocPrev<cr>
@@ -177,251 +360,27 @@ function! s:show_documentation()
     execute '!' . &keywordprg . " " . expand('<cword>')
   endif
 endfunction
-
 " }}}
 
-" {{{ NERDTree
-let g:NERDTreeQuitOnOpen = 1
-" }}}
-
-" Vim Test {{{
-let test#strategy = "vimux"
-let g:test#javascript#mocha#file_pattern = '\v.*\.(test|spec)\.(ts|js)$'
-" }}}
-
-" Editor Config {{{
-let g:EditorConfig_exclude_patterns = ['fugitive://.\*']
-" }}}
-
-" FZF {{{
-let g:fzf_tags_command = 'ctags -R --exclude=.git --exclude=node_modules --exclude=dist --exclude=docs --exclude="*.json"'
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
-  \   fzf#vim#with_preview(), <bang>0)
-" }}}
-
-" EasyMotion {{{
-let g:EasyMotion_smartcase = 1
-
-map s <Plug>(easymotion-overwin-f2)
-" }}}
-
-" ALE {{{
-let g:ale_fix_on_save = 1
-let g:ale_completion_enabled = 0
-let g:ale_sign_column_always = 1
-let g:ale_set_highlights = 0
-let g:ale_sign_error = 'x'
-let g:ale_sign_warning = '-'
-let b:ale_fixers = {'typescript': ['prettier', 'tslint']}
-" }}}
-
-" UltiSnips {{{
-" let g:UltiSnipsExpandTrigger="<tab>"
-" let g:UltiSnipsJumpForwardTrigger="<c-b>"
-" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-" }}}
-
-" Settings {{{
-set visualbell
-set noshowmode
-set timeoutlen=300
-set updatetime=100
-set autowrite
-set backupcopy=yes
-
-set clipboard+=unnamedplus
-set mouse=a
-set number
-set numberwidth=2
-set relativenumber
-set hidden
-set shortmess+=c
-set signcolumn=yes
-
-set wrap
-set expandtab
-set shiftwidth=2
-set shiftround
-set smarttab
-
-set incsearch
-set ignorecase
-set smartcase
-set inccommand=split
-set grepprg=rg\ --vimgrep
-
-set showbreak=↪\ 
-set nolist
-set listchars=tab:→\ ,trail:•,nbsp:␣,eol:↲
-set sidescrolloff=5
-
-set foldlevelstart=0
-set splitright
-" }}}
-
-" Normal mappings {{{
-nnoremap <leader><tab> <c-^>zz
-nnoremap <leader>q :q<cr>
-nnoremap <leader>a :Alternate<cr>zz
-nnoremap <leader>n :nohl<cr>
-" nnoremap <leader>o :only<cr>
-nnoremap <leader>l :set list!<cr>
-nnoremap <leader>r "qyiw:%s/\v<c-r>q//gc<left><left><left>
-nnoremap <leader>s :update<cr>
-nnoremap <leader>w <c-w><c-w>
-nnoremap <leader>ev :vsplit $MYVIMRC<cr>
-nnoremap <leader>ed :e $MYVIMRC<cr>
-nnoremap <leader>cd :lcd %:p:h<cr>
-nnoremap <leader>cp :let @+ = expand('%')<cr>
-nnoremap <m-h> <c-w>h
-nnoremap <m-j> <c-w>j
-nnoremap <m-k> <c-w>k
-nnoremap <m-l> <c-w>l
-nnoremap <a-j> :cnext<cr>
-nnoremap <a-k> :cprev<cr>
-
-nnoremap ; :
-nnoremap Y yg_
-"nnoremap H g0
-"nnoremap L g$
-nnoremap <s-l> gt
-nnoremap <s-h> gT
-nnoremap j gjzz
-nnoremap k gkzz
-nnoremap <c-f> <c-f>zz
-nnoremap <c-b> <c-b>zz
-nnoremap <c-u> <c-u>zz
-nnoremap <c-d> <c-d>zz
-nnoremap } }zz
-nnoremap { {zz
-nnoremap * *zz
-nnoremap n nzz
-" nnoremap n nzzzv
-" nnoremap N nzzzv
-nnoremap G Gzz
-nnoremap cw ciw
-"nnoremap / /\v
-nnoremap Q @q
-
-nnoremap <leader>; :execute "normal!\ mqA;\e`q"<cr>
-nnoremap <leader>, :execute "normal!\ mqA,\e`q"<cr>
-nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel
-nnoremap <leader>' viw<esc>a'<esc>bi'<esc>lel
-nnoremap <leader>= mqgg=G<cr>'qzz
-
-nnoremap <leader>bd :bdelete<cr>
-
-nnoremap <tab> za
-
-let i = 1
-while i <= 3
-  execute 'nnoremap <leader>' . i . ' :' . i . 'wincmd w<cr>'
-  let i = i + 1
-endwhile
-
-" Damian Conway's Die Blinkënmatchen: highlight matches
-nnoremap <silent> n nzzzv:call HLNext(0.1)<cr>
-nnoremap <silent> N Nzzzv:call HLNext(0.1)<cr>
-
-function! HLNext (blinktime)
-  let target_pat = '\c\%#'.@/
-  let ring = matchadd('ErrorMsg', target_pat, 101)
-  redraw
-  exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
-  call matchdelete(ring)
-  redraw
-endfunction
-
-nnoremap <leader>td :Rg TODO\(rod\)<cr>
-
-" FZF
-nnoremap <leader>z :Rg 
-nnoremap <leader>f :Files<cr>
-nnoremap <leader>bl :BLines<cr>
-nnoremap <leader>b :Buffers<cr>
-nnoremap <leader>t :BTags<cr>
-" nnoremap <leader>cc :Commands<cr>
-nnoremap <leader>y :Filetypes<cr>
-nnoremap <leader>h :History<cr>
-nnoremap <leader>mm :Maps<cr>
-"nnoremap <leader>tt :Tags<cr>
-imap <c-f> <plug>(fzf-complete-file-ag)
-imap <c-l> <plug>(fzf-complete-line)
-imap <c-x><c-k> <plug>(fzf-complete-word)
-
-" NERDTree
-" nnoremap <leader>e :NERDTreeToggle<cr>
-function MyNerdToggle()
-    if &filetype == 'nerdtree'
-        :NERDTreeToggle
-    else
-        :NERDTreeFind
-    endif
-endfunction
-
-nnoremap <leader>e :call MyNerdToggle()<CR>
-
-" ALE
-nnoremap ]e :ALENext<cr>zz
-nnoremap [e :ALEPrevious<cr>zz
-
-" Fugitive
-nnoremap <leader>gd :Gdiff<cr>
-nnoremap <leader>gs :Gstatus<cr>
-nnoremap <leader>gc :Git commit<cr>
-" }}}
-
-" Visual mappings {{{
-vmap > >gv
-vmap < <gv
-vnoremap <leader>" <esc>`<i"<esc>`>la"<esc>
-vnoremap <leader>' <esc>`<i'<esc>`>la'<esc>
-vnoremap <leader>ag "qy:Rg <c-r>q<cr>
-" }}}
-
-" Insert mappings {{{
-" convert current word to uppercase
-inoremap <c-u> <esc>viwUea
-inoremap jk <esc>
-inoremap {<cr> {<cr>}<esc>O
-" }}}
-
-" Operator pending mappings {{{
-onoremap in( :<c-u>normal! f(vi(<cr>
-onoremap an( :<c-u>normal! f(va(<cr>
-onoremap c :execute "normal! /[A-Z]/\r:nohlsearch\r"<cr>
-onoremap ef :<c-u>normal! ggVG<cr>
-" }}}
-
-" Abbreviations {{{
-iabbrev adn and
-iabbrev whiel while
-iabbrev tehn then
-iabbrev cosnt const
-iabbrev applicaiton application
-" }}}
-
-" File write {{{
+" auto write {{{
 augroup WriteFilesGroup
   autocmd!
   autocmd BufNewFile,FocusLost *.js,*.jsx,*.ts,*.tsx,*.c :update
 augroup end
 " }}}
 
-" HTML {{{
+" auto html {{{
 augroup HtmlFilesGroup
   autocmd!
   autocmd BufRead *.html :setlocal nowrap
 augroup end
 " }}}
 
-" Javascript {{{
+" auto javascript {{{
 augroup JavascriptFilesGroup
   autocmd!
-  autocmd FileType javascript
-        \ nnoremap <buffer> <localleader>c mqI//<esc>'q
+  autocmd FileType javascript,typescript
+        \nnoremap <buffer> gf :call JavascriptGotoFile()<cr>
         \|nnoremap <buffer> <localleader>t :TestNearest<cr>
         \|nnoremap <buffer> <localleader>f :TestFile<cr>
         \|nnoremap <buffer> <localleader>l :TestLast<cr>
@@ -430,30 +389,16 @@ augroup JavascriptFilesGroup
 augroup end
 " }}}
 
-" Typescript {{{
+" auto typescript {{{
 augroup TypescriptFilesGroup
   autocmd!
   autocmd BufWritePre *.ts :ALEFix prettier
   autocmd FileType typescript
-        \ nnoremap <buffer> <localleader>c mqI//<esc>'q
-        \|nnoremap <buffer> <localleader>t :update<cr>:TestNearest<cr>
-        \|nnoremap <buffer> <localleader>f :TestFile<cr>
-        \|nnoremap <buffer> <localleader>l :TestLast<cr>
         \|nnoremap <buffer> <localleader>, :Dispatch npx ts-node %<cr>
 augroup end
 " }}}
 
-" Vimscript {{{
-augroup VimFilesGroup
-  autocmd!
-  autocmd FileType vim
-        \ setlocal foldmethod=marker foldlevel=0
-        \|nnoremap <buffer> <localleader>, :update<cr>:source %<cr>
-  autocmd BufWritePost $MYVIMRC source % | echom "Reloaded " . expand("%") | redraw
-augroup end
-" }}}
-
-" Rust {{{
+" auto rust {{{
 augroup RustFilesGroup
   autocmd!
   autocmd FileType rust nnoremap <buffer> <localleader>r :make run<cr>
@@ -461,14 +406,7 @@ augroup RustFilesGroup
 augroup end
 " }}}
 
-" Markdown {{{
-augroup MarkdownFilesGroup
-  autocmd!
-  autocmd FileType markdown setlocal wrap linebreak nonumber norelativenumber spell spelllang=pt_br
-augroup end
-" }}}
-
-" C {{{
+" auto c {{{
 augroup CFilesGroup
   autocmd!
   autocmd BufWritePost *.c :Make
@@ -479,7 +417,7 @@ augroup CFilesGroup
 augroup end
 " }}}
 
-" Shell {{{
+" auto shell {{{
 augroup ShellGroup
   autocmd!
   autocmd FileType sh
@@ -487,47 +425,21 @@ augroup ShellGroup
 augroup end
 " }}}
 
-" Rust {{{
-augroup RustFilesGroup
-  autocmd!
-  autocmd FileType rust nnoremap <buffer> <localleader>r :make run<cr>
-  autocmd BufWritePost *.rs :Make build
-augroup end
-" }}}
-
-" Make {{{
-augroup MakeFilesGroup
-  autocmd!
-  autocmd FileType make
-        \ setlocal noexpandtab shiftwidth=4
-augroup end
-" }}}
-
-" Pgcli {{{
+" auto pgcli {{{
 augroup PgcliFilesGroup
   autocmd!
   autocmd BufRead /tmp/psql.edit.* setlocal syntax=sql
 augroup end
 " }}}
 
-" Buffer {{{
-augroup BufferSettings
-  autocmd!
-  autocmd BufEnter * setlocal cursorline
-        \| highlight ALEWarningSign ctermbg=0 ctermfg=16
-        \| highlight ALEErrorSign ctermbg=0 ctermfg=1
-  autocmd BufLeave * setlocal nocursorline
-augroup end
-" }}}
-
-" XResources {{{
+" auto xresources {{{
 augroup XResourcesGroup
   autocmd!
   autocmd BufWritePost ~/.Xresources silent !xrdb -load ~/.Xresources
 augroup end
 " }}}
 
-" Sxhkd {{{
+" auto sxhkd {{{
 augroup Sxhkd
   autocmd!
   autocmd BufWritePost sxhkdrc silent !killall sxhkd
@@ -535,7 +447,7 @@ augroup Sxhkd
 augroup end
 " }}}
 
-" i3blocks {{{
+" auto i3blocks {{{
 augroup i3blocks
   autocmd!
   autocmd BufWritePost i3blocks.conf silent !i3-msg restart
@@ -543,14 +455,7 @@ augroup end
 
 " }}}
 
-" Base16 color scheme {{{
-if filereadable(expand("~/.vimrc_background"))
-    let base16colorspace=256
-    " source ~/.vimrc_background
-endif
-" }}}
-
-" Coc {{{
+" auto coc {{{
 augroup CocGroup
   autocmd!
   " Highlight the symbol and its references when holding the cursor.
@@ -564,7 +469,106 @@ augroup CocGroup
 augroup end
 " }}}
 
-" Http {{{
-let g:vim_http_split_vertically=0
-let g:vim_http_tempbuffer=1
+" auto vim {{{
+augroup VimGroup
+	autocmd!
+  autocmd FileType vim setlocal foldmethod=marker foldlevel=0
+	autocmd BufWritePost *.vim,$MYVIMRC source %
+        \| echom "Reloaded " . expand("%")
+        \| redraw
+augroup end
+" }}}
+
+" auto cursor {{{
+augroup CursorLineGroup
+  autocmd!
+  autocmd BufEnter * setlocal cursorline
+  autocmd BufLeave * setlocal nocursorline
+augroup end
+" }}}
+
+" auto search {{{
+augroup SearchHighlight
+  autocmd!
+  autocmd CmdlineEnter /,\? :set hlsearch
+  autocmd CmdlineLeave /,\? :set nohlsearch
+augroup end
+" }}}
+
+" auto quickfix {{{
+augroup AutoOpenQuickfix
+  autocmd!
+  autocmd QuickFixCmdPost [^l]* cwindow
+  autocmd QuickFixCmdPost l* lwindow
+augroup end
+" }}}
+
+" auto plug {{{
+augroup PlugGroup
+  autocmd!
+  autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+        \| PlugInstall --sync | source $MYVIMRC
+        \| endif
+augroup end
+" }}}
+
+" auto markdown {{{
+augroup MarkdownGroup
+  autocmd!
+  autocmd FileType markdown setlocal wrap linebreak nonumber norelativenumber spell spelllang=en_us,pt_br
+augroup end
+" }}}
+
+" auto make {{{
+augroup MakeGroup
+  autocmd!
+  autocmd FileType make
+        \ setlocal noexpandtab shiftwidth=4
+augroup end
+" }}}
+
+" functions {{{
+" Damian Conway's Die Blinkënmatchen: highlight matches
+function! HLNext (blinktime)
+  let target_pat = '\c\%#'.@/
+  let ring = matchadd('ErrorMsg', target_pat, 101)
+  redraw
+  exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+  call matchdelete(ring)
+  redraw
+endfunction
+
+function! Syn()
+  for id in synstack(line("."), col("."))
+    echo synIDattr(id, "name")
+  endfor
+  set statusline=%{synIDattr(synIDtrans(synID(line('.'),col('.'),1)),'name')}
+endfunction
+command! -nargs=0 Syn call Syn()
+
+function! ToggleNumber()
+  set number! relativenumber!
+  if &signcolumn == "yes"
+    set signcolumn="auto"
+  else 
+    set signcolumn="yes"
+  endif
+endfunction
+
+function! JavascriptGotoFile()
+  normal! f'gf
+endfunction
+
+function! ParseConsistencyIndex()
+  execute "normal! gg"
+  execute "normal! d/+ set\<cr>"
+  execute "normal! dd"
+  execute "normal! /pipeline\<cr>"
+  execute "normal! dG"
+  execute "normal! :g/^2021/d\<cr>"
+  execute "normal! :%s/,\\n/,/g\<cr>"
+  execute "normal! :g/[{}]/d\<cr>"
+  execute "normal! :%s/\\s*//g\<cr>"
+endfunction
+command! -nargs=0 Parse call ParseConsistencyIndex()
 " }}}

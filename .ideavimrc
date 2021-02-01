@@ -12,6 +12,7 @@ set number
 set surround
 
 let mapleader = " "
+let localleader = ","
 nmap ; :
 nmap j jzz
 nmap k kzz
@@ -25,6 +26,10 @@ nmap <leader>h :action RecentFiles<cr>
 nmap <leader>t :action GotoSymbol<cr>
 nmap <leader>p :action ShowBookmarks<cr>
 nmap <leader>r :action RenameElement<cr>
+
+nmap <leader>t :action Rerun<cr>
+nmap <localleader>tf :action RerunFailedTests<cr>
+nmap <localleader>tt :action RerunTests<cr>
 
 nmap <leader>gb :action Back<cr>
 nmap <leader>gf :action Forward<cr>

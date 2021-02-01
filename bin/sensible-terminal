@@ -2,6 +2,11 @@
 # 'st -f Hack:size=10'
 for terminal in $TERMINAL st termite st urxvt kitty xterm gnome-terminal; do
     if command -v $terminal > /dev/null 2>&1; then
+
+        if command -v st > /dev/null 2>&1; then
+            exec st -f 'JetBrains Mono:size=10'
+            exit
+        fi
         exec $terminal "$@"
     fi
 done

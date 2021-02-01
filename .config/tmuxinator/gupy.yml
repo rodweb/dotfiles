@@ -18,7 +18,7 @@ windows:
       pre: cd gupy-api-darthvader && nvm use
       panes:
         - TRACING_ENABLED=false LOG_MESSAGE_LEVEL=error TS_NODE_TRANSPILE_ONLY=true npm start
-        - docker-compose up
+        - docker-compose up start_dependencies
   - consumers:
       layout: tiled
       pre: cd gupy-api-darthvader && nvm use
