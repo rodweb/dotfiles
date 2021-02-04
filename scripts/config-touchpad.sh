@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 TOUCHPAD=$(xinput | grep -i -m1 "touchpad" | pcregrep -o1 '=([0-9]+)')
 [ -z "$TOUCHPAD" ] && exit
 NATURAL=$(xinput list-props $TOUCHPAD | grep -i -m1 "natural" | pcregrep -o1 '\(([0-9]+)\)')

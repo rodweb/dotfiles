@@ -47,7 +47,7 @@ bindsym $ctrl+apostrophe exec --no-startup-id "trofi -modi 'clipboard:greenclip 
 bindsym $win+Print exec --no-startup-id xfce4-screenshooter -r -c
 bindsym --release $win+Delete exec --no-startup-id xkill
 
-bindsym $win+g exec ~/scripts/rofi/menu.sh
+# bindsym $win+g exec ~/scripts/rofi/menu.sh
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer -i 5 && pkill -RTMIN+11 i3blocks
@@ -220,10 +220,10 @@ mode "resize" {
 
 bindsym $win+r mode "resize"
 
-hide_edge_borders both
-smart_gaps on
+# hide_edge_borders both
+# smart_gaps on
 
-gaps inner 4
+# gaps inner 4
 
 assign[class="Google-chrome-stable"] $webws
 
@@ -306,7 +306,7 @@ set $base0F #444444
 bar {
     status_command i3blocks -c ~/.config/i3/i3blocks.conf
     font pango: Hack, FontAwesome 9
-    height 18
+    # height 18
     position top
     # mode hide
     colors {

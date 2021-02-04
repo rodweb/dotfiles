@@ -13,7 +13,12 @@ ZSH_CONFIGS=$HOME/.config/zsh
 export _JAVA_AWT_WM_NONREPARENTING=1
 export _Z_CMD=j
 
-source /usr/share/zsh/share/antigen.zsh
+if [ -n "${commands[fzf-share]}" ]; then
+  source "$(fzf-share)/key-bindings.zsh"
+  source "$(fzf-share)/completion.zsh"
+fi
+
+# source /usr/share/zsh/share/antigen.zsh
 antigen use oh-my-zsh
 antigen bundle git
 antigen bundle docker
@@ -51,15 +56,14 @@ autoload -U compinit && compinit
 autoload bashcompinit && bashcompinit # for aws-cli completion
 autoload -U edit-command-line
 
-source ~/dotfiles/zsh/functions/fzf-zsh-completion.sh
-bindkey '^A' fzf_completion
+# source ~/dotfiles/zsh/functions/fzf-zsh-completion.sh
+# bindkey '^A' fzf_completion
 
 source ~/scripts/zsh/fzf-git-checkout.zsh
 source ~/scripts/zsh/fzf-base16.zsh
-source /usr/share/doc/pkgfile/command-not-found.zsh
+# source /usr/share/doc/pkgfile/command-not-found.zsh
 
 export NVM_LAZY_LOAD=true
-export YADM_COMPATIBILITY=1
 # export NODE_OPTIONS=--max_old_space_size=4096
 export NODE_OPTIONS=--max_old_space_size=1900
 export FZF_DEFAULT_COMMAND='rg --files --hidden'
@@ -112,8 +116,8 @@ bindkey -v
 zle -N edit-command-line
 bindkey -M vicmd v edit-command-line
 
-source /usr/share/fzf/completion.zsh
-source /usr/share/fzf/key-bindings.zsh
+# source /usr/share/fzf/completion.zsh
+# source /usr/share/fzf/key-bindings.zsh
 
 eval "$RUN"
 

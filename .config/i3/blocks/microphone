@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Left click
 if [[ "${BLOCK_BUTTON}" -eq 1 ]]; then

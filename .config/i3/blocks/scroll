@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # IMPORTANT: 
 # To make this block work, you have to edit your block-command.
 # It should point to this file. For best performance, only use it on blocks
