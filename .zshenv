@@ -1,5 +1,6 @@
 export EDITOR=nvim
 export VISUAL="$EDITOR"
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export SSH_ASKPASS=ssh-askpass
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"

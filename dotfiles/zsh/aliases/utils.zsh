@@ -1,5 +1,0 @@
-alias cat='bat -p'
-alias diff='diff-so-fancy'
-alias l='exa -lahF'
-alias ls='exa'
-alias fk='fuck'
