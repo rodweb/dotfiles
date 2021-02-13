@@ -1,3 +1,2 @@
-#!/bin/sh
-rofi=~/bin/trofi
-fd -t f .sql ~/queries | $rofi -dmenu -i -matching fuzzy | xargs -I{} cat '{}' | xclip -selection clipboard
+#!/usr/bin/env bash
+fd -t f .sql ~/queries | rofi -dmenu -i -matching fuzzy | xargs -I{} cat '{}' | xclip -selection clipboard
