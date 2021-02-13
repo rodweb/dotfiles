@@ -1,7 +1,8 @@
-#!/bin/sh
-cd "$HOME/tmp"
+#!/usr/bin/env bash
+
+cd "$HOME/downloads"
 filename=$(ls -1t *.hex | head -1)
 teensy-loader-cli -mmcu=atmega32u4 -w "$filename"
 sleep 3
-setxkbmap br
+setxkbmap br -variant abnt2 -option caps:escape
 dunstify Flashed

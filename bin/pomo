@@ -44,7 +44,7 @@ stop() {
 }
 
 ask_for() {
-  option=$(echo -e "yes\nno" | dmenu -c -l 3 -p "$1?")
+  option=$(echo -e "yes\nno" | dmenu -l 3 -p "$1?")
   [ "$option" != "yes" ] && stop
   start
 }
@@ -66,7 +66,7 @@ menu() {
     secs_remaining=stopped
   fi
 
-  option=$(echo -e 'start\nstop\nconfig' | dmenu -c -l 5 -p "Pomodoro ($secs_remaining):")
+  option=$(echo -e 'start\nstop\nconfig' | dmenu -l 5 -p "Pomodoro ($secs_remaining):")
   [ -z "$option" ] || $0 "$option"
 }
 

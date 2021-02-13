@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-chosen=$(echo -e '[cancel]\nshutdown\nsuspend\nreboot\nlogout\nlock' | tdmenu -p "system")
+chosen=$(echo -e '[cancel]\nshutdown\nsuspend\nreboot\nlogout\nlock' | dmenu -p "system")
 
 case "$chosen" in
   shutdown)

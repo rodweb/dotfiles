@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 cd $HOME/bin
-chosen=$(ls | dmenu)
+chosen=$(ls | dmenu -p "edit:")
 [[ -z "$chosen" ]] && exit
-st -e zsh -i -c "nvim $(pwd)/$chosen"
+sensible-terminal -e zsh -i -c "$EDITOR $(pwd)/$chosen"

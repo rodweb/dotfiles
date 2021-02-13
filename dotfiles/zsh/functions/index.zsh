@@ -42,12 +42,3 @@ function g() {
     git status -s
   fi
 }
-
-# kubectl wrapper
-function k() {
-  if [[ $# -gt 0 ]]; then
-    kubectl "$@"
-  else
-    kubens --current
-  fi
-}

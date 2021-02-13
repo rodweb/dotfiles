@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+xinput set-prop 11 303 1
+xinput set-prop 11 321 1

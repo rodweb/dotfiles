@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+session_name="${1:-main}"
+if ! tmux ls -F '#{session_name}' | grep -q "$session_name"; then
+  tmux new-session -d -s "$session_name"
+fi
+
+pid=$(tmux list-clients -F "#{client_pid}" | head -n 1)
+if test -z $pid; then
+  alacritty -e tmux attach -t "$session_name"
+else
+  tmux switch -t "$session_name"
+  wmctrl -a "$session_name:"
+fi

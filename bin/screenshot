@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
-# deps (scrot, xclip, dmenu, notify-send)
 option="$1"
 if test -z "$option"; then
-  option=$(printf 'selection\nfocused\nscreen' | tdmenu -p 'screenshot:')
+  option=$(printf 'selection\nfocused\nscreen' | dmenu -p 'screenshot:')
 fi
 
 args=''

@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+/usr/bin/dmenu -fn 'JetBrains Mono:size=13' -sb '#f00' -i -l 10 "$@"

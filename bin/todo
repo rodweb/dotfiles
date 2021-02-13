@@ -7,7 +7,7 @@ mkdir -p "$config_path"
 touch "$todo_file"
 
 ask() {
-  echo $(tdmenu -p "add/remove" < "$todo_file")
+  echo $(dmenu -p "add/remove" < "$todo_file")
 }
 
 line=$(ask)

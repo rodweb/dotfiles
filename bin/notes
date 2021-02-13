@@ -1,4 +1,3 @@
 #!/bin/sh
-rofi=~/bin/trofi
 term=~/bin/sensible-terminal
-fd -t f .md  ~/.notable/notes | $rofi -dmenu -i -matching fuzzy | xargs -I{} $term -e nvim {}
+fd -t f .md  ~/org/notes | dmenu -i | xargs -I{} sensible-terminal -e zsh -i -c "nvim {}"

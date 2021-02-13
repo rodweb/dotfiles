@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-sxhkd -c "$HOME/bin/sxhkdrc"

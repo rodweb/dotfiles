@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+if [ -z "$@" ]; then
+  fd . ~/org --extension md --extension txt
+  exit 0
+fi
+
+if [ -f "$@" ]; then
+  sensible-terminal -e zsh -i -c "nvim $@" >/dev/null &
+  exit 0
+fi
+
+rg --files-with-matches "$@" ~/org
+exit 0
