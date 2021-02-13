@@ -1,16 +1,35 @@
-# vi:ft=sh
-export _JAVA_AWT_WM_NONREPARENTING=1
-source ~/.xsession
-xrandr --setprovideroutputsource modesetting NVIDIA=0
-xrandr --auto
-dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
+# vim:ft=sh
+[[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
+setxkbmap br -variant abnt2 -option caps:escape
+numlockx on
 
-# exec startdwm
-# # exec openbox
-exec i3
-# exec awesome
-#exec startdwm
-# exec xmonad
-# exec qtile
-# exec bspwm
-# exec startxfce4
+if ! pgrep -x "sxhkd" > /dev/null; then
+  #~/bin/bind &
+  sxhkd &
+fi
+if ! pgrep -x "dunst" > /dev/null; then
+  dunst &
+fi
+if ! pgrep -x "unclutter" > /dev/null; then
+  unclutter --fork &
+fi
+if ! pgrep -x "greenclip" > /dev/null; then
+  greenclip daemon &
+fi
+if ! pgrep -x "picom" > /dev/null; then
+  picom --daemon --fading &
+fi
+
+if ! pgrep -x "xcape" > /dev/null; then
+  xcape -t 200 -e 'Caps_Lock=Escape' &
+fi
+
+[[ -f ~/bin/configure-touchpad ]] && ~/bin/configure-touchpad
+[[ -f ~/bin/set-wallpaper ]] && ~/bin/set-wallpaper
+
+eval $(ssh-agent)
+keychain --absolute --dir "$KEYCHAIN_DIR" ~/.ssh/id_ed25519
+[ -f "$KEYCHAIN_DIR/$HOSTNAME-sh" ] && . $KEYCHAIN_DIR/$HOSTNAME-sh 2>/dev/null
+[ -f "$KEYCHAIN_DIR/$HOSTNAME-sh-gpg" ] && . "$KEYCHAIN_DIR/$HOSTNAME-sh-gpg" 2>/dev/null
+
+exec qtile
