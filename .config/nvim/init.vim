@@ -73,12 +73,7 @@ set lazyredraw
 " }}}
 
 " plugins {{{
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-endif
-
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 Plug 'sheerun/vim-polyglot'
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-commentary'
@@ -96,7 +91,7 @@ Plug 'tpope/vim-fugitive'
 " Plug 'tpope/vim-eunuch'
 " Plug 'tpope/vim-obsession'
 " Plug 'tpope/vim-unimpaired'
-" Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-dispatch'
 " Plug 'tpope/vim-vinegar'
 " Plug 'tpope/vim-projectionist'
 Plug 'editorconfig/editorconfig-vim'
@@ -205,7 +200,7 @@ nnoremap <leader>a :Alternate<cr>zz
 nnoremap <leader>q :quit<cr>
 nnoremap <leader>w <c-w><c-w>
 " nnoremap <leader>f :find *
-nnoremap <leader>r :%s/\<<C-r><C-w>\>//cg<left><left>
+nnoremap <leader>r :%s/\<<C-r><C-w>\>//cg<left><left><left>
 nnoremap <leader>s :update<cr>
 nnoremap <leader>n :nohlsearch<cr>
 " fzf
@@ -220,6 +215,7 @@ nnoremap <leader>cp :let @+ = expand('%:~')<cr>
 nnoremap <leader>ev :edit $MYVIMRC<cr>
 nnoremap <leader>ol :setlocal list!<cr>
 nnoremap <leader>on :call ToggleNumber()<cr>
+nnoremap <leader>os :setlocal spell!<cr>
 nnoremap <leader>ow :setlocal wrap!<cr>
 " fugitive
 nnoremap <leader>gs :Gstatus<cr>
@@ -268,7 +264,7 @@ function! s:GoToDefinition()
   endif
 
   let ret = execute("silent! normal \<C-]>")
-  if ret =~ "Error" || ret =~ "错误"
+  if ret =~ "Error"
     call searchdecl(expand('<cword>'))
   endif
 endfunction
@@ -380,7 +376,7 @@ augroup end
 augroup JavascriptFilesGroup
   autocmd!
   autocmd FileType javascript,typescript
-        \nnoremap <buffer> gf :call JavascriptGotoFile()<cr>
+        \ nnoremap <buffer> gf :call JavascriptGotoFile()<cr>
         \|nnoremap <buffer> <localleader>t :TestNearest<cr>
         \|nnoremap <buffer> <localleader>f :TestFile<cr>
         \|nnoremap <buffer> <localleader>l :TestLast<cr>
@@ -392,7 +388,7 @@ augroup end
 " auto typescript {{{
 augroup TypescriptFilesGroup
   autocmd!
-  autocmd BufWritePre *.ts :ALEFix prettier
+  " autocmd BufWritePre *.ts :ALEFix prettier
   autocmd FileType typescript
         \|nnoremap <buffer> <localleader>, :Dispatch npx ts-node %<cr>
 augroup end
@@ -442,7 +438,7 @@ augroup end
 " auto sxhkd {{{
 augroup Sxhkd
   autocmd!
-  autocmd BufWritePost sxhkdrc silent !killall sxhkd
+  autocmd BufWritePost sxhkdrc silent !killall sxhkd >/dev/null
         \| silent !sxhkd -c %
 augroup end
 " }}}
