@@ -19,6 +19,7 @@ export KEYCHAIN_DIR="$XDG_RUNTIME_DIR"/keychain
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
 export NODE_REPL_HISTORY="$XDG_DATA_HOME"/nodejs/repl_history
 export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
+export INPUTRC="$XDG_CONFIG_HOME"/readline/inputrc
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 export PATH="$HOME/bin:$PATH:$GOPATH/bin"

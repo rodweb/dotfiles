@@ -1,0 +1,8 @@
+set bell-style visible
+set editing-mode vi
+set keymap vi-command
+set colored-stats on
+set completion-ignore-case on
+set completion-prefix-display-length 3
+set show-all-if-ambiguous on
+set show-all-if-unmodified on
