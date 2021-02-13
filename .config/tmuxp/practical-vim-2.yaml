@@ -1,0 +1,8 @@
+session_name: practical-vim
+start_directory: ~/inbox/code
+windows:
+  - window_name: neovim
+    layout: main-vertical
+    panes:
+      - nvim .
+      - clear

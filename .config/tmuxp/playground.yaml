@@ -1,0 +1,8 @@
+session_name: playground
+start_directory: ~/inbox
+windows:
+  - window_name: neovim
+    layout: main-vertical
+    panes:
+      - nvim
+      - clear
