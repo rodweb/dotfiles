@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+function list_sessions() {
+    ls ~/.config/nvim/sessions/*.vim | xargs -n 1 basename
+}
+
+session=$(list_sessions | dmenu -p 'session:')
+[[ -z "$session" ]] && exit
+
+session_path="~/$session"
+sensible-terminal -e zsh -i -c "tmux new-session $EDITOR -S $session_path"

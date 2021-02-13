@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+# TODO: open terminal with tmux
+
+function list_projects() {
+    tmuxp ls
+}
+
+action=$(printf "load\nedit" | dmenu -p 'tmuxp:')
+
+if [[ "$action" == "load" ]]; then
+    project=$(list_projects | dmenu -p 'open:')
+    [ "$project" == "" ] && exit 0
+    sensible-terminal -e zsh -i -c "tmuxp load $project"
+fi
+
+if [[ "$action" == "edit" ]]; then
+    project=$(list_projects | dmenu -p 'edit:')
+    [ "$project" == "" ] && exit 0
+    sensible-terminal -e zsh -i -c "$EDITOR ~/.config/tmuxp/$project.yaml"
+fi
+
