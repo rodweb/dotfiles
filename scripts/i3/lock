@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-killall -SIGUSR1 dunst
-i3lock-fancy -n && killall -SIGUSR2 dunst
