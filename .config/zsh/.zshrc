@@ -61,6 +61,9 @@ alias T="$EDITOR $XDG_CONFIG_HOME/tmux/tmux.conf"
 
 alias ls="ls -1 --color"
 alias bat="bat --theme gruvbox"
+alias diff='diff-so-fancy'
+alias cat='bat -p'
+alias fk='fuck'
 
 alias gai='git add -i'
 alias gap='git add -p'
@@ -87,14 +90,28 @@ alias grm='git remote prune origin'
 alias grs='git reset HEAD -- .' # reset staged
 alias gs='git status -s'
 
+alias dcd='dc down'
+alias dcu='dc up'
+alias ds='docker stats'
+alias drm='docker system prune'
+
+alias ni='npm install'
+alias ns='npm start'
+alias nt='npm test'
+alias nrm="find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +"
+alias yi='yarn install'
+alias ya='yarn add'
+
 alias pi="sudo pacman -S"
 alias pr="sudo pacman -Rns"
 alias pu="sudo pacman -Syu"
 alias po="sudo pacman -Qtdq | sudo pacman -Rns -"
+
+alias ntp='sudo ntpdate -u b.ntp.br'
 # }}}
 
 # functions {{{
-g() {
+function g() {
   if [[ $# -gt 0 ]]; then
     git "$@"
   else
@@ -102,7 +119,39 @@ g() {
   fi
 }
 
-gbr() {
+function d() {
+  if [[ $# -gt 0 ]]; then
+    docker "$@"
+  else
+    docker ps
+  fi
+}
+
+function t() {
+  if [[ $# -gt 0 ]]; then
+    tmux "$@"
+  else
+    tmux ps
+  fi
+}
+
+function v() {
+  if [[ $# -gt 0 ]]; then
+    nvim "$@"
+  else
+    nvim .
+  fi
+}
+
+function dc() {
+  if [[ $# -gt 0 ]]; then
+    docker-compose "$@"
+  else
+    docker-compose ps
+  fi
+}
+
+function gbr() {
   local branches branch
   branches=$(git for-each-ref --count=30 --sort=-committerdate refs/heads/ --format="%(refname:short)") &&
   branch=$(echo "$branches" |
