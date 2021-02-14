@@ -22,5 +22,6 @@ export NODE_REPL_HISTORY="$XDG_DATA_HOME"/nodejs/repl_history
 export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
 export INPUTRC="$XDG_CONFIG_HOME"/readline/inputrc
 export _JAVA_AWT_WM_NONREPARENTING=1
+export FZF_DEFAULT_COMMAND='fd --type f'
 
 export PATH="$HOME/bin:$PATH:$GOPATH/bin"
