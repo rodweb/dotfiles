@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
-cd $HOME/bin
-chosen=$(ls | dmenu -p "edit:")
+chosen=$(yadm ls-files | dmenu -p "edit:")
 [[ -z "$chosen" ]] && exit
-sensible-terminal -e zsh -i -c "$EDITOR $(pwd)/$chosen"
+echo "$TERM"
+if [[ "$TERM" =~ "tmux" ]]; then
+  $EDITOR "$HOME/$chosen"
+  exit
+fi
+sensible-terminal -e zsh -i -c "$EDITOR $HOME/$chosen"
