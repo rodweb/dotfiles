@@ -40,6 +40,7 @@ direnv() { asdf exec direnv "$@"; }
 
 eval "$(fasd --init auto)"
 eval "$(direnv hook zsh)"
+eval "$(thefuck --alias)"
 
 autoload bashcompinit && bashcompinit
 autoload -Uz compinit && compinit -d "$ZDOTDIR/.zcompdump"
