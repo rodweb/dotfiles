@@ -1,6 +1,6 @@
 # vim:ft=sh
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
-setxkbmap br -variant abnt2 -option caps:escape
+setxkbmap br -variant abnt2 -option caps:ctrl_modifier -option shift:both_capslock
 numlockx on
 
 if ! pgrep -x "sxhkd" > /dev/null; then
@@ -21,7 +21,7 @@ if ! pgrep -x "picom" > /dev/null; then
 fi
 
 if ! pgrep -x "xcape" > /dev/null; then
-  xcape -t 200 -e 'Caps_Lock=Escape' &
+  xcape -e 'Caps_Lock=Escape' &
 fi
 
 [[ -f ~/bin/configure-touchpad ]] && ~/bin/configure-touchpad
