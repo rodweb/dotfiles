@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 chosen=$(yadm ls-files | dmenu -p "edit:")
 [[ -z "$chosen" ]] && exit
-echo "$TERM"
 if [[ "$TERM" =~ "tmux" ]]; then
   $EDITOR "$HOME/$chosen"
   exit
