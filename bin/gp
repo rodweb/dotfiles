@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+path="$HOME/dev"
+chosen=$(fd --no-ignore --hidden --type=directory ".git$" "$path" | rg -v 'node_modules' | sed 's@'"$path"'@@' | sed 's/\/.git//' | dmenu -p "repo:")
