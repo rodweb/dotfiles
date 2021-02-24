@@ -92,6 +92,9 @@ alias grm='git remote prune origin'
 alias grs='git reset HEAD -- .' # reset staged
 alias gs='git status -s'
 
+alias yap='yadm add -p'
+alias yd='yadm diff'
+
 alias dcd='dc down'
 alias dcu='dc up'
 alias ds='docker stats'
@@ -118,6 +121,14 @@ function g() {
     git "$@"
   else
     git status --short
+  fi
+}
+
+function y() {
+  if [[ $# -gt 0 ]]; then
+    yadm "$@"
+  else
+    yadm status --short
   fi
 }
 
