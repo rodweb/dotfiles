@@ -31,7 +31,6 @@ bindkey -v
 
 zstyle :compinstall filename "$ZDOTDIR/.zshrc"
 
-# source /opt/asdf-vm/asdf.sh
 PATH="$PATH:$ASDF_DIR/bin"
 
 fpath=(${ASDF_DIR}/completions $fpath)
@@ -42,6 +41,8 @@ eval "$(fasd --init auto)"
 eval "$(direnv hook zsh)"
 eval "$(antidot init)"
 eval "$(thefuck --alias)"
+
+PATH="$PATH:$(yarn global bin)"
 
 autoload bashcompinit && bashcompinit
 autoload -Uz compinit && compinit -d "$ZDOTDIR/.zcompdump"
