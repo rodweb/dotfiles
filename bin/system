@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-chosen=$(echo -e '[cancel]\nshutdown\nsuspend\nreboot\nlogout\nlock' | dmenu -p "system")
+chosen=$(echo -e '[cancel]\nshutdown\nsuspend\nhibernate\nreboot\nlogout\nlock' | dmenu -p "system")
 
 case "$chosen" in
   shutdown)
@@ -9,6 +9,8 @@ case "$chosen" in
     systemctl suspend;;
   reboot)
     systemctl reboot;;
+  hibernate)
+    systemctl hibernate;;
   logout) i3-msg exit;;
   lock) lock;;
 esac
