@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
+pushd "$HOME"
 chosen=$(yadm ls-files | dmenu -p "edit:")
 [[ -z "$chosen" ]] && exit
 if [[ "$TERM" =~ "tmux" ]]; then
   $EDITOR "$HOME/$chosen"
+  popd
   exit
 fi
+popd
 sensible-terminal -e zsh -i -c "$EDITOR $HOME/$chosen"
