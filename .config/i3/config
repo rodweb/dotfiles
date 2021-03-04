@@ -29,7 +29,7 @@ bindsym $ctrl+$alt+l exec --no-startup-id dm-tool lock
 # start a terminal
 bindsym $win+Return exec --no-startup-id $stterm
 # scratchpad
-bindsym $win+q scratchpad show
+# bindsym $win+q scratchpad show
 # kill focused window
 bindsym $win+Shift+q kill
 
@@ -260,7 +260,7 @@ for_window [class="Zeal"] move container to workspace $miscws
 for_window [window_role="GtkFileChooserDialog"] fullscreen enable
 for_window [instance="code" title="gupy-api"] move container to workspace $backws
 for_window [instance="code" title="gupy-front"] move container to workspace $frontws
-for_window [instance="st-256color" title="scratch"] floating enable, resize grow left 100, resize grow right 100, move scratchpad
+# for_window [instance="st-256color" title="scratch"] floating enable, resize grow left 100, resize grow right 100, move scratchpad
 for_window [class="Nm-connection-editor"] floating enable
 for_window [class="jetbrains-webstorm" title="Changelist"] fullscreen enable; focus
 for_window [class="jetbrains-webstorm" title="win"] focus
@@ -273,12 +273,12 @@ exec_always --no-startup-id ~/scripts/config-touchpad.sh
 #exec_always --no-startup-id ~/scripts/switch-capslock-escape.sh
 exec --no-startup-id nm-applet
 #exec --no-startup-id transmission-daemon -c ~/tmp/ -w ~/tmp/
-#exec --no-startup-id slack
+# exec --no-startup-id slack
 exec --no-startup-id spotify
 exec --no-startup-id google-chrome-unstable
 exec --no-startup-id pamixer --set-volume 10 && pkill -RTMIN+11 i3blocks
 exec --no-startup-id libinput-gestures-setup start
-exec --no-startup-id $stterm -t 'scratch'
+# exec --no-startup-id $stterm -t 'scratch'
 exec --no-startup-id udiskie -2
 exec --no-startup-id srandrd ~/scripts/i3/srandr.sh
 # exec --no-startup-id xautolock -time 3 -locker $locker
@@ -330,3 +330,11 @@ client.unfocused        $base01 $base00 $base05 $base01 $base01
 client.urgent           $base08 $base08 $base00 $base08 $base08
 client.placeholder      $base00 $base00 $base05 $base00 $base00
 client.background       $base07
+
+# bar {
+#   id bottom
+#   position bottom
+#   status_command ~/bar-bottom
+#   tray_output none
+#   workspace_buttons no
+# }

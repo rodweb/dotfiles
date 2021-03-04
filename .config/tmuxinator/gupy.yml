@@ -3,7 +3,7 @@
 name: gupy
 root: ~/dev/gupy
 
-attach: false
+attach: true
 on_project_stop: cd ~/dev/gupy/gupy-api-darthvader/ && docker-compose stop
 
 windows:

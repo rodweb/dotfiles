@@ -45,3 +45,6 @@ nmap [c :action VcsShowPreviousChangeMarker<cr>
 
 nmap s :action AceAction<cr>
 
+nmap <leader>; A;<esc>
+nmap <leader>, A,<esc>
+

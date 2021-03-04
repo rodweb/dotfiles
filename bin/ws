@@ -1,7 +1,13 @@
 #!/usr/bin/env bash
 
 dev_path="$HOME/dev/"
-chosen=$(fd --no-ignore --hidden --type=directory .idea "$dev_path" | rg -v 'node_modules' | sed 's@'"$dev_path"'@@' | sed 's/\/.idea//' | tdmenu -p "Project")
+
+generate_list() {
+  fd --no-ignore --hidden --type=directory .idea "$dev_path" | rg -v 'node_modules' | sed 's@'"$dev_path"'@@' | sed 's/\/.idea//' > ~/tmp/ws_list
+}
+
+chosen=$(tdmenu -p "Project" < ~/tmp/ws_list)
 [ -z "$chosen" ] && exit 0
 project="$dev_path$chosen"
 [ -d "$project" ] && (webstorm "$project")
+generate_list
