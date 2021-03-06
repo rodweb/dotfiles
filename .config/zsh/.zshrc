@@ -63,9 +63,8 @@ alias Z="$EDITOR $ZDOTDIR/.zshrc"
 alias T="$EDITOR $XDG_CONFIG_HOME/tmux/tmux.conf"
 
 alias ls="ls -1 --color"
-alias bat="bat --theme gruvbox"
 alias diff='diff-so-fancy'
-alias cat='bat -p'
+alias cat='bat --plain'
 alias fk='fuck'
 
 alias gai='git add -i'
@@ -97,6 +96,7 @@ alias gst='git status'
 
 alias yap='yadm add -p'
 alias yd='yadm diff'
+alias ydc='yadm diff --cached'
 
 alias dcd='dc down'
 alias dcu='dc up'

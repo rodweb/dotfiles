@@ -64,18 +64,17 @@ keys = [
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
 
     # Toggle between different layouts as defined below
-    Key([mod], "m", lazy.next_layout(), desc="Toggle between layouts"),
+    Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
 
     Key([mod, "shift"], "q", lazy.window.kill(), desc="Kill focused window"),
  
-    Key([mod], "Tab", lazy.window.toggle_fullscreen(), desc="Toggle fullscreen"),
+    Key([mod], "m", lazy.window.toggle_fullscreen(), desc="Toggle fullscreen"),
     Key([mod], "b", lazy.hide_show_bar("bottom"), desc="Toggle fullscreen"),
 
     Key([mod, "control"], "r", lazy.restart(), desc="Restart qtile"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown qtile"),
-    Key([mod], "t", lazy.spawn("ts"), desc="Tmux Switcher"),
-    Key([mod], "r", lazy.spawncmd(),
-        desc="Spawn a command using a prompt widget"),
+    # Key([mod], "r", lazy.spawncmd(),
+    #     desc="Spawn a command using a prompt widget"),
 ]
 
 groups = [Group(i) for i in "asdfuiop"]
