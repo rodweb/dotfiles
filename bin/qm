@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+query_path="$HOME/kbfs/private/rodweb/queries"
+script=$(ls "$query_path" | dmenu -p "query:")
+[[ -z "$script" ]] && exit
+script=$(realpath "$query_path/$script")
+temp_script=$(mktemp)
+cat "$script" > "$temp_script"
+$EDITOR "$temp_script"
+[[ $? -ne 0 ]] && exit
+query=$(cat "$temp_script")
+echo "$query"
+result=$(psql -h localhost -U postgres -c "$query")
+echo "$result"
