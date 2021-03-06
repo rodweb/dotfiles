@@ -66,6 +66,7 @@ alias ls="ls -1 --color"
 alias diff='diff-so-fancy'
 alias cat='bat --plain'
 alias fk='fuck'
+alias lg='lazygit'
 
 alias gai='git add -i'
 alias gap='git add -p'
