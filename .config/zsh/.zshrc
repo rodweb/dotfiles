@@ -67,6 +67,7 @@ alias diff='diff-so-fancy'
 alias cat='bat --plain'
 alias fk='fuck'
 alias lg='lazygit'
+alias hp='http-prompt'
 
 alias gai='git add -i'
 alias gap='git add -p'
