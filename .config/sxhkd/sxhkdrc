@@ -5,5 +5,11 @@ XF86Audio{Raise,Lower}Volume
 XF86AudioMute
   vol mute
 
-super + {1,4}
-	{firefox-developer-edition,slack}
+super + {1,4,5}
+	jumpapp {google-chrome-stable,slack,spotify}
+
+super + {r}
+  {dmenu_run,}
+
+alt + space
+  search

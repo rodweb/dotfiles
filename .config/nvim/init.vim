@@ -256,7 +256,8 @@ let g:coc_global_extensions = [
       \'coc-clangd',
       \'coc-rust-analyzer',
       \'coc-java',
-      \'coc-pairs']
+      \'coc-pairs',
+      \'coc-css']
 
 function! s:GoToDefinition()
   if CocAction('jumpDefinition')
@@ -284,7 +285,7 @@ nmap <silent><C-s> <Plug>(coc-range-select)
 xmap <silent><C-s> <Plug>(coc-range-select)
 nnoremap <silent><nowait> <leader>d :<C-u>CocList diagnostics<cr>
 nnoremap <silent><nowait> <leader>x :<C-u>CocList extensions<cr>
-nnoremap <silent><nowait> <leader>o :<C-u>CocList outline<cr>
+" nnoremap <silent><nowait> <leader>o :<C-u>CocList outline<cr>
 nnoremap <silent><nowait> <leader>p :<C-u>CocList -I symbols<cr>
 nnoremap <silent><nowait> <leader>j :<C-u>CocNext<cr>
 nnoremap <silent><nowait> <leader>k :<C-u>CocPrev<cr>
@@ -376,8 +377,7 @@ augroup end
 augroup JavascriptFilesGroup
   autocmd!
   autocmd FileType javascript,typescript
-        \ nnoremap <buffer> gf :call JavascriptGotoFile()<cr>
-        \|nnoremap <buffer> <localleader>t :TestNearest<cr>
+        \ nnoremap <buffer> <localleader>t :TestNearest<cr>
         \|nnoremap <buffer> <localleader>f :TestFile<cr>
         \|nnoremap <buffer> <localleader>l :TestLast<cr>
         \|nnoremap <buffer> <localleader>, :Dispatch node %<cr>
@@ -432,14 +432,6 @@ augroup end
 augroup XResourcesGroup
   autocmd!
   autocmd BufWritePost ~/.Xresources silent !xrdb -load ~/.Xresources
-augroup end
-" }}}
-
-" auto sxhkd {{{
-augroup Sxhkd
-  autocmd!
-  autocmd BufWritePost sxhkdrc silent !killall sxhkd >/dev/null
-        \| silent !sxhkd -c %
 augroup end
 " }}}
 
@@ -549,10 +541,6 @@ function! ToggleNumber()
   else 
     set signcolumn="yes"
   endif
-endfunction
-
-function! JavascriptGotoFile()
-  normal! f'gf
 endfunction
 
 function! ParseConsistencyIndex()

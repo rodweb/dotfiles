@@ -88,10 +88,12 @@ alias gpf='gp -f'
 alias gra='git rebase --abort'
 alias grc='git rebase --continue'
 alias grh='git reset HEAD'
+alias grhh='git reset HEAD --hard'
 alias gri='git rebase -i'
 alias grm='git remote prune origin'
 alias grs='git reset HEAD -- .' # reset staged
 alias gs='git status -s'
+alias gst='git status'
 
 alias yap='yadm add -p'
 alias yd='yadm diff'
