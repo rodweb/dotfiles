@@ -9,10 +9,10 @@ super + {1,4,5}
 	jumpapp {google-chrome-stable,slack,spotify}
 
 super + {r,t}
-  {search,ts}
+  {launcher,ts}
 
 alt + ctrl + shift {p,s,t,w}
   {passmenu,system,ts,ws}
 
 alt + space
-  search
+  launcher

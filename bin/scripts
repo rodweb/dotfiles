@@ -3,7 +3,9 @@ scripts=$(cat <<EOF
 windows
 passwords
 networks
+notes
 system
+power
 search
 screenshot
 cfg
