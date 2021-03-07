@@ -2,6 +2,7 @@
 scripts=$(cat <<EOF
 windows
 passwords
+networks
 system
 search
 screenshot
