@@ -4,11 +4,11 @@ windows
 passwords
 networks
 notes
-system
 power
+configs
 search
 screenshot
-cfg
+tmux_windows
 clip
 pomo
 translate
@@ -16,7 +16,6 @@ cpf
 todo
 vm
 qm
-ts
 vp
 tp
 EOF

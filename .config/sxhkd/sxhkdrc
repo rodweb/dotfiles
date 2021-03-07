@@ -8,11 +8,11 @@ XF86AudioMute
 super + {1,4,5}
 	jumpapp {google-chrome-stable,slack,spotify}
 
-super + {r,t}
-  {launcher,ts}
+super + {q,r,t}
+  {scripts,launcher,tmux_windows}
 
 alt + ctrl + shift {p,s,t,w}
-  {passmenu,system,ts,ws}
+  {passwords,power,tmux_windows,webstorm_projects}
 
 alt + space
   launcher
