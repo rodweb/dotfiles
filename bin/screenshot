@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# TODO: implement flameshot
+# TODO: implement peek
 option="$1"
 if test -z "$option"; then
   option=$(printf 'selection\nfocused\nscreen' | dmenu -p 'screenshot:')
