@@ -2,8 +2,8 @@
 scripts=$(cat <<EOF
 clips
 configs
-generate_cpf
-generate_password
+gcpf
+gpassword
 launcher
 machines
 networks
@@ -14,13 +14,13 @@ power
 queries
 screenshot
 search
-tprojects
-twindows
 todos
+tprojects
 translate
+twindows
 vprojects
-wprojects
 windows
+wprojects
 EOF
 )
 script=$(printf "$scripts" | dmenu -p "script:")

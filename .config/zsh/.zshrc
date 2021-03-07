@@ -118,6 +118,8 @@ alias pu="sudo pacman -Syu"
 alias po="sudo pacman -Qtdq | sudo pacman -Rns -"
 
 alias ntp='sudo ntpdate -u b.ntp.br'
+
+alias cfg='configs'
 # }}}
 
 # functions {{{
