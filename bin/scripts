@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 scripts=$(cat <<EOF
 windows
+passwords
 system
 search
 screenshot
