@@ -12,7 +12,7 @@ super + {q,r,t}
   {scripts,launcher,tmux_windows}
 
 alt + ctrl + shift {p,s,t,w}
-  {passwords,power,tmux_windows,webstorm_projects}
+  {passwords,power,twindows,wprojects}
 
 alt + space
   launcher

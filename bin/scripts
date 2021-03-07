@@ -14,12 +14,12 @@ power
 queries
 screenshot
 search
-tmux_projects
-tmux_windows
+tprojects
+twindows
 todos
 translate
-vim_projects
-webstorm_projects
+vprojects
+wprojects
 windows
 EOF
 )
