@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+scripts=$(cat <<EOF
+windows
+system
+search
+screenshot
+cfg
+clip
+pomo
+translate
+cpf
+todo
+vm
+qm
+ts
+vp
+tp
+EOF
+)
+script=$(printf "$scripts" | dmenu -p "script:")
+[[ -z "$script" ]] && exit
+$script
