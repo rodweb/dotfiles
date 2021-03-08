@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+sites=$(cat <<EOF
+last|Last.fm|https://last.fm/user/rodweb
+EOF
+)
+selected=$(printf "$sites" | dmenu -p "bookmark:" | cut -d'|' -f3-)
+[[ -z "$selected" ]] && exit
+echo "url: $selected"
+google-chrome-unstable "$selected"
