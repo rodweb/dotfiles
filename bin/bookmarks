@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 sites=$(cat <<EOF
 last|Last.fm|https://last.fm/user/rodweb
+todoist|Todoist|https://todoist.com
 EOF
 )
 selected=$(printf "$sites" | dmenu -p "bookmark:" | cut -d'|' -f3-)
