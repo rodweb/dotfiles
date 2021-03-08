@@ -8,6 +8,7 @@
   excludesfile = ~/.config/git/ignore
 [commit]
   template = ~/.config/git/message
+  gpgsign = true
 [pull]
   rebase = true
 [push]
