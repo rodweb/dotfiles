@@ -88,6 +88,7 @@ alias gp='git push origin HEAD'
 alias gpf='gp -f'
 alias gra='git rebase --abort'
 alias grc='git rebase --continue'
+alias gr1='git reset HEAD~1'
 alias grh='git reset HEAD'
 alias grhh='git reset HEAD --hard'
 alias gri='git rebase -i'
@@ -130,6 +131,21 @@ function g() {
     git status --short
   fi
 }
+
+function git_current_branch() {
+  git branch | sed  '/^\*/!d;s/\* //'
+}
+
+function git_commit() {
+  if [ -n "$BUFFER" ]; then
+    BUFFER="git add -u && git commit -m \"$BUFFER\" && git push origin $(git_current_branch)"
+  elif [ -z "$BUFFER" ]; then
+    BUFFER="git add -u && git commit -v && git push origin $(git_current_branch)"
+  fi
+  zle accept-line
+}
+zle -N git_commit
+bindkey "^g" git_commit
 
 function y() {
   if [[ $# -gt 0 ]]; then

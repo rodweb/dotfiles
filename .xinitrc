@@ -27,9 +27,8 @@ fi
 [[ -f ~/bin/configure-touchpad ]] && ~/bin/configure-touchpad
 [[ -f ~/bin/set-wallpaper ]] && ~/bin/set-wallpaper
 
-eval $(ssh-agent)
-keychain --absolute --dir "$KEYCHAIN_DIR" ~/.ssh/id_ed25519
-[ -f "$KEYCHAIN_DIR/$HOSTNAME-sh" ] && . $KEYCHAIN_DIR/$HOSTNAME-sh 2>/dev/null
-[ -f "$KEYCHAIN_DIR/$HOSTNAME-sh-gpg" ] && . "$KEYCHAIN_DIR/$HOSTNAME-sh-gpg" 2>/dev/null
+eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
+export SSH_AUTH_SOCK
+source /etc/X11/xinit/xinitrc.d/50-systemd-user.sh
 
 exec qtile

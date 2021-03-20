@@ -67,6 +67,7 @@ mlocate
 ncdu
 neovim
 ngrok
+nnn
 nodejs
 npm
 numlockx
@@ -84,6 +85,7 @@ pkgconf
 pkgfile
 playerctl
 poedit
+postgresql-libs
 postman-bin
 powertop
 pulseaudio
