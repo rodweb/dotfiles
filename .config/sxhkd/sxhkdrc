@@ -9,7 +9,7 @@ super + {1,4,5}
 	jumpapp {google-chrome-stable,slack,spotify}
 
 super + {q,r,t}
-  {scripts,launcher,tmux_windows}
+  {scripts,launcher,twindows}
 
 alt + ctrl + shift {p,s,t,w}
   {passwords,power,twindows,wprojects}
