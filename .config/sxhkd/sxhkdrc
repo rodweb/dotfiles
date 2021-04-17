@@ -5,8 +5,8 @@ XF86Audio{Raise,Lower}Volume
 XF86AudioMute
   vol mute
 
-super + {1,4,5}
-	jumpapp {google-chrome-stable,slack,spotify}
+super + {4,5}
+	jumpapp {slack,spotify}
 
 super + {q,r,t}
   {scripts,launcher,twindows}
@@ -16,3 +16,6 @@ alt + ctrl + shift {p,s,t,w}
 
 alt + space
   launcher
+
+super + Return
+  sensible-terminal

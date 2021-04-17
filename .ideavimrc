@@ -13,7 +13,6 @@ set surround
 
 let mapleader = " "
 let localleader = ","
-nmap ; :
 nmap j jzz
 nmap k kzz
 nmap n nzz
@@ -34,7 +33,7 @@ nmap <localleader>tt :action RerunTests<cr>
 nmap <leader>gb :action Back<cr>
 nmap <leader>gf :action Forward<cr>
 nmap <leader>w :action JumpToLastWindow<cr>
-nmap <leader>gu :action FindUsages<cr>
+nmap <leader>gr :action FindUsages<cr>
 nmap <leader>gd :action GotoDeclaration<cr>
 nmap <leader>gi :action GotoImplementation<cr>
 nmap <leader>= :action ReformatWithPrettierAction<cr>
@@ -44,4 +43,7 @@ nmap ]c :action VcsShowNextChangeMarker<cr>
 nmap [c :action VcsShowPreviousChangeMarker<cr>
 
 nmap s :action AceAction<cr>
+
+nmap <leader>; A;<esc>
+nmap <leader>, A,<esc>
 

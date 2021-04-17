@@ -8,7 +8,7 @@ window_count=$(echo "$windows" | wc -l)
 if [[ "$window_count" -eq 1 ]]; then
   selected="$windows"
 else
-  selected=$(echo "$windows" | dmenu)
+  selected=$(echo "$windows" | dmenu -p "window:")
 fi
 if [[ "$selected" =~ ([^\ ]+)\ \[([^\]]+)\] ]]; then
   window_name=${BASH_REMATCH[1]}

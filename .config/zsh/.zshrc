@@ -15,6 +15,8 @@ source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/doc/pkgfile/command-not-found.zsh
 source $ASDF_DIR/lib/asdf.sh
 
+[[ -f ~/bin/gupy ]] && source ~/bin/gupy
+
 # Lines configured by zsh-newuser-install
 
 setopt autocd
@@ -96,6 +98,7 @@ alias grm='git remote prune origin'
 alias grs='git reset HEAD -- .' # reset staged
 alias gs='git status -s'
 alias gst='git status'
+alias gcnp='gcn && gpf'
 
 alias yap='yadm add -p'
 alias yd='yadm diff'

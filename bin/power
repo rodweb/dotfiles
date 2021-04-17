@@ -11,8 +11,8 @@ case "$chosen" in
     systemctl reboot;;
   hibernate)
     systemctl hibernate;;
-  logout) i3-msg exit;;
-  lock) lock;;
+  logout) xkill xinit;;
+  lock) slock;;
 esac
 
 echo "$1"

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
+set -e
 
-cd "$HOME/downloads"
+cd "$HOME/tmp"
 filename=$(ls -1t *.hex | head -1)
 teensy-loader-cli -mmcu=atmega32u4 -w "$filename"
 sleep 3

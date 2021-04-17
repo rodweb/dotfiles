@@ -1,22 +1,28 @@
 #!/usr/bin/env bash
 
-# TODO: open terminal with tmux
-
 function list_projects() {
-    tmuxp ls
+    tmuxinator list | sed -n '1!p' | sed -r 's/\s+/\n/g'
 }
 
-action=$(printf "load\nedit" | dmenu -p 'tmuxp:')
+action=$(printf "start\nstop\nedit" | dmenu -p "action:")
 
-if [[ "$action" == "load" ]]; then
-    project=$(list_projects | dmenu -p 'open:')
+if [[ "$action" == "start" ]];
+then
+    project=$(list_projects | dmenu -p "start:")
     [ "$project" == "" ] && exit 0
-    sensible-terminal -e zsh -i -c "tmuxp load $project"
+    sensible-terminal -e zsh -i -c "tmuxinator start $project"
 fi
 
-if [[ "$action" == "edit" ]]; then
-    project=$(list_projects | dmenu -p 'edit:')
+if [[ "$action" == "stop" ]];
+then
+    project=$(list_projects | dmenu -p "stop:")
     [ "$project" == "" ] && exit 0
-    sensible-terminal -e zsh -i -c "$EDITOR ~/.config/tmuxp/$project.yaml"
+    sensible-terminal -e zsh -i -c "tmuxinator stop $project"
 fi
 
+if [[ "$action" == "edit" ]];
+then
+    project=$(list_projects | dmenu -p "edit:")
+    [ "$project" == "" ] && exit 0
+    sensible-terminal -e zsh -i -c "tmuxinator edit $project"
+fi

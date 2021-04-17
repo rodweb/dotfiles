@@ -3,8 +3,11 @@
 setxkbmap br -variant abnt2 -option caps:ctrl_modifier -option shift:both_capslock
 numlockx on
 
+if command -v nvidia-settings > /dev/null 2>&1; then
+  nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }"
+fi
+
 if ! pgrep -x "sxhkd" > /dev/null; then
-  #~/bin/bind &
   sxhkd &
 fi
 if ! pgrep -x "dunst" > /dev/null; then
@@ -31,4 +34,5 @@ eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 export SSH_AUTH_SOCK
 source /etc/X11/xinit/xinitrc.d/50-systemd-user.sh
 
-exec qtile
+# exec qtile
+exec ~/bin/run_dwm

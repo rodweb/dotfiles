@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+while true; do
+  xsetroot -name "$(date +"%d/%m %H:%M")"
+  sleep 1m
+done &
+
+while true; do
+  dwm >/dev/null 2>&1
+done

@@ -6,7 +6,7 @@ fi
 
 pid=$(tmux list-clients -F "#{client_pid}" | head -n 1)
 if test -z $pid; then
-  alacritty -e tmux attach -t "$session_name"
+  alacritty --class "Tmux" -e tmux attach -t "$session_name"
 else
   tmux switch -t "$session_name"
   wmctrl -a "$session_name:"
