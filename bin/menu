@@ -5,15 +5,21 @@ function get_options() {
   # scripts="commands/*"
   scripts=(
     'commands/bookmark'
+    'commands/chrome_app'
     'commands/clipboard'
     'commands/config'
-    'commands/chrome_app'
+    'commands/note'
     'commands/password'
+    'commands/pomodoro'
+    'commands/run'
     'commands/screenshot'
     'commands/script'
+    'commands/system'
+    'commands/tmux'
+    'commands/tmuxinator'
     'commands/todo'
-    'commands/tmux_window'
-    'commands/webstorm_project'
+    'commands/virtualbox'
+    'commands/webstorm'
     'commands/window'
   )
 

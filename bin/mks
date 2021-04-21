@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 
-cd $HOME/bin
+pushd "$HOME/bin" || exit
 filename="$1"
 
-[[ -z "$filename" ]] && exit 1;
-[[ -f "$filename" ]] && exit 2;
+[[ -z "$filename" ]] && popd && exit 1;
+[[ -f "$filename" ]] && popd && exit 2;
 
-echo '#!/usr/bin/env bash' > $filename
-chmod +x $filename
-${EDITOR:=vim} $filename
+echo '#!/usr/bin/env bash' > "$filename"
+chmod +x "$filename"
+${EDITOR:=vim} "$filename"
+popd || exit

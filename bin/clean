@@ -14,11 +14,12 @@ echo ok
 
 # clean yay cache
 echo -e 'Cleaning yay...\c'
-yay -Sc --aur >/dev/null <<EOF
-Y
-Y
-Y
-EOF
+yes | yay -Sc --aur >/dev/null
+echo ok
+
+# clean paru cache
+echo -e 'Cleaning paru...\c'
+yes | paru -Sc >/dev/null
 echo ok
 
 # clean downloads

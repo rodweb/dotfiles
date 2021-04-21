@@ -9,6 +9,7 @@ function get_options() {
     "gpassword"
     "reload_sxhkd"
     "update_pkglist"
+    "flash_qmk"
   )
 
   for script in "${scripts[@]}"; do 

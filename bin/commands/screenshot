@@ -5,13 +5,13 @@
 source "$(dirname "$0")/base"
 
 function get_options() {
-  printf 'selection\nfocused\nscreen'
+  printf 'area\nfocused\nscreen'
 }
 
 function execute() {
   args=''
   case "$1" in
-    selection)
+    area)
       args='--select'
       ;;
     focused)
