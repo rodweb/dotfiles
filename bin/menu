@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+export MENU=1
+
+function get_options() {
+  # scripts="commands/*"
+  scripts=(
+    'commands/window'
+    'commands/bookmark'
+  )
+
+  declare -A values_by_keyword
+
+  for script in "${scripts[@]}"; do
+    script="$(dirname "$0")/$script"
+    keyword=$(basename "$script")
+    values_by_keyword[$keyword]=$($script)
+  done
+  for key in "${!values_by_keyword[@]}"
+  do
+    while IFS= read -r value; do
+      [ -z "$value" ] && continue
+      echo "$key: $value"
+    done <<< "${values_by_keyword[$key]}"
+  done
+}
+
+current_path="$(dirname "$0")"
+commands_path="$current_path/commands"
+selected=$(get_options | dmenu -l 10 -p "menu:")
+regex="^([a-z]+): (.*)"
+if [[ $selected =~ $regex ]]; then
+  script="${BASH_REMATCH[1]}"
+  value="${BASH_REMATCH[2]}"
+  "$commands_path/$script" "$value"
+fi

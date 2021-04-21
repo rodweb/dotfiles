@@ -1,0 +1,88 @@
+#!/bin/env bash
+set -e
+is_menu="${MENU:-0}"
+selected="$1"
+
+bookmarks_file="$HOME/bookmarks";
+bookmarks_file_tmp="$bookmarks_file.tmp"
+browser='google-chrome-unstable'
+
+function notify() {
+  dunstify "$0" "$1";
+}
+
+function filter() {
+  prompt="${1:-bookmark:}"
+  dmenu -i -l 10 -p "$prompt"
+}
+
+function input() {
+  filter "$1"
+}
+
+function get_bookmarks() {
+  while IFS=\| read -r alias url tags;
+  do
+    echo "$alias|$url|$tags";
+  done < "$bookmarks_file"
+}
+
+function get_options() {
+  printf "\n"
+  get_bookmarks
+  printf "[add]\n[remove]\n"
+}
+
+function get_url() {
+  cut -d'|' -f2
+}
+
+function get_alias() {
+  cut -d'|' -f1
+}
+
+function add() {
+  # TODO: alias override check
+  alias=$(get_options | get_alias | input "alias")
+  [[ -z "$alias" ]] && exit
+  url=$(input "url")
+  tags=$(input "tags")
+  cp "$bookmarks_file" "$bookmarks_file_tmp"
+  echo "$alias|$url|$tags" >> "$bookmarks_file_tmp"
+  cp "$bookmarks_file_tmp" "$bookmarks_file"
+  notify "$url added."
+}
+
+function remove() {
+  bookmark=$(get_bookmarks | filter "bookmark(remove):");
+  alias=$(echo "$bookmark" | get_alias)
+  url=$(echo "$bookmark" | get_url)
+  sed "/^$alias|/d" > "$bookmarks_file_tmp" < "$bookmarks_file"
+  cp "$bookmarks_file_tmp" "$bookmarks_file"
+  notify "$url removed."
+}
+
+function launch() {
+  notify "opening $1..."
+  "$browser" "$1" >/dev/null 2>&1
+}
+
+function execute() {
+  case "$1" in
+    '') exit;;
+    '[add]') add;;
+    '[remove]') remove;;
+    *) launch "$(echo "$1" | get_url)";;
+  esac
+}
+
+[[ -n "$selected" ]] && execute "$selected" && exit
+
+if [[ "$is_menu" -eq "1" ]]; then
+  get_options
+  exit
+fi
+
+selected=$(get_options | filter)
+[[ -z "$selected" ]] && exit
+"$0" "$selected"

@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+is_menu="${MENU:-0}"
+selected="$1"
+
+function get_options() {
+  wmctrl -l | cut -d" " -f5-
+}
+
+function filter() {
+  dmenu -p "window:"
+}
+
+function execute() {
+  dunstify "$0" "$1"
+  wmctrl -a "$1"
+  exit
+}
+
+[[ -n "$selected" ]] && execute "$selected"
+
+if [[ "$is_menu" -eq "1" ]]; then
+  get_options
+  exit
+fi
+
+selected=$(get_options | filter)
+[[ -z "$selected" ]] && exit
+"$0" "$selected"
+
