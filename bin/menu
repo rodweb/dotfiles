@@ -13,12 +13,11 @@ function get_options() {
     'commands/pomodoro'
     'commands/run'
     'commands/screenshot'
-    'commands/script'
     'commands/system'
     'commands/tmux'
     'commands/tmuxinator'
     'commands/todo'
-    'commands/virtualbox'
+    # 'commands/virtualbox'
     'commands/webstorm'
     'commands/window'
   )

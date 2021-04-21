@@ -7,9 +7,7 @@ function get_options() {
 }
 
 function execute() {
-  dunstify "$0" "$1"
   wmctrl -a "$1"
-  exit
 }
 
 define_command "window" get_options execute "$1"

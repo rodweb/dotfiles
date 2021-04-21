@@ -5,17 +5,11 @@ XF86Audio{Raise,Lower}Volume
 XF86AudioMute
   vol mute
 
-super + {4,5}
-	jumpapp {slack,spotify}
-
-super + {q,r,t,m}
-  {scripts,launcher,twindows}
+super + {q,r}
+  {menu,launcher}
 
 alt + ctrl + shift {a,s,d,f,g}
-  {twindows,slack,webstorm-eap,google-chrome-unstable, spotify}
-
-alt + ctrl + shift {p,s,t,w,m}
-  {passwords,power,twindows,wprojects,menu}
+  {ror-tmux,slack,webstorm-eap,google-chrome-unstable,spotify}
 
 alt + space
   launcher
