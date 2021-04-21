@@ -6,6 +6,7 @@ function get_options() {
   scripts=(
     'commands/window'
     'commands/bookmark'
+    'commands/tmux_window'
   )
 
   declare -A values_by_keyword
@@ -27,7 +28,7 @@ function get_options() {
 current_path="$(dirname "$0")"
 commands_path="$current_path/commands"
 selected=$(get_options | dmenu -l 10 -p "menu:")
-regex="^([a-z]+): (.*)"
+regex="^([a-z_]+): (.*)"
 if [[ $selected =~ $regex ]]; then
   script="${BASH_REMATCH[1]}"
   value="${BASH_REMATCH[2]}"

@@ -1,13 +1,9 @@
 #!/usr/bin/env bash
-is_menu="${MENU:-0}"
-selected="$1"
+# shellcheck source=base
+source "$(dirname "$0")/base"
 
 function get_options() {
   wmctrl -l | cut -d" " -f5-
-}
-
-function filter() {
-  dmenu -p "window:"
 }
 
 function execute() {
@@ -16,14 +12,4 @@ function execute() {
   exit
 }
 
-[[ -n "$selected" ]] && execute "$selected"
-
-if [[ "$is_menu" -eq "1" ]]; then
-  get_options
-  exit
-fi
-
-selected=$(get_options | filter)
-[[ -z "$selected" ]] && exit
-"$0" "$selected"
-
+define_command "window" get_options execute "$1"

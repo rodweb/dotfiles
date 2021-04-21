@@ -1,7 +1,6 @@
 #!/bin/env bash
-set -e
-is_menu="${MENU:-0}"
-selected="$1"
+# shellcheck source=base
+source "$(dirname "$0")/base"
 
 bookmarks_file="$HOME/bookmarks";
 bookmarks_file_tmp="$bookmarks_file.tmp"
@@ -76,13 +75,4 @@ function execute() {
   esac
 }
 
-[[ -n "$selected" ]] && execute "$selected" && exit
-
-if [[ "$is_menu" -eq "1" ]]; then
-  get_options
-  exit
-fi
-
-selected=$(get_options | filter)
-[[ -z "$selected" ]] && exit
-"$0" "$selected"
+define_command "bookmark" get_options execute "$1"
