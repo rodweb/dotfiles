@@ -9,10 +9,16 @@ mkdir -p "$config_path"
 touch "$todo_file"
 
 function get_options() {
+  printf "[add]\n"
   cat "$todo_file"
 }
 
-function execute() {
+function add_todo() {
+  item=$(dmenu -p "todo:" < "$todo_file")
+  "$0" "$item"
+}
+
+function process() {
   line="$1"
   if grep "^$line\$" "$todo_file"; then
     sed -i "/^$line\$/d" "$todo_file"
@@ -20,6 +26,14 @@ function execute() {
     echo "$line" >> "$todo_file"
   fi
   "$0"
+}
+
+function execute() {
+  case "$1" in
+    '') exit;;
+    '[add]') add_todo;;
+    *) process "$1";;
+  esac
 }
 
 define_command "todo" get_options execute "$1"
