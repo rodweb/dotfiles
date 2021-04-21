@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# shellcheck source=base
+source "$(dirname "$0")/base"
+
+config_path="$HOME/.config/todo"
+todo_file="$config_path/todo"
+
+mkdir -p "$config_path"
+touch "$todo_file"
+
+function get_options() {
+  cat "$todo_file"
+}
+
+function execute() {
+  line="$1"
+  if grep "^$line\$" "$todo_file"; then
+    sed -i "/^$line\$/d" "$todo_file"
+  else
+    echo "$line" >> "$todo_file"
+  fi
+  "$0"
+}
+
+define_command "todo" get_options execute "$1"

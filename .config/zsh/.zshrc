@@ -5,6 +5,7 @@ fi
 
 # this is temporary
 source ~/.zshenv
+eval "$(antidot init)"
 
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 source /usr/share/fzf/fzf-extras.zsh
@@ -13,6 +14,8 @@ source /usr/share/fzf/completion.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/doc/pkgfile/command-not-found.zsh
+source ~/.zsh/plugins/zsh-nvm/zsh-nvm.plugin.zsh
+source /usr/share/zsh/plugins/zsh-load-nvmrc/load-nvmrc.zsh
 source $ASDF_DIR/lib/asdf.sh
 
 [[ -f ~/bin/gupy ]] && source ~/bin/gupy
@@ -41,10 +44,9 @@ direnv() { asdf exec direnv "$@"; }
 
 eval "$(fasd --init auto)"
 eval "$(direnv hook zsh)"
-eval "$(antidot init)"
 eval "$(thefuck --alias)"
 
-PATH="$PATH:$(yarn global bin)"
+# PATH="$PATH:$(yarn global bin)"
 
 autoload bashcompinit && bashcompinit
 autoload -Uz compinit && compinit -d "$ZDOTDIR/.zcompdump"

@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# shellcheck source=base
+source "$(dirname "$0")/base"
+
+function get_options() {
+  greenclip print | head -n 10 | sed '/^$/d'
+}
+
+function execute() {
+  greenclip print "$1"
+}
+
+define_command "clipboard" get_options execute "$1"

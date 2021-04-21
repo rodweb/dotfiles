@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# shellcheck source=base
+source "$(dirname "$0")/base"
+
+function within_home() {
+  pushd "$HOME" || exit
+  "$@"
+  popd || exit
+}
+
+function get_options() {
+  within_home yadm ls-files
+}
+
+function execute() {
+  if [[ "$TERM" =~ "tmux" ]]; then
+    "$EDITOR $HOME/$1"
+    exit
+  fi
+  sensible-terminal -e zsh -i -c "$EDITOR $HOME/$1"
+}
+
+define_command "config" get_options execute "$1"

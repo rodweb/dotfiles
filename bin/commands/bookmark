@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/usr/bin/env bash
 # shellcheck source=base
 source "$(dirname "$0")/base"
 
@@ -42,10 +42,10 @@ function get_alias() {
 
 function add() {
   # TODO: alias override check
-  alias=$(get_options | get_alias | input "alias")
+  alias=$(get_options | get_alias | input "alias:")
   [[ -z "$alias" ]] && exit
-  url=$(input "url")
-  tags=$(input "tags")
+  url=$(input "url:")
+  tags=$(input "tags:")
   cp "$bookmarks_file" "$bookmarks_file_tmp"
   echo "$alias|$url|$tags" >> "$bookmarks_file_tmp"
   cp "$bookmarks_file_tmp" "$bookmarks_file"

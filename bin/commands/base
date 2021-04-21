@@ -2,22 +2,25 @@
 set -e
 
 function define_command() {
-  name="$1"
+  command_name="$1"
   get_options="$2"
   execute="$3"
   selected="$4"
 
   is_menu="${MENU:-0}"
 
-  [[ -n "$selected" ]] && $execute "$selected" && exit
+  if [[ -n "$selected" ]]; then
+    $execute "$selected"
+    exit
+  fi
 
   if [[ "$is_menu" -eq "1" ]]; then
-    get_options
+    $get_options
     exit
   fi
 
   function filter() {
-    dmenu -p "$name:"
+    dmenu -p "$command_name:"
   }
 
   selected=$($get_options | filter)

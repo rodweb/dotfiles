@@ -1,5 +1,5 @@
 XF86Audio{Play,Stop,Prev,Next}
-	playerctl {play-pause,stop,next,previous}
+	playerctl {play-pause,stop,previous,next}
 XF86Audio{Raise,Lower}Volume
   vol {up,down}
 XF86AudioMute
@@ -8,11 +8,14 @@ XF86AudioMute
 super + {4,5}
 	jumpapp {slack,spotify}
 
-super + {q,r,t}
+super + {q,r,t,m}
   {scripts,launcher,twindows}
 
-alt + ctrl + shift {p,s,t,w}
-  {passwords,power,twindows,wprojects}
+alt + ctrl + shift {a,s,d,f,g}
+  {twindows,slack,webstorm-eap,google-chrome-unstable, spotify}
+
+alt + ctrl + shift {p,s,t,w,m}
+  {passwords,power,twindows,wprojects,menu}
 
 alt + space
   launcher

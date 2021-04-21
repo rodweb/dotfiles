@@ -4,9 +4,17 @@ export MENU=1
 function get_options() {
   # scripts="commands/*"
   scripts=(
-    'commands/window'
     'commands/bookmark'
+    'commands/clipboard'
+    'commands/config'
+    'commands/chrome_app'
+    'commands/password'
+    'commands/screenshot'
+    'commands/script'
+    'commands/todo'
     'commands/tmux_window'
+    'commands/webstorm_project'
+    'commands/window'
   )
 
   declare -A values_by_keyword

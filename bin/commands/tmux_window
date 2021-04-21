@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-is_menu="${MENU:-0}"
-selected="$1"
+# shellcheck source=base
+source "$(dirname "$0")/base"
 
 function get_options() {
   tmux list-windows -a -F '#{window_active},#{window_name} [#{session_name}]' \
@@ -26,13 +26,4 @@ function execute() {
   exit
 }
 
-[[ -n "$selected" ]] && execute "$selected"
-
-if [[ "$is_menu" -eq "1" ]]; then
-  get_options
-  exit
-fi
-
-selected=$(get_options | filter)
-[[ -z "$selected" ]] && exit
-"$0" "$selected"
+define_command "tmux_window" get_options execute "$1"

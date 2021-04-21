@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# shellcheck source=base
+source "$(dirname "$0")/base"
+
+function get_options() {
+  scripts=(
+    "translate"
+    "gcpf"
+    "gpassword"
+    "reload_sxhkd"
+    "update_pkglist"
+  )
+
+  for script in "${scripts[@]}"; do 
+    echo "$script"
+  done
+}
+
+function execute() {
+  "$HOME/bin/$1"
+}
+
+define_command "script" get_options execute "$1"
