@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# shellcheck source=base
+source "$(dirname "$0")/base"
+
+function get_options() {
+  dmenu_path 
+}
+
+function execute() {
+  dmenu "$@" | ${SHELL:-"/bin/sh"} &
+}
+
+define_command "run" get_options execute "$1"

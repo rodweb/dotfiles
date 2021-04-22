@@ -1,0 +1,86 @@
+#!/usr/bin/env bash
+# shellcheck source=base
+source "$(dirname "$0")/base"
+
+config_path="$HOME/.config/pomo" 
+config_file="$config_path/config"
+status_file="$config_path/status"
+
+mkdir -p "$config_path"
+[ -f "$config_file" ] || echo -e "work\t25 minutes\nbreak\t5 minutes" > "$config_file"
+
+notify() {
+  dunstify "$0" "$1"
+}
+
+state() {
+  echo $(cut -f1 < "$status_file")
+}
+
+start() {
+  current=$(state)
+  work_time=$(awk '/work/{print $2}' < "$config_file")
+  break_time=$(awk '/break/{print $2}' < "$config_file")
+  next=$current
+  if [ "$current" = "work" ]; then
+    current="break"
+    slice=$break_time
+  else
+    current="work"
+    slice=$work_time
+  fi
+
+  next_break=$(date -d "+$slice minutes" +%s)
+  break_at=$(date -d "@$next_break" '+%H:%M')
+  echo "current $current, next $next"
+  echo "DISPLAY=:0 pomo $next" | at "$break_at"
+  echo -e "$current\tuntil\t$next_break" > "$status_file"
+  notify "started"
+  exit 0
+}
+
+stop() {
+  echo -e "break\tuntil\t0" > "$status_file"
+  notify "stopped"
+  exit 0
+}
+
+ask_for() {
+  option=$(echo -e "yes\nno" | dmenu -l 3 -p "$1?")
+  [ "$option" != "yes" ] && stop
+  start
+}
+
+edit_config() {
+  sensible-terminal -e "$EDITOR" "$config_file"
+}
+
+remaining() {
+  [ -f "$status_file" ] || stop
+  echo $(($(awk '/until/ {print $3}' < "$status_file") - $(date +%s)))
+}
+
+function get_options() {
+  secs=$(remaining)
+  if [ "$secs" -gt 0 ]; then
+    secs_remaining=$(printf "%s %02d:%02d" $(state) $((secs/60)) $((secs%60)))
+  else
+    secs_remaining=stopped
+  fi
+  printf "start\nstop\nconfig\n"
+  echo "status: $secs_remaining"
+}
+
+function execute() {
+  case "$1" in
+    start)  start;;
+    stop)   stop;;
+    config) edit_config;;
+    break)  ask_for "break";;
+    work)   ask_for "work";;
+    *)      exit;;
+  esac
+
+}
+
+define_command "pomodoro" get_options execute "$1"

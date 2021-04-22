@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# shellcheck source=base
+source "$(dirname "$0")/base"
+
+function get_options() {
+  fd -t f .md  "$HOME"/org/notes
+}
+
+function execute() {
+  sensible-terminal -e zsh -i -c "$EDITOR $1"
+}
+
+define_command "note" get_options execute "$1"

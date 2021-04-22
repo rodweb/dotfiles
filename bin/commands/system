@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# shellcheck source=base
+source "$(dirname "$0")/base"
+
+function get_options() {
+  printf '[cancel]\nshutdown\nsuspend\nhibernate\nreboot\nlogout\nlock'
+}
+
+function execute() {
+  case "$1" in
+    shutdown)
+      systemctl poweroff;;
+    suspend)
+      systemctl suspend;;
+    reboot)
+      systemctl reboot;;
+    hibernate)
+      systemctl hibernate;;
+    logout) xkill xinit;;
+    lock) slock;;
+  esac
+}
+
+define_command "system" get_options execute "$1"
