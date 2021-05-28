@@ -1,6 +1,6 @@
 [user]
-  email = rod.apd@gmail.com
-  name = Rodrigo Campos
+	email = rod.apd@gmail.com
+	name = Rodrigo Campos
   login = rodweb
 [core]
   pager = diff-so-fancy | less --tabs=4 -RFX
@@ -15,3 +15,5 @@
   default = upstream
 [credential]
 	helper = /usr/lib/git-core/git-credential-libsecret
+[init]
+	defaultBranch = main
