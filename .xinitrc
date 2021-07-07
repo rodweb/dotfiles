@@ -24,7 +24,7 @@ if ! pgrep -x "picom" > /dev/null; then
 fi
 
 if ! pgrep -x "xcape" > /dev/null; then
-  xcape -e 'Caps_Lock=Escape' &
+  xcape -e 'Caps_Lock=Escape;Alt_L=Backspace' &
 fi
 
 [[ -f ~/bin/configure-touchpad ]] && ~/bin/configure-touchpad
