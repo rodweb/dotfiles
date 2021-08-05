@@ -17,3 +17,7 @@
 	helper = /usr/lib/git-core/git-credential-libsecret
 [init]
 	defaultBranch = main
+[github]
+	user = rodweb
+[diff "gpg"]
+	textconv = gpg --no-tty --decrypt
