@@ -9,10 +9,7 @@ super + {q,r}
   {menu,launcher}
 
 alt + ctrl + shift {a,s,d,f,g}
-  {ror-tmux,slack,webstorm-eap,google-chrome-unstable,spotify}
-
-alt + space
-  launcher
+  {ror-tmux,slack,emacs,google-chrome-stable,jumpapp -c spotify spotify}
 
 super + Return
   sensible-terminal
