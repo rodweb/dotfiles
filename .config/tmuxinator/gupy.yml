@@ -26,4 +26,4 @@ windows:
         - TRACING_ENABLED=false LOG_MESSAGE_LEVEL=error TS_NODE_TRANSPILE_ONLY=true npm run dev-task-consumers bulk-move-applications
         - TRACING_ENABLED=false LOG_MESSAGE_LEVEL=error TS_NODE_TRANSPILE_ONLY=true npm run dev-task-consumers bulk-disqualify-applications
         - TRACING_ENABLED=false LOG_MESSAGE_LEVEL=error TS_NODE_TRANSPILE_ONLY=true npm run dev-task-consumers completed-task
-        - TRACING_ENABLED=false LOG_MESSAGE_LEVEL=error TS_NODE_TRANSPILE_ONLY=true NODE_ENV=development QUEUE_CONSUMERS=index-application,index-talent-pool npx ts-node interfaces/consumers/consumers.js
+        - TRACING_ENABLED=false LOG_MESSAGE_LEVEL=error TS_NODE_TRANSPILE_ONLY=true NODE_ENV=development QUEUE_CONSUMERS=index-application,index-talent-pool,index-job npx ts-node interfaces/consumers/consumers.js

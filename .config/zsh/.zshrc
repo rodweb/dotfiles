@@ -15,10 +15,11 @@ source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/doc/pkgfile/command-not-found.zsh
 source ~/.zsh/plugins/zsh-nvm/zsh-nvm.plugin.zsh
+source ~/.zsh/plugins/zsh-notify/notify.plugin.zsh
 source /usr/share/zsh/plugins/zsh-load-nvmrc/load-nvmrc.zsh
 source $ASDF_DIR/lib/asdf.sh
 
-[[ -f ~/bin/gupy ]] && source ~/bin/gupy
+[[ -f ~/gupy.sh ]] && source ~/gupy.sh
 
 # Lines configured by zsh-newuser-install
 
@@ -31,6 +32,7 @@ setopt share_history
 setopt inc_append_history
 setopt hist_ignore_all_dups
 setopt hist_reduce_blanks
+setopt HIST_IGNORE_SPACE
 unsetopt beep
 bindkey -v
 
@@ -67,7 +69,6 @@ alias Z="$EDITOR $ZDOTDIR/.zshrc"
 alias T="$EDITOR $XDG_CONFIG_HOME/tmux/tmux.conf"
 
 alias ls="ls -1 --color"
-alias diff='diff-so-fancy'
 alias cat='bat --plain'
 alias fk='fuck'
 alias lg='lazygit'
@@ -86,7 +87,7 @@ alias gcp='git commit -p'
 alias gd='git diff'
 alias gdc='git diff --cached'
 alias gl='git pull'
-alias glr='git pull -r origin master'
+alias glr='git pull -r origin main'
 alias gm='git mergetool'
 alias gp='git push origin HEAD'
 alias gpf='gp -f'
@@ -125,7 +126,7 @@ alias po="sudo pacman -Qtdq | sudo pacman -Rns -"
 
 alias ntp='sudo ntpdate -u b.ntp.br'
 
-alias cfg='configs'
+alias cfg='$HOME/bin/commands/config'
 # }}}
 
 # functions {{{

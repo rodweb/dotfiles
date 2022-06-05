@@ -2,36 +2,27 @@
 # shellcheck source=base
 source "$(dirname "$0")/base"
 
+cache_file="/tmp/tmuxinator-projects.txt" 
+
 function list_projects() {
-    tmuxinator list | sed -n '1!p' | sed -r 's/\s+/\n/g'
+    if [[ -f "$cache_file" ]]; then
+        cat "$cache_file"
+    fi
+    tmuxinator list | sed -n '1!p' | sed -r 's/\s+/\n/g' > "$cache_file" &
 }
 
 function get_options() {
+    list_projects
     printf "start\nstop\nedit"
 }
 
 function execute() {
-    action="$1"
-    if [[ "$action" == "start" ]];
-    then
-        project=$(list_projects | dmenu -p "start:")
-        [ "$project" == "" ] && exit 0
-        sensible-terminal -e zsh -i -c "tmuxinator start $project"
-    fi
-
-    if [[ "$action" == "stop" ]];
-    then
-        project=$(list_projects | dmenu -p "stop:")
-        [ "$project" == "" ] && exit 0
-        sensible-terminal -e zsh -i -c "tmuxinator stop $project"
-    fi
-
-    if [[ "$action" == "edit" ]];
-    then
-        project=$(list_projects | dmenu -p "edit:")
-        [ "$project" == "" ] && exit 0
-        sensible-terminal -e zsh -i -c "tmuxinator edit $project"
-    fi
+    case "$1" in
+        start|stop|edit) project=$(list_projects | dmenu -p "$1:")
+            [ "$project" == "" ] && exit 0
+            sensible-terminal -e zsh -i -c "tmuxinator $1 $project";;
+        *) sensible-terminal -e zsh -i -c "tmuxinator start $1";;
+    esac
 }
 
 define_command "tmuxinator" get_options execute "$1"
