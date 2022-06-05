@@ -47,4 +47,13 @@
     "workbench.editor.showTabs": false,
     "window.zoomLevel": 0,
     "editor.minimap.enabled": false,
+    "alternate.patterns": [
+        {
+            "main": "(.*).js$",
+            "alternates": [
+                "$1.unit.test.js",
+                "$1.integration.test.js"
+            ]
+        }
+    ],
 }

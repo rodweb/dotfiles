@@ -1,196 +1,88 @@
 {
-    // "files.autoSave": "onFocusChange",
-    "editor.renderWhitespace": "none",
-    "editor.wordWrap": "on",
-    "files.exclude": {
-        "**/node_modules": true
+  // "files.autoSave": "onFocusChange",
+  "editor.renderWhitespace": "none",
+  "editor.wordWrap": "on",
+  "files.exclude": {
+    "**/node_modules": true
+  },
+  "editor.accessibilitySupport": "off",
+  "editor.foldingStrategy": "indentation",
+  "editor.mouseWheelZoom": true,
+  "editor.fontLigatures": true,
+  "editor.lineNumbers": "relative",
+  "editor.minimap.enabled": false,
+  "vim.leader": "<space>",
+  "vim.useSystemClipboard": true,
+  "vim.easymotion": true,
+  "vim.surround": true,
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": [";"],
+      "after": [":"]
     },
-    "editor.accessibilitySupport": "off",
-    "editor.foldingStrategy": "indentation",
-    "editor.mouseWheelZoom": true,
-    "editor.fontLigatures": true,
-    "editor.lineNumbers": "relative",
-    "editor.minimap.enabled": false,
-    "vim.leader": "<space>",
-    "vim.useSystemClipboard": true,
-    "vim.easymotion": true,
-    "vim.surround": true,
-    "vim.normalModeKeyBindingsNonRecursive": [
-        {
-            "before": [
-                ";"
-            ],
-            "after": [
-                ":"
-            ]
-        },
-        {
-            "before": [
-                "j"
-            ],
-            "after": [
-                "g",
-                "j",
-                "z",
-                "z"
-            ]
-        },
-        {
-            "before": [
-                "k"
-            ],
-            "after": [
-                "g",
-                "k",
-                "z",
-                "z"
-            ]
-        },
-        {
-            "before": [
-                "G"
-            ],
-            "after": [
-                "G",
-                "z",
-                "z"
-            ]
-        },
-        {
-            "before": [
-                "<leader>",
-                "c"
-            ],
-            "after": [
-                ":",
-                "q",
-                "<cr>"
-            ]
-        },
-        {
-            "before": [
-                "<leader>",
-                "f"
-            ],
-            "commands": [
-                "workbench.action.quickOpen"
-            ]
-        },
-        {
-            "before": [
-                "<leader>",
-                "l"
-            ],
-            "commands": [
-                "editor.action.marker.nextInFiles"
-            ]
-        },
-        {
-            "before": [
-                "<leader>",
-                "s"
-            ],
-            "commands": [
-                "workbench.action.files.save"
-            ]
-        },
-        {
-            "before": [
-                "<leader>",
-                "t"
-            ],
-            "commands": [
-                "workbench.action.toggleSidebarVisibility"
-            ]
-        },
-        {
-            "before": [
-                "]",
-                "e"
-            ],
-            "commands": [
-                "editor.action.marker.nextInFiles"
-            ]
-        },
-        {
-            "before": [
-                "[",
-                "e"
-            ],
-            "commands": [
-                "editor.action.marker.prevInFiles"
-            ]
-        }
-    ],
-    "editor.renderControlCharacters": false,
-    "window.menuBarVisibility": "toggle",
-    "window.titleBarStyle": "native",
-    "typescript.updateImportsOnFileMove.enabled": "always",
-    "[typescript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    {
+      "before": ["j"],
+      "after": ["g", "j", "z", "z"]
     },
-    "window.zoomLevel": 0,
-    "editor.formatOnSave": true,
-    "breadcrumbs.enabled": false,
-    "peacock.favoriteColors": [
-        {
-            "name": "Angular Red",
-            "value": "#b52e31"
-        },
-        {
-            "name": "Auth0 Orange",
-            "value": "#eb5424"
-        },
-        {
-            "name": "Azure Blue",
-            "value": "#007fff"
-        },
-        {
-            "name": "C# Purple",
-            "value": "#68217A"
-        },
-        {
-            "name": "Gatsby Purple",
-            "value": "#639"
-        },
-        {
-            "name": "Go Cyan",
-            "value": "#5dc9e2"
-        },
-        {
-            "name": "Java Blue-Gray",
-            "value": "#557c9b"
-        },
-        {
-            "name": "JavaScript Yellow",
-            "value": "#f9e64f"
-        },
-        {
-            "name": "Mandalorian Blue",
-            "value": "#1857a4"
-        },
-        {
-            "name": "Node Green",
-            "value": "#215732"
-        },
-        {
-            "name": "React Blue",
-            "value": "#00b3e6"
-        },
-        {
-            "name": "Something Different",
-            "value": "#832561"
-        },
-        {
-            "name": "Vue Green",
-            "value": "#42b883"
-        }
-    ],
-    "[typescriptreact]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    {
+      "before": ["k"],
+      "after": ["g", "k", "z", "z"]
     },
-    "workbench.activityBar.visible": false,
-    "workbench.statusBar.visible": false,
-    "workbench.editor.showTabs": false,
-    "workbench.editor.tabCloseButton": "off"
+    {
+      "before": ["G"],
+      "after": ["G", "z", "z"]
+    },
+    {
+      "before": ["<leader>", "c"],
+      "after": [":", "q", "<cr>"]
+    },
+    {
+      "before": ["<leader>", "f"],
+      "commands": ["workbench.action.quickOpen"]
+    },
+    {
+      "before": ["<leader>", "l"],
+      "commands": ["editor.action.marker.nextInFiles"]
+    },
+    {
+      "before": ["<leader>", "s"],
+      "commands": ["workbench.action.files.save"]
+    },
+    {
+      "before": ["<leader>", "t"],
+      "commands": ["workbench.action.toggleSidebarVisibility"]
+    },
+    {
+      "before": ["]", "e"],
+      "commands": ["editor.action.marker.nextInFiles"]
+    },
+    {
+      "before": ["[", "e"],
+      "commands": ["editor.action.marker.prevInFiles"]
+    },
+    {
+      "before": ["<leader>", "a"],
+      "commands": ["alternate.helloWorld"]
+    }
+  ],
+  "editor.renderControlCharacters": false,
+  "window.menuBarVisibility": "toggle",
+  "window.titleBarStyle": "native",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    // "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "workbench.activityBar.visible": false,
+  "workbench.statusBar.visible": false,
+  "workbench.editor.showTabs": false,
+  "workbench.editor.tabCloseButton": "off",
+  "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
+  "vscode-neovim.neovimInitVimPaths.linux": "/home/rod/.config/nvim/vscode.vim",
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "git.autofetch": true
 }
