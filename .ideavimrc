@@ -17,32 +17,34 @@ nmap j jzz
 nmap k kzz
 nmap n nzz
 nmap N Nzz
+nmap <leader><space> :action SearchEverywhere<cr>
 nmap <leader><tab> :action Switcher<cr>
-nmap <leader>s :action SaveAll<cr>
 nmap <leader>/ :action FindInPath<cr>
+nmap <leader>= :action ReformatCode<cr>
+nmap <leader>a :action GotoTest<cr>
+nmap <leader>b :action RecentFiles<cr>
 nmap <leader>f :action GotoFile<cr>
+nmap <leader>k :action CloseEditor<cr>
 nmap <leader>h :action RecentFiles<cr>
-nmap <leader>t :action GotoSymbol<cr>
-nmap <leader>p :action ShowBookmarks<cr>
+nmap <leader>j :action AceAction<cr>
+nmap <leader>m :action ShowBookmarks<cr>
 nmap <leader>r :action RenameElement<cr>
-
+nmap <leader>s :action SaveAll<cr>
 nmap <leader>t :action Rerun<cr>
+nmap <leader>w :action JumpToLastWindow<cr>
 nmap <localleader>tf :action RerunFailedTests<cr>
 nmap <localleader>tt :action RerunTests<cr>
 
 nmap <leader>gb :action Back<cr>
 nmap <leader>gf :action Forward<cr>
-nmap <leader>w :action JumpToLastWindow<cr>
 nmap <leader>gr :action FindUsages<cr>
 nmap <leader>gd :action GotoDeclaration<cr>
 nmap <leader>gi :action GotoImplementation<cr>
 nmap <leader>= :action ReformatWithPrettierAction<cr>
 nmap ]e :action GotoNextError<cr>
 nmap [e :action GotoPreviousError<cr>
-nmap ]c :action VcsShowNextChangeMarker<cr>
-nmap [c :action VcsShowPreviousChangeMarker<cr>
-
-nmap s :action AceAction<cr>
+nmap ]g :action VcsShowNextChangeMarker<cr>
+nmap [g :action VcsShowPreviousChangeMarker<cr>
 
 nmap <leader>; A;<esc>
 nmap <leader>, A,<esc>
