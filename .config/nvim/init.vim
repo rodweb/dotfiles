@@ -21,7 +21,7 @@ set belloff=all
 set noshowmode
 set noshowcmd
 set shortmess+=cF
-set laststatus=1
+set laststatus=2
 set mouse=a
 set number
 set numberwidth=2
@@ -196,7 +196,11 @@ nnoremap <leader>/ :Ripgrep
 nnoremap <leader>= mqgg=G<cr>'qzz
 nnoremap <leader>; :execute "normal!\ mqA;\e`q"<cr>
 nnoremap <leader>, :execute "normal!\ mqA,\e`q"<cr>
-nnoremap <leader>a :Alternate<cr>zz
+if exists('g:vscode')
+  nnoremap <leader>a <Cmd>call VSCodeCall('alternate.run')<CR>
+else
+  nnoremap <leader>a :Alternate<cr>zz
+endif
 nnoremap <leader>q :quit<cr>
 nnoremap <leader>w <c-w><c-w>
 " nnoremap <leader>f :find *
@@ -250,7 +254,6 @@ cnoreabbrev w!! write !sudo tee > /dev/null %
 let g:coc_global_extensions = [
       \'coc-json',
       \'coc-tsserver',
-      \'coc-eslint',
       \'coc-snippets',
       \'coc-jest',
       \'coc-clangd',
