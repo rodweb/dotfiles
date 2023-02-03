@@ -5,11 +5,11 @@ XF86Audio{Raise,Lower}Volume
 XF86AudioMute
   vol mute
 
-super + {q,r}
+super + {e,r}
   {menu,launcher}
 
 alt + ctrl + shift {a,s,d,f,g}
-  {ror-tmux,slack,emacs,google-chrome-stable,jumpapp -c spotify spotify}
+  {ror-tmux,discord,emacs,google-chrome-stable,jumpapp -c spotify spotify}
 
 super + Return
   sensible-terminal

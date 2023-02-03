@@ -20,4 +20,7 @@ export HISTFILE="${XDG_CACHE_HOME}/zsh/history"
 export HISTSIZE=100000
 export SAVEHIST=100000
 
+# emacs related
+export LSP_USE_PLISTS=true
+
 export PATH="$HOME/bin:$PATH:$GOPATH/bin"

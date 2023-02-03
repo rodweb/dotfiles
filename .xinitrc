@@ -29,6 +29,7 @@ fi
 
 [[ -f ~/bin/configure-touchpad ]] && ~/bin/configure-touchpad
 [[ -f ~/bin/set-wallpaper ]] && ~/bin/set-wallpaper
+[[ -f ~/.screenlayout/main-home.sh ]] && ~/.screenlayout/main-home.sh
 
 eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 export SSH_AUTH_SOCK

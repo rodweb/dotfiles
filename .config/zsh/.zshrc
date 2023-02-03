@@ -34,7 +34,7 @@ setopt hist_ignore_all_dups
 setopt hist_reduce_blanks
 setopt HIST_IGNORE_SPACE
 unsetopt beep
-bindkey -v
+# bindkey -v
 
 zstyle :compinstall filename "$ZDOTDIR/.zshrc"
 
@@ -57,7 +57,7 @@ complete -C '/usr/bin/aws_completer' aws
 
 autoload -z edit-command-line
 zle -N edit-command-line
-bindkey "^V" edit-command-line
+# bindkey "^V" edit-command-line
 bindkey "^R" fzf-history-widget
 
 # aliases {{{
