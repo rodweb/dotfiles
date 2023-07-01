@@ -5,11 +5,11 @@ XF86Audio{Raise,Lower}Volume
 XF86AudioMute
   vol mute
 
-super + {e,r}
-  {menu,launcher}
+super + {space,e,r,t}
+  {launcher,menu,launcher,sensible-terminal}
 
 alt + ctrl + shift {a,s,d,f,g}
-  {ror-tmux,discord,emacs,google-chrome-stable,jumpapp -c spotify spotify}
+  {ror-tmux,discord,jumpapp -c emacs emacs,jumpapp -c google-chrome google-chrome-stable,jumpapp -c spotify spotify}
 
-super + Return
-  sensible-terminal
+super + braceright
+  bash -c 'killall xdotool || while xdotool click --repeat 100000 --delay 133 1; do :; done'
