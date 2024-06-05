@@ -3,3 +3,4 @@ tags
 .tool-versions
 /.dir-locals.el
 /.rgignore
+.projectile

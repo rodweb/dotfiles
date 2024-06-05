@@ -1,17 +1,18 @@
 [user]
 	email = rod.apd@gmail.com
 	name = Rodrigo Campos
-  login = rodweb
+	login = rodweb
 [core]
-  editor = nvim
-  excludesfile = ~/.config/git/ignore
+	editor = nvim
+	excludesfile = ~/.config/git/ignore
 [commit]
-  template = ~/.config/git/message
-  gpgsign = true
+	template = ~/.config/git/message
+	gpgsign = true
 [pull]
-  rebase = true
+	rebase = true
 [push]
-  default = upstream
+	default = upstream
+	autoSetupRemote = true
 [credential]
 	helper = /usr/lib/git-core/git-credential-libsecret
 [init]
