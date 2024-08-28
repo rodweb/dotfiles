@@ -10,6 +10,7 @@ set clipboard=unnamedplus,unnamed
 set relativenumber
 set number
 set surround
+set commentary
 
 let mapleader = " "
 let localleader = ","
@@ -24,10 +25,12 @@ nmap <leader>= :action ReformatCode<cr>
 nmap <leader>a :action GotoTest<cr>
 nmap <leader>b :action RecentFiles<cr>
 nmap <leader>f :action GotoFile<cr>
-nmap <leader>k :action CloseEditor<cr>
 nmap <leader>h :action RecentFiles<cr>
 nmap <leader>j :action AceAction<cr>
+nmap <leader>k :action CloseEditor<cr>
+nmap <leader>l :action FileStructurePopup<cr>
 nmap <leader>m :action ShowBookmarks<cr>
+nmap <leader>p :action ManageRecentProjects<cr>
 nmap <leader>r :action RenameElement<cr>
 nmap <leader>s :action SaveAll<cr>
 nmap <leader>t :action Rerun<cr>
@@ -43,6 +46,8 @@ nmap <leader>gi :action GotoImplementation<cr>
 nmap <leader>= :action ReformatWithPrettierAction<cr>
 nmap ]e :action GotoNextError<cr>
 nmap [e :action GotoPreviousError<cr>
+nmap ]f :action NextOccurence<cr>
+nmap [f :action PreviousOccurence<cr>
 nmap ]g :action VcsShowNextChangeMarker<cr>
 nmap [g :action VcsShowPreviousChangeMarker<cr>
 
